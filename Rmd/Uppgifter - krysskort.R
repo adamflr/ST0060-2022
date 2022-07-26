@@ -13,3 +13,4 @@ ggplot(tab, aes(Question, Exercise, color = Type)) +
   annotate("text", x = c(25.5, 31.5), y = max(tab$Exercise) + 0.5, label = c("Bonus", "Hem"), family = "serif", hjust = 0) +
   cowplot::theme_nothing() +
   xlim(-4,43)
+
