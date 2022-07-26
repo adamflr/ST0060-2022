@@ -3,7 +3,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Datorövning 1
+# Datorövning 1. Datahantering och grafer
 
 Datorövning 1 handlar om grunderna till R. Efter övningen ska vi kunna
 
@@ -33,7 +33,7 @@ Gränssnittet i RStudio är uppdelat i fyra delar och varje del består av en el
 - *Help* där man ser hjälpsidor för funktioner.
 
 ::: {.exercise name="Help-fliken"}
-Hitta fliken *Help*, klicka på husikonen under fliken. Finns det en länk med *RStudio Cheat Sheets*? Följ den länken för att hitta guider till R som kan bli nyttiga längre från. För nu, gå tillbaka till RStudio.
+Hitta fliken *Help*, klicka på husikonen under fliken. Finns det en länk med *RStudio Cheat Sheets*? Följ den länken för att hitta guider till R som kan bli nyttiga längre fram. För nu, gå tillbaka till RStudio.
 :::
 
 Ofta skriver man inte sin kod direkt i konsollen, utan i ett separat *skript* - en vanlig textfil som innehåller den kod man vill köra. Genom att organisera sin kod i ett skript kan man lätt strukturera och dokumentera sitt arbete. I RStudio kan man öppna ett nytt skript genom att gå till *File > New File > R Script* eller genom att klicka *Ctrl + Shift + N*. Ett tomt skript öppnar sig då i det övre vänstra delfönstret. Om du läser det här i RStudio, genom att ha laddat ner .R-filen, läster du just nu ett skript.
@@ -263,7 +263,7 @@ dat_dice
 Inskrivning av värden är ofta tidskrävande och kan lätt leda till misstag. Det är därför mycket vanligare att data läses in från en extern fil. Det finns en mängd funktioner för dataimport och det exakta valet av funktion beror på vilken typ av fil datan är sparad i. Ett vanligt filformat är .csv (*comma separated values*). Här importerar vi en fil med data från Spotify.
 
 ```{r}
-dat <- read_csv("https://raw.githubusercontent.com/adamflr/ST0060/master/Data/Spotify_data.csv")
+dat <- read_csv("https://raw.githubusercontent.com/adamflr/ST0060-2022/main/Data/Spotify_data.csv")
 dat
 ```
 
@@ -390,7 +390,7 @@ dat %>%                                                        # Ta datan, och s
   select(valence, danceability, valence_to_danceability)       # välj relevanta kolumner.
 ```
 
-Gör lämpliga ändringar för att multiplicera `tempo` och `time signature`.
+Gör lämpliga ändringar för att multiplicera `tempo` och `time signature`. Ett passande namn för den nya kolumnen kan vara `tempo_times_time_signature`.
 :::
 
 ### Summera kolumner med `group_by` och `summarise`
@@ -627,10 +627,10 @@ Hemsidan https://plotly.com/r/ innehåller fler exempel för den som är intress
 För att göra en graf behöver vi data över temperaturer. Följande rad hämtar temperaturdata från Stockholm. Källa: https://miljobarometern.stockholm.se/klimat/klimat-och-vaderstatistik/medeltemperatur/
 
 ```{r}
-dat_temp <- read_csv("Data/Temperatur, Stockholm.csv")
+dat_temp <- read_csv("https://raw.githubusercontent.com/adamflr/ST0060-2022/main/Data/Temperatur%2C%20Stockholm.csv")
 ```
 
-Vi skapar nu en graf, som alltså ska ha en x-axeln given av år  (`Year`) och ifylld färg som ges av temperatur (`Value`). Vi sätter höjden till 1.
+Vi skapar nu en graf, som alltså ska ha en x-axeln given av år  (`Year`) och ifylld färg som ges av temperatur (`Value`). Höjden ska vara densamma för alla staplar, men det spelar ingen roll vad den är (så länge den inte är noll).
 
 ```{r}
 ggplot(dat_temp, aes(x = Year, y = 1, fill = Value)) +
