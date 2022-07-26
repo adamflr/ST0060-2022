@@ -1,0 +1,19 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+## Binär data. Proportioner
+
+Om man vill jämföra två proportioner kan man använda z-testet för två stickprov. Säg till exempel att man utvecklar den tidigare studien, som gav 17 av 50 infekterade plantor, till att undersöka ytterligare en sort och att den sorten har 26 infekterade plantor av en total på 60. Testets hypotesen är i det tvåsidiga fallet
+
+$$H_0: p_1 = p_2 \qquad H_1: p_1 \neq p_2.$$
+
+I R kan testet genomföras med `prop.test`-funktionen. Funktionens första argument är antalen infekterade, som en vektor med två värden, och dess andra argument är totalerna. Likt testet med ett stickprov finns en möjlighet att göra en kontinuitetskorrektion med `correct`-argumentet.
+
+```{r}
+prop.test(c(17, 26), c(50, 60), correct = F)
+```
+
+Notera att funktionen inte ger ett z-värde utan ett $\chi^2$-värde (utskrivet `X-squared`). Det beror på att funktionen beräknar z-testet som ett likvärdigt $\chi^2$-test. Det z-värde man får om man genomför testet som ett z-test är detsamma som roten ur utskriftens $\chi^2$-värde.
+Testet ger ett högt p-värde vilket innebär att nollhypotesen inte förkastas.

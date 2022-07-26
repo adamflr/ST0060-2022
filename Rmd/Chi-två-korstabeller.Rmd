@@ -1,0 +1,60 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+## Nominal eller ordinal data. Korstabeller
+
+Data med två insamlade variabler per observerad enhet kan presenteras med en korstabell. Ta som (ett något deppigt) exempel överlevandsdata från Titanic. Datan finns tillgänglig i R som `Titanic` och man kan konstruera en korstabell med `pivot_wider`. I detta fall ges överlevnad filtrerad på vuxna män, uppdelat efter klass.
+
+```{r}
+dat <- Titanic %>% 
+  as_tibble() %>% 
+  filter(Age == "Adult", Sex == "Male")
+kable(dat)
+```
+
+En korstabell kan konstrueras med `pivot_wider`.
+
+```{r}
+dat_wide <- dat %>% 
+  pivot_wider(names_from = Survived, values_from = n)
+```
+
+Datan tyder på att överlevnad är beroende av klass - en tredjedel av förstaklass överlever, men en sjättedel av tredjeklass överlever. En illustration kan göras genom ett stapeldiagram.
+
+```{r}
+ggplot(dat, aes(Class, n, fill = Survived)) +
+  geom_bar(stat = "identity", position = position_fill(), 
+           color = "black", width = 0.5) +
+  scale_fill_manual(values = c("black", "white")) +
+  ylab("Proportion")
+```
+
+Argumentet `position` i `geom_bar` används för att skapa proportionella staplar.
+
+Ett $\chi^2$-test på en korstabell har nollhypotesen att det inte finns något samband mellan variabeln för rader och variabeln för kolumner. Antal frihetsgrader ges av antal rader minus ett gånger antal kolumner minus ett. Testet kan enkelt göras med `chisq.test`. Som ingångsvärde kan man plocka ut kolumnerna med numeriska värden genom hakparenteser.
+
+```{r}
+dat_wide[, 4:5] # De två numeriska kolumnerna
+
+chisq.test(dat_wide[, 4:5])
+```
+
+Utskriften ger teststorheten, antal frihetsgrader, och p-värdet. I det här fallet är p-värdet mycket litet (skrivning med `e` ska läsas som $2.843e-8 = 2.843 \cdot 10^{-8} = 0.00000002843$) och slutsatsen blir att nollhypotesen förkastas - det finns ett samband mellan klass och överlevnad. Antalet frihetsgrader ges av antalet rader minus ett gånger antalet kolumner minus ett (här $(4-1) \cdot (2-1) = 3$).
+
+$\chi^2$-test är ett asymptotiskt test - dess egenskaper är beroende av *stora* stickprov. Som gräns för storleken används ofta att samtliga förväntade antal ska vara större än 5. Funktionen ger en varning om förväntade värden är små. En möjlig lösning i sådana fall är att slå ihop klasser.
+
+```{r}
+test_result <- chisq.test(dat_wide[, 4:5])
+test_result$expected # Samtliga förväntade värden över 5
+```
+
+Om detta krav inte är uppfyllt skriver funktionen ut en varning.
+
+```{r}
+dat <- matrix(c(4,2,5,1), 2)
+test_result <- chisq.test(dat)
+test_result$expected
+```

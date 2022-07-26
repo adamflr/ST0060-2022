@@ -1,0 +1,18 @@
+book_filename: "R-anvisningar"
+delete_merged_file: true
+output_dir: "docs"
+rmd_files: ["index.Rmd", 
+"Rmd/Installation.Rmd",
+"Rmd/Datorövning-1.Rmd"]
+language:
+  label:
+    fig: 'Figur '
+    tab: 'Tabell '
+    exm: 'Exempel '
+    prp: 'Problem '
+    prf: 'Bevis '
+    thm: 'Sats '
+    exr: 'Uppgift '
+    hyp: 'Lösningsförslag '
+  ui:
+    chapter_name: "Kapitel "

@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Kapitel 7 Ett stickprov | R-anvisningar till Grundläggande statistik</title>
+  <meta name="description" content="Kapitel 7 Ett stickprov | R-anvisningar till Grundläggande statistik" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Kapitel 7 Ett stickprov | R-anvisningar till Grundläggande statistik" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Kapitel 7 Ett stickprov | R-anvisningar till Grundläggande statistik" />
+  
+  
+  
+
+
+
+<meta name="date" content="2022-05-18" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="sannolikhetsfördelningar-och-slumptal.html"/>
+<link rel="next" href="två-stickprov.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R-anvisningar</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduktion</a></li>
+<li class="chapter" data-level="2" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>2</b> Installation</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="installation.html"><a href="installation.html#inledning"><i class="fa fa-check"></i><b>2.1</b> Inledning</a></li>
+<li class="chapter" data-level="2.2" data-path="installation.html"><a href="installation.html#installation-av-r"><i class="fa fa-check"></i><b>2.2</b> Installation av R</a></li>
+<li class="chapter" data-level="2.3" data-path="installation.html"><a href="installation.html#installation-av-rstudio"><i class="fa fa-check"></i><b>2.3</b> Installation av RStudio</a></li>
+<li class="chapter" data-level="2.4" data-path="installation.html"><a href="installation.html#gränssnittet-i-rstudio"><i class="fa fa-check"></i><b>2.4</b> Gränssnittet i RStudio</a></li>
+<li class="chapter" data-level="2.5" data-path="installation.html"><a href="installation.html#paket-i-r"><i class="fa fa-check"></i><b>2.5</b> Paket i R</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="objekt-och-funktioner.html"><a href="objekt-och-funktioner.html"><i class="fa fa-check"></i><b>3</b> Objekt och funktioner</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="objekt-och-funktioner.html"><a href="objekt-och-funktioner.html#sekvenser-av-funktioner"><i class="fa fa-check"></i><b>3.1</b> Sekvenser av funktioner</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="dataimport.html"><a href="dataimport.html"><i class="fa fa-check"></i><b>4</b> Dataimport</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="dataimport.html"><a href="dataimport.html#direkt-inskrivning-av-data"><i class="fa fa-check"></i><b>4.1</b> Direkt inskrivning av data</a></li>
+<li class="chapter" data-level="4.2" data-path="dataimport.html"><a href="dataimport.html#import-från-en-extern-fil"><i class="fa fa-check"></i><b>4.2</b> Import från en extern fil</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="beskrivande-statistik.html"><a href="beskrivande-statistik.html"><i class="fa fa-check"></i><b>5</b> Beskrivande statistik</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="beskrivande-statistik.html"><a href="beskrivande-statistik.html#datamängd"><i class="fa fa-check"></i><b>5.1</b> Datamängd</a></li>
+<li class="chapter" data-level="5.2" data-path="beskrivande-statistik.html"><a href="beskrivande-statistik.html#filtrering-av-rader-och-selektion-av-kolumner"><i class="fa fa-check"></i><b>5.2</b> Filtrering av rader och selektion av kolumner</a></li>
+<li class="chapter" data-level="5.3" data-path="beskrivande-statistik.html"><a href="beskrivande-statistik.html#transformationer-av-variabler"><i class="fa fa-check"></i><b>5.3</b> Transformationer av variabler</a></li>
+<li class="chapter" data-level="5.4" data-path="beskrivande-statistik.html"><a href="beskrivande-statistik.html#sammanfattande-statistik"><i class="fa fa-check"></i><b>5.4</b> Sammanfattande statistik</a></li>
+<li class="chapter" data-level="5.5" data-path="beskrivande-statistik.html"><a href="beskrivande-statistik.html#grafer"><i class="fa fa-check"></i><b>5.5</b> Grafer</a></li>
+<li class="chapter" data-level="5.6" data-path="beskrivande-statistik.html"><a href="beskrivande-statistik.html#övningar"><i class="fa fa-check"></i><b>5.6</b> Övningar</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="sannolikhetsfördelningar-och-slumptal.html"><a href="sannolikhetsfördelningar-och-slumptal.html"><i class="fa fa-check"></i><b>6</b> Sannolikhetsfördelningar och slumptal</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="sannolikhetsfördelningar-och-slumptal.html"><a href="sannolikhetsfördelningar-och-slumptal.html#fördelningar"><i class="fa fa-check"></i><b>6.1</b> Fördelningar</a></li>
+<li class="chapter" data-level="6.2" data-path="sannolikhetsfördelningar-och-slumptal.html"><a href="sannolikhetsfördelningar-och-slumptal.html#egna-funktioner"><i class="fa fa-check"></i><b>6.2</b> Egna funktioner</a></li>
+<li class="chapter" data-level="6.3" data-path="sannolikhetsfördelningar-och-slumptal.html"><a href="sannolikhetsfördelningar-och-slumptal.html#simuleringar"><i class="fa fa-check"></i><b>6.3</b> Simuleringar</a></li>
+<li class="chapter" data-level="6.4" data-path="sannolikhetsfördelningar-och-slumptal.html"><a href="sannolikhetsfördelningar-och-slumptal.html#övningar-1"><i class="fa fa-check"></i><b>6.4</b> Övningar</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ett-stickprov.html"><a href="ett-stickprov.html"><i class="fa fa-check"></i><b>7</b> Ett stickprov</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="ett-stickprov.html"><a href="ett-stickprov.html#normalfördelad-data-eller-stora-stickprov"><i class="fa fa-check"></i><b>7.1</b> Normalfördelad data (eller stora stickprov)</a></li>
+<li class="chapter" data-level="7.2" data-path="ett-stickprov.html"><a href="ett-stickprov.html#binär-data.-proportioner"><i class="fa fa-check"></i><b>7.2</b> Binär data. Proportioner</a></li>
+<li class="chapter" data-level="7.3" data-path="ett-stickprov.html"><a href="ett-stickprov.html#nominal-eller-ordinal-data.-goodness-of-fit"><i class="fa fa-check"></i><b>7.3</b> Nominal eller ordinal data. Goodness-of-fit</a></li>
+<li class="chapter" data-level="7.4" data-path="ett-stickprov.html"><a href="ett-stickprov.html#övningar-2"><i class="fa fa-check"></i><b>7.4</b> Övningar</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="två-stickprov.html"><a href="två-stickprov.html"><i class="fa fa-check"></i><b>8</b> Två stickprov</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="två-stickprov.html"><a href="två-stickprov.html#normalfördelad-data-eller-stora-stickprov-1"><i class="fa fa-check"></i><b>8.1</b> Normalfördelad data (eller stora stickprov)</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="två-stickprov.html"><a href="två-stickprov.html#t-test-för-två-matchade-stickprov"><i class="fa fa-check"></i><b>8.1.1</b> t-test för två matchade stickprov</a></li>
+<li class="chapter" data-level="8.1.2" data-path="två-stickprov.html"><a href="två-stickprov.html#t-test-för-två-oberoende-stickprov"><i class="fa fa-check"></i><b>8.1.2</b> t-test för två oberoende stickprov</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="två-stickprov.html"><a href="två-stickprov.html#binär-data.-proportioner-1"><i class="fa fa-check"></i><b>8.2</b> Binär data. Proportioner</a></li>
+<li class="chapter" data-level="8.3" data-path="två-stickprov.html"><a href="två-stickprov.html#nominal-eller-ordinal-data.-korstabeller"><i class="fa fa-check"></i><b>8.3</b> Nominal eller ordinal data. Korstabeller</a></li>
+<li class="chapter" data-level="8.4" data-path="två-stickprov.html"><a href="två-stickprov.html#övningar-3"><i class="fa fa-check"></i><b>8.4</b> Övningar</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="variansanalys.html"><a href="variansanalys.html"><i class="fa fa-check"></i><b>9</b> Variansanalys</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="variansanalys.html"><a href="variansanalys.html#variansanalys.-en-faktor"><i class="fa fa-check"></i><b>9.1</b> Variansanalys. En faktor</a></li>
+<li class="chapter" data-level="9.2" data-path="variansanalys.html"><a href="variansanalys.html#variansanalys.-en-faktor-med-block"><i class="fa fa-check"></i><b>9.2</b> Variansanalys. En faktor med block</a></li>
+<li class="chapter" data-level="9.3" data-path="variansanalys.html"><a href="variansanalys.html#variansanalys.-två-faktorer-med-block"><i class="fa fa-check"></i><b>9.3</b> Variansanalys. Två faktorer med block</a></li>
+<li class="chapter" data-level="9.4" data-path="variansanalys.html"><a href="variansanalys.html#övningar-4"><i class="fa fa-check"></i><b>9.4</b> Övningar</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html"><i class="fa fa-check"></i><b>10</b> Regression och korrelation</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html#regression"><i class="fa fa-check"></i><b>10.1</b> Regression</a></li>
+<li class="chapter" data-level="10.2" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html#korrelation"><i class="fa fa-check"></i><b>10.2</b> Korrelation</a></li>
+<li class="chapter" data-level="10.3" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html#övningar-5"><i class="fa fa-check"></i><b>10.3</b> Övningar</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R-anvisningar till <em>Grundläggande statistik</em></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ett-stickprov" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Kapitel 7</span> Ett stickprov<a href="ett-stickprov.html#ett-stickprov" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="normalfördelad-data-eller-stora-stickprov" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Normalfördelad data (eller stora stickprov)<a href="ett-stickprov.html#normalfördelad-data-eller-stora-stickprov" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Om man har normalfördelad data och vill testa om datans medelvärde är skilt från något hypotetiskt värde <span class="math inline">\(\mu_0\)</span> kan man använda ett t-test för ett stickprov. Testets hypoteser ges i det tvåsidiga fallet av</p>
+<p><span class="math display">\[H_0: \mu = \mu_0 \qquad H_1: \mu \neq \mu_0.\]</span></p>
+<p>Testet kan beräknas genom att beräkna testvärdet</p>
+<p><span class="math display">\[t = \frac{\bar x - \mu_0}{s / \sqrt n}\]</span></p>
+<p>och beräkna ett p-värde som sannolikheten i svansarna bortom det t-värdet, i en t-fördelning med <span class="math inline">\(n-1\)</span> frihetsgrader.</p>
+<p>Som exempel ges följande data på 8 observationer av havreskörd.</p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td style="text-align:right;">
+49.8
+</td>
+<td style="text-align:right;">
+58.4
+</td>
+<td style="text-align:right;">
+49.4
+</td>
+<td style="text-align:right;">
+57.1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+52.2
+</td>
+<td style="text-align:right;">
+49.1
+</td>
+<td style="text-align:right;">
+44.6
+</td>
+<td style="text-align:right;">
+55.4
+</td>
+</tr>
+</tbody>
+</table>
+<p>Man vill testa om skörden är skild från 50, så hypoteser ges av</p>
+<p><span class="math display">\[H_0: \mu = 50 \qquad H_1: \mu \neq 50.\]</span></p>
+<p>Innan man utför testet kan det vara bra att ta en titt på datan och bilda en första uppfattning om nollhypotesens rimlighet. Man kan rita varje observation som en punkt i ett punktdiagram. Om det kan finnas överlappande punkter kan <code>geom_dotplot</code> eller <code>geom_count</code> användas för att separera eller notera överlappningar.</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="ett-stickprov.html#cb175-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">49.8</span>, <span class="fl">58.4</span>, <span class="fl">49.4</span>, <span class="fl">57.1</span>, <span class="fl">52.2</span>, <span class="fl">49.1</span>, <span class="fl">44.6</span>, <span class="fl">55.4</span>)</span>
+<span id="cb175-2"><a href="ett-stickprov.html#cb175-2" aria-hidden="true" tabindex="-1"></a>dat_t <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> dat)</span>
+<span id="cb175-3"><a href="ett-stickprov.html#cb175-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb175-4"><a href="ett-stickprov.html#cb175-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_t, <span class="fu">aes</span>(x, <span class="at">y =</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb175-5"><a href="ett-stickprov.html#cb175-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb175-6"><a href="ett-stickprov.html#cb175-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;point&quot;</span>, <span class="at">x =</span> <span class="dv">50</span>, <span class="at">y =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb175-7"><a href="ett-stickprov.html#cb175-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">1</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Havreskörd&quot;</span>) <span class="sc">+</span></span>
+<span id="cb175-8"><a href="ett-stickprov.html#cb175-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb175-9"><a href="ett-stickprov.html#cb175-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb175-10"><a href="ett-stickprov.html#cb175-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-104-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Det skattade medelvärdet är <span class="math inline">\(\bar x = 52.0\)</span> och standardavvikelsen <span class="math inline">\(s = 4.68\)</span>. Teststorheten kan beräknas till</p>
+<p><span class="math display">\[t = \frac{52 - 50}{4.68 / \sqrt 8} = 1.209\]</span></p>
+<p>Testen kan genomföras i R med funktionen <code>t.test</code>.</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="ett-stickprov.html#cb176-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">49.8</span>, <span class="fl">58.4</span>, <span class="fl">49.4</span>, <span class="fl">57.1</span>, <span class="fl">52.2</span>, <span class="fl">49.1</span>, <span class="fl">44.6</span>, <span class="fl">55.4</span>)</span>
+<span id="cb176-2"><a href="ett-stickprov.html#cb176-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(dat, <span class="at">mu =</span> <span class="dv">50</span>)</span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  dat
+## t = 1.2086, df = 7, p-value = 0.266
+## alternative hypothesis: true mean is not equal to 50
+## 95 percent confidence interval:
+##  48.08713 55.91287
+## sample estimates:
+## mean of x 
+##        52</code></pre>
+<p>I funktionen anges datan <code>dat</code> och nollhypotesens värde <code>mu = 50</code>. Utskriften ger t-värdet till <span class="math inline">\(1.2086\)</span> och p-värdet till <span class="math inline">\(0.266\)</span>. Det höga p-värdet ger att man inte förkastar nollhypotesen. Beräkningen av p-värdet kan illustreras med en t-fördelning.</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="ett-stickprov.html#cb178-1" aria-hidden="true" tabindex="-1"></a>test_results <span class="ot">&lt;-</span> <span class="fu">t.test</span>(dat, <span class="at">mu =</span> <span class="dv">50</span>)</span>
+<span id="cb178-2"><a href="ett-stickprov.html#cb178-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb178-3"><a href="ett-stickprov.html#cb178-3" aria-hidden="true" tabindex="-1"></a>dat_t <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="fl">0.01</span>), </span>
+<span id="cb178-4"><a href="ett-stickprov.html#cb178-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> <span class="fu">dt</span>(x, <span class="dv">7</span>))</span>
+<span id="cb178-5"><a href="ett-stickprov.html#cb178-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb178-6"><a href="ett-stickprov.html#cb178-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_t, <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
+<span id="cb178-7"><a href="ett-stickprov.html#cb178-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb178-8"><a href="ett-stickprov.html#cb178-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymax =</span> y, <span class="at">ymin =</span> <span class="dv">0</span>), <span class="at">fill =</span> <span class="st">&quot;red3&quot;</span>, </span>
+<span id="cb178-9"><a href="ett-stickprov.html#cb178-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> dat_t <span class="sc">%&gt;%</span> <span class="fu">filter</span>(x <span class="sc">&lt;</span> <span class="sc">-</span>test_results<span class="sc">$</span>statistic)) <span class="sc">+</span></span>
+<span id="cb178-10"><a href="ett-stickprov.html#cb178-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymax =</span> y, <span class="at">ymin =</span> <span class="dv">0</span>), <span class="at">fill =</span> <span class="st">&quot;red3&quot;</span>, </span>
+<span id="cb178-11"><a href="ett-stickprov.html#cb178-11" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> dat_t <span class="sc">%&gt;%</span> <span class="fu">filter</span>(x <span class="sc">&gt;</span> test_results<span class="sc">$</span>statistic))</span></code></pre></div>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-106-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Notera hur man kan spara utfallet av <code>t.test</code> och sedan använda resultat direkt ur det objektet (här genom <code>test_restults$statistic</code> som ger teststorheten, men även <code>test_results$p.value</code> kan vara användbart). Testobjektets namn kan förstås vara något helt annat än <code>test_results</code>.</p>
+<p>Den röda arean i svansarna motsvarar p-värdet <span class="math inline">\(0.266\)</span>. Sannolikheten att få den observerade skillnaden mellan skattat medelvärde och nollhypotesens värde (52 respektive 50) även om det inte finns någon verklig skillnad är alltså ungefär en på fyra.</p>
+<p>Utskriften från <code>t.test</code> ger också ett 95-procentigt konfidensintervall: <span class="math inline">\((48.09, 55.91)\)</span>. Tolkningen är att det sanna populationsmedelvärdet ligger i intervallet med 95 procents konfidens. Notera att nollhypotesens värde 50 ligger i intervallet.</p>
+
+</div>
+<div id="binär-data.-proportioner" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Binär data. Proportioner<a href="ett-stickprov.html#binär-data.-proportioner" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En skattad proportion kan ställas mot en nollhypotes genom ett <em>binomialtest</em> eller <em>z-test</em>. Ta som exempel att man samlar data om antal infekterade plantor i ett slumpmässigt urval av 50 och finner att 17 är infekterade. Man kan då testa nollhypotesen att den sanna populationsproportionen är 0.5,</p>
+<p><span class="math display">\[H_0: p = 0.5 \qquad H_1: p \neq 0.5.\]</span></p>
+<p>I R kan ett binomialtest utföras med <code>binom.test</code> och ett z-test (som bygger på en normalapproximation av binomialfördelningen) med <code>prop.test</code>. Det senare kan antingen utföras med eller utan en <em>kontinuitetskorrektion</em>. Det test som beräknas för hand är oftast utan korrektionen.</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="ett-stickprov.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">binom.test</span>(<span class="dv">17</span>, <span class="dv">50</span>, <span class="at">p =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  17 and 50
+## number of successes = 17, number of trials = 50, p-value = 0.03284
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.2120547 0.4876525
+## sample estimates:
+## probability of success 
+##                   0.34</code></pre>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="ett-stickprov.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.test</span>(<span class="dv">17</span>, <span class="dv">50</span>, <span class="at">p =</span> <span class="fl">0.5</span>, <span class="at">correct =</span> F)</span></code></pre></div>
+<pre><code>## 
+##  1-sample proportions test without continuity correction
+## 
+## data:  17 out of 50, null probability 0.5
+## X-squared = 5.12, df = 1, p-value = 0.02365
+## alternative hypothesis: true p is not equal to 0.5
+## 95 percent confidence interval:
+##  0.2243695 0.4784617
+## sample estimates:
+##    p 
+## 0.34</code></pre>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="ett-stickprov.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.test</span>(<span class="dv">17</span>, <span class="dv">50</span>, <span class="at">p =</span> <span class="fl">0.5</span>, <span class="at">correct =</span> T)</span></code></pre></div>
+<pre><code>## 
+##  1-sample proportions test with continuity correction
+## 
+## data:  17 out of 50, null probability 0.5
+## X-squared = 4.5, df = 1, p-value = 0.03389
+## alternative hypothesis: true p is not equal to 0.5
+## 95 percent confidence interval:
+##  0.2159464 0.4885541
+## sample estimates:
+##    p 
+## 0.34</code></pre>
+<p>Funktionernas argument är antal postiva utfall, det totala antalet utfall, och nollhypotesens värde. För <code>prop.test</code> anger argumentet <code>correct</code> om en korrektion ska utföras eller ej.
+De tre testen ger liknande resultat, med p-värden kring 3 procent. Ett test på femprocentsnivån skulle alltså ge att nollhypotesen förkastas.</p>
+<p>Utskrifterna ger också konfidensintervall, och precis som p-värden beror intervallet på fördelning och kontinuitetskorrektion. Tolkningen av intervallet är detsamma som i fallet med kontinuerlig data - den sanna populationsproportionen ligger i intervallet med 95 procents konfidens - men den exakta konstruktionen varierar beroende på detaljer i antaganden. För ett konfidensintervall som motsvarar det man vanligen beräknar för hand kan man använda <code>binomial</code>-paketet och funktionen <code>binom.confint</code>.</p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="ett-stickprov.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(binom)</span>
+<span id="cb185-2"><a href="ett-stickprov.html#cb185-2" aria-hidden="true" tabindex="-1"></a><span class="fu">binom.confint</span>(<span class="dv">17</span>, <span class="dv">50</span>, <span class="at">methods =</span> <span class="st">&quot;asymp&quot;</span>)</span></code></pre></div>
+<pre><code>##       method  x  n mean    lower    upper
+## 1 asymptotic 17 50 0.34 0.208697 0.471303</code></pre>
+<p>Det interval som ges är kan beräknas genom att sätta <span class="math inline">\(\hat p = 17/50\)</span> i uttrycket</p>
+<p><span class="math display">\[\hat p \pm 1.96 \sqrt{\frac{\hat p (1 - \hat p)}{50}},\]</span></p>
+<p>med ett litet avrundningsfel eftersom <span class="math inline">\(1.96\)</span> är avrundat.</p>
+
+</div>
+<div id="nominal-eller-ordinal-data.-goodness-of-fit" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Nominal eller ordinal data. Goodness-of-fit<a href="ett-stickprov.html#nominal-eller-ordinal-data.-goodness-of-fit" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Goodness-of-fit-test testar fördelningen i insamlad data med en hypotetiskt fördelning. Teststorheten ges av</p>
+<p><span class="math display">\[\chi^2 = \sum \frac{(O-E)^2}{E}\]</span></p>
+<p>där summan går över alla utfall i fördelning, <span class="math inline">\(O\)</span> är det observerade antalet i klassen och <span class="math inline">\(E\)</span> är det förväntade antalet enligt den hypotetiska fördelningen. Under nollhypotesen följer teststorheten en <span class="math inline">\(\chi^2\)</span>-fördelning.</p>
+<p>Som exempel ges följande data på fågelobservationer.</p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Art
+</th>
+<th style="text-align:right;">
+Antal
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Ladusvala
+</td>
+<td style="text-align:right;">
+237
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hussvala
+</td>
+<td style="text-align:right;">
+220
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Backsvala
+</td>
+<td style="text-align:right;">
+143
+</td>
+</tr>
+</tbody>
+</table>
+<p>Totalt har man observerat 600 fåglar. Från tidigare års studier tror man att Ladusvalor och Hussvalor är lika vanliga, medan Backsvalar förekommer hälften så ofta - proportionerna skulle alltså vara 0.4, 0.4 respektive 0.2. Detta kan illustreras med ett stapeldiagram, med den hypotetiska fördelningen som punkter.</p>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="ett-stickprov.html#cb187-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Art =</span> <span class="fu">c</span>(<span class="st">&quot;Ladusvala&quot;</span>, <span class="st">&quot;Hussvala&quot;</span>, <span class="st">&quot;Backsvala&quot;</span>),</span>
+<span id="cb187-2"><a href="ett-stickprov.html#cb187-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">Antal =</span> <span class="fu">c</span>(<span class="dv">237</span>, <span class="dv">220</span>, <span class="dv">143</span>))</span>
+<span id="cb187-3"><a href="ett-stickprov.html#cb187-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb187-4"><a href="ett-stickprov.html#cb187-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(Art, Antal)) <span class="sc">+</span></span>
+<span id="cb187-5"><a href="ett-stickprov.html#cb187-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb187-6"><a href="ett-stickprov.html#cb187-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.4</span>, <span class="fl">0.2</span>) <span class="sc">*</span> <span class="dv">600</span>), <span class="at">size =</span> <span class="dv">6</span>)</span></code></pre></div>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-110-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Grafen visar att hussvalor förekommer något mer sällan än väntat, medan backsvalor förekommer någon oftare.</p>
+<p>För att genomföra testet i R används <code>chisq.test</code>. Funktionens ingångsvärden är den observerade datan och de teoretiska andelarna.</p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="ett-stickprov.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(dat<span class="sc">$</span>Antal, <span class="at">p =</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.4</span>, <span class="fl">0.2</span>))</span></code></pre></div>
+<pre><code>## 
+##  Chi-squared test for given probabilities
+## 
+## data:  dat$Antal
+## X-squared = 6.1125, df = 2, p-value = 0.04706</code></pre>
+<p>Utskriften ger teststorheten <span class="math inline">\(\chi^2 = 6.1125\)</span> och p-värdet <span class="math inline">\(0.04706\)</span>. I detta fall är p-värdet strax under fem procent - man skulle alltså förkasta nollhypotesen på signifikansnivån fem procent.</p>
+<p>Utskriften ger också antalet frihetsgrader till två. I det här fallet ges den hypotetiska fördelningen av antagna sannolikheter, antalet frihetsgrader ges därför av antalet klasser minus ett. Men man kan också använda goodness-of-fit-test för att testa om data följer en viss typfördelning vars parameter beror på värden i data. Ett typiskt exempel på detta är test om data följer en poissonfördelning där man använder datan för att skatta <span class="math inline">\(\lambda\)</span>-parametern i fördelningen. Antal frihetsgrader blir i sådana fall antalet klasser, minus antalet skattade parametrar, minus ett. Funktionen <code>chisq.test</code> kommer då ge fel antal frihetsgrader - p-värdet kan istället beräknas genom <code>pchisq</code>.</p>
+<p>Ta som exempel följande frekvenstabell, beräknad från 500 observationer av en diskret variabel.</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="ett-stickprov.html#cb190-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Utfall =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">7</span>, </span>
+<span id="cb190-2"><a href="ett-stickprov.html#cb190-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">Frekvens =</span> <span class="fu">c</span>(<span class="dv">21</span>,<span class="dv">76</span>,<span class="dv">125</span>,<span class="dv">107</span>,<span class="dv">79</span>,<span class="dv">54</span>,<span class="dv">23</span>,<span class="dv">15</span>))</span>
+<span id="cb190-3"><a href="ett-stickprov.html#cb190-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(dat)</span></code></pre></div>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+Utfall
+</th>
+<th style="text-align:right;">
+Frekvens
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+21
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+76
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+125
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+107
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+79
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+54
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+23
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+15
+</td>
+</tr>
+</tbody>
+</table>
+<p>Målet är att testa om datan följer en poissonfördelning. För att beräkna sannolikheter från en poissonfördelning behövs en skattning av parametern <span class="math inline">\(\lambda\)</span>. Detta ges av medelvärdet av de 600 observationerna, vilket kan beräknas genom att multiplicera utfallet med frekvensen, summera, och dela på 600.</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="ett-stickprov.html#cb191-1" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="fu">sum</span>(dat<span class="sc">$</span>Utfall <span class="sc">*</span> dat<span class="sc">$</span>Frekvens) <span class="sc">/</span> <span class="dv">500</span></span>
+<span id="cb191-2"><a href="ett-stickprov.html#cb191-2" aria-hidden="true" tabindex="-1"></a>lambda</span></code></pre></div>
+<pre><code>## [1] 2.952</code></pre>
+<p>Skattningen på <span class="math inline">\(\lambda\)</span> är <span class="math inline">\(2.952\)</span>. Nästa steg är att beräkna sannolikheter från en poissonfördelning med det parametervärdet. För att sannolikheterna ska summera till ett justeras sannolikheten för det avslutande utfallet 7.</p>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="ett-stickprov.html#cb193-1" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>Sannolikheter <span class="ot">&lt;-</span> <span class="fu">dpois</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">7</span>, lambda)</span>
+<span id="cb193-2"><a href="ett-stickprov.html#cb193-2" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>Sannolikheter[<span class="dv">8</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">ppois</span>(<span class="dv">6</span>, lambda)</span>
+<span id="cb193-3"><a href="ett-stickprov.html#cb193-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(dat<span class="sc">$</span>Sannolikheter)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>Data och nollhypotes kan illustreras med ett stapeldiagram där punkter anger förväntade värden från nollhypotesen.</p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="ett-stickprov.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(Utfall, Frekvens)) <span class="sc">+</span></span>
+<span id="cb195-2"><a href="ett-stickprov.html#cb195-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb195-3"><a href="ett-stickprov.html#cb195-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> Sannolikheter <span class="sc">*</span> <span class="dv">500</span>))</span></code></pre></div>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-115-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Data och nollhypotes verkar stämma ganska väl. Funktionen <code>chisq.test</code> kan användas för att beräkna teststorheten, men observera att antalet frihetsgrader nu blir fel - datan har åtta klasser, och då en parameter skattas i beräkningen av förväntade antal bör testet genomföras med <span class="math inline">\(8-1-1=6\)</span> frihetsgrader. För att korrigera kan man ta fram teststorheten och beräkna p-värdet ur den korrekta fördelningen.</p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="ett-stickprov.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(dat<span class="sc">$</span>Frekvens, <span class="at">p =</span> dat<span class="sc">$</span>Sannolikheter)</span></code></pre></div>
+<pre><code>## 
+##  Chi-squared test for given probabilities
+## 
+## data:  dat$Frekvens
+## X-squared = 3.122, df = 7, p-value = 0.8735</code></pre>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="ett-stickprov.html#cb198-1" aria-hidden="true" tabindex="-1"></a>test_result <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(dat<span class="sc">$</span>Frekvens, <span class="at">p =</span> dat<span class="sc">$</span>Sannolikheter)</span>
+<span id="cb198-2"><a href="ett-stickprov.html#cb198-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(test_result<span class="sc">$</span>statistic, <span class="at">df =</span> <span class="dv">6</span>)</span></code></pre></div>
+<pre><code>## X-squared 
+## 0.7933799</code></pre>
+<p>I ett <span class="math inline">\(\chi^2\)</span>-test är p-värdet sannolikheten i svansen till höger om teststorheten. Eftersom <code>pchisq</code>-funktionen beräknar sannolikheten till vänster, kan man ta komplementet genom att dra ifrån sannolikheten från ett.</p>
+
+</div>
+<div id="övningar-2" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Övningar<a href="ett-stickprov.html#övningar-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-33" class="exercise"><strong>Övning 7.1  (Smältpunkt) </strong></span>Någon mäter smältpunkter för legeringar av metall och får följande värden.</p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td style="text-align:right;">
+1054.8
+</td>
+<td style="text-align:right;">
+1052.9
+</td>
+<td style="text-align:right;">
+1051.0
+</td>
+<td style="text-align:right;">
+1049.8
+</td>
+<td style="text-align:right;">
+1051.6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1047.9
+</td>
+<td style="text-align:right;">
+1051.8
+</td>
+<td style="text-align:right;">
+1048.5
+</td>
+<td style="text-align:right;">
+1050.2
+</td>
+<td style="text-align:right;">
+1050.7
+</td>
+</tr>
+</tbody>
+</table>
+<p>a. Beräkna ett 95-procentigt konfidensintervall för medelvärdet.</p>
+<p>b. Genomför ett hypotestest för att testa om medelsmältpunkten är 1050 grader.</p>
+</div>
+<div class="hypothesis">
+<p><span id="hyp:unlabeled-div-34" class="hypothesis"><strong>Lösningsförslag 7.1  (Smältpunkt) </strong></span>Datan kan importeras från excelfilen med uppgiftsdata.</p>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="ett-stickprov.html#cb200-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">&quot;Data/Uppgiftsdata.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Smältpunkt&quot;</span>)</span>
+<span id="cb200-2"><a href="ett-stickprov.html#cb200-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb200-3"><a href="ett-stickprov.html#cb200-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(Smältpunkt, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb200-4"><a href="ett-stickprov.html#cb200-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb200-5"><a href="ett-stickprov.html#cb200-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;point&quot;</span>, <span class="at">x =</span> <span class="dv">1050</span>, <span class="at">y =</span> <span class="sc">-</span><span class="fl">0.1</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb200-6"><a href="ett-stickprov.html#cb200-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="sc">-</span><span class="fl">0.2</span>,<span class="fl">0.1</span>)</span></code></pre></div>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-118-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="ett-stickprov.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(dat<span class="sc">$</span>Smältpunkt, <span class="at">mu =</span> <span class="dv">1050</span>)</span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  dat$Smältpunkt
+## t = 1.4345, df = 9, p-value = 0.1852
+## alternative hypothesis: true mean is not equal to 1050
+## 95 percent confidence interval:
+##  1049.469 1052.371
+## sample estimates:
+## mean of x 
+##   1050.92</code></pre>
+<p>I bilden är varje svart punkt en observation och den röda punkten är nollhypotesens värde.</p>
+<p>Testet ger ett högt p-värde, vilket tyder på att nollhypotesen inte bör förkastar. Ett 95-procentigt konfidensintervall ges av <span class="math inline">\((1047.08, 1052.76)\)</span>. Notera att det täcker nollhypotesens värde på 1050.</p>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-35" class="exercise"><strong>Övning 7.2  (Väderstation Falsterbo. Test och konfidensintervall) </strong></span>Bland kursdatan finns en fil med temperaturmätningar från Falsterbo. Datan kan läsas in med följande kod.</p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="ett-stickprov.html#cb203-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">&quot;Data/smhi-opendata_1_52230_20210912_114534.csv&quot;</span>, <span class="at">skip =</span> <span class="dv">9</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb203-2"><a href="ett-stickprov.html#cb203-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Lufttemperatur =</span> <span class="fu">as.numeric</span>(Lufttemperatur))</span></code></pre></div>
+<p>Medeltemperatur 2000-2009 ges av följande tabell.</p>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="ett-stickprov.html#cb204-1" aria-hidden="true" tabindex="-1"></a>dat_temp <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> </span>
+<span id="cb204-2"><a href="ett-stickprov.html#cb204-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(Å<span class="at">r =</span> lubridate<span class="sc">::</span><span class="fu">year</span>(Datum)) <span class="sc">%&gt;%</span> </span>
+<span id="cb204-3"><a href="ett-stickprov.html#cb204-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(År <span class="sc">%in%</span> <span class="dv">2000</span><span class="sc">:</span><span class="dv">2009</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb204-4"><a href="ett-stickprov.html#cb204-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(År) <span class="sc">%&gt;%</span> </span>
+<span id="cb204-5"><a href="ett-stickprov.html#cb204-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Medeltemperatur =</span> <span class="fu">mean</span>(Lufttemperatur)) <span class="sc">%&gt;%</span> </span>
+<span id="cb204-6"><a href="ett-stickprov.html#cb204-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Medeltemperatur =</span> <span class="fu">round</span>(Medeltemperatur, <span class="dv">2</span>))</span>
+<span id="cb204-7"><a href="ett-stickprov.html#cb204-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb204-8"><a href="ett-stickprov.html#cb204-8" aria-hidden="true" tabindex="-1"></a>dat_temp</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="ett-stickprov.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(dat_temp)</span></code></pre></div>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+År
+</th>
+<th style="text-align:right;">
+Medeltemperatur
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+2000
+</td>
+<td style="text-align:right;">
+9.72
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2001
+</td>
+<td style="text-align:right;">
+8.98
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2002
+</td>
+<td style="text-align:right;">
+9.51
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2003
+</td>
+<td style="text-align:right;">
+8.89
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2004
+</td>
+<td style="text-align:right;">
+8.92
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2005
+</td>
+<td style="text-align:right;">
+9.01
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2006
+</td>
+<td style="text-align:right;">
+9.63
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2007
+</td>
+<td style="text-align:right;">
+9.80
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:right;">
+9.81
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2009
+</td>
+<td style="text-align:right;">
+9.17
+</td>
+</tr>
+</tbody>
+</table>
+<p>Medelvärde och standardavvikelsen ges av följande.</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="ett-stickprov.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(dat_temp<span class="sc">$</span>Medeltemperatur)</span></code></pre></div>
+<pre><code>## [1] 9.344</code></pre>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="ett-stickprov.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(dat_temp<span class="sc">$</span>Medeltemperatur)</span></code></pre></div>
+<pre><code>## [1] 0.3852907</code></pre>
+<p>a. Konstruera och tolka ett 95-procentigt konfidensintervall för medeltemperaturen under perioden.</p>
+<p>b. Mätningarna från 1900-1949 ger en medeltemperatur på 8.42. Genomför ett passande t-test för att se om mätningarna från 2000-talet skiljer sig i medelvärde.</p>
+<p>c. Titta på antalet mätningar per dag. Diskutera möjlig påverkan på testet i (b).</p>
+</div>
+<div class="hypothesis">
+<p><span id="hyp:unlabeled-div-36" class="hypothesis"><strong>Lösningsförslag 7.2  (Väderstation Falsterbo. Test och konfidensintervall) </strong></span>a. Konfidensvallet kan tas fram med <code>t.test</code>. Den aggregerade datan med årsmedelvärden sparades tidigare som <code>dat_temp</code>.</p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="ett-stickprov.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(dat_temp<span class="sc">$</span>Medeltemperatur)</span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  dat_temp$Medeltemperatur
+## t = 76.691, df = 9, p-value = 5.514e-14
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  9.06838 9.61962
+## sample estimates:
+## mean of x 
+##     9.344</code></pre>
+<p>Intervallet ges av <span class="math inline">\((9.06, 9.62)\)</span>. Populationsmedelvärdet för 2000-2009 ligger med 95-procents konfidens i det intervallet.</p>
+<p>b. Funktionen <code>t.test</code> kan användas med nollhypotesens värde angivet med argumentet <code>mu</code>. Nollhypotesen är att populationsmedelvärdet <span class="math inline">\(\mu\)</span> är 8.42.</p>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="ett-stickprov.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(dat_temp<span class="sc">$</span>Medeltemperatur, <span class="at">mu =</span> <span class="fl">8.42</span>)</span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  dat_temp$Medeltemperatur
+## t = 7.5837, df = 9, p-value = 3.383e-05
+## alternative hypothesis: true mean is not equal to 8.42
+## 95 percent confidence interval:
+##  9.06838 9.61962
+## sample estimates:
+## mean of x 
+##     9.344</code></pre>
+<p>Det låga p-värdet ger att nollhypotesen förkastas, vilket tyder på att medeltemperaturen 2000-2009 är skild från 8.42.</p>
+<p>c. Man kan räkna antal observationer per dag med <code>count</code> och göra en linjegraf med <code>ggplot</code> och <code>geom_line</code>.</p>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="ett-stickprov.html#cb214-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> <span class="fu">count</span>(Datum) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(Datum, n)) <span class="sc">+</span> <span class="fu">geom_line</span>()</span></code></pre></div>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-125-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Antal observationer per dag är inte konstant. Om vissa dagar är uppmätta vid tider på dygnet då det är kallare eller varmare kan det ge en skevhet i mätningarna, vilket gör att jämförelsen mellan olika tider inte är rättvis. En lösning skulle kunna vara att ta värdet en viss tid på dygnet, en tid då det finns observationer för samtliga dagar. Det finns förstås också andra möjliga felkällor som påverkar en jämförelse över tid, t.ex. ändrade mätinstrument, små positionsförändringar, förändringar i kringliggande bebyggelse).</p>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-37" class="exercise"><strong>Övning 7.3  (Äppelträd) </strong></span>I en undersökning av insektsskador på äppelträd har 6 plantor blivit vägda före och efter insektsdödande behandling. Syftet är att undersöka om behandlingen leder till förändrad vikt. Resultatet ges av följande tabell.</p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Träd
+</th>
+<th style="text-align:right;">
+Före
+</th>
+<th style="text-align:right;">
+Efter
+</th>
+<th style="text-align:right;">
+Diff
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+271.1
+</td>
+<td style="text-align:right;">
+311.2
+</td>
+<td style="text-align:right;">
+40.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:right;">
+307.9
+</td>
+<td style="text-align:right;">
+285.4
+</td>
+<td style="text-align:right;">
+-22.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+305.9
+</td>
+<td style="text-align:right;">
+320.9
+</td>
+<td style="text-align:right;">
+15.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D
+</td>
+<td style="text-align:right;">
+302.6
+</td>
+<td style="text-align:right;">
+353.5
+</td>
+<td style="text-align:right;">
+50.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E
+</td>
+<td style="text-align:right;">
+263.4
+</td>
+<td style="text-align:right;">
+358.0
+</td>
+<td style="text-align:right;">
+94.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:right;">
+277.7
+</td>
+<td style="text-align:right;">
+286.1
+</td>
+<td style="text-align:right;">
+8.4
+</td>
+</tr>
+</tbody>
+</table>
+<p>a. Gör ett test för att se om medelvärdet <em>före</em> behandling är skilt från 310.</p>
+<p>b. Beräkna ett konfidensintervall för skillnaden i populationsmedelvärden.</p>
+</div>
+<div class="hypothesis">
+<p><span id="hyp:unlabeled-div-38" class="hypothesis"><strong>Lösningsförslag 7.3  (Äppelträd) </strong></span>Datan importeras från excelfilen med uppgiftsdata. Datan ändras till långform genom <code>pivot_longer</code> och plottas med <code>ggplot</code>.</p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="ett-stickprov.html#cb215-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">&quot;Data/Uppgiftsdata.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;Äppelträd&quot;</span>)</span>
+<span id="cb215-2"><a href="ett-stickprov.html#cb215-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb215-3"><a href="ett-stickprov.html#cb215-3" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> </span>
+<span id="cb215-4"><a href="ett-stickprov.html#cb215-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>Träd) <span class="sc">%&gt;%</span> </span>
+<span id="cb215-5"><a href="ett-stickprov.html#cb215-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(name, value, <span class="at">group =</span> Träd)) <span class="sc">+</span></span>
+<span id="cb215-6"><a href="ett-stickprov.html#cb215-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb215-7"><a href="ett-stickprov.html#cb215-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-127-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>a.</p>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="ett-stickprov.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(dat<span class="sc">$</span>Före, <span class="at">mu =</span> <span class="dv">310</span>)</span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  dat$Före
+## t = -2.733, df = 5, p-value = 0.04113
+## alternative hypothesis: true mean is not equal to 310
+## 95 percent confidence interval:
+##  267.5012 308.6988
+## sample estimates:
+## mean of x 
+##     288.1</code></pre>
+<p>Testet ger ett p-värde på <span class="math inline">\(0.041\)</span>. Nollhypotesen förkastas på femprocentsnivån men ej på enprocentsnivån.</p>
+<p>b.</p>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="ett-stickprov.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(dat<span class="sc">$</span>Före, dat<span class="sc">$</span>Efter, <span class="at">paired =</span> T)</span></code></pre></div>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  dat$Före and dat$Efter
+## t = -1.8855, df = 5, p-value = 0.118
+## alternative hypothesis: true mean difference is not equal to 0
+## 95 percent confidence interval:
+##  -73.45961  11.29295
+## sample estimates:
+## mean difference 
+##       -31.08333</code></pre>
+<p>Konfidensintervallet ges av <span class="math inline">\((-73.46, 11.29)\)</span>. Den sanna behandlingsskillnaden ligger med 95 procents konfidens i det intervallet.</p>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-39" class="exercise"><strong>Övning 7.4  (Simulering, hypotestest) </strong></span>Slumptal kan användas för att undersöka hypotestestens egenskaper. Skriv en funktion som genererar 100 slumptal från en normalfördelning med populationsmedelvärdet 0, testar mot nollhypotesen <span class="math inline">\(\mu_0 = 0\)</span> i ett t-test, och ger ut p-värdet från det testet. Generera 10000 körningar av funktionen och illustrera p-värdena med ett histogram.</p>
+<p>Upprepa samma procedur men dra denna gång slumptal från en normalfördelning med populationsmedelvärdet 0.1 (använs samma nollhypotes som tidigare <span class="math inline">\(\mu_0 = 0\)</span>). Hur stor andel av de 10000 simuleringarna resulterar i ett p-värde under 0.05?</p>
+</div>
+<div class="hypothesis">
+<p><span id="hyp:unlabeled-div-40" class="hypothesis"><strong>Lösningsförslag 7.4  (Simulering hypotestest) </strong></span>Här konstrueras en funktion som drar hundra slumpvärden, testar om medelvärdet är skilt från noll, och ger ut p-värdet från testet. Funktionen replikeras 10000 gånger och de resulterande p-värdena illustreras med ett histogram.</p>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="ett-stickprov.html#cb220-1" aria-hidden="true" tabindex="-1"></a>p_values_when_mean_0 <span class="ot">&lt;-</span> <span class="cf">function</span>(){</span>
+<span id="cb220-2"><a href="ett-stickprov.html#cb220-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>)</span>
+<span id="cb220-3"><a href="ett-stickprov.html#cb220-3" aria-hidden="true" tabindex="-1"></a>  test <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x, <span class="at">mu =</span> <span class="dv">0</span>)</span>
+<span id="cb220-4"><a href="ett-stickprov.html#cb220-4" aria-hidden="true" tabindex="-1"></a>  test<span class="sc">$</span>p.value</span>
+<span id="cb220-5"><a href="ett-stickprov.html#cb220-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb220-6"><a href="ett-stickprov.html#cb220-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb220-7"><a href="ett-stickprov.html#cb220-7" aria-hidden="true" tabindex="-1"></a>p_values <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">10000</span>, <span class="fu">p_values_when_mean_0</span>())</span>
+<span id="cb220-8"><a href="ett-stickprov.html#cb220-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb220-9"><a href="ett-stickprov.html#cb220-9" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(p_values)</span>
+<span id="cb220-10"><a href="ett-stickprov.html#cb220-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(p_values)) <span class="sc">+</span></span>
+<span id="cb220-11"><a href="ett-stickprov.html#cb220-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.1</span>))</span></code></pre></div>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-130-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="ett-stickprov.html#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(p_values <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code></pre></div>
+<pre><code>## [1] 0.0489</code></pre>
+<p>När slumptalen genereras från en normalfördelning med medelvärde 0 följer p-värdena en likformig fördelning. Ganska exakt 5 procent av simuleringarna ger ett p-värde under 5 procent. Detta är simuleringar i situationen att nollhypotesen är sann - sannolikheten att felaktigt förkasta på femprocentsnivån när nollhypotesen stämmer är alltså fem procent. Detta är alltså risken för falska positiva resultat.</p>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="ett-stickprov.html#cb223-1" aria-hidden="true" tabindex="-1"></a>p_values_when_mean_0 <span class="ot">&lt;-</span> <span class="cf">function</span>(){</span>
+<span id="cb223-2"><a href="ett-stickprov.html#cb223-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="fl">0.1</span>)</span>
+<span id="cb223-3"><a href="ett-stickprov.html#cb223-3" aria-hidden="true" tabindex="-1"></a>  test <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x, <span class="at">mu =</span> <span class="dv">0</span>)</span>
+<span id="cb223-4"><a href="ett-stickprov.html#cb223-4" aria-hidden="true" tabindex="-1"></a>  test<span class="sc">$</span>p.value</span>
+<span id="cb223-5"><a href="ett-stickprov.html#cb223-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb223-6"><a href="ett-stickprov.html#cb223-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb223-7"><a href="ett-stickprov.html#cb223-7" aria-hidden="true" tabindex="-1"></a>p_values <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">10000</span>, <span class="fu">p_values_when_mean_0</span>())</span>
+<span id="cb223-8"><a href="ett-stickprov.html#cb223-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb223-9"><a href="ett-stickprov.html#cb223-9" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(p_values)</span>
+<span id="cb223-10"><a href="ett-stickprov.html#cb223-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(p_values)) <span class="sc">+</span></span>
+<span id="cb223-11"><a href="ett-stickprov.html#cb223-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.05</span>))</span></code></pre></div>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-131-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="ett-stickprov.html#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(p_values <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code></pre></div>
+<pre><code>## [1] 0.1633</code></pre>
+<p>När slumptalen istället genereras från en normalfördelning med medelvärde 0.1 följer p-värdena en avtagande kurva men högst sannolikheter kring noll. Runt 16 procent av simuleringarna har givit p-värden under 0.05 - man har alltså en större chans att korrekt förkasta nollhypotesen när den inte stämmer. Notera att man ändå har ganska låg sannolikhet att förkasta nollhypotesen.</p>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-41" class="exercise"><strong>Övning 7.5  (Guldfiskgenetik) </strong></span>En teori inom genetik förutsäger att tre fjärdedelar i en grupp guldfiskar ska ha genomskinliga fjäll. Observationer ger att nittio av hundra har genomskinliga fjäll. Genomför ett test för att se om den faktiska proportionen skiljer sig från 0.75.</p>
+<p>(Fråga från Olsson, <em>Biometri</em>)</p>
+</div>
+<div class="hypothesis">
+<p><span id="hyp:unlabeled-div-42" class="hypothesis"><strong>Lösningsförslag 7.5  (Guldfiskgenetik) </strong></span>Frågan kan hanteras med ett <span class="math inline">\(\chi^2\)</span>-test, ett z-test eller ett binomialtest. Här ges exempel på det första. Nollhypotesen är att sannolikheten för genomskinliga fjäll är tre fjärdedelar. Notera att funktionen anges både med antalet (och andelen under nollhypotesen) med genomskinliga fjäll och antalet med färglagda fjäll.</p>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="ett-stickprov.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="fu">c</span>(<span class="dv">90</span>, <span class="dv">10</span>), <span class="at">p =</span> <span class="fu">c</span>(<span class="fl">0.75</span>, <span class="fl">0.25</span>))</span></code></pre></div>
+<pre><code>## 
+##  Chi-squared test for given probabilities
+## 
+## data:  c(90, 10)
+## X-squared = 12, df = 1, p-value = 0.000532</code></pre>
+<p>Det låga p-värdet tyder på att den sanna sannolikheten för genomskinliga fjäll inte är 0.75.</p>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-43" class="exercise"><strong>Övning 7.6  (Mer guldfiskgenetik) </strong></span>En konkurrerande teori inom genetik förutsäger att femton sextondelar (proportionen 0.9375) ska ha genomskinliga fjäll. Observationer ger att nittio av hundra har genomskinliga fjäll. Genomför ett test för att se om proportionen skiljer sig från 0.9375.</p>
+</div>
+<div class="hypothesis">
+<p><span id="hyp:unlabeled-div-44" class="hypothesis"><strong>Lösningsförslag 7.6  (Mer guldfiskgenetik) </strong></span>Frågan kan hanteras med ett <span class="math inline">\(\chi^2\)</span>-test. Nollhypotesen är att sannolikheten är genomskinliga fjäll är femton sextondelar.</p>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="ett-stickprov.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="fu">c</span>(<span class="dv">90</span>, <span class="dv">10</span>), <span class="at">p =</span> <span class="fu">c</span>(<span class="dv">15</span><span class="sc">/</span><span class="dv">16</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">16</span>))</span></code></pre></div>
+<pre><code>## 
+##  Chi-squared test for given probabilities
+## 
+## data:  c(90, 10)
+## X-squared = 2.4, df = 1, p-value = 0.1213</code></pre>
+<p>Nollhypotesen att sannolikheten för genomskinliga fjäll är femton sextondelar, <span class="math inline">\(p = 15/16\)</span>, kan ej förkastas, eftersom testet ger ett p-värde över de vanliga signifikansnivåerna.</p>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-45" class="exercise"><strong>Övning 7.7  (Artobservationer) </strong></span>Ekologisk data på populationsstorlekar kan samlas in genom att en observatör följer en rak slinga (en transekt) i ett naturområde och räknar antalet observerade individer. I en transektundersökning av storlom utförs 200 observationer med resultat nedan. Data finns tillgänglig bland kursdatan.</p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+Antal observerade
+</th>
+<th style="text-align:right;">
+n
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+25
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+53
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+51
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+17
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+</tbody>
+</table>
+<p><em>Observerade</em> anger antalet observerade individer och <em>n</em> anger antalet transekter med det utfallet. Från tidigare studier förväntar man sig 1.7 observationer per transektgång. Genomför ett <em>goodness-of-fit</em>-test för att undersöka om antalet observerade individer följer en poissonfördelning med <span class="math inline">\(\lambda = 1.7\)</span>.</p>
+</div>
+<div class="hypothesis">
+<p><span id="hyp:unlabeled-div-46" class="hypothesis"><strong>Lösningsförslag 7.7  (Artobservationer) </strong></span>Ett goodness-of-fit-test kan genomföras genom att först beräkna det förväntade antalet observationer om nollhypotesen stämmer, det vill säga om antalet observerade individer följer en poissonfördelning med <span class="math inline">\(\lambda = 1.7\)</span>.
+Förväntat antal beräknas genom att ta fram sannolikheterna för utfallet noll till 5 från poissonfördelning och multiplicera med 200.
+För att sannolikheterna ska summera till 1 sätts sannolikheten att observera fem individer till ett minus summan av sannolikheten att få färre än 5.</p>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="ett-stickprov.html#cb230-1" aria-hidden="true" tabindex="-1"></a>prob_poisson <span class="ot">&lt;-</span> <span class="fu">dpois</span>(<span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">lambda =</span> <span class="fl">1.7</span>)</span>
+<span id="cb230-2"><a href="ett-stickprov.html#cb230-2" aria-hidden="true" tabindex="-1"></a>prob_poisson[<span class="dv">6</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">sum</span>(prob_poisson[<span class="dv">0</span><span class="sc">:</span><span class="dv">5</span>])</span>
+<span id="cb230-3"><a href="ett-stickprov.html#cb230-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb230-4"><a href="ett-stickprov.html#cb230-4" aria-hidden="true" tabindex="-1"></a>expected_counts <span class="ot">&lt;-</span> prob_poisson <span class="sc">*</span> <span class="dv">200</span></span></code></pre></div>
+<p>Datan kan illusteras med ett stapeldiagram. Stapeln ger faktiska observationer medan punkten ger det förväntade antalet under nollhypotesen.</p>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="ett-stickprov.html#cb231-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;Data/Transektdata Storlom.csv&quot;</span>)</span>
+<span id="cb231-2"><a href="ett-stickprov.html#cb231-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> </span>
+<span id="cb231-3"><a href="ett-stickprov.html#cb231-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(<span class="st">`</span><span class="at">Antal observerade</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb231-4"><a href="ett-stickprov.html#cb231-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Sannolikheter enligt nollhypotes</span><span class="st">`</span> <span class="ot">=</span> prob_poisson,</span>
+<span id="cb231-5"><a href="ett-stickprov.html#cb231-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Förväntat antal</span><span class="st">`</span> <span class="ot">=</span> expected_counts)</span>
+<span id="cb231-6"><a href="ett-stickprov.html#cb231-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb231-7"><a href="ett-stickprov.html#cb231-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="st">`</span><span class="at">Antal observerade</span><span class="st">`</span>, n)) <span class="sc">+</span></span>
+<span id="cb231-8"><a href="ett-stickprov.html#cb231-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">width =</span> <span class="fl">0.5</span>, </span>
+<span id="cb231-9"><a href="ett-stickprov.html#cb231-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb231-10"><a href="ett-stickprov.html#cb231-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="st">`</span><span class="at">Förväntat antal</span><span class="st">`</span>), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-136-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Observerade antal verkar inte perfekt följa nollhypotesens förväntade värden.</p>
+<p>Ett formellt test genomförs som ett chi-två-test. Eftersom värdet på <span class="math inline">\(\lambda\)</span> inte skattas från datan ges antalet frihetsgrader av antalet klasser minus ett. Testet genomförs i R med <code>chisq.test</code>.</p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="ett-stickprov.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(dat<span class="sc">$</span>n, <span class="at">p =</span> dat<span class="sc">$</span><span class="st">`</span><span class="at">Sannolikheter enligt nollhypotes</span><span class="st">`</span>)</span></code></pre></div>
+<pre><code>## 
+##  Chi-squared test for given probabilities
+## 
+## data:  dat$n
+## X-squared = 32.347, df = 5, p-value = 5.072e-06</code></pre>
+<p>Det låga p-värdet ger att man förkastar nollhypotesen. Det finns en statistiskt säkerställd skillnad mellan den observerade fördelningen och en poissonfördelning med <span class="math inline">\(\lambda = 1.7\)</span>.</p>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-47" class="exercise"><strong>Övning 7.8  (Simulering konfidensintervall) </strong></span>Konfidensinterval konstrueras så att det sanna parametervärdet ingår i intervallet med en viss konfidensgrad (oftast 95 procent). Skriv en funktion som drar 10 slumptal från en normalfördelning med medelvärdet 9 och beräknar konfidensintervall. Upprepa funktionen 10000 gånger. Hur ofta täcker intervallet 9?</p>
+<p>Notera att detta är en svårare uppgift.</p>
+</div>
+<div class="hypothesis">
+<p><span id="hyp:unlabeled-div-48" class="hypothesis"><strong>Lösningsförslag 7.8  (Simulering konfidensintervall) </strong></span>Här konstrueras en funktion som drar 10 slumptal och beräknar ett konfidensintervall. Eftersom funktionen ger två värden (intervallets lägre och övre gräns) behövs lite mer hantering än i tidigare exempel (där de funktioner som använts givit ett utfallsvärde).</p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="ett-stickprov.html#cb234-1" aria-hidden="true" tabindex="-1"></a>ci_from_ten <span class="ot">&lt;-</span> <span class="cf">function</span>(){</span>
+<span id="cb234-2"><a href="ett-stickprov.html#cb234-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">9</span>)</span>
+<span id="cb234-3"><a href="ett-stickprov.html#cb234-3" aria-hidden="true" tabindex="-1"></a>  test <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x)</span>
+<span id="cb234-4"><a href="ett-stickprov.html#cb234-4" aria-hidden="true" tabindex="-1"></a>  test<span class="sc">$</span>conf.int</span>
+<span id="cb234-5"><a href="ett-stickprov.html#cb234-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb234-6"><a href="ett-stickprov.html#cb234-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb234-7"><a href="ett-stickprov.html#cb234-7" aria-hidden="true" tabindex="-1"></a>intervals <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">10000</span>, <span class="fu">ci_from_ten</span>())</span>
+<span id="cb234-8"><a href="ett-stickprov.html#cb234-8" aria-hidden="true" tabindex="-1"></a>intervals <span class="ot">&lt;-</span> <span class="fu">t</span>(intervals) <span class="co"># Transponera till kolumner</span></span>
+<span id="cb234-9"><a href="ett-stickprov.html#cb234-9" aria-hidden="true" tabindex="-1"></a>intervals <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(intervals)</span>
+<span id="cb234-10"><a href="ett-stickprov.html#cb234-10" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(intervals) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Undre&quot;</span>, <span class="st">&quot;Övre&quot;</span>)</span>
+<span id="cb234-11"><a href="ett-stickprov.html#cb234-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb234-12"><a href="ett-stickprov.html#cb234-12" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(intervals<span class="sc">$</span>Undre <span class="sc">&gt;</span> <span class="dv">9</span>)</span></code></pre></div>
+<pre><code>## [1] 0.0266</code></pre>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="ett-stickprov.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(intervals<span class="sc">$</span>Övre <span class="sc">&lt;</span> <span class="dv">9</span>)</span></code></pre></div>
+<pre><code>## [1] 0.0253</code></pre>
+<p>Värdet 9 ligger under den övre gränsen ungefär 2.5 procent av gångerna och över den undre gränsen ungefär 2.5 gångerna. Intervallet täcker alltså 9 ungefär 95 procent av gångerna.</p>
+<p>En illustration med 100 simulerade fall.</p>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="ett-stickprov.html#cb238-1" aria-hidden="true" tabindex="-1"></a>intervals <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">100</span>, <span class="fu">ci_from_ten</span>())</span>
+<span id="cb238-2"><a href="ett-stickprov.html#cb238-2" aria-hidden="true" tabindex="-1"></a>intervals <span class="ot">&lt;-</span> <span class="fu">t</span>(intervals) <span class="co"># Transponera till kolumner</span></span>
+<span id="cb238-3"><a href="ett-stickprov.html#cb238-3" aria-hidden="true" tabindex="-1"></a>intervals <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(intervals)</span>
+<span id="cb238-4"><a href="ett-stickprov.html#cb238-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(intervals) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Undre&quot;</span>, <span class="st">&quot;Övre&quot;</span>)</span>
+<span id="cb238-5"><a href="ett-stickprov.html#cb238-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb238-6"><a href="ett-stickprov.html#cb238-6" aria-hidden="true" tabindex="-1"></a>intervals <span class="sc">%&gt;%</span> </span>
+<span id="cb238-7"><a href="ett-stickprov.html#cb238-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Undre <span class="sc">+</span> Övre) <span class="sc">%&gt;%</span> </span>
+<span id="cb238-8"><a href="ett-stickprov.html#cb238-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>(),</span>
+<span id="cb238-9"><a href="ett-stickprov.html#cb238-9" aria-hidden="true" tabindex="-1"></a>         Täcker<span class="at">_9 =</span> Undre <span class="sc">&lt;</span> <span class="dv">9</span> <span class="sc">&amp;</span> Övre <span class="sc">&gt;</span> <span class="dv">9</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb238-10"><a href="ett-stickprov.html#cb238-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Undre, <span class="at">xend =</span> Övre, <span class="at">y =</span> id, <span class="at">yend =</span> id, <span class="at">col =</span> Täcker_9)) <span class="sc">+</span></span>
+<span id="cb238-11"><a href="ett-stickprov.html#cb238-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>() <span class="sc">+</span></span>
+<span id="cb238-12"><a href="ett-stickprov.html#cb238-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> (Övre <span class="sc">+</span> Undre) <span class="sc">/</span> <span class="dv">2</span>, id)) <span class="sc">+</span></span>
+<span id="cb238-13"><a href="ett-stickprov.html#cb238-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">9</span>) <span class="sc">+</span></span>
+<span id="cb238-14"><a href="ett-stickprov.html#cb238-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-139-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Varje streck motsvarar konfidensintervallet från en simulering. Intervallet väntas täcka 9 i 95 av hundra fall, men det kan förstås variera eftersom det beror på slumptalen.</p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="sannolikhetsfördelningar-och-slumptal.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="två-stickprov.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "sepia",
+"family": "serif",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["R-anvisningar.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

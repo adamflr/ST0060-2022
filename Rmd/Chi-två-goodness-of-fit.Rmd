@@ -1,0 +1,86 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+## Nominal eller ordinal data. Goodness-of-fit
+
+Goodness-of-fit-test testar fördelningen i insamlad data med en hypotetiskt fördelning. Teststorheten ges av
+
+$$\chi^2 = \sum \frac{(O-E)^2}{E}$$
+
+där summan går över alla utfall i fördelning, $O$ är det observerade antalet i klassen och $E$ är det förväntade antalet enligt den hypotetiska fördelningen. Under nollhypotesen följer teststorheten en $\chi^2$-fördelning.
+
+Som exempel ges följande data på fågelobservationer.
+
+```{r, echo = F}
+dat <- tibble(Art = c("Ladusvala", "Hussvala", "Backsvala"),
+              Antal = c(237, 220, 143))
+
+kable(dat)
+```
+
+Totalt har man observerat 600 fåglar. Från tidigare års studier tror man att Ladusvalor och Hussvalor är lika vanliga, medan Backsvalar förekommer hälften så ofta - proportionerna skulle alltså vara 0.4, 0.4 respektive 0.2. Detta kan illustreras med ett stapeldiagram, med den hypotetiska fördelningen som punkter.
+
+```{r}
+dat <- tibble(Art = c("Ladusvala", "Hussvala", "Backsvala"),
+              Antal = c(237, 220, 143))
+
+ggplot(dat, aes(Art, Antal)) +
+  geom_bar(stat = "identity") +
+  geom_point(aes(y = c(0.4, 0.4, 0.2) * 600), size = 6)
+```
+
+Grafen visar att hussvalor förekommer något mer sällan än väntat, medan backsvalor förekommer någon oftare.
+
+För att genomföra testet i R används `chisq.test`. Funktionens ingångsvärden är den observerade datan och de teoretiska andelarna.
+
+```{r}
+chisq.test(dat$Antal, p = c(0.4, 0.4, 0.2))
+```
+
+Utskriften ger teststorheten $\chi^2 = 6.1125$ och p-värdet $0.04706$. I detta fall är p-värdet strax under fem procent - man skulle alltså förkasta nollhypotesen på signifikansnivån fem procent.
+
+Utskriften ger också antalet frihetsgrader till två. I det här fallet ges den hypotetiska fördelningen av antagna sannolikheter, antalet frihetsgrader ges därför av antalet klasser minus ett. Men man kan också använda goodness-of-fit-test för att testa om data följer en viss typfördelning vars parameter beror på värden i data. Ett typiskt exempel på detta är test om data följer en poissonfördelning där man använder datan för att skatta $\lambda$-parametern i fördelningen. Antal frihetsgrader blir i sådana fall antalet klasser, minus antalet skattade parametrar, minus ett. Funktionen `chisq.test` kommer då ge fel antal frihetsgrader - p-värdet kan istället beräknas genom `pchisq`.
+
+Ta som exempel följande frekvenstabell, beräknad från 500 observationer av en diskret variabel.
+
+```{r}
+dat <- tibble(Utfall = 0:7, 
+              Frekvens = c(21,76,125,107,79,54,23,15))
+kable(dat)
+```
+
+Målet är att testa om datan följer en poissonfördelning. För att beräkna sannolikheter från en poissonfördelning behövs en skattning av parametern $\lambda$. Detta ges av medelvärdet av de 600 observationerna, vilket kan beräknas genom att multiplicera utfallet med frekvensen, summera, och dela på 600.
+
+```{r}
+lambda <- sum(dat$Utfall * dat$Frekvens) / 500
+lambda
+```
+
+Skattningen på $\lambda$ är $2.952$. Nästa steg är att beräkna sannolikheter från en poissonfördelning med det parametervärdet. För att sannolikheterna ska summera till ett justeras sannolikheten för det avslutande utfallet 7.
+
+```{r}
+dat$Sannolikheter <- dpois(0:7, lambda)
+dat$Sannolikheter[8] <- 1 - ppois(6, lambda)
+sum(dat$Sannolikheter)
+```
+
+Data och nollhypotes kan illustreras med ett stapeldiagram där punkter anger förväntade värden från nollhypotesen.
+
+```{r}
+ggplot(dat, aes(Utfall, Frekvens)) +
+  geom_bar(stat = "identity") +
+  geom_point(aes(y = Sannolikheter * 500))
+```
+
+Data och nollhypotes verkar stämma ganska väl. Funktionen `chisq.test` kan användas för att beräkna teststorheten, men observera att antalet frihetsgrader nu blir fel - datan har åtta klasser, och då en parameter skattas i beräkningen av förväntade antal bör testet genomföras med $8-1-1=6$ frihetsgrader. För att korrigera kan man ta fram teststorheten och beräkna p-värdet ur den korrekta fördelningen.
+
+```{r}
+chisq.test(dat$Frekvens, p = dat$Sannolikheter)
+
+test_result <- chisq.test(dat$Frekvens, p = dat$Sannolikheter)
+1 - pchisq(test_result$statistic, df = 6)
+```
+
+I ett $\chi^2$-test är p-värdet sannolikheten i svansen till höger om teststorheten. Eftersom `pchisq`-funktionen beräknar sannolikheten till vänster, kan man ta komplementet genom att dra ifrån sannolikheten från ett.

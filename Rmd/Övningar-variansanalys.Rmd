@@ -1,0 +1,254 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+## Övningar
+
+::: {.exercise name="Jämförelse mellan t-test och anova"}
+Detta är ett datamaterial som jämför hållfastheten hos murbruk för två oberoende stickprov.
+
+```{r, echo = F}
+dat <- tibble(Behandling = rep(c("Ny", "Standard"), each = 10),
+              Hållfasthet = c(16.85,16.40,17.21,16.36,16.52,
+                              17.04,16.96,17.15,16.59,16.57,
+                              17.50,17.63,18.25,18.00,17.86,
+                              17.75,18.22,17.90,17.96,18.15))
+kable(dat)
+```
+
+a\. Gör ett t-test för att se om det är någon skillnad mellan de två behandlingarna. Anta att varianserna är lika för de två behandlingarna.
+
+b\. Använd envägs-anova för att se om det är skillnad. Är modellantaganden om normalfördelade *residualer* och lika varians inom grupper uppfyllda?
+
+c\. Jämför resultaten i (a) och (b).
+:::
+
+::: {.hypothesis name="Jämförelse mellan t-test och anova"}
+a\.
+```{r}
+dat <- tibble(Behandling = rep(c("Ny", "Standard"), each = 10),
+              Hållfasthet = c(16.85,16.40,17.21,16.36,16.52,
+                              17.04,16.96,17.15,16.59,16.57,
+                              17.50,17.63,18.25,18.00,17.86,
+                              17.75,18.22,17.90,17.96,18.15))
+
+ggplot(dat, aes(Behandling, Hållfasthet)) +
+  geom_point()
+```
+
+En graf visar på en mycket tydlig behandlingsskillnad. Det finns inga tydliga extremvärden och grupperna verkar ha samma varians inom gruppen.
+
+```{r}
+t.test(Hållfasthet ~ Behandling, dat, var.equal = T)
+```
+
+Ett mycket lågt p-värde tyder på att det finns en skillnad mellan grupperna.
+
+b\. Modellen kan skattas med `lm`. Modellekvationen ges av `Hållbarhet ~ Behandling`, vilket kan utläsas som *hållbarhet beroende på behandling*.
+
+```{r}
+mod <- lm(Hållfasthet ~ Behandling, dat)
+
+library(car)
+Anova(mod)
+```
+
+Ett mycket lågt p-värde tyder på att det finns en skillnad mellan grupperna.
+
+Modellantaganden (normalfördelning och lika varianser inom grupper) kan undersökas med diagnosplottar. QQ-grafen visar eventuella avvikelser från en normalfördelning (om data är normalfördelad följer punkterna diagonalen) och spridningsdiagram visar eventuella skillnader i spridning.
+
+```{r, fig.height=3, fig.width=3.5}
+qqnorm(residuals(mod))
+qqline(residuals(mod))
+
+plot(residuals(mod) ~ fitted(mod))
+```
+
+Diagnostik-grafer pekar inte på några extrema avvikelser från normalantagandet (punkterna följer den diagonala linjen ganska väl) eller antagandet om lika varianser (de två kolumnerna med punkter har ungefär samma spridning).
+
+c\. F-testet i (b) ger samma p-värde som t-test i (a).
+:::
+
+::: {.exercise name="Äppelinfektion"}
+En studie har givit ett mått på infektion hos äppelträd. Fyra sorter jämförs med tre replikat per sort.
+
+```{r, echo = F}
+library(readxl)
+dat <- read_excel("Data/Uppgiftsdata.xlsx", sheet = "Äppelangrepp")
+kable(dat)
+```
+
+a\. Skatta anova-modellen och ta fram anova-tabellen.
+
+b\. Undersök om residualerna är normalfördelade.
+
+c\. Jämför sorter med Tukeys HSD.
+
+d\. Jämför sorter med Fishers LSD.
+:::
+
+::: {.hypothesis name="Äppelinfektion"}
+Data kan läsas in från excelfilen med uppgiftsdata.
+
+```{r}
+library(readxl)
+dat <- read_excel("Data/Uppgiftsdata.xlsx", sheet = "Äppelangrepp")
+
+ggplot(dat, aes(Sort, Angrepp)) +
+  geom_point()
+```
+
+Grafen visar svaga tecken på skillnader, men inga *tydliga* mönster.
+
+a\.
+```{r}
+mod <- lm(Angrepp ~ Sort, dat)
+
+library(car)
+Anova(mod)
+```
+
+F-testet testar nollhypotesen att alla grupper har samma populationsmedelvärde. Det höga p-värdet ger att det inte finns signifikanta skillnader mellan sorter.
+
+b\.
+```{r, fig.height=3, fig.width=3.5}
+qqnorm(residuals(mod))
+qqline(residuals(mod))
+```
+Ungefärligt normalfördelat.
+
+c\.
+```{r}
+library(emmeans)
+multcomp::cld(emmeans(mod, ~ Sort)) # Tukey
+```
+Tukey-testet pekar på att det inte finns några skillnader mellan sorterna.
+
+d\.
+```{r}
+multcomp::cld(emmeans(mod, ~ Sort, adjust = "none")) # Fisher
+```
+
+Fishers LSD pekar på att det inte finns några skillnader mellan sorterna.
+:::
+
+::: {.exercise name="Majshybrider"}
+Fyra majssorter planteras på fem platser (som agerar som fem block). Datan ges av följande tabell.
+
+```{r, echo =F}
+dat <- read_excel("Data/Uppgiftsdata.xlsx", sheet = "Majshybrider")
+
+dat %>% 
+  pivot_wider(names_from = Plats, values_from = Avkastning) %>% 
+  kable()
+```
+
+a\. Skatta en anova-modell med block och ta fram anova-tabellen. Finns det signifikanta skillander mellan hybrider? Mellan block?
+
+b\. Använd Tukey-metoden för parvisa jämförelser mellan hybrider.
+:::
+
+::: {.hypothesis name="Majshybrider"}
+Data kan läsas in från excelfilen med uppgiftsdata.
+
+```{r}
+dat <- read_excel("Data/Uppgiftsdata.xlsx", sheet = "Majshybrider")
+
+ggplot(dat, aes(Hybrid, Avkastning, group = Plats, col = Plats)) +
+  geom_point() +
+  geom_line()
+```
+
+Tecken på både platseffekt (nordväst alltid lägst) och hybrideffekt (RC3 lägre än övriga).
+
+```{r}
+mod <- lm(Avkastning ~ Hybrid + Plats, dat)
+Anova(mod)
+
+multcomp::cld(emmeans(mod, ~ Hybrid), Letters = letters)
+```
+
+Klart signifikanta skillnader mellan hybrider. Post-hoc-tester ger att RC-3 har lägre avkastning av övriga.
+:::
+
+::: {.exercise name="Maskiner med och utan block"}
+I en fabrik testas tre olika maskiner i produktionen. Utfallsvariabeln är hur mycket tid maskinen behöver för tryckpressa en stol. Man vill undersöka om det är en skillnad mellan maskiner. Resultatet ges nedan.
+
+```{r, echo = F}
+dat <- tibble(Maskin = rep(c("A", "B", "C"), each = 6),
+              Replikat = rep(1:6, 3),
+              Tid = c(34,38,32,41,41,36,
+                      30,31,33,40,39,35,
+                      27,30,29,31,36,32))
+kable(dat %>% pivot_wider(names_from = Replikat, values_from = Tid))
+```
+
+a\. Antag att den som gjorde experimentet randomiserade ordningen på de 18 försöken och gjorde alla under en dag. Analysera försöket med envägs anova-modell för att se om det är någon skillnad mellan maskinerna.
+
+b\. Om där är en skillnad, vilka maskiner skiljer sig åt?
+
+c\. Vilka antaganden gjordes i analysen? Undersök om dessa är uppfyllda genom att använda lämpliga diagnosgrafer.
+
+d\. Någon säger att försöket inte är gjort under en dag utan att replikat i själva verket anger vilken dag som försöket gjordes. Man vill därför använda replikat som block i försöket. Gör detta och undersök om detta förändrar resultatet. Tror du att replikat anger olika dagar?
+:::
+
+::: {.hypothesis name="Maskiner med och utan block"}
+Datan kan skrivas in som en `tibble` och illustreras med ett enkelt spridningsdiagram.
+
+```{r}
+dat <- tibble(Maskin = rep(c("A", "B", "C"), each = 6),
+              Replikat = rep(1:6, 3),
+              Tid = c(34,38,32,41,41,36,
+                      30,31,33,40,39,35,
+                      27,30,29,31,36,32))
+
+ggplot(dat, aes(Maskin, Tid, group = Replikat)) +
+  geom_point() +
+  geom_line()
+```
+
+Det finns tecken på skillnader i tid (Maskin C ligger lägre).
+
+a\. En enkel anova-modell skattas för att testa eventuella maskinskillnader.
+
+```{r}
+mod <- lm(Tid ~ Maskin, dat)
+Anova(mod)
+```
+
+F-testet för faktorn Maskin ger ett p-värde på 0.03. Eftersom det är under fem procent förkastas nollhypotesen att maskinerna ger samma medelvärde.
+
+b\. 
+
+```{r}
+emmeans(mod, pairwise ~ Maskin)
+```
+
+Post-hoc-tester visar på en skillnad mellan maskin A och C.
+
+c\. Modellen bygger på antagandet att residualerna är normalfördelade och att grupperna har samma varians.
+
+```{r, fig.height=3, fig.width=3.5}
+qqnorm(residuals(mod))
+qqline(residuals(mod))
+
+plot(residuals(mod) ~ fitted(mod))
+```
+
+En graf över residualerna visar inte på några tydliga brister i antaganden.
+
+d\. Replikat används som en block-faktor i försöket. För att R ska tolka variabeln Replikat korrekt ändras dess typ till `character`.
+
+```{r}
+dat <- dat %>% mutate(Replikat = as.character(Replikat))
+mod <- lm(Tid ~ Maskin + Replikat, dat)
+
+Anova(mod)
+
+emmeans(mod, pairwise ~ Maskin)
+```
+
+Om replikat tas med i modellen förtydligas behandlingseffekten. F-testet ger en mycket starkare signifikans än tidigare och post-hoc-testet ger en signifikant skillnad mellan B och C (utöver den tidigare signifikanta skillnaden mellan A och C).
+:::

@@ -1,0 +1,358 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+editor_options:
+  chunk_output_type: console
+---
+## Övningar
+
+```{r, echo=F, message=F,warning=F}
+library(tidyverse)
+```
+
+::: {.exercise name="Antal barn"}
+Antal barn per familj för 30 familjer är
+
+```{r, echo = F}
+dat <- c(4,3,0,0,0,1,5,2,2,8,3,1,0,1,2,1,1,4,1,0,2,2,3,0,4,1,5,1,1,3)
+kable(matrix(dat, 3, byrow = T))
+```
+
+a\. Sammanfatta materialet i en frekvenstabell och illustrera materialet med ett lämpligt diagram.
+
+b\. Beräkna genomsnittligt antal barn per familj.
+
+c\. Beräkna variansen.
+
+d\. Pröva att ändra sista värdet till 30 och se vad som händer med resultaten.
+:::
+
+::: {.hypothesis name="Antal barn"}
+Datan kan illustreras med ett stapeldiagram och beskrivande statistik kan beräknas med lämpliga funktioner.
+
+a\.
+```{r}
+dat <- c(4,3,0,0,0,1,5,2,2,8,3,1,0,1,2,1,1,4,1,0,2,2,3,0,4,1,5,1,1,3)
+table(dat)
+
+dat <- tibble(`Antal barn` = dat)
+ggplot(dat, aes(`Antal barn`)) +
+  geom_bar() +
+  scale_x_continuous(breaks = 0:8) +
+  scale_y_continuous(breaks = 0:10) +
+  ylab("Frekvens") +
+  theme(panel.grid.minor = element_blank(),
+        panel.grid.major.x = element_blank())
+```
+
+b\.
+```{r}
+dat %>% summarise_all(c(mean, median, var))
+```
+
+c\.
+```{r}
+var(dat$`Antal barn`)
+```
+
+d\.
+```{r}
+dat$`Antal barn`[30] <- 30 # Ändra trettionde värde till 30
+dat %>% summarise_all(c(mean, median, var))
+```
+
+Medelvärde ökar med ungefär 1, medianen är densamma (varför?) och variansen ökar kraftigt.
+:::
+
+::: {.exercise name="Darwindata"}
+Följande data gäller längden (i tum) hos 15 stycken plantor som fortplantats genom självbefruktning:
+
+```{r, echo = F}
+dat <- c(174,204,200,200,184,186,186,153,165,180,163,180,128,155,180) / 10
+kable(matrix(dat, 3, byrow = T))
+```
+
+a\. Beräkna medelvärdet.
+
+b\. Beräkna medianen.
+
+c\. Beräkna variansen.
+
+d\. Beskriv fördelningen med ett histogram.
+
+e\. Beskriv fördelningen med ett lådagram.
+:::
+
+::: {.hypothesis name="Darwindata"}
+Funktionen `summarise_all` kan användas för att beräkna medelvärde, median och varians. Grafer kan konstrueras med `geom_histogram` och `geom_boxplot`.
+
+```{r}
+dat <- tibble(Längd = c(174,204,200,200,184,186,186,
+                        153,165,180,163,180,128,155,180))
+dat %>% 
+  summarise_all(c(mean, median, var))
+  
+ggplot(dat, aes(Längd)) + 
+  geom_histogram(bins = 10)
+
+ggplot(dat, aes(Längd, "Självbefruktning")) + 
+  geom_boxplot() +
+  ylab("")
+```
+
+Storleken på intervallen i histogrammets x-axel kan styras med `binwidth`. Med så få observationer är histogram sällan informativt.
+:::
+
+::: {.exercise name="Stapeldiagram med felstaplar"}
+Darwins studie gav följande data:
+
+```{r, echo = F}
+dat <- readxl::read_excel("Data/Uppgiftsdata.xlsx", sheet = "Darwin")
+
+dat %>% 
+  mutate(ID = c(1:15,1:15)) %>% 
+  pivot_wider(names_from = Metod, values_from = Utfall) %>% 
+  select(-ID) %>% 
+  kable()
+```
+
+Konstruera ett stapeldiagram med felstaplar där stapelns höjd ges av medelvärdet inom gruppen och felstapelns längd av standardavvikelsen inom gruppen.
+
+Datan finns tillgänglig i arket *Darwin* i excelfilen *Uppgiftsdata.xlsx*. Exceldata kan läsas in med funktionen `read_excel` från paketet `readxl`.
+:::
+
+::: {.hypothesis name="Stapeldiagram med felstaplar"}
+Felstaplar kan konstrueras genom att beräkna medelvärde och standardavvikelse, och sedan *pipa* (`%>%`) in i en plot där staplar konstrueras med `geom_bar` och felstaplar med `geom_errorbar`.
+
+```{r}
+dat <- readxl::read_excel("Data/Uppgiftsdata.xlsx", sheet = "Darwin")
+dat %>% 
+  group_by(Metod) %>% 
+  summarise(m = mean(Utfall), s = sd(Utfall)) %>% 
+  ggplot(aes(Metod, m)) +
+  geom_bar(stat = "identity", width = 0.3, col = "black", fill = "white") +
+  geom_errorbar(aes(ymin = m - s, ymax = m + s), width = 0.1) +
+  labs(caption = "Felstapel anger +/- en standardavvikelse")
+```
+
+Det är inte alltid klart vilket spridningsmått felstaplarna illusterar (vanliga alternativ är standardavvikelsen, medelfelet (standardavvikelsen delat på roten ur stickprovsstorleken) och konfidensintervallet). Det är därför god praxis att skriva ut vad felstaplarna anger.
+:::
+
+::: {.exercise name="Animal Crossing"}
+TidyTuesday (https://github.com/rfordatascience/tidytuesday) är ett R-kopplat projekt som varje vecka släpper ett nytt dataset, med tanken att vemsomhelst kan analysera datan och publicera informativa grafer. Ta gärna titt på Twitter under *#tidytuesday* (helst på en tisdag förstås). Ett dataset från TidyTuesday täcker bybor från spelserien *Animal Crossing*. Datan kan läsas in med
+
+```{r}
+villagers <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-05/villagers.csv')
+```
+
+a\. Illustrera fördelning mellan arter (kolumnen *species*) med ett lämpligt diagram. Försök att med hjälp av en internetsökning lösa de problem som kan uppstå med överlappande etiketter och ordning på staplar.
+
+b\. Utveckla diagrammet från (a) genom att på lämpligt sätt ange personlighet (kolumnen *personality*).
+
+c\. Vilken är spelens mest populära låt?
+:::
+
+::: {.hypothesis name="Animal Crossing"}
+a\.
+```{r, fig.height=4}
+ggplot(villagers, aes(species)) +
+  geom_bar()
+```
+
+En internetsökning på exempelvis 'ggplot2 bar order' kommer ge flera möjliga lösningar - en är att använda `fct_reorder` från paketet `forcats`, vilket ordnar en faktor efter antalet förekomster (genom att sätta funktionen till `length`).
+Överlappande etiketter kan också lösas på ett par olika sätt (lutande etiketter, etiketter på olika nivåer). En enkel lösning är att vrida staplarna och få etiketterna till vänster med `coord_flip`.
+
+```{r, fig.height=5}
+ggplot(villagers, aes(forcats::fct_reorder(species, species, .fun = length))) +
+  geom_bar() +
+  xlab("Art") +
+  coord_flip()
+```
+
+b\.
+```{r, fig.height=5}
+ggplot(villagers, aes(forcats::fct_reorder(species, species, .fun = length), fill = personality)) +
+  geom_bar() +
+  xlab("Art") +
+  coord_flip()
+```
+
+c\.
+```{r}
+villagers %>% 
+  count(song, sort = T)
+```
+
+Det vanligaste alternativet är att sång saknas, vilket då anges som `NA`. Den mest populära faktiska sången är *KK Country*.
+:::
+
+::: {.exercise name="Väderstation Falsterbo"}
+SMHI publicerar historisk väderdata från en stor mängd väderstationer (https://www.smhi.se/data/meteorologi/ladda-ner-meteorologiska-observationer). Ett exempel på en sådan fil, från väderstationen i Falsterbo, finns bland kursdatan. Notera att flera inledande rader innehåller metadata och inte ska läsas in. Filen är dessutom inte kommaseparerad utan semikolon-separerad. Den kan läsas in med funktionen `read_csv2` från `readr`. Vid inläsning kan man också ändra datatyp för temperaturkolumnen, som annars felaktigt tolkats som en textkolumn.
+
+```{r, message=F}
+dat <- read_csv2("Data/smhi-opendata_1_52230_20210912_114534.csv", skip = 9) %>% 
+  mutate(Lufttemperatur = as.numeric(Lufttemperatur))
+```
+
+a\. Vilken är den högst uppmätta temperaturen?
+
+b\. Beräkna max-temperaturen för varje år. Plotta ett linjediagram med år på x-axeln och maxtemperatur på y-axeln.
+
+c\. Skapa en variabel som anger observationens årtionde. Beräkna medeltemperaturen per årtionde och illustrera med lämplig graf.
+:::
+
+::: {.hypothesis name="Väderstation Falsterbo"}
+a\. Ordna data efter lufttemperatur och skriv ut de översta raderna.
+
+```{r}
+dat %>% arrange(desc(Lufttemperatur)) %>% print(n = 10)
+```
+
+Fem av de tio högsta mätningarna inträffade mellan 26 juli och 3 augusti 2018. Två samma dag.
+
+b\. Beräkningen kan göras genom att skapa en årsvariabel med `year` från `lubridate`-paketet. Därefter gruppera per år och summera med `max`-funktionen.
+
+```{r}
+dat %>%
+  mutate(År = lubridate::year(Datum)) %>% 
+  group_by(År) %>% 
+  summarise(Maxtemperatur = max(Lufttemperatur)) %>% 
+  ggplot(aes(År, Maxtemperatur)) +
+  geom_line()
+```
+
+Datan visar på stor variation mellan år. 
+
+c\. Likt (b) kan man skapa en årsvariabel och från den beräkna årtionde genom att dela på tio, använda `floor` för att ta bort decimalen, och sedan multiplicera med tio. Därefter kan man gruppera efter årtionde och summera till medelvärdet.
+
+```{r}
+dat %>% 
+  mutate(Årtionde = floor(lubridate::year(Datum) / 10) * 10) %>% 
+  group_by(Årtionde) %>% 
+  summarise(Medeltemperatur = mean(Lufttemperatur)) %>% 
+  ggplot(aes(Årtionde, Medeltemperatur, fill = Medeltemperatur)) +
+  geom_bar(stat = "identity", col = "black") +
+  scale_fill_gradient(low = "yellow", high = "red")
+```
+
+Temperaturen verkar öka i Falsterbo. Märk att stapeln för 2020-talet bara innefattar ett år.
+:::
+
+::: {.exercise name="Allsvenskan för herrar"}
+Bland kursdatan finns en fil med matchresultat från herrarnas fotbollsallsvenska, 1924 - 2019. Läs in datan och undersök följande.
+
+a\. Hur många gånger har Malmö FF mött Mjällby? Vilket datum inföll Mjällbys enda seger?
+
+b\. Fyra säsonger har lag gått rent på hemmaplan (segrar i samtliga matcher). Vilka är de två lagen och vilka är de fyra säsongerna?
+
+c\. Vilka är de målrikaste matcherna?
+
+d\. Producera ett spridningsdiagram med hemmamål på x-axeln och bortamål på y-axeln. Hur kan man hantera överlappande punkter?
+:::
+
+::: {.hypothesis name="Allsvenskan för herrar"}
+Filen kan läsas in med `read_csv` från `readr`.
+
+```{r}
+dat <- read_csv("Data/Allsvenskan, herrar, 1924-2019.csv")
+```
+
+a\. Matcher kan filtreras ut genom filter-funktionen. Två skilda rader kan användas för att få både hemma- och borta-matcher.
+
+```{r}
+dat %>% filter(hemma == "Malmö FF", borta == "Mjällby")
+dat %>% filter(hemma == "Mjällby", borta == "Malmö FF")
+```
+
+Lagen har mötts sexton gånger. Den enda malmöförlusten inträffade 2010 på bortaplan.
+
+b\. Andelen vinster på hemmaplan kan tas fram genom att gruppera på lag och säsong, beräkna antalet segrar och antalet matcher, och slutligen beräkna andelen segrar.
+För att beräkna antalet vinster kan man använda `sum(hemmamal > bortamal)` - summan av antal gånger hemmamålen överstiger bortamålen. För det totala antalet matcher en säsong kan man använda funktionen `n()` - antalet rader i en viss gruppering.
+
+```{r}
+dat %>% 
+  group_by(hemma, sasong) %>% 
+  summarise(Vinster = sum(hemmamal > bortamal), Total = n()) %>% 
+  mutate(Proportion = Vinster / Total) %>% 
+  filter(Proportion == 1)
+```
+
+Två lag (IFK Göteborg och Malmö FF) med två gånger var (1934-35 och 1941-42 respektive 1949-50 och 1950-51).
+
+c\. Skapa en ny variabel för totalt antal mål och sortera efter den kolumnen.
+
+```{r}
+dat %>% 
+  mutate(Mål = hemmamal + bortamal) %>% 
+  arrange(-Mål) %>% 
+  print(n = 5)
+```
+
+Två gånger har det blivit 14 mål. Bägge gångerna förluster för Eskilstuna.
+
+d\. Ett spridningsdiagram kan skapas med `ggplot`. Ett sätt att hantera överlappande punkter är att ge punkterna ett *jitter* (ett slumpmässig justering så att de inte längre överlappar). Man kan också använda `geom_count`, vilket gör att punktens storlek beror på antal överlappande observationer, eller skriva ut antalet överlappande fall.
+
+```{r}
+g1 <- ggplot(dat, aes(hemmamal, bortamal)) +
+  geom_jitter(size = 0.1)
+
+g2 <- ggplot(dat, aes(hemmamal, bortamal)) +
+  geom_count()
+
+library(patchwork)
+g1 + g2
+```
+
+Det verkar som att 1-1 är det vanligaste resultatet. För att få en siffra kan man räkna hemma- och bortamål med `count`, för att sedan plotta med `geom_text`.
+
+```{r, fig.height = 6}
+dat %>% 
+  count(hemmamal, bortamal) %>% 
+  ggplot(aes(hemmamal, bortamal, label = n)) +
+  geom_text(size = 3)
+```
+
+Det verkar som att 1-1, följt av 2-1 och 1-0 är de vanligaste resultaten.
+:::
+
+::: {.exercise name="Egenskapad standardavvikelsefunktion"}
+En styrka med R är hur enkelt nya funktioner kan skapas. Många standardfunktioner är skrivna i R. Ta som exempel funktionen för standardavvikelse:
+
+```{r}
+sd
+```
+
+Standardavvikelsen beräknas alltså som kvadratroten (`sqrt`) av variansen (`var`). Sedan finns också lite mer avancerad kod för att hantera olika typer av ingångsdata.
+
+Standardavvikelsen av $n$ datapunkter ges av 
+
+$$s = \sqrt{\frac{1}{n-1}\sum_{i=1}^n (x_i - \bar x)^2},$$
+
+vilket kan brytas upp i steg som (1) beräkna medelvärdet, (2) dra ifrån medelvärdet från varje datavärde, (3) kvadrera differenserna, (4) summera kvadraterna, (5) dela summan med $n-1$, och (6) ta kvadratroten ur kvoten.
+
+Skapa en egen standardavvikelsefunktion baserat på de stegen. Funktionen ska ta en godtycklig mängd värden som ingångsvärden och ge standardavvikelsen som output.
+:::
+
+::: {.hypothesis name="Egenskapad standardavvikelsefunktion"}
+Funktionen nedan går igenom stegen för att beräkna standardavvikelsen.
+
+```{r}
+egen_sd <- function(x){
+  n <- length(x)          # Spara datans storlek som n
+  medel <- mean(x)        # 1
+  diffs <- x - medel      # 2
+  kvadrater <- diffs^2    # 3
+  summa <- sum(kvadrater) # 4
+  kvot <- summa / (n - 1) # 5
+  s <- sqrt(kvot)         # 6
+  s                       # Ange output
+}
+
+dat <- c(3,1,4,5,9)
+sd(dat)
+egen_sd(dat)
+```
+
+Den egenskapade funktionen ger samma utfall som R funktionen `sd`.
+:::

@@ -1,0 +1,383 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, echo = F}
+library(tidyverse)
+```
+
+## Övningar
+
+::: {.exercise name="Binomial grobarhet"}
+I ett försöks sätts 10 frön med en grobarhetssannolikhet om 60 procent. Antal frön som gror följer då en binomialfördelning med $N = 10$ och $p = 0.6$, vilket kan skrivas $X \sim Bin(10, 0.6)$.
+
+a\. Vad är sannolikheten att få exakt 6 groende frön, $P(X = 6)$?
+
+b\. Vad är sannolikheten att få högst 6 groende frön, $P(X \leq 6)$?
+
+c\. Beräkna slumpvariabelns *fördelningsfunktion*.
+
+d\. Illustrera sannolikheterna från (c).
+
+Ledning: `dbinom` och `pbinom` kan beräkna sannolikheter från en binomialfördelning.
+:::
+
+::: {.hypothesis name="Binomial grobarhet"}
+Uppgiften kan lösas genom att ta fram sannolikheter med `dbinom` och `pbinom` med argumenten `size = 10` för tio frön och `prob = 0.6` för en grobarhet på 0.6
+
+a\. 
+
+```{r}
+dbinom(x = 6, size = 10, prob = 0.6)
+```
+
+b\.
+
+```{r}
+pbinom(6, size = 10, prob = 0.6)
+```
+
+c\.
+
+```{r}
+tibble(x = 0:10,
+       Fördelningsfunktion = pbinom(x, size = 10, prob = 0.6))
+```
+
+d\.
+
+```{r}
+dat <- tibble(x = 0:10,
+       Fördelningsfunktion = pbinom(x, size = 10, prob = 0.6),
+       Sannolikhetsfunktion = dbinom(x, size = 10, prob = 0.6))
+
+ggplot(dat, aes(x)) +
+  geom_bar(aes(y = Fördelningsfunktion), stat = "identity", 
+           fill = "pink", col = "hotpink", width = 0.5) +
+  geom_segment(aes(x = x, xend = x, 
+                   y = Sannolikhetsfunktion, yend = 0)) +
+  scale_x_continuous(breaks = 0:10) +
+  theme(panel.background = element_rect(fill = "purple"), 
+        panel.grid = element_blank())
+```
+
+Illustration av fördelningsfunktionen (som breda staplar) med sannolikhetsfunktionen inritad som smala streck. Exempel på argument för val av färger för geom och tema. Sannolikheten i (a) (exakt 6 groende frön) ges av det svarta strecket vid 6 och sannolikheten i (b) (högst 6 groende frön) ges av den breda stapeln vid 6.
+:::
+
+::: {.exercise name="Poissonfördelad klöver"}
+Antalet fyrklöver på en slumpmässigt vald kvadratmeter från en gräsmatta är poissonfördelad med väntevärde 1 per $m^2$.
+
+a\. Hur stor är sannolikheten att en slumpmässigt vald $m^2$ innehåller minst en fyrklöver, $P(X \geq 1)$? Exakt en fyrklöver, $P(X = 1)$?
+
+b\. Hur stor är sannolikheten att en slumpmässigt vald yta om 10 kvadratmeter innehåller exakt 10 fyrklöver?
+
+Ledning: Summan av n stycken likadana poissonfördelade variabler är en poissonfördelad variabel med väntevärde givet av n gånger väntevärdet för den enskilda variabeln.
+
+(Från Olsson, *Biometri*.)
+:::
+
+::: {.hypothesis name="Poissonfördelad klöver"}
+Sannolikheter för en poissonfördelning kan tas fram med `dpois` för sannolikhetsfunktionen eller `ppois` för fördelningsfunktionen.
+
+a\. Antal klöver på en kvadratmeter följer en poissonfördelning med $\lambda = 1$. Sannolikheten för minst en fyrklöver kan beräknas genom ett minus sannolikheten för noll fyrklöver (utfallet noll fyrklöver är ett *komplement* till utfallet en eller fler fyrklöver).
+
+```{r}
+# P(X >= 1) = 1 - P(X <= 0)
+1 - ppois(0, lambda = 1)
+
+# P(X = 1)
+dpois(1, lambda = 1)
+```
+
+b\. Summan av poissonfördelade variabler är poissonfördelad med parametern $\lambda$ given av summan av de ursprungliga variablernas parametervärden. Tio kvadratmeter kan ses som summan av tio stycken observationer av en kvadratmeter. Antal klöver på tio kvadratmeter bör därmed följa en poissonfördelning med $\lambda = 10$.
+
+```{r}
+# Y ~ Po(lambda = 10)
+dpois(10, lambda = 10)
+```
+
+Ungefär $12.5$ procent.
+:::
+
+::: {.exercise name="Sannolikheter från en normalfördelning"}
+Slumpvariabeln $X$ är normalfördelad med medelvärde $2$ och varians $9$. Beräkna följande
+
+a\. $P(X > 2.75)$
+
+b\. $P(X \leq 2.75)$
+
+c\. $P(X > 2.50)$
+
+d\. $P(2.30 < X < 2.45)$
+
+e\. $P(X > -0.02)$
+
+f\. $P(-0.02 < X < 1.80)$
+
+g\. Bestäm värdet på x som uppfyller att $P(X < x) = F(x) = 0.95$.
+
+(Från Olsson, *Biometri*. Samma som instuderingsuppgift 22.)
+:::
+
+::: {.hypothesis name="Sannolikheter från en normalfördelning"}
+Sannolikheter från normalfördelningen kan tas fram med `pnorm`.
+
+a\. Notera att *variansen* $\sigma^2$ är $9$ och att standardavvikelsen $\sigma$ därmed är $3$. Funktionen `pnorm` ger sannolikheten att ligga *under* ett givet x-värde. För att beräkna $P(X > 2.75)$ kan ta ett minus $P(X < 2.75)$.
+
+```{r}
+1 - pnorm(2.75, mean = 2, sd = 3)
+```
+
+b\. Direkt tillämpning av `pnorm`.
+
+```{r}
+pnorm(2.75, 2, 3)
+```
+
+c\. Likt (a).
+
+```{r}
+1 - pnorm(2.5, 2, 3)
+```
+
+d\. För att beräkna sannolikheten att ligga mellan två värden kan man ta skillnaden mellan två värden framräknade med `pnorm`.
+
+```{r}
+pnorm(2.45, 2, 3) - pnorm(2.30, 2, 3)
+```
+
+Om man vill illustrera en sannolikhet från en normalfördelning kan man beräkna normalfördelningskurvan med `dnorm` och sedan färglägga en sektion genom ett `geom_ribbon` på filtrerad data. Exempel för (d).
+
+```{r}
+dat <- tibble(x = seq(-7, 11, 0.01),
+              Täthetsfunktion = dnorm(x, 2, 3))
+
+ggplot(dat, aes(x, Täthetsfunktion)) +
+  geom_line() +
+  geom_ribbon(aes(ymax = Täthetsfunktion, ymin = 0), 
+              data = dat %>% filter(x > 2.30 & x < 2.45),
+              fill = "turquoise")
+```
+
+Den turkosa ytan motsvarar sannolikheten att $X$ ger ett utfall mellan $2.30$ och $2.45$, sannolikheten uträknad i (d).
+
+e\.
+
+```{r}
+1 - pnorm(-0.02, 2, 3)
+```
+
+f\. 
+
+```{r}
+pnorm(1.8, 2, 3) - pnorm(-0.02, 2, 3)
+```
+
+g\. Det sökta värdet är kvantil $0.95$, ett värde sådant att 95 procent ligger under det värdet. Med en normalfördelning med medelvärde 2 och standardavvikelse 3 kan det tas fram med följande.
+
+```{r}
+qnorm(0.95, 2, 3) # 2 och 3 anger medel 2 och standardavvikelse 3
+```
+
+Tolkningen är att i en normal $N(\mu = 2, \sigma^2 = 9)$ ligger 95 procent av ytan under $6.9346$.
+
+En illustration kan skapas med en datatabell med värden från fördelningens täthetsfunktion och `geom_ribbon`.
+
+```{r}
+dat <- tibble(x = seq(-7, 11, 0.01),
+              Täthetsfunktion = dnorm(x, 2, 3))
+
+q_95 <- qnorm(0.95, 2, 3)
+
+ggplot(dat, aes(x, Täthetsfunktion)) +
+  geom_line() +
+  geom_ribbon(aes(ymax = Täthetsfunktion, ymin = 0), 
+              data = dat %>% filter(x < q_95),
+              fill = "turquoise", col = "black") +
+  scale_x_continuous(breaks = c(-5, 0, 5, round(q_95, 3)))
+```
+
+95 procent av ytan ligger under 6.935.
+:::
+
+::: {.exercise name="Relativ frekvens"}
+Säg att man kastar ett häftstift och att sannolikheten att stiftet stannar med spetsen upp är 0.66. Simulera tusen häftstiftskast och beräkna den relativa frekvensen häftstiften hamnat med spetsen uppåt. Den relativa frekvensen för en serie värden ges av antalet positiva utfall delat på antalet kast för varje kast. Den relativa frekvensen efter 35 kast är till exempel antalet positiva utfall bland de 35, delat på 35.
+Illustrera med ett linjediagram.
+
+Ledning: tusen kast kan simuleras med `rbin(1000, 1, 0.66)`, vilket skapar tusen slumptal från en binomialfördelning där $n = 1$ och $p = 0.67$.
+:::
+
+::: {.hypothesis name="Relativ frekvens"}
+För att beräkna och illustrera den relativa frekvensen skapas en `tibble` där den första kolumnen anger antalet kast vid varje steg, det vill säga en kolumn som anger ett till tusen. Därefter dras tusen slumptal enligt ledningen ovan. Därefter beräknas den *kumulativa summan* - antalet positiva utfall upp till det kast som anges för raden. Och slutligen beräknas den relativa frekvensen genom att ta den kumulativa summan och dela med antalet kast.
+
+```{r}
+dat <- tibble(Kast = 1:1000,
+              Utfall = rbinom(1000, 1, 0.67),
+              Antal_spets_upp = cumsum(Utfall),
+              Relativ_frekvens = Antal_spets_upp / Kast)
+
+dat
+
+ggplot(dat, aes(Kast, Relativ_frekvens)) +
+  geom_line() +
+  geom_hline(yintercept = 0.66, col = "red", alpha = 0.7) +
+  ylim(0,1)
+```
+
+Den relativa frekvensen stabiliseras efter ett par hundra kast.
+:::
+
+::: {.exercise name="Jämförelse mellan binomial och poisson"}
+Poissonfördelning kan ses som en approximation av en binomialfördelning när $n$ är stort och $p$ är litet. Poissonfördelningens parameter $\lambda$ sätts vid approximation till binomialfördelningens populationsmedelvärde $np$.
+
+Ta som exempel en binomialfördelning men $n = 10$ och $p = 0.1$; dess väntevärde är $10 \cdot 0.1 = 1$.
+Beräkna sannolikheter från binomialfördelningen och motsvarande poissonfördelning. Jämför utfallen och illustrera med en passande graf.
+:::
+
+::: {.hypothesis name="Jämförelse mellan binomial och poisson"}
+Fördelningen för binomial och poisson kan tas fram med `dbinom` respektive `dpois`.
+
+```{r}
+dat <- tibble(x = 0:10,
+              Binomial = dbinom(x, 10, 0.1),
+              Poisson = dpois(x, 1),
+              Differens = Binomial - Poisson)
+dat %>% round(3)
+
+ggplot(dat, aes(x)) +
+  geom_point(aes(y = Binomial), col = "red") +
+  geom_point(aes(y = Poisson), col = "green")
+```
+
+Fördelningarna är ganska lika. Relativt binomialen överskattar poissonfördelningen sannolikheten att få exakt 0 och överskattar sannolikheten att få exakt 1.
+:::
+
+::: {.exercise name="Jämförelse mellan binomial och normal"}
+En av många orsaker till att normalfördelningen förekommer i tillämpningar är att både binomialfördelningen och poissonfördelningen kan approximeras med en normalfördelning om populationsmedelvärdet är stort. För att se exempel på detta kan man jämföra en binomialfördelning med en normalfördelning. Skapa en graf för en binomialfördelning med n = 100 och p = 0.4 med en överliggande normalfördelning med samma populationsmedelvärde och -varians, dvs. populationsmedelvärdet $\mu = np = 100 \cdot 0.4 = 40$ och populationsvariansen $\sigma^2 = n\cdot p \cdot (1-p) = 100 \cdot 0.4 \cdot 0.6 = 24$.
+:::
+
+::: {.hypothesis name="Jämförelse mellan binomial och normal"}
+Funktionerna `dbinom` och `dnorm` kan användas för att ta fram funktionsvärden från binomial- och normalfördelning. Dessa kan sedan plottas i en ggplot genom `geom_segment` för binomialen och `geom_line` för den kontinuerliga normalfördelningen.
+
+```{r}
+dat_bin <- tibble(x = 0:100,
+                  Snlh = dbinom(x, 100, 0.4))
+dat_norm <- tibble(x = seq(0, 100, by = 0.1),
+                   Snlh = dnorm(x, mean = 40, sd = sqrt(24)))
+
+ggplot() +
+  geom_line(aes(x, Snlh), data = dat_norm, col = "blue") +
+  geom_segment(aes(x = x, xend = x, y = 0, yend =Snlh), 
+               data = dat_bin, col = "red") 
+```
+
+Normalkurvan (blå kontinuerlig linje) följer binomalfördelningen (röda staplar). Man kan också jämföra specifika sannolikheter, till exempel
+
+```{r}
+# Exakt 35 i binomialen
+dbinom(35, 100, 0.4) # 0.0491
+
+# Mellan 34.5 och 35.5 i normalen
+pnorm(35.5, 40, sqrt(24)) - pnorm(34.5, 40, sqrt(24)) # 0.0483
+```
+
+Sannolikheten för exakt 35 i binomialen ligger nära sannolikheten för utfall mellan 34.5 och 35.5 i normalfördelningen.
+:::
+
+::: {.exercise name="Log-normal fördelning"}
+Ett exempel på en fördelning som är kontinuerlig, men inte normal, är en log-normal fördelning. En log-normal fördelning defineras av att den ger en normalfördelning efter att den logaritmeras - den är exponentialen av normalfördelningen. Dra 10000 slumptal från en log-normal fördelning (funktionen `rlnorm`) och illustrera med ett histogram. Ta logaritmen av datan och skapa histogrammet på nytt.
+:::
+
+::: {.hypothesis name="Log-normal fördelning"}
+Funktionen `rlnorm` skapar slumptal från en log-normal fördelning. Två separata grafer plottar histogram över slumptalen och slumptalen efter log-transform.
+
+```{r}
+dat <- tibble(Slumptal = rlnorm(10000))
+
+g1 <- ggplot(dat, aes(Slumptal)) + 
+  geom_histogram() +
+  ggtitle("Log-normal")
+  
+g2 <- ggplot(dat, aes(log(Slumptal))) + 
+  geom_histogram() +
+  ggtitle("Log av log-normal")
+
+library(patchwork)
+g1 + g2
+```
+:::
+
+::: {.exercise name="Centrala gränsvärdesatsen"}
+Centrala gränsvärdesatsen ger att summor (och medelvärden) av flera likadana slumpvariabler följer en ungefärlig normalfördelning. Skriv en funktion som drar 10 observation från en log-normal fördelning och beräknar ett medelvärde. Dra 10000 upprepningar från den fördelningen och se om medelvärdena följer en normalfördelning. Gör samma sak men skriv funktionen så att den drar 1000 observationer och tar ett medelvärde.
+
+Se anvisningarna för ett liknande exempel. Observera att detta är en svårare uppgift.
+:::
+
+::: {.hypothesis name="Centrala gränsvärdesatsen"}
+En funktion som tar medelvärdet av tio observation skapas. Tiotusen sådana medelvärden beräknas och dessa illustreras med ett histogram.
+```{r}
+mean_of_ten <- function(){
+  x <- rlnorm(10)
+  mean(x)
+}
+
+means <- replicate(10000, mean_of_ten())
+
+dat <- tibble(Mean_values = means)
+
+ggplot(dat, aes(Mean_values)) +
+  geom_histogram(bins = 60)
+```
+
+Histogrammet visar en klar skevhet.
+
+```{r}
+mean_of_thousand <- function(){
+  x <- rlnorm(1000)
+  mean(x)
+}
+
+means <- replicate(10000, mean_of_thousand())
+
+dat <- tibble(Mean_values = means)
+
+ggplot(dat, aes(Mean_values)) +
+  geom_histogram(bins = 60)
+```
+
+Histogrammet ligger närmare en typisk normalfördelning.
+:::
+
+::: {.exercise name="Multiplicera med två eller addera två"}
+I en övningsuppsgift väcks frågan om det finns någon skillnad mellan att ta utfallet av en slumpvariabel och multiplicera med två, och att addera två slumpvariabler. Ta som exempel tre slumpvariabler $X_1, X_2, X_3$ och låt dem alla följa en binomialfördelning med $n = 100$ och $p = 0.8$. Dra 10000 slumptal från respektive fördelning, beräkna $2 \cdot X_1$ och $X_2 + X_3$ och illustrera dessa beräknade variabler. Beräkna också väntevärde och standardavvikelse från de beräknade variablerna.
+:::
+
+::: {.hypothesis name="Multiplicera med två eller addera två"}
+Tre variabler med slumptal konstrueras med `rbinom`. Därefter skapas två nya variabler, en genom summan av två av slumpvariablerna och en som den tredje slumpvariabeln multiplicerad med 2.
+
+```{r}
+dat <- tibble(X1 = rbinom(10000, size = 100, prob = 0.8),
+              X2 = rbinom(10000, size = 100, prob = 0.8),
+              X3 = rbinom(10000, size = 100, prob = 0.8)) %>% 
+  mutate(Mult_by_2 = 2 * X1,
+         Sum_of_two = X2 + X3)
+
+dat %>% 
+  summarise_all(mean)
+dat %>% 
+  summarise_all(sd)
+
+dat %>% 
+  select(Mult_by_2, Sum_of_two) %>% 
+  pivot_longer(1:2) %>% 
+  ggplot(aes(value, fill = name)) +
+  geom_bar() +
+  facet_wrap(~ name)
+```
+
+Stapeldiagrammet för fallet med en variabel multiplicerad med två ger högre staplar och större spridning än stapeldiagrammet med två summerade variabler. Diagrammet visar också hur vissa utfall inte kan inträffa i fallet med multiplikation, eftersom bara jämna utfall kan inträffa. Intuitivt kan man förstå den mindre spridningen för två summerade variabler med att ovanligt låga eller höga värden ofta kommer kvittas ut mot ett *vanligt* värde.
+
+Skillnaden märks också i beräkning av standardavvikelse. Den ursprungliga variabeln har en varians på $np(1-p) = 100 \cdot 0.8 \cdot 0.2 = 16$ och därmed en standardavvikelse på$\sqrt{16} = 4$. Multiplikation med två ger en slumpvariabel med den dubbla standardavvikelsen, alltså 8, medan addition av två likadana slumpvariabler ger en lägre standardavvikelse. För summor gäller att *variansen av summan är summan av varianserna* (detta antar dock oberoende slumpvariabler) - här fås alltså att variansen av summan är $16+16=32$ och att standardavvikelsen är $\sqrt{32} = 5.6569$. Värdet i datan kommer förstås avvika något från den teoretiska beräkningen, eftersom det är slumptal.
+:::

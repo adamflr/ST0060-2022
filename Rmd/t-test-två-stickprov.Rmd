@@ -1,0 +1,100 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# Två stickprov
+
+## Normalfördelad data (eller stora stickprov)
+
+t-test för två stickprov används för att jämföra två grupper och se om de har samma populationsmedelvärde i någon insamlad utfallsvariabel. Det finns två specifika fall: t-test för matchade stickprov, där det finns en parvis koppling mellan de två stickproven, t.ex. att de är mätningar på två syskon; och t-test för oberoende stickprov, där det saknas en sådan koppling mellan stickproven.
+
+### t-test för två matchade stickprov
+
+Vid matchade stickprov kan varje observation i en behandlingsgrupp paras med en observation i den andra gruppen. Själva testet är ett t-test för *ett* stickprov på differensserien beräknat från varje par. I R kan man antingen beräkna den differensserien eller använda `t.test`-funktionen med två dataserier och argumentet för parvisa observationer satt till sant, `paired = T`.
+Som exempel ges följande data från en studie på äpple, där trädhöjd mätts före och efter en näringsbehandling.
+
+```{r}
+dat <- tibble(TrädID = 1:4, 
+              `Tidpunkt 1` = c(48, 43, 30, 47), 
+              `Tidpunkt 2` = c(51, 44, 42, 54))
+dat
+```
+
+Datan kan illustreras med ett punktdiagram där en linje binder samman paret. För att enkelt skapa grafen i `ggplot2` kan man först omstrukturera datan till lång form genom `pivot_longer`.
+
+```{r}
+dat_long <- dat %>% pivot_longer(-TrädID)
+dat_long
+```
+
+```{r}
+ggplot(dat_long, aes(name, value, group = TrädID)) +
+  geom_point() +
+  geom_line()
+```
+
+Testet för parade stickprov kan antingen utföras som ett enkelt t-test på differensserien
+
+```{r}
+t.test(dat$`Tidpunkt 2` - dat$`Tidpunkt 1`)
+```
+
+eller som ett t-test för två stickprov där man särskilt anger att datan är parad
+
+```{r}
+t.test(dat$`Tidpunkt 1`, dat$`Tidpunkt 2`, paired = T)
+```
+
+För bägge alternativen måste datan vara ordnad så att de två vektorerna matchar varandra parvis. Notera att ordningen på vektorerna påverkar konfidensintervall men inte p-värdet (i fallet med en tvåsidig mothypotes). Här är det naturligt att ta den andra mätningen först eftersom konfidensintervallet då blir ett intervall för medelvärdesökningen efter behandling. Ett p-värde på $0.0987$ ger att man inte förkastar vid en signifikansnivå på fem procent.
+
+### t-test för två oberoende stickprov
+
+Ett t-test för två oberoende stickprov testar om två populationsmedelvärden är lika. Ta som exempel följande data på jordgubbsskörd vid två olika näringsbehandlingar (A och B). Här är stickprov inte matchade - det finns ingen direkt koppling mellan en observation i den ena behandlingsgruppen till någon observation i den andra.
+
+```{r}
+dat <- tibble(Behandling = c("A", "A", "A", "A", "B", "B", "B", "B"),
+              Vikt = c(40, 48.2, 39.2, 47.9, 57.5, 61.5, 58, 66.5))
+kable(dat)
+```
+
+Datan kan illustreras med ett enkelt punktdiagram. I ett publiceringssammanhang hade det kanske presenterats med ett stapeldiagram med felstaplar.
+
+```{r}
+g1 <- ggplot(dat, aes(Behandling, Vikt)) +
+  geom_point()
+
+g2 <- dat %>% 
+  group_by(Behandling) %>% 
+  summarise(m = mean(Vikt), s = sd(Vikt)) %>% 
+  ggplot(aes(Behandling, m)) +
+  geom_bar(stat = "identity", fill = "grey80", width = 0.3) +
+  geom_errorbar(aes(ymin = m - s, ymax = m + s), width = 0.1)
+
+library(patchwork)
+g1 + g2
+```
+
+Ett t-test för två oberoende stickprov har nollhypotesen att grupperna har samma populationsmedelvärde och alternativhypotesen att populationsmedelvärdena är skilda (för det tvåsidiga fallet):
+
+$$\mu_1 = \mu_2 \qquad \mu_1 \neq \mu_2.$$
+
+Testet kan utföras i R genom funktionen `t.test`. Data kan antingen anges som en formel med dess data `Vikt ~ Behandling, data = dat` (vilket man kan läsa som *vikt uppdelat efter behandling*) eller som två skilda vektorer. Det förra alternativet är oftast enklare om man har datan på lång form - med en kolumn som anger grupp (i exemplet *Behandling*) och en kolumn som anger utfallsvärdet (i exemplet *Vikt*).
+
+```{r}
+# Formelskrivning
+t.test(Vikt ~ Behandling, data = dat, var.equal = T)
+
+# Två separata vektorer
+## Filtrera ut data där behandling är A
+Vikt_A <- dat$Vikt[dat$Behandling == "A"]
+
+## Filtrera ut data där behandling är B
+Vikt_B <- dat$Vikt[dat$Behandling == "B"]
+
+t.test(Vikt_A, Vikt_B, var.equal = T)
+```
+
+Argumentet `var.equal = T` används för att beräkna testet där gruppernas varianser antas vara lika. Grundinställningen är testet där varianser inte antas vara lika, så `t.test(Vikt ~ Behandling, data = dat)` ger ett lite annat resultat.
+Testet ger ett p-värde på $0.0018$, vilket leder till att nollhypotesen förkastas på enprocentsnivån. Detta tyder på att det finns en viktskillnad mellan behandlingarna. Utskriften ger också ett 95-procentigt konfidensintervall på $(-24.898, -9.202)$. Tolkningen är att skillnaden mellan populationsmedelvärden ligger i intervallet med 95 procents konfidens. Notera att värdet noll inte ligger i intervallet.

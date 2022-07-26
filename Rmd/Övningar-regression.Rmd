@@ -1,0 +1,294 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+## Övningar
+
+::: {.exercise name="Blodtryck"}
+Följande fascinerande blodtrycksdata hämtas från kvinnor i Sala.
+
+```{r, echo = F}
+dat <- read_excel("Data/Uppgiftsdata.xlsx", sheet = "Blodtryck")
+kable(dat)
+```
+
+a\. Skatta en enkel linjär regressionsmodell och tolka lutningskoefficienten i termer av de ursprungliga variablerna.
+
+b\. Beräkna ett konfidensintervall för lutningskoefficienten.
+
+c\. Undersök modellens antaganden (normalfördelade residualer, lika varians för skilda nivåer av x-variabeln).
+
+d\. Testa om lutningskoefficienten är skild från 1.
+:::
+
+::: {.hypothesis name="Blodtryck"}
+Data kan läsas in från excelfilen med uppgiftsdata. Två kontinuerliga variabler kan enklast illustreras med ett spridningsdiagram.
+
+```{r}
+dat <- read_excel("Data/Uppgiftsdata.xlsx", sheet = "Blodtryck")
+
+ggplot(dat, aes(Ålder, Blodtryck)) +
+  geom_point() +
+  geom_smooth(method = lm)
+```
+
+Det finns ett tydligt positivt samband mellan variablerna.
+
+```{r}
+mod <- lm(Blodtryck ~ Ålder, dat)
+summary(mod)
+```
+
+Regressionslinjen ges av $y = 65.465 + 1.3915$.
+
+a\. Blodtrycket ökar med $1.39$ för varje ökat år.
+
+b\. Ett konfidensintervall kan tas fram med `confint`.
+
+```{r}
+confint(mod)
+```
+
+Ett 95-procentigt konfidensintervall för lutning ges av $(1.003, 1.780)$.
+
+c\. Modellen bygger på normalfördelade residualer och lika varians för skilda nivåer av ålder.
+
+```{r, fig.height = 5}
+plot(residuals(mod) ~ fitted(mod))
+```
+
+Det finns inga extremvärden bland residualer och inga tydliga tecken på skillnader i varians.
+
+d\. Eftersom 1 ligger precis utanför ett 95-procentigt konfidensintervall, bör ett test på femprocentsnivån leda till att man förkastar nollhypotesen att lutningen är 1. Detta kan testas formellt genom `emtrends` från paketet `emmeans`.
+
+```{r}
+test(emtrends(mod, ~ 1, "Ålder"), null = 1)
+```
+
+P-värdet ligger precis under fem procent.
+:::
+
+
+
+::: {.exercise name="Metodjämförelse"}
+Någon vill jämföra två metoder för att mäta volym på någon planta. Hen mäter därför nio olika plantor med bägge metoderna, vilket ger följande värden.
+
+```{r, echo = F}
+dat <- read_excel("Data/Uppgiftsdata.xlsx", sheet = "Metodjämförelse")
+dat %>% 
+  pivot_wider(names_from = Yta, values_from = Volym) %>% 
+  kable()
+```
+
+a\. Illustrera datan med en lämplig figur. Testa med ett lämpligt test om metoderna ger samma medelvärdesvolym.
+
+b\. Beräkna korrelationen mellan metoderna. Metod A är en dyrare men bättre metod. Ger mätning med metod B en säker uppskattning av utfallet med metod A?
+:::
+
+::: {.hypothesis name="Metodjämförelse"}
+Data kan hämtas från excelfilen med uppgiftsdata. Ett diagram visar en tydlig skillnad mellan grupperna.
+```{r}
+dat <- read_excel("Data/Uppgiftsdata.xlsx", sheet = "Metodjämförelse")
+
+ggplot(dat, aes(Metod, Volym, group = Yta)) +
+  geom_point() +
+  geom_line()
+```
+
+a\. Ibland behöver man inget test.
+
+Men en jämförelse mellan två grupper kan förstås tas som ett parat t-test. Man kan först använda `pivot_wider` för att skriva om data till kolumnform.
+
+```{r}
+dat_wide <- dat %>% 
+  pivot_wider(names_from = Metod, values_from = Volym)
+
+t.test(dat_wide$A, dat_wide$B, paired = T)
+```
+
+Parad data kan också ses som det enklaste exemplet på ett block, och analyseras som en anova med block. För att R ska tolka variabeln Yta som en faktor kan man ändra dess typ med `as.character`.
+
+```{r}
+dat <- dat %>% mutate(Yta = as.character(Yta))
+
+mod <- lm(Volym ~ Metod + Yta, dat)
+
+Anova(mod)
+```
+
+P-värdet från ett F-test på metod är detsamma som det från det parade t-testet.
+
+b\. 
+```{r}
+ggplot(dat_wide, aes(B, A)) + 
+  geom_point()
+
+cor.test(dat_wide$A, dat_wide$B)
+```
+
+Det finns inget signifikant samband mellan metoderna. Mätning med metod B säger alltså inget om utfallet i metod A. Om metod A är den mer precisa metoden, tyder detta på att metod B inte bör användas.
+:::
+
+::: {.exercise name="Anscombes data"}
+Den raka regressionslinjen eller det enkla korrelationsmåttet säger lite om hur data egentligen ser ut. En vanlig illustration av detta är *Anscombes kvartett*, fyra exempel konstruerade av den brittiske statistikern Francis Anscombe 1973. Datan finns tillgänglig i R som datasetet `anscombe`. Plotta de fyra graferna (`x1` paras med `y1` och så vidare) i spridningsdiagram och beräkna korrelation för varje par. Kommentera utfallet.
+:::
+
+::: {.hypothesis name="Anscombes data"}
+Data finns tillgänglig i R som `anscombe`, vilket är en tabell med åtta kolumner som består av fyra par (där `x1` är kopplad till `y1` och så vidare). Paren kan plottas med enkla spridningsdiagram.
+
+```{r, fig.height=5}
+g1 <- ggplot(anscombe, aes(x1, y1)) + geom_point()
+g2 <- ggplot(anscombe, aes(x2, y2)) + geom_point()
+g3 <- ggplot(anscombe, aes(x3, y3)) + geom_point()
+g4 <- ggplot(anscombe, aes(x4, y4)) + geom_point()
+
+library(patchwork)
+(g1 + g2) / (g3 + g4)
+```
+
+Graferna ser olika ut.
+
+```{r}
+cor(anscombe$x1, anscombe$y1)
+cor(anscombe$x2, anscombe$y2)
+cor(anscombe$x3, anscombe$y3)
+cor(anscombe$x4, anscombe$y4)
+```
+
+Men har samma korrelation (till fjärde decimal).
+
+En modern utveckling av Anscombes kvartett ges av *The Datasaurus Dozen*.
+:::
+
+::: {.exercise name="Beach 2050"}
+Bland kursdata finns en fil med uppmätta temperaturer vid väderstationen i Falsterbo. Den kan läsas in från csv-filen. Se tidigare uppgift om beskrivande statistik för detaljer.
+
+```{r}
+dat <- read_csv2("Data/smhi-opendata_1_52230_20210912_114534.csv", skip = 9) %>% 
+  mutate(Lufttemperatur = as.numeric(Lufttemperatur))
+```
+
+En sammanställning av medeltemperaturer de senaste fyrtio åren ges av följande tabell.
+
+```{r, echo = F}
+dat_medel <- dat %>% 
+  mutate(År = lubridate::year(Datum)) %>% 
+  group_by(År) %>% 
+  summarise(Medeltemperatur = mean(Lufttemperatur)) %>% 
+  filter(År > 1980, År < 2021)
+
+kable(dat_medel, digits = 2)
+```
+
+a\. Skapa en passande graf med år på x-axeln och medeltemperatur på y-axeln. I ggplot kan en skattad regressionlinje illustreras genom `geom_smooth(method = lm)`.
+
+b\. Skatta en regressionsmodell med år som förklarande variabel och medeltemperatur som förklarad variabel. Genomför ett t-test eller F-test för att se om lutningskoefficienten är skild från noll.
+
+c\. Funktionen `predict` kan användas för att skapa en skattning av populationsmedelvärdet för valfritt värde på den förklarande variabeln. Titta på hjälpsidan för `predict.lm` och använd funktionen för att förutsäga medeltemperatur för varje år fram till 2050. Illustrera skattningarna i en passande graf.
+
+d\. Vilken kritik finns mot den här modellen?
+:::
+
+::: {.hypothesis name="Beach 2050"}
+Data läses in med koden i uppgiften.
+
+```{r}
+dat <- read_csv2("Data/smhi-opendata_1_52230_20210912_114534.csv", skip = 9) %>% 
+  mutate(Lufttemperatur = as.numeric(Lufttemperatur))
+```
+
+Årsmedelvärden kan beräknas genom att skapa en variabel för År med `year` från paketet `lubridate`. Därefter grupperas efter år och summeras med medelvärdet. Slutligen filteras datan för att ta fram de senaste 40 åren. Datan sparas under namnet `dat_medel`.
+
+```{r}
+dat_medel <- dat %>% 
+  mutate(År = lubridate::year(Datum)) %>% 
+  group_by(År) %>% 
+  summarise(Medeltemperatur = mean(Lufttemperatur)) %>% 
+  filter(År > 1980, År < 2021)
+```
+
+a\. Tidsdata illustreras ofta med en linjediagram. Regressionslinjen kan skapas med `geom_smooth(method = lm)`.
+
+```{r}
+g1 <- ggplot(dat_medel, aes(År, Medeltemperatur)) + 
+  geom_line() + 
+  geom_point() +
+  geom_smooth(method = lm)
+g1
+```
+
+Det finns tecken på en ökning över tid.
+
+b\. Regressionmodellen skattas med funktionen `lm`. Medeltemperatur är den förklarade variabeln och år den förklarande - regressionsformeln skrivs därmed `Medeltemperatur ~ År`. Modellen har automatiskt ett intercept, men man hade även kunnat skriva `Medeltemperatur ~ 1 + År` för tydlighet. Resultatet skrivs ut med `summary`.
+
+```{r}
+mod <- lm(Medeltemperatur ~ År, dat_medel)
+summary(mod)
+```
+
+Linjen har ett intercept på $-138.63$ och en lutning på $0.074$. Standardtolkningar är att det var $-138$ grader år noll (hmmmm) och att medeltemperaturen ökar med $0.07$ grader per år.
+
+Testet för lutningen (ett t-test) ges på raden för `År`. Nollhypotesen är att lutningskoefficienten är 0 och det låga p-värdet tyder på att den nollhypotesen bör förkastas. Det finns en statistiskt säkerställd ökning i medeltemperatur över tid.
+
+Diagnosgrafer ger inga uppenbara avvikelser från normalfördelning eller struktur i spridningen.
+
+```{r}
+qqnorm(residuals(mod))
+qqline(residuals(mod))
+
+plot(fitted(mod), residuals(mod))
+```
+
+c\. Det är möjligt att prognosticera värden med `predict`. Funktionen tar en skattad modell (här `mod`) och en ny datatabellen, som innehåller en kolumn med samma namn som den förklarande variabeln i modellen (här `År`). Funktionen kan även producera konfidensintervall för skattningen, här genom `interval = "conf"` för ett konfidensintervall.
+
+```{r}
+dat_predict <- predict(mod, newdata = tibble(År = 2020:2050), interval = "conf") %>% 
+  as_tibble() %>% # Ändra till en tibble för enklare hantering
+  mutate(År = 2020:2050) # Lägg till år för senare graf
+
+g1 + # Samma grundgraf som tidigare
+  geom_line(aes(År, fit), data = dat_predict) + # Lägger till en linje för skattningar för kommande år
+  geom_ribbon(aes(År, ymin = lwr, ymax = upr),  # Lägger till ett band för konfidensintervallet för skattningen
+              inherit.aes = F, data = dat_predict,
+              alpha = 0.2, fill = "red") # alpha sätter genomskinlighet för en yta
+```
+
+d\. I en tidigare uppgift påpekas att data inte samlats in samma tider på dygnet under hela mätperioden - det är därmed möjligt att den observerade ökningen beror på förändringar i mätmetod. Valet av de fyrtio senaste åren var ett godtyckligt val som påverkar lutningen kraftigt (till exempel om man av en ren slump börjar med några kalla år och avslutar med några varma). Regressionsmodellen är en linjär modell, vilket ger den uppenbarligen orimliga tolkning av interceptet som en temperatur år 0.
+
+Slutligen finns förstås det grundläggande problemet med prognoser: det kan ske oväntade saker som leder till strukturbrott och gör att sambandet mellan förklarande och förklarad variabel förändras.
+:::
+
+::: {.exercise name="Datasaurus Dozen"}
+Datasaurus-datan är en konstruerad datamängd som illustrerar hur skilda mönster i data kan ge samma punktskattningar (medelvärden, standardavvikelser och korrelationer). Datan finns tillgänglig som en del av TidyTuesday-projektet och kan hämtas med följande rad.
+
+```{r}
+dat <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-10-13/datasaurus.csv')
+```
+
+a\. Datan innehåller en gruppering (`dataset`) och x- och y-koordinater. För varje grupp i kolumnen `dataset`, beräkna medelvärde och standardavvikelse för x och y, och beräkna korrelationen mellan x och y. Kommentera utfallet.
+
+b\. Illustrera materialet med en lämplig graf, t.ex. ett spridningsdiagram mellan x och y för varje grupp i kolumnen `dataset`.
+:::
+
+::: {.hypothesis name="Datasaurus Dozen"}
+a\. Punkskattningar kan beräknas genom att gruppera enligt `dataset` och summera med lämpliga funktioner (`mean`, `sd` och `cor`).
+```{r}
+dat %>%
+  group_by(dataset) %>% 
+  summarise(mean(x), mean(y), sd(x), sd(y), cor(x,y))
+```
+
+Grupperna har samma medelvärde och standardavvikelser i x och y. Korrelationerna mellan x och y är mycket lika.
+
+b\. Datan kan illustreras med ett spridningsdiagram. Funktionen `facet_wrap` kan användas för separata fönster för skilda grupper.
+
+```{r, fig.height=6}
+ggplot(dat, aes(x, y)) +
+  geom_point() +
+  facet_wrap(~ dataset)
+```
+
+Figuren visar att det finns tydliga mönster i flera av grupperna och tydliga skillnader mellan dem.
+:::

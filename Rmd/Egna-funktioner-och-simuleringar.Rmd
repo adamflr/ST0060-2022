@@ -1,0 +1,192 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# Sannolikhetsfördelningar och slumptal
+
+## Fördelningar
+
+R kommer med en stor mängd funktioner för att beräkna sannolikheter ur kända sannolikhetsfördelningar såsom binomial- och normalfördelningen. För en lista på fördelningar täckta av grundpaketen i R kan man köra `?distributions`.
+
+För en *kontinuerlig likformig fördelning* gäller att alla utfall mellan 0 och 1 är lika sannolika. Som exempel kan man tänka sig att man stoppar ett tidtagarur vid ett slumpmässigt tillfälle och tittar på utfallets decimaler - de kommer ge ett värde mellan 0 och 1 och det finns ingen anledning att tro att vissa värden är mer sannolika än andra. Täthetsfunktionen $f(x)$ kan beräknas genom $dunif$, där `d` står för *density* (täthet) och `unif` anger en *uniform* fördelning. Fördelningens täthetsfunktion är 0 för värden på $x$ under 0 eller över 1, och däremellan är täthetsfunktionen 1.
+
+```{r dunif}
+dunif(-0.1)
+dunif(0.1)
+dunif(1.1)
+```
+
+Fördelningsfunktionen anger sannolikheten för ett värde mindre än $x$, $F(x) = P(X \leq x)$ och kan i R beräknas genom funktionen $punif$, där `p` står för *probability*.
+
+```{r}
+punif(-0.1)
+punif(0.1)
+punif(1.1)
+```
+
+Fördelningsfunktionen för en likformig fördelning är för värden på $x$ under 0, 1 för värden på $x$ över 1, och däremellan lika med $x$.
+
+Täthetsfunktion och fördelningsfunktion kan illustreras med grafer. Funktionen `seq` används för att skapa en sekvens från ett värde till ett annat värde. Paketet `patchwork` används för att kombinera två grafer. Funktionen `tibble` används för att skapa ett `tibble`-objekt - funktionen fungerar likt `data.frame` i att kolumner anges som `namn = kolumnvärden`.
+
+```{r}
+g1 <- tibble(x = seq(from = -0.5, to = 1.5, by = 0.01),
+             f = dunif(x)) %>% 
+  ggplot(aes(x, f)) + 
+  geom_line() +
+  labs(title = "Täthetsfunktion, f(x)")
+
+g2 <- tibble(x = seq(from = -0.5, to = 1.5, by = 0.01),
+             F = punif(x)) %>% 
+  ggplot(aes(x, F)) + 
+  geom_line() +
+  labs(title = "Fördelningsfunktion, F(x)")
+
+library(patchwork)
+g1 + g2
+```
+
+Motsvarande funktioner för en normalfördelning ges av `dnorm` och `pnorm`. Medelvärde och standardavvikelse kan sättas genom argumenten `mean` och `sd`. Här ges ett exempel på en normalfördelning med medelvärdet 50 och standardavvikelse 3.
+
+```{r}
+g1 <- tibble(x = seq(from = 40, to = 60, by = 0.1),
+             f = dnorm(x, mean = 50, sd = 3)) %>% 
+  ggplot(aes(x, f)) + 
+  geom_line() +
+  labs(title = "Täthetsfunktion, f(x)")
+
+g2 <- tibble(x = seq(from = 40, to = 60, by = 0.1),
+             F = pnorm(x, mean = 50, sd = 3)) %>% 
+  ggplot(aes(x, F)) + 
+  geom_line() +
+  labs(title = "Fördelningsfunktion, F(x)")
+
+g1 + g2
+```
+
+Fördelningsfunktionen anger sannolikheten att ett utfall ligger under värdet $x$. Om man vill beräkna det omvända fallet - ett x-värde sådant att sannolikheten att ligga under det värdet är en viss sannolikhet $p$ - använder man *kvantilfunktionen*. Som exempel beräknas ett värde på x-axeln sådant att en fjärdedel ligger under det värdet i en normalfördelning med $\mu = 50$ och $\sigma = 3$.
+
+```{r}
+qnorm(0.25, mean = 50, sd = 3)
+```
+
+Sannolikhetsfunktion och fördelningsfunktion kan även beräknas för diskreta fördelningar. Binomialfördelningen ges till exempel av `dbinom` och `pbinom` med argumenten `size` för parametern $n$ och `prob` för parametern $p$. Här ges ett exempel på en binomialfördelning med $n = 20$ och $p = 0.7$. Eftersom en diskret fördelning oftast illustreras med stapeldiagram ersätts `geom_line()` med `geom_bar(stat = "identity")`.
+
+```{r}
+g1 <- tibble(x = 0:20,
+             f = dbinom(x, size = 20, prob = 0.7)) %>% 
+  ggplot(aes(x, f)) + 
+  geom_bar(stat = "identity") +
+  labs(title = "Sannolikhetsfunktion, f(x)")
+
+g2 <- tibble(x = 0:20,
+             F = pbinom(x, size = 20, prob = 0.7)) %>% 
+  ggplot(aes(x, F)) + 
+  geom_bar(stat = "identity") +
+  labs(title = "Fördelningsfunktion, F(x)")
+
+g1 + g2
+```
+
+Utöver sannolikhetsberäkningar har R funktioner för att skapa slumptal från en angiven fördelning. Dessa anges genom bokstaven `r` (för *random*) följt av fördelningens namn, t.ex. `rnorm` för normalfördelningen och `rbinom` för binomialfördelningen. I exemplet nedan dras tiotusen observationer från en normalfördelning. Histogrammet visar att slumptalen ungefär följer den teoretiska fördelningen (här utritad med funktionen `stat_function`).
+
+```{r}
+dat <- tibble(x = rnorm(10000, mean = 50, sd = 3))
+ggplot(dat, aes(x)) +
+  geom_histogram(aes(y =..density..)) +
+  stat_function(fun = dnorm, args = list(mean = 50, sd = 3), 
+                col = "red", size = 1)
+```
+
+Argumentet `y = ..density..` anger att y-axeln ska vara i andelar, istället för antal.
+
+## Egna funktioner
+
+Det är möjligt att definera egna funktioner genom konstruktionsfunktionen `function`. Ett enkelt exempel på en funktion som tar ett värde och ger det värdet plus 4:
+
+```{r}
+add_four <- function(x){
+  y <- x + 4
+  y
+}
+
+add_four(5)
+```
+
+Här är `add_four` namnet på den funktion som skapas och `function(x)` anger att man skapar en funktion med ett ingångsvärde `x`. Stycket inom `{...}` är själva funktionsberäkning. I det här fallet skapar funktionen ett objekt `y` som ges av x plus 4, och därefter skrivs resultatet ut. Det som skrivs ut i funktionens sista rad blir funktionens output.
+
+Funktioner kan ha mer än ett ingående värde, t.ex.
+
+```{r}
+add_two_numbers <- function(x, y){
+  res <- x + y
+  res
+}
+
+add_two_numbers(15, 3)
+```
+
+Ett ingångsvärde kan ges ett grundläge genom att ange det som ett argument i funktionen, t.ex.
+
+```{r}
+add_two_numbers <- function(x, y = 3){
+  res <- x + y
+  res
+}
+
+add_two_numbers(15)
+add_two_numbers(15, 12)
+```
+
+Om inget värde anges för det andra ingåendevärdet (y) sätts det värdet till 3, eftersom det anges i definitionen av funktionen.
+
+## Simuleringar
+
+Med hjälp av egna funktioner och slumptal kan man utforska många grundläggande statistiska resultat. Teoretiska resultat säger till exempel att om en slumpvariabel $X$ har standardavvikelsen $\sigma$, så har ett medelvärde av $n$ observationer av $X$ standardavvikelsen $\sigma / \sqrt n$. För att undersöka detta skapas en funktion som för ett angivet värde på $n$ ger ett medelvärde av $n$ slumptal.
+
+```{r}
+mean_of_n_obs <- function(n = 1){
+  x <- rnorm(n, mean = 0, sd = 1)
+  mean(x)
+}
+```
+
+Funktionen tar ingångsvärdet n, simulerar n stycken slumptal från en normalfördelning med medelvärde 0 och standardavvikelse 1, och ger ut medelvärdet av de slumptalen.
+
+Funktionen `replicate` kan användas för att köra en funktion upprepade gånger - `replicate(100, mean_of_n_obs(n = 10))` upprepar den definerade funktionen 100 gånger och ger alltså 100 stycken medelvärden där varje medelvärde beräknas från 10 observationer.
+
+Eftersom standardavvikelsen i den ursprungliga dragningen var 1 ($\sigma = 1$) bör standardavvikelsen i ett medelvärde av 16 observationer vara 0.25 ($\sigma / \sqrt{16} = 1 / 4 = 0.25$). Det testas genom att beräkna tiotusen medelvärden (genom `replicate`) och beräkna standardavvikelsen i den serien av medelvärden.
+
+```{r}
+means <- replicate(10000, mean_of_n_obs(n = 16))
+sd(means)
+```
+
+Detta kan uppepas för andra stickprovsstorlekar - ett stickprov om hundra observationer bör ge ett värde kring 0.1 (eftersom $\sigma / \sqrt{100} = 1 / 10 = 0.1$).
+
+```{r}
+means <- replicate(10000, mean_of_n_obs(n = 100))
+sd(means)
+```
+
+Sannolikhetsteorin viktigaste resultat är *centrala gränsvärdesatsen*, som säger att medelvärden av flera lika slumpvariabler är ungefärligt normalfördelade även om den ursprungliga slumpvariabeln inte är det. Detta kan illustreras genom att dra slumptal från valfri fördelning, beräkna medelvärden av de slumptalen, och sedan titta på fördelningen för de medelvärdena. Ett första steg kan vara att skriva en funktion som drar slumptal och beräknar ett medelvärde.
+
+```{r}
+draw_random_calculate_mean <- function(){
+  x <- runif(10)
+  mean(x)
+}
+```
+
+Den ursprungliga fördelningen är här en likformig fördelning och stickprovsstorleken är 10.
+
+Funktionen `replicate` används för att dra tiotusen medelvärden och `ggplot` används för att skapa ett histogram över medelvärdena.
+
+```{r}
+means <- tibble(x = replicate(10000, draw_random_calculate_mean()))
+ggplot(means, aes(x)) +
+  geom_histogram(bins = 60)
+```
+
+Medelvärdena följer en ungefärlig normalfördelning trots att den ursprungliga variabeln följer en likformig fördelning.
