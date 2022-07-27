@@ -393,6 +393,14 @@ dat %>%                                                        # Ta datan, och s
 Gör lämpliga ändringar för att multiplicera `tempo` och `time signature`. Ett passande namn för den nya kolumnen kan vara `tempo_times_time_signature`.
 :::
 
+I exemplet och uppgiften ovan skapades nya kolumn namn med understreck `_` istället för mellanrum. Om man vill ha mellanrum i sina kolumnnamn måste man skriva namnet inom *backticks* `\`` för att ange att namnet ska tolkas som en enhet.
+
+```{r}
+dat %>% 
+  mutate(`Valence to danceability` = valence / danceability) %>% # Namnet Valence to danceability skrivs inom backticks
+  select(artist_name, `Valence to danceability`)
+```
+
 ### Summera kolumner med `group_by` och `summarise`
 
 För att presentera insamlad data på ett tolkningsbart sätt används sammanfattande mått såsom summor, medelvärden, medianer och standardavvikelser. 
@@ -420,12 +428,12 @@ dat %>%                                   # Ta datan, och sen
 ::: {.exercise name="Gladast artist"}
 Vad ska ändras i stycket ovan för att beräkna medelvalence per artist istället för per år?
 
-Vad måste ändras i stycket nedan för att se vilka artister som påverkar värdet för 1960?
+Funktionen `count()` ger antalet rader uppdelat efter valfri kolumn. Den kan användas som en kortform för `group_by()` och `summarise()`. Vad måste ändras i stycket nedan för att se vilka artister som påverkar värdet för 1960?
 
 ```{r, eval=F}
-dat %>% 
-  filter(album_release_year == 1976) %>% 
-  count(artist_name, album_name, album_release_year)
+dat %>%                                              # Ta data, och sen
+  filter(album_release_year == 1976) %>%             # ta ut rader där år är 1976, och sen
+  count(artist_name, album_name, album_release_year) # räkna antalet rader per artist, album och år
 ```
 :::
 
@@ -483,7 +491,7 @@ ggplot(dat_small, aes(x = mode_name, y = valence, color = album_name)) +
 Har spår i dur (*major*) högre valens?
 :::
 
-Andra graftyper kan skapas med andra `geom_`-funktioner. För ett linjediagram används `geom_line`. De observationer som ska ge en specifik linje anges med `group` i `aes`-funktionen. Låt oss beräkna medeldansbarhet över tid, uppdelat efter markeringen för *explicit* (alltså om spåret är barnvänligt eller inte).
+Andra graftyper kan skapas med andra `geom_`-funktioner. För ett linjediagram används `geom_line`. De observationer som ska ge en specifik linje anges med `group` i `aes`-funktionen. Låt oss beräkna medeldansbarhet över tid, uppdelat efter markeringen för *explicit* (alltså om spåret är barnvänligt eller inte). Exemplet visar också hur man använda flera geometrier genom att lägga till dem efter varandra med `+`.
 
 ```{r}
 dat_mean_over_time <- dat %>% 
@@ -491,7 +499,8 @@ dat_mean_over_time <- dat %>%
   summarise(Mean_danceability = mean(danceability))
 
 ggplot(dat_mean_over_time, aes(x = album_release_year, y = Mean_danceability, color = explicit)) +
-  geom_line()
+  geom_line() +
+  geom_point()
 ```
 
 Här ger färgen uppdelningen i explicit och icke-explicit (`TRUE` för explicit). Det finns också spår som saknat värde för explicit och därför blir `NA` här. Kan vi utifrån grafen säga att barnvänlig musik är mer eller mindre dansbar än icke-barnvänlig?

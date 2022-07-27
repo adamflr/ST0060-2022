@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2022-07-26" />
+<meta name="date" content="2022-07-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +51,15 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -144,27 +153,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4" data-path="installation.html"><a href="installation.html#gränssnittet-i-rstudio"><i class="fa fa-check"></i><b>2.4</b> Gränssnittet i RStudio</a></li>
 <li class="chapter" data-level="2.5" data-path="installation.html"><a href="installation.html#paket-i-r"><i class="fa fa-check"></i><b>2.5</b> Paket i R</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="datorövning-1.html"><a href="datorövning-1.html"><i class="fa fa-check"></i><b>3</b> Datorövning 1</a>
+<li class="chapter" data-level="3" data-path="datorövning-1.-datahantering-och-grafer.html"><a href="datorövning-1.-datahantering-och-grafer.html"><i class="fa fa-check"></i><b>3</b> Datorövning 1. Datahantering och grafer</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="datorövning-1.html"><a href="datorövning-1.html#uppstart-och-orientering"><i class="fa fa-check"></i><b>3.1</b> Uppstart och orientering</a></li>
-<li class="chapter" data-level="3.2" data-path="datorövning-1.html"><a href="datorövning-1.html#packages-från-cran"><i class="fa fa-check"></i><b>3.2</b> <em>Packages</em> från CRAN</a></li>
-<li class="chapter" data-level="3.3" data-path="datorövning-1.html"><a href="datorövning-1.html#objekt-och-funktioner"><i class="fa fa-check"></i><b>3.3</b> Objekt och funktioner</a></li>
-<li class="chapter" data-level="3.4" data-path="datorövning-1.html"><a href="datorövning-1.html#sekvenser-av-funktioner"><i class="fa fa-check"></i><b>3.4</b> Sekvenser av funktioner</a></li>
-<li class="chapter" data-level="3.5" data-path="datorövning-1.html"><a href="datorövning-1.html#datainskrivning-och-dataimport-från-web"><i class="fa fa-check"></i><b>3.5</b> Datainskrivning och dataimport från web</a>
+<li class="chapter" data-level="3.1" data-path="datorövning-1.-datahantering-och-grafer.html"><a href="datorövning-1.-datahantering-och-grafer.html#uppstart-och-orientering"><i class="fa fa-check"></i><b>3.1</b> Uppstart och orientering</a></li>
+<li class="chapter" data-level="3.2" data-path="datorövning-1.-datahantering-och-grafer.html"><a href="datorövning-1.-datahantering-och-grafer.html#packages-från-cran"><i class="fa fa-check"></i><b>3.2</b> <em>Packages</em> från CRAN</a></li>
+<li class="chapter" data-level="3.3" data-path="datorövning-1.-datahantering-och-grafer.html"><a href="datorövning-1.-datahantering-och-grafer.html#objekt-och-funktioner"><i class="fa fa-check"></i><b>3.3</b> Objekt och funktioner</a></li>
+<li class="chapter" data-level="3.4" data-path="datorövning-1.-datahantering-och-grafer.html"><a href="datorövning-1.-datahantering-och-grafer.html#sekvenser-av-funktioner"><i class="fa fa-check"></i><b>3.4</b> Sekvenser av funktioner</a></li>
+<li class="chapter" data-level="3.5" data-path="datorövning-1.-datahantering-och-grafer.html"><a href="datorövning-1.-datahantering-och-grafer.html#datainskrivning-och-dataimport-från-web"><i class="fa fa-check"></i><b>3.5</b> Datainskrivning och dataimport från web</a>
 <ul>
-<li class="chapter" data-level="3.5.1" data-path="datorövning-1.html"><a href="datorövning-1.html#inskrivning-av-data"><i class="fa fa-check"></i><b>3.5.1</b> Inskrivning av data</a></li>
-<li class="chapter" data-level="3.5.2" data-path="datorövning-1.html"><a href="datorövning-1.html#import-från-en-extern-fil"><i class="fa fa-check"></i><b>3.5.2</b> Import från en extern fil</a></li>
+<li class="chapter" data-level="3.5.1" data-path="datorövning-1.-datahantering-och-grafer.html"><a href="datorövning-1.-datahantering-och-grafer.html#inskrivning-av-data"><i class="fa fa-check"></i><b>3.5.1</b> Inskrivning av data</a></li>
+<li class="chapter" data-level="3.5.2" data-path="datorövning-1.-datahantering-och-grafer.html"><a href="datorövning-1.-datahantering-och-grafer.html#import-från-en-extern-fil"><i class="fa fa-check"></i><b>3.5.2</b> Import från en extern fil</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="datorövning-1.html"><a href="datorövning-1.html#transformera-en-tabell-med-select-filter-mutate-och-summarise"><i class="fa fa-check"></i><b>3.6</b> Transformera en tabell med <code>select</code>, <code>filter</code>, <code>mutate</code> och <code>summarise</code></a>
+<li class="chapter" data-level="3.6" data-path="datorövning-1.-datahantering-och-grafer.html"><a href="datorövning-1.-datahantering-och-grafer.html#transformera-en-tabell-med-select-filter-mutate-och-summarise"><i class="fa fa-check"></i><b>3.6</b> Transformera en tabell med <code>select</code>, <code>filter</code>, <code>mutate</code> och <code>summarise</code></a>
 <ul>
-<li class="chapter" data-level="3.6.1" data-path="datorövning-1.html"><a href="datorövning-1.html#urval-med-select-och-filter"><i class="fa fa-check"></i><b>3.6.1</b> Urval med <code>select</code> och <code>filter</code></a></li>
-<li class="chapter" data-level="3.6.2" data-path="datorövning-1.html"><a href="datorövning-1.html#ändra-och-skapa-nya-kolumner-med-mutate"><i class="fa fa-check"></i><b>3.6.2</b> Ändra och skapa nya kolumner med <code>mutate</code></a></li>
-<li class="chapter" data-level="3.6.3" data-path="datorövning-1.html"><a href="datorövning-1.html#summera-kolumner-med-group_by-och-summarise"><i class="fa fa-check"></i><b>3.6.3</b> Summera kolumner med <code>group_by</code> och <code>summarise</code></a></li>
+<li class="chapter" data-level="3.6.1" data-path="datorövning-1.-datahantering-och-grafer.html"><a href="datorövning-1.-datahantering-och-grafer.html#urval-med-select-och-filter"><i class="fa fa-check"></i><b>3.6.1</b> Urval med <code>select</code> och <code>filter</code></a></li>
+<li class="chapter" data-level="3.6.2" data-path="datorövning-1.-datahantering-och-grafer.html"><a href="datorövning-1.-datahantering-och-grafer.html#ändra-och-skapa-nya-kolumner-med-mutate"><i class="fa fa-check"></i><b>3.6.2</b> Ändra och skapa nya kolumner med <code>mutate</code></a></li>
+<li class="chapter" data-level="3.6.3" data-path="datorövning-1.-datahantering-och-grafer.html"><a href="datorövning-1.-datahantering-och-grafer.html#summera-kolumner-med-group_by-och-summarise"><i class="fa fa-check"></i><b>3.6.3</b> Summera kolumner med <code>group_by</code> och <code>summarise</code></a></li>
 </ul></li>
-<li class="chapter" data-level="3.7" data-path="datorövning-1.html"><a href="datorövning-1.html#grafer-med-ggplot2"><i class="fa fa-check"></i><b>3.7</b> Grafer med <code>ggplot2</code></a></li>
-<li class="chapter" data-level="3.8" data-path="datorövning-1.html"><a href="datorövning-1.html#bonus-interaktiva-grafer-med-plotly"><i class="fa fa-check"></i><b>3.8</b> Bonus: interaktiva grafer med <code>plotly</code></a></li>
-<li class="chapter" data-level="3.9" data-path="datorövning-1.html"><a href="datorövning-1.html#bonus-warming-stripes"><i class="fa fa-check"></i><b>3.9</b> Bonus: Warming stripes</a></li>
-<li class="chapter" data-level="3.10" data-path="datorövning-1.html"><a href="datorövning-1.html#valfria-hemuppgifter"><i class="fa fa-check"></i><b>3.10</b> Valfria hemuppgifter</a></li>
+<li class="chapter" data-level="3.7" data-path="datorövning-1.-datahantering-och-grafer.html"><a href="datorövning-1.-datahantering-och-grafer.html#grafer-med-ggplot2"><i class="fa fa-check"></i><b>3.7</b> Grafer med <code>ggplot2</code></a></li>
+<li class="chapter" data-level="3.8" data-path="datorövning-1.-datahantering-och-grafer.html"><a href="datorövning-1.-datahantering-och-grafer.html#bonus-interaktiva-grafer-med-plotly"><i class="fa fa-check"></i><b>3.8</b> Bonus: interaktiva grafer med <code>plotly</code></a></li>
+<li class="chapter" data-level="3.9" data-path="datorövning-1.-datahantering-och-grafer.html"><a href="datorövning-1.-datahantering-och-grafer.html#bonus-warming-stripes"><i class="fa fa-check"></i><b>3.9</b> Bonus: Warming stripes</a></li>
+<li class="chapter" data-level="3.10" data-path="datorövning-1.-datahantering-och-grafer.html"><a href="datorövning-1.-datahantering-och-grafer.html#valfria-hemuppgifter"><i class="fa fa-check"></i><b>3.10</b> Valfria hemuppgifter</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="datorövning-2.-beskrivande-statistik.html"><a href="datorövning-2.-beskrivande-statistik.html"><i class="fa fa-check"></i><b>4</b> Datorövning 2. Beskrivande statistik</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="datorövning-2.-beskrivande-statistik.html"><a href="datorövning-2.-beskrivande-statistik.html#repetition-från-datorövning-1"><i class="fa fa-check"></i><b>4.1</b> Repetition från datorövning 1</a></li>
+<li class="chapter" data-level="4.2" data-path="datorövning-2.-beskrivande-statistik.html"><a href="datorövning-2.-beskrivande-statistik.html#import-av-data-från-en-excelfil"><i class="fa fa-check"></i><b>4.2</b> Import av data från en Excelfil</a></li>
+<li class="chapter" data-level="4.3" data-path="datorövning-2.-beskrivande-statistik.html"><a href="datorövning-2.-beskrivande-statistik.html#sammanfattande-lägesmått"><i class="fa fa-check"></i><b>4.3</b> Sammanfattande lägesmått</a></li>
+<li class="chapter" data-level="4.4" data-path="datorövning-2.-beskrivande-statistik.html"><a href="datorövning-2.-beskrivande-statistik.html#sammanfattande-spridningsmått"><i class="fa fa-check"></i><b>4.4</b> Sammanfattande spridningsmått</a></li>
+<li class="chapter" data-level="4.5" data-path="datorövning-2.-beskrivande-statistik.html"><a href="datorövning-2.-beskrivande-statistik.html#ordna-upp-beskrivande-statistik-och-exportera"><i class="fa fa-check"></i><b>4.5</b> Ordna upp beskrivande statistik och exportera</a></li>
+<li class="chapter" data-level="4.6" data-path="datorövning-2.-beskrivande-statistik.html"><a href="datorövning-2.-beskrivande-statistik.html#stegvis-beräkning-av-varians"><i class="fa fa-check"></i><b>4.6</b> Stegvis beräkning av varians</a></li>
+<li class="chapter" data-level="4.7" data-path="datorövning-2.-beskrivande-statistik.html"><a href="datorövning-2.-beskrivande-statistik.html#kumulativt-medelvärde"><i class="fa fa-check"></i><b>4.7</b> Kumulativt medelvärde</a></li>
+<li class="chapter" data-level="4.8" data-path="datorövning-2.-beskrivande-statistik.html"><a href="datorövning-2.-beskrivande-statistik.html#darwin-exempel"><i class="fa fa-check"></i><b>4.8</b> Darwin-exempel</a></li>
+<li class="chapter" data-level="4.9" data-path="datorövning-2.-beskrivande-statistik.html"><a href="datorövning-2.-beskrivande-statistik.html#bonus.-tredimensionella-grafer-med-plotly"><i class="fa fa-check"></i><b>4.9</b> Bonus. Tredimensionella grafer med <code>plotly</code></a></li>
+<li class="chapter" data-level="4.10" data-path="datorövning-2.-beskrivande-statistik.html"><a href="datorövning-2.-beskrivande-statistik.html#valfria-hemuppgifter-1"><i class="fa fa-check"></i><b>4.10</b> Valfria hemuppgifter</a></li>
 </ul></li>
 </ul>
 
@@ -185,7 +207,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="header">
 <h1 class="title">R-anvisningar till <em>Grundläggande statistik</em></h1>
-<p class="date"><em>2022-07-26</em></p>
+<p class="date"><em>2022-07-27</em></p>
 </div>
 <div id="introduktion" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Kapitel 1</span> Introduktion<a href="index.html#introduktion" class="anchor-section" aria-label="Anchor link to header"></a></h1>
