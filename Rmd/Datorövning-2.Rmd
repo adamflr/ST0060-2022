@@ -87,7 +87,7 @@ gapminder
 ```
 
 ::: {.exercise name="Importera från excelfil"}
-Vad är sökvägen för den nedladdade filen *Gapminder.xlsx*? Gör lämplig ändring i koden ovan för att läsa in data från den filen. Notera att R använder högerlutande snedstreck `/`, så om en kopierad sökväg har vänster-snedstreck måste de ändras. Kontrollera att datan blivit korrekt inläst genom att köra objektnamnet `gapminder`.
+Var ligger den nedladdade filen *Gapminder.xlsx*? Gör lämplig ändring i koden ovan för att läsa in data från den filen. Notera att R använder högerlutande snedstreck `/`, så om en kopierad sökväg har vänster-snedstreck måste de ändras. Kontrollera att datan blivit korrekt inläst genom att köra objektnamnet `gapminder`.
 :::
 
 En R-session har alltid en grundmapp, ett *Working directory*. Man kan se vilken mapp det är genom att köra
@@ -467,42 +467,77 @@ ggplot(dat_dice, aes(x = Kast, y = `Kumulativ frekvens`)) +
 
 ## Darwin-exempel
 
-::: {.exercise name="Stapeldiagram med felstaplar"}
-Darwins studie gav följande data:
+På kursen Canvas-sida finns en excelfil *Uppgiftdata.xlsx* som innehåller data för de flesta räkneupgifter på kursen. I den här delen ska vi titta på datan i fliken *Darwin* som innehåller en jämförelse i planthöjd mellan kors- och självbefruktade plantor.
 
-```{r, echo = F}
-dat <- readxl::read_excel("Data/Uppgiftsdata.xlsx", sheet = "Darwin")
-
-dat %>% 
-  mutate(ID = c(1:15,1:15)) %>% 
-  pivot_wider(names_from = Metod, values_from = Utfall) %>% 
-  select(-ID) %>% 
-  kable()
-```
-
-Konstruera ett stapeldiagram med felstaplar där stapelns höjd ges av medelvärdet inom gruppen och felstapelns längd av standardavvikelsen inom gruppen.
-
-Datan finns tillgänglig i arket *Darwin* i excelfilen *Uppgiftsdata.xlsx*. Exceldata kan läsas in med funktionen `read_excel` från paketet `readxl`.
+::: {.exercise name="Ladda ner uppgiftsdata"}
+Ladda ner filen med uppgiftsdata till din lokala hårddisk.
 :::
 
-::: {.hypothesis name="Stapeldiagram med felstaplar"}
-Felstaplar kan konstrueras genom att beräkna medelvärde och standardavvikelse, och sedan *pipa* (`%>%`) in i en plot där staplar konstrueras med `geom_bar` och felstaplar med `geom_errorbar`.
+Vi såg tidigare hur en excelfil kan läsas in med `read_excel()`. Ett argument den funktionen kan ta är `sheet`, som styr vilken flik som ska läsas in. Som tidigare måste man ange var på datorn excel-filen ligger.
+
+::: {.exercise name="Läs in Darwin-datan"}
+Gör lämpliga ändringar i koden nedan för att läsa in fliken *Darwin*.
 
 ```{r}
-dat <- readxl::read_excel("Data/Uppgiftsdata.xlsx", sheet = "Darwin")
-dat %>% 
-  group_by(Metod) %>% 
-  summarise(m = mean(Utfall), s = sd(Utfall)) %>% 
-  ggplot(aes(Metod, m)) +
-  geom_bar(stat = "identity", width = 0.3, col = "black", fill = "white") +
-  geom_errorbar(aes(ymin = m - s, ymax = m + s), width = 0.1) +
-  labs(caption = "Felstapel anger +/- en standardavvikelse")
+dat_darwin <- read_excel("Data/Uppgiftsdata.xlsx", sheet = "Darwin")
+dat_darwin %>% print(n = 30)
 ```
-
-Det är inte alltid klart vilket spridningsmått felstaplarna illusterar (vanliga alternativ är standardavvikelsen, medelfelet (standardavvikelsen delat på roten ur stickprovsstorleken) och konfidensintervallet). Det är därför god praxis att skriva ut vad felstaplarna anger.
 :::
 
-## Bonus. Tredimensionella grafer med `plotly`
+När data är inläst kan man sammanfatta den med medelvärde, standardavvikelse och medelfel (där medelfelet ges av standardavvikelsen delad på roten ur antalet observationer).
+
+::: {.exercise name="Sammanfatta Darwin-datan"}
+Fyll i koden nedan för att beräkna medelvärde, standardavvikelse, antal observationer och medelfel. Gör beräkningen per grupp (`Metod`)
+
+```{r, eval = F}
+dat_sum <- dat_darwin %>% 
+  group_by(___) %>% 
+  summarise(Medelvärde = mean(___),
+            Standardavvikelse = ___(Utfall),
+            `Antal observationer` = n(),
+            Medelfel = Standardavvikelse / sqrt(`Antal observationer`))
+dat_sum
+```
+:::
+
+Slutligen kan vi presentera de sammanfattande måtten med en lämplig graf. Ett vanligt val är ett stapeldiagram med felstaplar för medelfelen.
+
+::: {.exercise name="Illustrera Darwin-datan"}
+Fyll i koden nedan för att skapa ett stapeldiagram med felstaplar av de sammanfattande måtten i objektet som skapades i uppgiften ovan. Felstaplarna styrs med argumenten `ymin` och `ymax`. Dess ska sättas till medelvärdet minus ett medelfel respektive medelvärdet plus ett medelfel. Välj lämpliga värden för staplarnas bredd. Välj en lämplig färg för staplarnas kant och inre del. Se `colors()` för en lista över färger, eller använd hex-koder som `"#ff00ff"`.
+
+```{r, eval = F}
+ggplot(dat_sum, aes(Metod, Medelvärde)) +
+  geom_col(color = ___, fill = ___, width = ___) +
+  geom_errorbar(aes(ymin = ___ - ___, ymax = ___ + ___),
+                width = ___) +
+  labs(caption = "Felstapel anger medelvärde ± ett medelfel")
+```
+:::
+
+Ett annat alternativ för en graf ett lådagram per grupp. Här används den ursprungliga datan, snarare än beräknad beskrivande statistik.
+
+::: {.exercise name="Illustrera Darwin-datan"}
+Fyll i koden nedan för att skapa ett lådagram för de två metoderna. Låt x-axeln ange planthöjden (`Utfall`) och y-axeln metoden (`Metod`). Även här kan man styra färger och bredd med `color`, `fill` och `width`.
+
+```{r, eval = F}
+ggplot(dat_darwin, aes(x = ___, y = ___)) +
+  geom_boxplot(color = "purple", fill = "hotpink", width = 0.2)
+```
+
+Funktionen `quantile()` kan användas för att beräkna kvartiler. Notera att man första måste dela per grupp.
+
+```{r}
+dat_darwin_kors <- dat_darwin %>% filter(Metod == "Korsbefruktade")
+quantile(dat_darwin_kors$Utfall)
+
+dat_darwin_själv <- dat_darwin %>% filter(Metod == "Självbefruktade")
+quantile(dat_darwin_själv$Utfall)
+```
+
+Vad är kopplingen mellan kvantilerna och lådagrammet?
+:::
+
+## Bonus: tredimensionella grafer med `plotly`
 
 Förra gången anvnäde vi paketet `plotly` för att göra en interaktiv graf. Paketet har också funktioner för 3d-grafer. Börja med att ladda paketet.
 
