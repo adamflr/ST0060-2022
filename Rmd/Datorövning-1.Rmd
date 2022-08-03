@@ -327,7 +327,7 @@ dat %>%
   filter(key_name == "D#")
 ```
 
-För att se fler eller färre rader kan man använda en pipe `%>%` till funktionen `print`. Följande skriver ut fem rader
+För att se fler eller färre rader kan man använda en pipe `%>%` till funktionen `print()`. Följande skriver ut fem rader
 
 ```{r}
 dat %>% 
@@ -336,7 +336,7 @@ dat %>%
   print(n = 5)
 ```
 
-Om man istället vill göra ett urval av kolumner kan man använda `select`. Som argument anges de kolumner man vill välja, t.ex.
+Om man istället vill göra ett urval av kolumner kan man använda `select()`. Som argument anges de kolumner man vill välja, t.ex.
 
 ```{r}
 dat %>% 
@@ -382,7 +382,7 @@ dat %>% select(tempo, beats_per_second)
 ```
 
 ::: {.exercise name="Glädje per dansbarhet"}
-Följande stycke beräknar kvoten av kolumnerna valence och danceability i en ny kolumn `valence_to_danceability.
+Följande stycke beräknar kvoten av kolumnerna valence och danceability i en ny kolumn `valence_to_danceability`.
 
 ```{r, eval = F}
 dat %>%                                                        # Ta datan, och sen
@@ -553,7 +553,7 @@ ggplot(dat_small, aes(danceability, album_name)) +
 Ändra färgvalen i grafen ovan för att skapa fulast möjliga graf. Visa de två graferna för någon annan och se om de kan säga vilken som är vilken.
 :::
 
-## Bonus: interaktiva grafer med `plotly`
+## Bonus. Interaktiva grafer med `plotly`
 
 Låt oss ta en titt på `plotly`, ett av flera R-paket som gör det möjligt att skapa interaktiva grafer. Vi börjar med att installera och ladda paketet.
 
@@ -629,7 +629,7 @@ Vad måste läggas till för en interaktiv version av samma graf?
 
 Hemsidan https://plotly.com/r/ innehåller fler exempel för den som är intresserad.
 
-## Bonus: Warming stripes
+## Bonus. Warming stripes
 
 *Warming stripes* har sedan de först introducerades av Ed Hawking 2018 blivit en vanlig illustration av temperaturökning. I en warming stripe-graf anges varje år av en stapel och stapels färg ges av ett temperaturmått, vanligen årets medeltemperatur. I ggplot-terminologi har vi geometrier (staplar eller kolumner) med en x-position som ges av år och en ifylld färg som ges av temperatur.
 

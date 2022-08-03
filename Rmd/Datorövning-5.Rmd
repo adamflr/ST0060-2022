@@ -1,0 +1,16 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Datorövning 5. Test för ett stickprov, icke-normalfördelad data
+
+Datorövning 5 handlar om hypotestest och konfidensintervall för ett stickprov av normalfördelad data. Efter övningen ska vi kunna
+
+- genomföra och tolka ett t-test för normalfördelad data,
+
+- beräkna och tolka ett konfidensintervall för normalfördelad data,
+
+- använda simulerad data för att förstå t-testets egenskaper.
+
+## 

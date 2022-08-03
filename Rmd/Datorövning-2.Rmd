@@ -537,7 +537,7 @@ quantile(dat_darwin_själv$Utfall)
 Vad är kopplingen mellan kvantilerna och lådagrammet?
 :::
 
-## Bonus: tredimensionella grafer med `plotly`
+## Bonus. Tredimensionella grafer med `plotly`
 
 Förra gången anvnäde vi paketet `plotly` för att göra en interaktiv graf. Paketet har också funktioner för 3d-grafer. Börja med att ladda paketet.
 

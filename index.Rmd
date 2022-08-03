@@ -35,6 +35,8 @@ kable <- function(x, digits = 4){
 ```{r, echo = F}
 theme_set(theme_bw() + 
             theme(plot.background = element_rect(fill = "#f3eacb", color = "#f3eacb"),
-                  text = element_text(family = "serif")))
-```
-
+                  text = element_text(family = "serif"),
+                  legend.background = element_rect(fill = "#f3eacb", color = "black")))
+          ```
+          
+          
