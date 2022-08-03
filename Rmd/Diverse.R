@@ -24,3 +24,13 @@ dat %>%
 
 dat2 <- dat %>% filter(as.numeric(Säsong) >= 1990)
 write_csv(dat2, "Data/Allsvenskan, herrar, 1990-2020.csv")
+
+dat %>% 
+  mutate(Res = sign(Hemmamål - Bortamål)) %>% 
+  count(Res) %>% 
+  mutate(p = n / sum(n))
+
+dat_ore %>% 
+  select(-stat_id) %>% 
+  pivot_longer(-(1:2), names_to = "Vehicle", values_to = "Count") %>% 
+  write_csv("Oresund-bridge-traffic.csv")
