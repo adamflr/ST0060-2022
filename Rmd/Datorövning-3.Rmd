@@ -15,7 +15,7 @@ Datorövning 3 handlar om sannolikhetslära i R. Efter övningen ska vi kunna
 
 - Använda slumptal för att utforska teoretiska resultat från sannolikhetsläran.
 
-# Repetition från datorövning 2
+## Repetition från datorövning 2
 
 I datorövning 2 tittade vi på hur insamlade variabler kan sammanfattas med lägesmått och spridningsmått. Ett enkelt sätt att ta fram dem är att använda `summarise()` och ange de mått och variabler man vill använda. Vi hade uppe ett exempel på data från Gapminder som vi importerade från en excel-fil. För nu kan vi dock hämta datan från paketet `gapminder`.
 

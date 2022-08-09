@@ -130,16 +130,16 @@ På canvassidan finns en excelfil med data för kursens uppgifter *Uppgiftsdata.
 
 Ladda ner filen till lämplig plats på datorn och importera datan genom att fylla i följande rad.
 
-```{r}
+```{r, eval = F}
 library(readxl)
 dat_smält <- read_excel("___", sheet = "Smältpunkt")
 ```
 :::
 
-::: {.exercise name="Importera smältpunkt-data"}
+::: {.exercise name="Plotta smältpunkt-data"}
 Illustrera smältpunktsdatan på samma sätt som exempeldatan genom att fylla i följande kod. Vårt mål är att testa om medelvärde är skilt från 1050, vilket här kan noteras med ett vertikalt streck vid 1050.
 
-```{r}
+```{r, eval = F}
 ggplot(___, aes(x = Smältpunkt, y = 0)) + 
   ___() +
   geom_vline(xintercept = ___, color = "red")
@@ -151,7 +151,7 @@ Kan man utifrån grafen säga om 1050 är ett rimligt medelvärde för populatio
 ::: {.exercise name="Hypotestest för hand"}
 Genomför ett t-test för hand för att se om medelsmältpunkten är skild från 1050. Skriv ut tydliga hypoteser. Medelvärde och standardavvikelse ges av följande.
 
-```{r}
+```{r, eval = F}
 mean(dat_smält$Smältpunkt)
 sd(dat_smält$Smältpunkt)
 ```

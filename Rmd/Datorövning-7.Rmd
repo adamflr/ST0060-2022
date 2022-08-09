@@ -1,0 +1,413 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Datorövning 7. Anova-modellen och -tabellen
+
+Datorövning 7 handlar om anova-modellen och Anova-tabellen. Efter övningen ska vi kunna
+
+- beräkna en anova-modell i R,
+
+- ta fram och tolka en anova-tabell,
+
+- göra lämpliga tester av modellantaganden,
+
+- göra parvisa jämförelser mellan behandlingar
+
+## Allmänt
+
+Variansanalys (eller *anova-modellen*) är en statistisk modell där medelvärdet varierar beroende på en behandling och ett normalfördelat slumpfel. Från en anova-modell kan man beräkna ett F-test, som testar om det finns någon övergripande gruppskillnad, och post-hoc-test, som jämför specifika grupper med varandra.
+
+Den specifika modellen beror på försöksupplägget. Här ges exempel på variansanalys med en faktor, en faktor med block, och två faktorer.
+
+## Variansanalys. En faktor
+
+Vid variansanalys med en faktor har man observationer av en kontinuerlig utfallsvariabel från två eller flera behandlingsgrupper. Som exempel används en datamängd på ett odlingsförsök med tre behandlingar (varav en kontroll). Exemplet finns tillgängligt i R som `PlantGrowth`.
+
+```{r}
+PlantGrowth
+```
+
+Datan har 30 observationer av vikt `weight` och varje observation tillhör någon specifik behandling `group`. Datan kan illustreras med ett spridningsdiagram.
+
+```{r}
+ggplot(PlantGrowth, aes(group, weight)) +
+  geom_point()
+```
+
+Behandling 1 verkar vara något lägre än kontrollen medan behandling 2 verkar vara något högre.
+
+En anova-modell kan i R skattas med funktionen `lm()` (för *linjär modell*). Från modellobjektet kan man sedan plocka fram en anova-tabell (som bland annat anger utfallet av F-testet) och genomföra parvisa jämförelser genom `emmeans`.
+
+```{r}
+mod <- lm(weight ~ group, data = PlantGrowth)
+```
+
+Modellen anges som en formel `weight ~ group`, vilket kan utläsas *vikt beroende på behandlingsgrupp*. Därefter anges data med argumentet `data`.
+
+För anova-tabellen finns flera alternativ. Här används funktionen `Anova()` från paketet `car`.
+
+```{r}
+library(car)
+Anova(mod)
+```
+
+Anova-tabellen ger kvadratsummor (`Sum Sq`), frihetsgrader (`Df`) och utfallet av ett F-test. Testets hypoteser ges av
+
+H0: alla behandlingsgrupper har samma medelvärde
+H1: alla behandlingsgrupper har inte samma medelvärde
+
+Det låga p-värdet tyder på att nollhypotesen bör förkastas, vilket alltså pekar på att det finns någon eller några skillnader i medelvärde.
+
+::: {.exercise name="Anova för hand"}
+Anovatabell från `Anova()` ger kvadratsummor och frihetsgrader. Använd den informationen för att, för hand, beräkna medelkvadratsummor och F-värdet.
+:::
+
+::: {.exercise name="Tabellvärde för F-fördelningen"}
+Anova-tabellen ger ett p-värde från vilket vi kan dra en direkt slutsats. Om man istället löser uppgiften för hand ställer man det beräknade F-värdet mot ett kritiskt värde från en tabell över F-fördelningen. Se efter om man kan hitta ett lämpligt tabellvärde för det aktuella testet (med 2 och 27 frihetsgrader). Det är möjligt att det inte finns en rad för 27 i en vanlig F-fördelningstabell, använd isåfall värdet på närmast övre rad (t.ex. 26 eller 25). I R kan kvantiler för F-fördelningen tas fram med `qf()`, t.ex.
+
+```{r}
+qf(0.95, 2, 27)
+```
+:::
+
+En naturlig följdfråga är vilka behandlingsgrupper som skiljer sig åt. För att besvara det krävs *parvisa jämförelser* där behandlingarna jämförs två och två. Parvisa jämförelse kan göras med paketet `emmeans` och funktionen med samma namn. Funktionen tar modellobjektet som första argument och en formel för jämförelsetyp som andra argument (här `pairwise ~ group`, en parvis jämförelse mellan nivåer i `group`).
+
+```{r}
+# install.packages("emmeans")
+library(emmeans)
+emmeans(mod, pairwise ~ group)
+```
+
+I den nedre tabellen med jämförelser ges alla parvisa jämförelser. Nollhypotesen är att de två grupper som jämförs har samma medelvärde - ett lågt p-värde tyder alltså på att de två grupperna är signifikant skilda. Notera också att p-värden justeras med tukey-metoden, även känt som Tukeys HSD.
+
+Om man istället vill använda Fishers LSD kan man styra justeringen med argumentet `adjust`.
+
+```{r}
+emmeans(mod, pairwise ~ group, adjust = "none")
+```
+
+Parvisa jämförelser presenteras ofta med signifikansbokstäver (en. *compact letter display, cld*). Dessa kan plockas fram med `multcomp`-paketet och funktionen `cld()`.
+
+```{r}
+em <- emmeans(mod, pairwise ~ group)
+
+library(multcomp)
+cld(em, Letters = letters)
+```
+
+Tolkning av grupperingen till höger är att grupper som delar en bokstav inte är signifikant skilda. I det här fallet är den lägsta nivån skild från de två högsta. I övrigt finns inga signifikanta skillnader. Jämför gärna med p-värdena från tabellen med parvisa jämförelser. Man bör se att parvisa jämförelser med ett p-värde under fem procent motsvaras av att de behandlingarna inte delar någon bokstav i bokstavstabellen.
+
+::: {.exercise name="Anova med två behandlingar"}
+Följande kod skapar en datamängd med två behandlingar.
+
+```{r}
+dat_two <- PlantGrowth %>% filter(group %in% c("trt1", "trt2"))
+```
+
+Använd den datan för att göra ett t-test för två oberoende stickprov med lika varians, ett t-test för två oberoende stickprov utan antagande om lika varians, och ett F-test (ofullständig exempelkod nedan). Vad kan sägas om p-värdena från de tre testen?
+
+```{r, eval = F}
+t.test(___ ~ group, data = dat_two, var.equal = T)
+t.test(weight ~ ___, data = dat_two, var.equal = F)
+
+mod <- lm(weight ~ group, data = ___)
+Anova(mod)
+```
+:::
+
+::: {.exercise name="Mass-signifikans"}
+Anledning till att vi justerar p-värden är att man vid varje test har en sannolikhet att förkasta. Om man gör ett stort antal tester är man nästan garanterad att få något (falskt) signifikant resultat. Justering höjer p-värdena för att minska den risken. Följande kod simulerar data med 5 grupper och producerar de parvisa jämförelserna.
+
+```{r}
+n_groups <- 5
+dat_sim <- expand_grid(obs = 1:10, group = letters[1:n_groups]) %>% mutate(y = rnorm(n()))
+mod <- lm(y ~ group, dat_sim)
+emmeans(mod, pairwise ~ group, adjust = "none")
+```
+
+Kör koden tio gånger. Hur många gånger av de tio ger de parvisa jämförelserna *någon* signifikant skillnad (det vill säga något p-värde under 0.05)?
+
+En passande xkcd-serie: https://xkcd.com/882/
+:::
+
+::: {.exercise name="Äppelinfektionsimport"}
+En studie har givit ett mått på infektion hos äppelträd. Fyra sorter jämförs med tre replikat per sort. Data finns i fliken *Äppelangrepp* i excelfilen *Uppgiftsdata.xslx* på canvassidan. Fyll i kodstycket nedan för att importera datan.
+
+```{r, echo = F, eval = F}
+library(readxl)
+dat_apple <- read_excel("___", sheet = "Äppelangrepp")
+dat_apple
+
+# dat_apple <- read_csv("https://raw.githubusercontent.com/adamflr/ST0060-2022/main/Data/Uppgiftsdata/Uppgift_%C3%84ppelangrepp.csv") # Alternativ lösning
+```
+:::
+
+::: {.exercise name="Äppelinfektionsgraf"}
+Fyll i kodstycket nedan för att skapa en graf av äppeldatan.
+
+```{r, eval = F}
+ggplot(___, aes(x = ___, y = ___)) +
+  geom_point()
+```
+:::
+
+::: {.exercise name="Äppelinfektionsmodell"}
+Fyll i kodstycket nedan för att skatta en anovamodell och ta fram anovatabellen. Vad är F-testets noll- och alternativhypotes? Vilken slutsats kan man dra från testet?
+
+```{r, eval = F}
+mod <- lm(___ ~ ___, data = dat_apple)
+Anova(mod)
+```
+:::
+
+## Variansanalys. En faktor med block
+
+I en blockdesign delas försöksobjekten (de enheter man ger en behandling och sedan mäter, t.ex. en försöksruta eller en planta) in i grupper av lika objekt (ett *block*). Sedan ger man enheterna inom blocket varsin behandling. Blockförsök är ofta balanserade, så att varje behandling förekommer en gång i varje block.
+
+Som exempel på ett blockförsök kan vi titta på datan `oats` från paketet `MASS`. Datan kommer från ett agrikulturellt försök och blockdesignen sker genom att man delar in ett fält i flera delar (blocken) och sätter varje behandling i varje block. Datan har två faktorer (kväve `N` och sort `V`), men låt oss i den här första delen titta på en specifik sort.
+
+```{r}
+library(MASS)
+oats_marvel <- oats %>% filter(V == "Marvellous")
+oats_marvel
+```
+
+En vanlig illustration av ett blockförsök är ett punktdiagram kombinerat med ett linjediagram.
+
+```{r}
+ggplot(oats_marvel, aes(N, Y, color = B, group = B)) +
+  geom_point(size = 4) +
+  geom_line()
+```
+
+Färg och linje sammanbinder observationer från samma block. Det finns tecken på en blockeffekt: block I är nästan alltid högst och block V är nästan alltid lägst. Det finns också en tydlig behandlingseffekt i att högre kväve ger högre skörd.
+
+Blockeffekten kan enkelt föras in i modellen genom att lägga till variabeln `B` i `lm`-funktionen. Anova-tabellen och parvisa jämförelser kan göras på samma sätt som tidigare. Resultaten påverkas av att modellen har en blockfaktor; man behöver vanligen inte ange det explicit.
+
+```{r}
+mod_bl <- lm(Y ~ N + B, data = oats_marvel)
+Anova(mod_bl)
+```
+
+P-värdet från F-testet på variabeln N är nu klart mindre än tidigare. Detta beror på att en stor del av variationen kan förklaras med blockeffekten, vilket är tydligt i att blockeffekten också har ett litet p-värde i F-testet.
+
+Det kan vara intressant att jämföra med modellen utan block.
+
+```{r}
+mod_wo_block <- lm(Y ~ N, data = oats_marvel)
+Anova(mod_wo_block)
+```
+
+Det som är residualens kvadratsumma i modellen utan block är i blockmodellen uppdelat i en blockeffekt och en residualterm. Eftersom F-testet bygger på en jämförelse mellan behandlingseffekten och residualtermen leder blockdesignen till starkare signifikans i blockmodellen. Å andra sidan kostar blockfaktorn frihetsgrader vilket ger oss ett svagare test. Effekten av att ta med ett block beror alltså på om det finns en verklig skillnad mellan blocken eller ej.
+
+Vi kan gå vidare med att titta på parvisa jämförelser mellan kvävenivåer. Funktionen `emmeans()` och `cld()` fungerar som tidigare.
+
+```{r}
+cld(emmeans(mod_bl, ~ N), Letters = letters)
+```
+
+Signifikansbokstäver anger att den lägsta nivån är skild från övriga och att den näst lägsta är skild från den högsta. Även här kan det vara intressant att jämföra med modellen utan block.
+
+```{r}
+cld(emmeans(mod_wo_block, ~ N), Letters = letters)
+```
+
+Modellen utan block ger samma medelvärden `emmean` men större medelfel `SE` och färre signifikanta skillnader.
+
+::: {.exercise name="Block med två behandlingar. Graf"}
+Det minsta möjliga blocket är det med två behandlingar. Vi filtrerar havredatan för att den situationen.
+
+```{r}
+dat_small_block <- oats %>% filter(V == "Marvellous", N %in% c("0.6cwt", "0.0cwt"))
+dat_small_block
+```
+
+Fyll i stycket nedan för att skapa en graf med `N` på x-axeln, `Y` på y-axeln och en gruppering som länkar observationer från samma block.
+
+```{r, eval = F}
+ggplot(dat_small_block, aes(x = ___, y = ___, group = ___)) +
+  geom_point() +
+  geom_line()
+```
+:::
+
+::: {.exercise name="Block med två behandlingar. Test"}
+Eftersom det är ett försök med en förklarande faktor och block kan man modellera det med den tidigare blockmodellen. Men eftersom man bara har två observationer per block kan man också se det som matchade stickprov, vilket kan lösas med ett t-test. Fyll i stycket nedan för att göra de två testen - utfallsvariabeln är skörd `Y` och den förklarande faktorn är kvävenivån `N`. Jämför resultaten.
+
+```{r, eval = F}
+mod <- lm(___ ~ ___ + B, data = dat_small_block)
+Anova(mod)
+
+t.test(___ ~ ___, data = dat_small_block, paired = ___)
+```
+:::
+
+::: {.exercise name="Majshybridimport"}
+I fliken *Majshybrider* i excelfilen *Uppgiftsdata.xlsx* finns data på fyra majssorter, vardera sorterad på fem platser (som agerar som block). Importera datan med funktionen `read_excel()` genom att fylla i kodstycket nedan.
+
+```{r, eval = F}
+dat_corn <- read_excel("", sheet = ___)
+```
+
+:::
+
+::: {.exercise name="Majshybridgraf"}
+Skapa en lämplig graf av datan på majshybrider. Grafen ska illustrera både jämförelsen mellan hybrider och jämförelsen mellan platser. Se exemplet ovan som guide.
+:::
+
+::: {.exercise name="Majshybridmodell"}
+Fyll i koden nedan för att skatta en anova-modell med block för datan på majshybrider. Ta fram anovatabellen med `Anova()`. Vilka slutsatser kan man dra från anovatabellen?
+
+```{r, eval = F}
+mod <- lm(___ ~ ___ + Plats, data = dat_corn)
+Anova(mod)
+```
+:::
+
+::: {.exercise name="Majshybridjämförelser"}
+Gör lämplig ändring i koden nedan för att jämföra hybrider, istället för platser.
+
+```{r, eval = F}
+emmeans(mod, pairwise ~ Plats)
+```
+:::
+
+## Variansanalys. Två faktorer med block
+
+Exempeldata på havre tar med två förklarande faktorer och ett block. Datan kan illustreras med ett punktdiagram där `facet_wrap` delar grafen efter sort.
+
+```{r}
+ggplot(oats, aes(N, Y, color = B)) +
+  geom_point(size = 4) +
+  facet_wrap(~ V)
+```
+
+Grafen visar samma kvävesamband som tidigare. Det finns inga tydliga skillnader mellan sorter, möjligen har sorten Victory givit något lägre skörd än övriga. Det finns fortfarande en tydlig blockeffekt, till exempel har block I höga värden och block V låga värden.
+
+Modellen skattas genom att lägga till variabeln för sort (V för variety) i `lm`-formeln. En modell med två faktorer kan antingen vara med eller utan en *interaktion*. Interaktionstermen fångar påverkan mellan faktorerna. Ett exempel hade varit om någon sort svarat starkare på ökad kväve än någon annan. Standardmodellen är att ta med interaktionen, vilket vi anger genom att sätta `N * V` istället för `N + V`. Blocket tas fortfarande med som en adderad faktor
+
+```{r}
+mod_two_fact <- lm(Y ~ N * V + B, data = oats)
+```
+
+Anovatabellen kan plockas fram på samma sätt som tidigare.
+
+```{r}
+Anova(mod_two_fact)
+```
+
+Raden `N:V` gäller interaktionseffekten mellan kväve och sort. I det här fallet är det ingen signifikant interaktion - vilket tyder på att sorterna svarar på kvävebehandling på liknande sätt. Samtliga huvudeffekter (raderna för N, V och B) är signifikanta. Kvadratsummorna och p-värdena tyder på att kväve förklarar mer av variationen än sort, vilket också är i linje med grafen ovan.
+
+Vid flerfaktoriella försök kan man presentera parvisa jämförelser på flera olika sätt. Man kan ange huvudeffekter för en faktor utan att ange den andra faktorn, man kan ange medelvärden för samtliga kombinationer av två faktorer, och man kan ange medelvärden uppdelat efter nivåer i en annan faktor.
+
+```{r}
+emmeans(mod_two_fact, ~ N)
+emmeans(mod_two_fact, ~ N + V)
+emmeans(mod_two_fact, ~ N | V)
+```
+
+Även här kan man göra jämförelser mellan nivåer genom att sätta `pairwise ~ N + V` eller beräkna signifikansbokstäver med `cld`. Följande kod jämför kvävenivåer *inom* sort.
+
+```{r, echo = F, eval = F}
+cld(emmeans(mod_two_fact, ~ N | V), Letters = letters)
+```
+
+::: {.exercise name="Sort uppdelat efter kvävenivå"}
+Gör lämplig ändring i koden ovan för att jämföra sorter *inom* kvävenivå. Finns det några signifikanta skillnader?
+:::
+
+::: {.exercise name="Interaktion med ett block"}
+I modellen ovan är block en *additiv* faktor - den ingår inte i någon interaktionseffekt. Vad händer med testerna om man skattar modellen där samtliga interaktioner tas med? Varför?
+
+```{r, eval = F}
+mod_two_fact <- lm(Y ~ N * V * B, data = oats)
+```
+:::
+
+## Modellantaganden och residualer
+
+Samtliga anovamodeller har samma grundläggande antaganden: feltermerna (den kvarvarande slumpmässigheten) är normalfördelade, sinsemellan oberoende, och variansen är samma för samtliga behandlingsgrupper. Antagandena testas oftast genom att titta på modellens *residualer* - skillnaden mellan det faktiska värdet och det skattade värdet. För en skattad modell kan man ta upp residualerna med `residuals()` och de skattade värdena med `fitted()`. Vi kan lägga till residualer och skattningar till datan med ett `mutate()`-steg.
+
+```{r}
+oats <- oats %>% 
+  mutate(Residualer = residuals(mod_two_fact),
+         Skattade = fitted(mod_two_fact))
+```
+
+Normalfördelning kan undersökas grafiskt med ett histogram eller en QQ-graf.
+
+```{r}
+g_hist <- ggplot(oats, aes(Residualer)) + geom_histogram(bins = 20)
+g_qq <- ggplot(oats, aes(sample = Residualer)) + geom_qq() + geom_qq_line()
+
+library(patchwork)
+g_hist + g_qq
+```
+
+Punkterna avviker något från normalfördelningen i svansarna, men det är förstås alltid en bedömningsfråga.
+
+Lika varians undersöks ofta med ett spridningsdiagram med de skattade värdena på x-axeln och residualerna på y-axeln.
+
+```{r}
+ggplot(oats, aes(x = Skattade, y = Residualer)) +
+  geom_point() +
+  geom_hline(yintercept = 0, alpha = 0.3)
+```
+
+Om datan är i linje med antaganden ska diagrammet se ut som slumpmässigt placerade punkter med ungefär lika stor spridning kring noll-linjen för samtliga nivåer på x-axeln. För det här exemplet ser det okej ut.
+
+::: {.exercise name="Bakterieimport"}
+Fliken *Bakterier* i filen *Uppgiftsdata.xlsx* innehåller data om tillväxt hos gräs efter inokulering av bakterier. Ladda ner filen och importera datan genom att fylla i koden nedan.
+
+```{r, eval = F}
+dat_bact <- read_excel("___", sheet = "Bakterier")
+```
+:::
+
+::: {.exercise name="Bakterieimport"}
+Illustrera datan med en lämplig graf, till exempel ett spridningsdiagram med `Inoculation` på x-axeln, `Dry weight` på y-axeln, småfönster efter `Cultivar` och färg efter `Block`.
+
+```{r, eval = F}
+ggplot(dat_bact, aes(x = ___, y = `___`, color = Block)) +
+  geom_point(size = 6) +
+  facet_wrap(~ ___)
+```
+
+Hur blev färgerna för blocket? Om de inte blev distinkta färger kan variabeln `Block` ha blivit inläst som numerisk. Transformera variabeln med `as.character()` och gör om grafen. Ändras färgerna?
+
+```{r, eval = F}
+dat_bact <- dat_bact %>% 
+  mutate(Block = as.character(Block))
+```
+:::
+
+::: {.exercise name="Bakteriemodell"}
+Bakteriedatan har två faktorer och en blockfaktor. Skatta en anova-modell med interaktion och block genom att fylla i stycket nedan. Ta fram anovatabell och dra en slutsats från F-testen. Ligger slutsatsen i linje med grafen?
+
+```{r, eval = F}
+mod <- lm(`___` ~ ___ * ___ + ___, data = dat_bact)
+Anova(mod)
+```
+:::
+
+::: {.exercise name="Bakteriejämförelser"}
+Använd `emmeans()` för parvisa jämförelser mellan inokuleringsmetoder. Vilka par är signifikant åtskilda?
+
+```{r, eval = F}
+emmeans(mod, pairwise ~ ___)
+```
+:::
+
+::: {.exercise name="Bakterieresidualer"}
+Vi använder den skattade modellen för att ta fram skattade värden och residualer.
+
+```{r, eval = F}
+dat_bact <- dat_bact %>% 
+  mutate(Residualer = residuals(mod),
+         Skattade = fitted(mod))
+```
+
+Använd exemplet på residualtester ovan för att undersöka antagandet om normalfördelade residualer.
+:::

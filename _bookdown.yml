@@ -7,7 +7,9 @@ rmd_files: ["index.Rmd",
 "Rmd/Datorövning-2.Rmd",
 "Rmd/Datorövning-3.Rmd",
 "Rmd/Datorövning-4.Rmd",
-"Rmd/Datorövning-5.Rmd"]
+"Rmd/Datorövning-5.Rmd",
+"Rmd/Datorövning-6.Rmd",
+"Rmd/Datorövning-7.Rmd"]
 language:
   label:
     fig: 'Figur '
@@ -19,4 +21,4 @@ language:
     exr: 'Uppgift '
     hyp: 'Lösningsförslag '
   ui:
-    chapter_name: "Kapitel "
+    chapter_name: ""
