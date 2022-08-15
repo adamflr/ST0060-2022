@@ -70,7 +70,7 @@ För bägge alternativen måste datan vara ordnad så att de två vektorerna mat
 Gör ett tillägg till ett av kodstyckena med `t.test()` för att beräkna ett ensidigt test med mothypotesen att träden ökar i höjd efter behandling. Hjälpsidan för `t.test()` kan tas fram genom att köra `?t.test()`.
 :::
 
-Konfidensintervallet beräknas från differenserna på samma sätt som vid ett stickprov med normalfördelad data. Tolkningen liknar den före ett stickprov: med 95 procents konfidens ligger den sanna skillnaden i medelvärden i intervallet.
+Konfidensintervallet beräknas från differenserna på samma sätt som vid ett stickprov med normalfördelad data. Tolkningen liknar den för ett stickprov: med 95 procents konfidens ligger den sanna skillnaden i medelvärden i intervallet.
 
 ::: {.exercise name="Lökimport"}
 Åtta monoglukosidmätningar på lök samlas in från fyra konventionella och fyra ekologiska ordlare. Resultatet finns i fliken *Lökfärg* i excelfilen *Uppgiftsdata.xlsx* på canvassidan. Ladda ner filen och importera datan genom att fylla i raden nedan.
@@ -86,9 +86,11 @@ dat_onion <- read_excel("____", sheet = "Lökfärg")
 Fyll i stycket nedan för en graf av lökdatan från föregående uppgift.
 
 ```{r, eval = F}
-dat_long <- dat_onion %>% pivot_longer(-Odlare)
+dat_long <- dat_onion %>% 
+  pivot_longer(-Odlare, names_to = "Odlingstyp", values_to = "Utfall")
+dat_long
 
-ggplot(dat_long, aes(name, value, group = Odlare)) +
+ggplot(dat_long, aes(___, ___, group = Odlare)) +
   geom_point() +
   geom_line()
 ```
@@ -334,7 +336,7 @@ dat_pot
 ```
 :::
 
-::: {.hypothesis name="Po-ta-toes-graf"}
+::: {exercise name="Po-ta-toes-graf"}
 För att göra en graf kan man pivotera datan till lång form.
 
 ```{r, eval = F}
@@ -353,7 +355,7 @@ ggplot(dat_long, aes(x = ___, y = ___, fill = ___)) +
 Finns det några tydliga skillnader mellan behandlingar?
 :::
 
-::: {.hypothesis name="Po-ta-toes-test"}
+::: {exercise name="Po-ta-toes-test"}
 Beräkna ett chi-två-test på potatisdatan för att se om det finns färgskillnader mellan behandlingarna. Formulera tydliga hypoteser och ge ett tydligt svar.
 
 ```{r, eval = F}
@@ -397,16 +399,4 @@ Använd ett z-test för att se om proportionen hemmasegrar under 1920-talet (371
 ```{r, eval = F}
 prop.test(c(___, ___), n = c(___, ___), correct = F)
 ```
-:::
-
-::: {.exercise name="Chi-två-test för hemmasegrar"}
-Använd ett chi-två-test för att se om proportionen hemmasegrar förändrats under hela tidsperioden.
-```{r, eval = F}
-dat_hemma[, c(2,3)]
-chisq.test(___)
-```
-:::
-
-::: {.exercise name="Är det ens en rimlig sak att testa"}
-Vid ett hypotestest har vi en population och ett stickprov. Är det rimligt att se alla matcher i allsvenskan som ett stickprov? Vad är i så fall populationen? Till vilka andra situationer kan resultat från den här datan generaliseras?
 :::

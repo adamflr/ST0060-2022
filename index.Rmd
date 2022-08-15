@@ -7,7 +7,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Introduktion
+# Introduktion {-}
 
 Detta dokument är en kort introduktion till R för en kurs i grundläggande statistik.
 
@@ -36,7 +36,6 @@ kable <- function(x, digits = 4){
 theme_set(theme_bw() + 
             theme(plot.background = element_rect(fill = "#f3eacb", color = "#f3eacb"),
                   text = element_text(family = "serif"),
-                  legend.background = element_rect(fill = "#f3eacb", color = "black")))
+                  legend.background = element_rect(fill = "#f3eacb", color = "#f3eacb"),
+                  legend.key = element_rect(fill = "#f3eacb", color = "#f3eacb")))
 ```
-
-          

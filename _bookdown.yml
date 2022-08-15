@@ -9,7 +9,8 @@ rmd_files: ["index.Rmd",
 "Rmd/Datorövning-4.Rmd",
 "Rmd/Datorövning-5.Rmd",
 "Rmd/Datorövning-6.Rmd",
-"Rmd/Datorövning-7.Rmd"]
+"Rmd/Datorövning-7.Rmd",
+"Rmd/Datorövning-8.Rmd"]
 language:
   label:
     fig: 'Figur '

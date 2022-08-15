@@ -1,4 +1,4 @@
-tibble(Datorövning = 1:7,
+tibble(Datorövning = 1:8,
        file = paste0("Rmd/Datorövning-", Datorövning, ".Rmd")) %>% 
   mutate(text = map(file, read_lines)) %>% 
   mutate(Exercises = map_dbl(text, ~ sum(grepl("exercise", .x))))

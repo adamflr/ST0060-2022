@@ -4,11 +4,13 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Installation
+# Installation {-}
 
 ## Inledning
 
 För att köra R-kod på sin dator krävs en installation av programspråket R. För att effektivt arbeta i R används ofta en utvecklingsmiljö (ett tilläggsprogram som på flera sätt förenklar arbetet) och här ges anvisningar till den vanligaste utvecklingsmiljön för R, som är RStudio. För att komma ingång måste man alltså installera R och RStudio.
+
+**2022-08-11.** RStudio har nyligen annonserat ett namnbyte till *Posit*. Om du läser det här bortom slutet av 2022 kommer det som sägs om RStudio alltså istället gälla Posit.
 
 ## Installation av R
 

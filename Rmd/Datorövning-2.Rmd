@@ -629,7 +629,7 @@ BBC Radio har ett program om statistik, se https://www.bbc.co.uk/programmes/p02n
 :::
 
 ::: {.exercise name="gganimate"}
-Med paketet `gganimate` (https://gganimate.com/) kan man göra animationer av ggplot-grafer. Installera paketet med `install.packages("gganimate")` och försök kör de exempel som ges på hemsidan.
+Med paketet `gganimate` (https://gganimate.com/) kan man göra animationer av ggplot-grafer. Installera paketet med `install.packages("gganimate")` och försök köra de exempel som ges på hemsidan.
 :::
 
 ::: {.exercise name="Skumma ett paper"}
