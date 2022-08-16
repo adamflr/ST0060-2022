@@ -3,7 +3,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Datorövning 5. Test för ett stickprov, icke-normalfördelad data
+# Ett stickprov av icke-normalfördelad data
 
 Datorövning 5 handlar om hypotestest och konfidensintervall för ett stickprov av icke-normalfördelad data. Efter övningen ska vi kunna
 
@@ -16,6 +16,51 @@ Datorövning 5 handlar om hypotestest och konfidensintervall för ett stickprov 
 - använda simulerad data för att förstå testens egenskaper.
 
 Om det finns tid för en bonussektion kommer vi också titta på interaktiva kartor med `leaflet`.
+
+## Repetition av datorövning 4
+
+När man startar en ny R-session bör man ladda de paket man vet kommer behövas med `library()`. Om paket inte finns installerade måste man först köra `install.packages()`.
+
+```{r}
+# install.packages("tidyverse")
+library(tidyverse)
+```
+
+I datorövning 4 tittade vi på analys av ett stickprov av normalfördelad data. Det underliggande upplägget är att vi vill säga något om en population genom att titta på ett stickprov. Ett *t-test* kan användas för att testa en given *nollhypotes*. Ett konfidensintervall ringar in populationens medelvärde med en viss konfidensgrad - oftast 95 procent. Ett normalfördelningsantagande kan undersökas med histogram eller QQ-grafer.
+
+Ta som exempel följande data på jord-pH och låt oss anta att det är relevant att testa om populationens medelvärde är 7.
+
+```{r, fig.height=2.5}
+dat_pH <- data.frame(pH = c(6.3, 6.55, 6.75, 6.4, 7.25, 6.65, 6.8, 7.3, 7.15, 6.7))
+
+ggplot(dat_pH, aes(pH, 0)) +
+  geom_point(size = 4) +
+  geom_vline(xintercept = 7, size = 5, color = "red", alpha = 0.4) +
+  theme(axis.text.y = element_blank(), 
+        axis.title.y = element_blank(), 
+        axis.ticks = element_blank())
+```
+
+Hypoteser ges av
+
+- H0: mu lika med 7
+- H1: mu ej lika med 7
+
+Testet kan genomföras med funktionen `t.test()`.
+
+```{r}
+t.test(dat_pH$pH, mu = 7)
+```
+
+Ett p-värde över 0.05 ger att vi inte förkastar nollhypotesen - den observerade skillnaden mot 7 är inte statistiskt signifikant. Konfidensintervallet ger att populationens medelvärde ligger mellan 6.54 och 7.03 med 95 procents konfidens.
+
+En QQ-graf kan visa om det finns några avvikelser från normalantagandet. Med små datamängder är det oftast svårt att se några tydliga tecken på icke-normalitet.
+
+```{r, fig.height=3, fig.width=3}
+ggplot(dat_pH, aes(sample = pH)) +
+  geom_qq() +
+  geom_qq_line()
+```
 
 ## Proportioner från binär data
 

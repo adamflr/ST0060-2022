@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Installation {-}
+# Installation av R och RStudio {-}
 
 ## Inledning
 

@@ -3,7 +3,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Datorövning 1. Datahantering och grafer
+# Datahantering och grafer
 
 Datorövning 1 handlar om grunderna till R. Efter övningen ska vi kunna
 

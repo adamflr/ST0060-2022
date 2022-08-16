@@ -3,7 +3,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Datorövning 2. Beskrivande statistik
+# Beskrivande statistik
 
 Datorövning 2 handlar om beräkning av beskrivande statistik i R. Efter övningen ska vi kunna
 

@@ -3,7 +3,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Datorövning 4. t-test och konfidensintervall för ett stickprov
+# Ett stickprov av normalfördelad data
 
 Datorövning 4 handlar om hypotestest och konfidensintervall för ett stickprov av normalfördelad data. Efter övningen ska vi kunna
 
@@ -12,6 +12,41 @@ Datorövning 4 handlar om hypotestest och konfidensintervall för ett stickprov 
 - beräkna och tolka ett konfidensintervall för normalfördelad data,
 
 - använda simulerad data för att förstå t-testets egenskaper.
+
+## Repetition av datorövning 3
+
+När man startar en ny R-session bör man ladda de paket man vet kommer behövas med `library()`. Om paket inte finns installerade måste man först köra `install.packages()`.
+
+```{r}
+# install.packages("tidyverse")
+library(tidyverse)
+```
+
+I datorövning 3 tittade vi på funktioner för att ta fram sannolikheter och slumptal från någon given fördelning. 
+
+Sannolikhetsfunktionen - som anger sannolikheten för ett specifikt utfall - kan i R tas fram med funktioner som börjar med `d`, till exempel `dbinom()` och `dpois()`. För en kontinuerlig slumpvariabel ger `d` istället täthetsfunktionens värde, till exempel `dnorm()` för normalfördelningen.
+
+Binomialfördelningen är en fördelning för summan av positiva utfall vid n upprepningar av likadana binära slumphändelser. Fördelningens parametrar är n - antalet försök, och p - sannolikheten för varje enskilt försök. Ett exempel kan vara att man kastar en tiosidig tärning fem gånger och tittar på antalet ettor. Följande beräkning ger sannolikheten att få tre ettor vid fem kast. 
+
+```{r}
+dbinom(3, 5, prob = 0.1)
+```
+
+Poissonfördelning är en fördelning för antalet händelser om händelsen potentiellt kan inträffa väldigt ofta men gör så med låg sannolikhet. Fördelningen har en parameter, lambda, och vanliga exempel är observationer av ovanliga arter och olika typer av sällsynta händelser. Säg som exempel att någon art vanligen observeras tio gånger per år i en viss region. Sannolikheten för exakt fem observationer ett visst år ges av
+
+```{r}
+dpois(5, lambda = 10)
+```
+
+Fördelningsfunktionen - som anger sannolikhet under eller lika med ett givet värde - tas fram med funktioner som börjar på `p`, till exempel `pbinom()`, `ppois()` och `pnorm()`. Fördelningsfunktionen är särskilt användbar för normalfördelningen. Om en plantas höjd tros vara normalfördelad med medelvärde 10 cm och standardavvikelse 2, kan man beräkna sannolikheten att en slumpmässigt vald planta är över 13 cm.
+
+```{r}
+1 - pnorm(13, mean = 10, sd = 2)
+```
+
+Eftersom `pnorm()` ger sannolikheten *under* 13, ger ett minus den sannolikheten värdet *över* 13.
+
+Slumputfall kan beräknas med funktionen `sample()`, till exempel `sample(1:6, 10000000, replace = T)` för tio miljoner tärningskast. För specifika fördelningar finns särskilda funktioner som `rbinom()`, `rpois()` och `rnorm()`.
 
 ## Test av medelvärde för normalfördelad data
 
@@ -38,8 +73,8 @@ I grafen ser vi att värdena ligger jämt spridda kring 50, så 50 är nog gansk
 
 Vi vill testa om medelskörden är skild från 50, så hypoteser ges av
 
-H0: mu lika med 50
-H1: mu ej lika med 50
+- H0: mu lika med 50
+- H1: mu ej lika med 50
 
 Alternativhypotesen är tvåsidig - vi tittar både på möjligheten att populationsmedelvärdet är större och 50 på möjligheten att det är mindre.
 

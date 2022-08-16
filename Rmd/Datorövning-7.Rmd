@@ -3,9 +3,9 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Datorövning 7. Anova-modellen och -tabellen
+# Variansanalys
 
-Datorövning 7 handlar om anova-modellen och Anova-tabellen. Efter övningen ska vi kunna
+Datorövning 7 handlar om variansanalys. Efter övningen ska vi kunna
 
 - beräkna en anova-modell i R,
 
@@ -13,7 +13,99 @@ Datorövning 7 handlar om anova-modellen och Anova-tabellen. Efter övningen ska
 
 - göra lämpliga tester av modellantaganden,
 
-- göra parvisa jämförelser mellan behandlingar
+- göra parvisa jämförelser mellan behandlingar.
+
+
+## Repetition av datorövning 6
+
+När man startar en ny R-session bör man ladda de paket man vet kommer behövas med `library()`. Om paket inte finns installerade måste man först köra `install.packages()`.
+
+```{r}
+# install.packages("tidyverse")
+library(tidyverse)
+```
+
+I datorövning 6 tittade vi på tester för två stickprov. För normalfördelad data kan man då använda ett t-test för två stickprov (för två matchade stickprov eller för två oberoende stickprov beroende på situation) för data med utfall i två eller flera kategorier kan man använda ett z-test för två stickprov eller ett chi-två-test för en korstabell.
+
+Ett t-test för matchade stickprov anvnäds när de två grupper man jämför är matchade så att en observation i den ena gruppen är kopplad till en observation i den andra gruppen. Ett vanligt exempel är mätningar över tid där man mäter ett objekt före och efter en behandling; man har då två grupper (före och efter) och varje observation i före-gruppen är kopplad till en mätning av samma objekt i efter-gruppen). Ett t-test för oberoende stickprov används om man inte har matchade stickprov, det vill säga då det inte finns någon koppling mellan behandlinggrupperna.
+
+Ta som exempel följande fiskefångster för sex båtar från två regioner och två fiskearter.
+
+```{r}
+dat_fish <- data.frame(Vessel = c("A", "B", "C", "D", "E", "F"),
+                       Region = c("N", "N", "N", "S", "S", "S"),
+                       Species1 = c(115.7, 98.5, 82.1, 89.2, 95.7, 99.4),
+                       Species2 = c(122.8, 105.3, 99.8, 106.8, 114, 102.7))
+```
+
+Vi vill här testa om det finns en skillnad mellan arter och om det finns skillnad mellan regioner. 
+
+```{r, fig.height=3}
+dat_long <- dat_fish %>% 
+  pivot_longer(-c(Vessel, Region), names_to = "Species", values_to = "Catch")
+ggplot(dat_long, aes(Species, Catch, group = Vessel)) + 
+  geom_point() + 
+  geom_line() +
+  labs(title = "Fångster av två arter", subtitle = "Linje sammanbinder observationer från samma fartyg")
+```
+
+```{r, fig.height=2}
+ggplot(dat_fish, aes(Species1, Region)) + 
+  geom_point() +
+  labs(title = "Fångster i två regioner")
+```
+
+För arterna har vi matchad data - varje observation av den ena arten är kopplad till en observation från den andra arten eftersom den kommer från samma båt - och vi kan testa om medelfångsterna av de två arterna är lika med ett t-test. Hypoteserna ges av 
+
+- H0: populationsmedelvärdet av fångster för art 1 är lika med det för art 2,
+- H1: populationsmedelvärdena är ej lika.
+
+I R kan ett test för matchad data genomföras med `t.test()` och argumentet `paired`, eller genom att beräkna differensen per båt och göra ett t-test för ett stickprov.
+
+```{r}
+t.test(dat_fish$Species1, dat_fish$Species2, paired = T)
+
+# Alternativt
+# t.test(dat_fish$Species1 - dat_fish$Species2)
+```
+
+Det beräknade p-värdet ställs mot en signifikansnivå, vanligen fem procent, och om p-värdet är under signifikansnivån förkastar vi nollhypotesen. I det här exemplet tyder på värdet på att nollhypotesen inte stämmer - en art är vanligare än den andra.
+
+För att jämföra regioner kan vi göra ett t-test för två oberoende stickprov. Hypoteser ges av 
+
+- H0: populationsmedelvärdet av fångster är lika mellan regioner,
+- H1: populationsmedelvärdet av fångster är ej lika mellan regioner.
+
+Testet kan genomföras med `t.test()` och kan antingen göras med ett antagande om lika varianser (vilket motsvarar det som görs för hand under kursen) eller utan det antagandet. Variabler kan anges med en formel som `Species1 ~ Group`, vilket vi kan tänka på som värden för art 1 uppdelat efter grupp.
+
+```{r}
+t.test(Species1 ~ Region, data = dat_fish, var.equal = T)
+```
+
+Ett högt p-värde tyder på att det inte finns någon skillnad i fångst mellan regioner.
+
+För data där utfallen är två eller flera kategorier kan ett chi-två-test testa om det finns något samband mellan två variabler. Följande data anger vilka partier ett urval väljare från tre kommuner planerar rösta på i nästa riksdagsval.
+
+```{r}
+dat_parti <- data.frame(Kommun = c("Malmö", "Lund", "Kävlinge"),
+                        S = c(54, 102, 40),
+                        M = c(30, 98, 53),
+                        MP = c(7, 50, 5))
+dat_parti
+```
+
+För att testa om det finns något samband mellan kommun och parti sätter vi upp hypoteserna
+
+- H0: det finns inget samband mellan parti och kommun (ingen skillnad mellan kommuner),
+- H1: det finns något samband mellan parti och kommun.
+
+Detta kan testas med ett chi-två-test med funktionen `chisq.test()`. Som argument ges den numeriska delen av korstabellen - vi tar alltså bort den första kolumnen för kommun.
+
+```{r}
+chisq.test(dat_parti[, -1])
+```
+
+Det låga p-värdet på 0.000037 ger att vi förkastar nollhypotesen och drar slutsatsen att det finns ett samband mellan kommun och parti.
 
 ## Allmänt
 

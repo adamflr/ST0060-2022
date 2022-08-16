@@ -93,3 +93,5 @@ tabs <- html %>% html_table()
 tab <- tabs[[1]] %>% select(-2)
 
 tab %>% count(Director, sort = T)
+
+tab %>% filter(grepl("ergman", Director)) %>% pull(Title)

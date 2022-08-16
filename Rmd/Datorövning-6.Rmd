@@ -3,7 +3,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Datorövning 6. Test för två stickprov
+# Test för två stickprov
 
 Datorövning 6 handlar om hypotestest och konfidensintervall för jämförelse av två stickprov. Efter övningen ska vi kunna genomföra och tolka
 
@@ -14,6 +14,52 @@ Datorövning 6 handlar om hypotestest och konfidensintervall för jämförelse a
 - chi-två-test för jämförelse fördelningar mellan två eller flera grupper,
 
 - konfidensintervall för skillnaden mellan två medelvärden eller två proportioner.
+
+## Repetition av datorövning 5
+
+När man startar en ny R-session bör man ladda de paket man vet kommer behövas med `library()`. Om paket inte finns installerade måste man först köra `install.packages()`.
+
+```{r}
+# install.packages("tidyverse")
+library(tidyverse)
+```
+
+I datorövning 5 tittade vi på tester som inte bygger på normalfördelning: dels tester för proportioner, där varje observation är något av två möjliga utfall; dels tester för kategoridata, där varje observation har ett ufall i någon av flera kategorier.
+
+Proportioner kan testas med ett z-test. Säg att man testar om en doft har en effekt på en insekt, man skickar 20 insekter i ett y-rör och 16 går mot doften. Hypoteserna ges av
+
+- H0: proportionen i populationen är 0.5,
+- H1: proportionen i populationen är inte 0.5.
+
+I R genomförs ett z-test med `prop.test()`. Funktionen gör en korrektion som ger ett något bättre test än det man ofta beräknar för hand. Korrektionen kan sättas av med argumentet `correct`.
+
+```{r}
+prop.test(x = 16, n = 20, p = 0.5, correct = F)
+```
+
+Ett lågt p-värde tyder på en signifikant skillnad från 0.5.
+
+För att få samma konfidensintervall som det man beräknar för hand kan man använda `binom.asymp()` från paketet `binom`.
+
+```{r}
+library(binom)
+binom.asymp(16, 20)
+```
+
+Populationens proportion ligger med 95 procents konfidens mellan 0.62 och 0.98.
+
+Om utfallen är mer än två kategorier kan en hypotes om datans fördelning testas med ett goodness-of-fit-test, vilket är ett slags chi-två-test. Testet bygger på att observerade antal (O) ställs mot förväntade antal (E). I R genomförs ett chi-två-test med `chisq.test()`. Säg som exempel att man studerar fågelpopulationer genom en observationsstudie. Observerade antal av fyra fågelarter är 102, 53, 75 och 12 och de förväntade andelarna av arterna är 50, 15, 25 och 10 procent. Testets hypoteser ges av
+
+- H0: proportionerna följer den förväntade fördelningen,
+- H1: proportionerna följer inte den förväntade fördelningen,
+
+och testet ges av
+
+```{r}
+chisq.test(c(102, 53, 75, 12), p = c(0.5, 0.15, 0.25, 0.1))
+```
+
+Ett lågt p-värde tyder på att de antagna proportionerna inte stämmer. Antalet frihetsgrader ges i ett chi-två-test av antalet klasser minus antalet skattade parametrar minus ett. I det här fallet finns fyra klasser och ingen skattad parameter.
 
 ## Två stickprov och normalfördelad data
 
