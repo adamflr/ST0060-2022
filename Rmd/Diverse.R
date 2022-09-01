@@ -1,7 +1,36 @@
+library(tidyverse)
+
+# Antal övningar
 tibble(Datorövning = 1:8,
        file = paste0("Rmd/Datorövning-", Datorövning, ".Rmd")) %>% 
   mutate(text = map(file, read_lines)) %>% 
   mutate(Exercises = map_dbl(text, ~ sum(grepl("exercise", .x))))
+
+# Funktioner
+extract_funs <- function(file){
+  text <- read_lines(file)
+  chunks <- cumsum(grepl("```", text))
+  tibble(text, chunks) %>% 
+    mutate(even = chunks %% 2) %>% 
+    filter(even == 1) %>% 
+    filter(!grepl("```", text)) %>% 
+    filter(grepl("\\(", text)) %>% 
+    separate(text, c("name"), sep = "\\(", extra = "drop") %>% 
+    mutate(last_name = map_chr(name, ~ strsplit(.x, " ")[[1]] %>% rev() %>% `[`(1))) %>% 
+    mutate(last_name = paste0(last_name, "()")) %>% 
+    pull(last_name) %>% 
+    unique() %>% 
+    sort()
+}
+
+tab_funs <- tibble(Datorövning = 1:8,
+       file = paste0("Rmd/Datorövning-", Datorövning, ".Rmd")) %>% 
+  mutate(text = map(file, extract_funs)) %>% 
+  unnest(cols = text) %>% 
+  select(text) %>% 
+  distinct(text) %>% 
+  arrange(text)
+
 
 # Allsvenskan. Poisson ----
 library(tidyverse)

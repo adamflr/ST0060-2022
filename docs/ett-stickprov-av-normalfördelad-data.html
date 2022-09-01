@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2022-08-16" />
+<meta name="date" content="2022-08-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,13 +51,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -226,6 +219,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="test-för-två-stickprov.html"><a href="test-för-två-stickprov.html#z-test-och-konfidensintervall-för-två-proportioner"><i class="fa fa-check"></i><b>6.3</b> z-test och konfidensintervall för två proportioner</a></li>
 <li class="chapter" data-level="6.4" data-path="test-för-två-stickprov.html"><a href="test-för-två-stickprov.html#chi-två-test-för-korstabeller"><i class="fa fa-check"></i><b>6.4</b> Chi-två-test för korstabeller</a></li>
+<li class="chapter" data-level="6.5" data-path="test-för-två-stickprov.html"><a href="test-för-två-stickprov.html#bonus.-bilder-i-r"><i class="fa fa-check"></i><b>6.5</b> Bonus. Bilder i R</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="variansanalys.html"><a href="variansanalys.html"><i class="fa fa-check"></i><b>7</b> Variansanalys</a>
 <ul>
@@ -235,12 +229,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4" data-path="variansanalys.html"><a href="variansanalys.html#variansanalys.-en-faktor-med-block"><i class="fa fa-check"></i><b>7.4</b> Variansanalys. En faktor med block</a></li>
 <li class="chapter" data-level="7.5" data-path="variansanalys.html"><a href="variansanalys.html#variansanalys.-två-faktorer-med-block"><i class="fa fa-check"></i><b>7.5</b> Variansanalys. Två faktorer med block</a></li>
 <li class="chapter" data-level="7.6" data-path="variansanalys.html"><a href="variansanalys.html#modellantaganden-och-residualer"><i class="fa fa-check"></i><b>7.6</b> Modellantaganden och residualer</a></li>
+<li class="chapter" data-level="7.7" data-path="variansanalys.html"><a href="variansanalys.html#bonus.-statistik-för-ekologi"><i class="fa fa-check"></i><b>7.7</b> Bonus. Statistik för ekologi</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html"><i class="fa fa-check"></i><b>8</b> Regression och korrelation</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html#repetition-av-datorövning-7"><i class="fa fa-check"></i><b>8.1</b> Repetition av datorövning 7</a></li>
 <li class="chapter" data-level="8.2" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html#regression"><i class="fa fa-check"></i><b>8.2</b> Regression</a></li>
 <li class="chapter" data-level="8.3" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html#korrelation"><i class="fa fa-check"></i><b>8.3</b> Korrelation</a></li>
+<li class="chapter" data-level="8.4" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html#bonus.-skrapa-data-från-webbsidor"><i class="fa fa-check"></i><b>8.4</b> Bonus. Skrapa data från webbsidor</a></li>
 </ul></li>
 </ul>
 
@@ -305,7 +301,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="ett-stickprov-av-normalfördelad-data.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(x, <span class="dv">0</span>)) <span class="sc">+</span> </span>
 <span id="cb253-2"><a href="ett-stickprov-av-normalfördelad-data.html#cb253-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb253-3"><a href="ett-stickprov-av-normalfördelad-data.html#cb253-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">50</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-170-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-166-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>I grafen ser vi att värdena ligger jämt spridda kring 50, så 50 är nog ganska rimligt som medelvärde, men låt oss göra ett formellt test. Ett t-test bygger, som alla hypotestest, på en serie steg:</p>
 <ol style="list-style-type: decimal">
 <li>sätt upp en <em>nollhypotes</em> och en <em>alternativhypotes</em>,</li>
@@ -343,16 +339,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb259-4"><a href="ett-stickprov-av-normalfördelad-data.html#cb259-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb259-5"><a href="ett-stickprov-av-normalfördelad-data.html#cb259-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_t, <span class="fu">aes</span>(x, p)) <span class="sc">+</span></span>
 <span id="cb259-6"><a href="ett-stickprov-av-normalfördelad-data.html#cb259-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-172-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-168-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="ett-stickprov-av-normalfördelad-data.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_t, <span class="fu">aes</span>(x, P)) <span class="sc">+</span></span>
 <span id="cb260-2"><a href="ett-stickprov-av-normalfördelad-data.html#cb260-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-172-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-168-2.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Nästa steg i ett hypotestest är att ta fram ett p-värdet. P-värdet kan illustreras som ytan under t-fördelning <em>bortom</em> test-värdet. I ett tvåsidigt test tar vi med bägge svansarna.</p>
 <div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="ett-stickprov-av-normalfördelad-data.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_t) <span class="sc">+</span></span>
 <span id="cb261-2"><a href="ett-stickprov-av-normalfördelad-data.html#cb261-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(x, p)) <span class="sc">+</span></span>
 <span id="cb261-3"><a href="ett-stickprov-av-normalfördelad-data.html#cb261-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> p), <span class="at">data =</span> dat_t <span class="sc">%&gt;%</span> <span class="fu">filter</span>(x <span class="sc">&gt;</span> <span class="fu">abs</span>(t_value)), <span class="at">fill =</span> <span class="st">&quot;salmon&quot;</span>) <span class="sc">+</span></span>
 <span id="cb261-4"><a href="ett-stickprov-av-normalfördelad-data.html#cb261-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> p), <span class="at">data =</span> dat_t <span class="sc">%&gt;%</span> <span class="fu">filter</span>(x <span class="sc">&lt;</span> <span class="sc">-</span><span class="fu">abs</span>(t_value)), <span class="at">fill =</span> <span class="st">&quot;salmon&quot;</span>)</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-173-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-169-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>De röda ytorna i <em>svansarna</em> motsvarar p-värdet. De anger sannolikheten att få ett större t-värde än det vi fått, under antagandet att nollhypotesen stämmer. Vi kan beräkna p-värdet med <code>pt()</code>. För ett tvåsidigt test multipliceras värdet med 2.</p>
 <div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="ett-stickprov-av-normalfördelad-data.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>(<span class="sc">-</span><span class="fu">abs</span>(t_value), <span class="dv">7</span>) <span class="co"># Tvåsidigt p-värde</span></span></code></pre></div>
 <pre><code>## [1] 0.2660402</code></pre>
@@ -456,7 +452,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb281-2"><a href="ett-stickprov-av-normalfördelad-data.html#cb281-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(x, <span class="dv">0</span>)) <span class="sc">+</span></span>
 <span id="cb281-3"><a href="ett-stickprov-av-normalfördelad-data.html#cb281-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb281-4"><a href="ett-stickprov-av-normalfördelad-data.html#cb281-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;errorbar&quot;</span>, <span class="at">xmin =</span> interval[<span class="dv">1</span>], <span class="at">xmax =</span> interval[<span class="dv">2</span>], <span class="at">y =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">width =</span> <span class="fl">0.1</span>)</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-184-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-180-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-101" class="exercise"><strong>Uppgift 4.15  (Illustration av smältdata) </strong></span>Använd exempelillustrationen för havredata till en liknande illustration av smältpunktsdatan.</p>
 </div>
@@ -465,22 +461,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.4</span> Normalfördelad data och centrala gränsvärdesatsen<a href="ett-stickprov-av-normalfördelad-data.html#normalfördelad-data-och-centrala-gränsvärdesatsen" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Eftersom t-testet bygger på att data är normalfördelad är det förstås bra att kunna undersöka om det antagandet stämmer. Ett sätt är att göra ett histogram över datan - om den underliggande variabeln är normalfördelad bör stickprovet ge den typiska klockformen. Det här kräver dock ganska mycket data. Ta ett histogram för havredatan som exempel</p>
 <div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="ett-stickprov-av-normalfördelad-data.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(x)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">5</span>)</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-185-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-181-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Uppenbarligen helt meningslöst. Låt oss titta på histogram över genererad normalfördelad data.</p>
 <div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="ett-stickprov-av-normalfördelad-data.html#cb283-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
 <span id="cb283-2"><a href="ett-stickprov-av-normalfördelad-data.html#cb283-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(n)), <span class="at">bins =</span> <span class="dv">30</span>)</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-186-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-182-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-102" class="exercise"><strong>Uppgift 4.16  (Histogram för normalfördelning) </strong></span>Testa koden ovan för lite olika värden på <code>n</code>. Det kan vara nyttigt att sätta antalet staplar <code>bins</code> för att få ett bättre histogram. Hur stort måste n vara för att ge en karaktäristisk klockform för histogrammet?</p>
 </div>
 <p>Ett annat vanligt alternativ för att grafisk undersöka om data följer en ungefärlig normalfördelning är en QQ-graf (<em>QQ-plot</em>). En qq-graf är ett spridningsdiagram med teoretiska kvantiler på en axel och datans kvantiler på den andra axeln. Om data perfekt följer en normalfördelning kommer grafen visa en rak diagonal linje. En QQ-graf kan tas fram med <code>qqnorm()</code> eller <code>geom_qq()</code> i en ggplot. En diagonal linje för jämförelse kan läggas till med <code>geom_qq_line()</code>.</p>
 <div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="ett-stickprov-av-normalfördelad-data.html#cb284-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="at">sample =</span> x)) <span class="sc">+</span> <span class="fu">geom_qq</span>() <span class="sc">+</span> <span class="fu">geom_qq_line</span>()</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-187-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-183-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Punkterna ligger nära linjen. Vi kan återigen demonstrera med lite genererad data.</p>
 <div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="ett-stickprov-av-normalfördelad-data.html#cb285-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
 <span id="cb285-2"><a href="ett-stickprov-av-normalfördelad-data.html#cb285-2" aria-hidden="true" tabindex="-1"></a>dat_norm <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(n))</span>
 <span id="cb285-3"><a href="ett-stickprov-av-normalfördelad-data.html#cb285-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_norm, <span class="fu">aes</span>(<span class="at">sample =</span> x)) <span class="sc">+</span> <span class="fu">geom_qq</span>() <span class="sc">+</span> <span class="fu">geom_qq_line</span>()</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-188-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-184-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-103" class="exercise"><strong>Uppgift 4.17  (Histogram för normalfördelning) </strong></span>Funktionen <code>runif()</code> ger slumpmässiga värden mellan 0 och 1. Testa att ändra i kodstycket ovan så att slumptal genereras med <code>runif()</code> istället för <code>rnorm()</code>. Hur påverkar det QQ-grafen?</p>
 </div>
@@ -493,9 +489,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb286-6"><a href="ett-stickprov-av-normalfördelad-data.html#cb286-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">x =</span> <span class="fu">mean</span>(x))</span>
 <span id="cb286-7"><a href="ett-stickprov-av-normalfördelad-data.html#cb286-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb286-8"><a href="ett-stickprov-av-normalfördelad-data.html#cb286-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_sim_unif, <span class="fu">aes</span>(x)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">50</span>)</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-189-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-185-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="ett-stickprov-av-normalfördelad-data.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_sim_unif, <span class="fu">aes</span>(<span class="at">sample =</span> x)) <span class="sc">+</span> <span class="fu">geom_qq</span>() <span class="sc">+</span> <span class="fu">geom_qq_line</span>()</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-189-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-185-2.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Fördelningen för summan är inte likformig, men inte heller särskilt normalfördelad. Vad händer om vi ökar antal termer i summan?</p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-104" class="exercise"><strong>Uppgift 4.18  (Antalet observationer för normalfördelning) </strong></span>Vad måste ändras i koden ovan för beräkna medelvärdet av tio observationer? Följer de medelvärdena en ungefärlig normalfördelning? Vad är det lägsta antalet observationer som ger ungefärligen normalfördelade medelvärden?</p>
@@ -509,9 +505,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb288-6"><a href="ett-stickprov-av-normalfördelad-data.html#cb288-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">x =</span> <span class="fu">mean</span>(x))</span>
 <span id="cb288-7"><a href="ett-stickprov-av-normalfördelad-data.html#cb288-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb288-8"><a href="ett-stickprov-av-normalfördelad-data.html#cb288-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_sim_unif, <span class="fu">aes</span>(x)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>)</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-190-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-186-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="ett-stickprov-av-normalfördelad-data.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_sim_unif, <span class="fu">aes</span>(<span class="at">sample =</span> x)) <span class="sc">+</span> <span class="fu">geom_qq</span>() <span class="sc">+</span> <span class="fu">geom_qq_line</span>()</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-190-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-186-2.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Histogrammet visar på en typisk klockform och punkterna följer linjen <em>ungefärligt</em>. QQ-grafens trappeffekt är typisk för diskret data. Det här tyder alltså på att t-testet är ett acceptabelt alternativ om man har en poissonfördelning med lambda runt tio och gör tio upprepningar.</p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-105" class="exercise"><strong>Uppgift 4.19  (Svag normalapproximation) </strong></span>Testa att minska värdena på n och lambda. Vad är de lägsta värdena som ger ett histogram med en symmetrisk fördelning och punkter nära linjen i QQ-grafen?</p>
@@ -529,7 +525,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb290-10"><a href="ett-stickprov-av-normalfördelad-data.html#cb290-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb290-11"><a href="ett-stickprov-av-normalfördelad-data.html#cb290-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
 <span id="cb290-12"><a href="ett-stickprov-av-normalfördelad-data.html#cb290-12" aria-hidden="true" tabindex="-1"></a>g1 <span class="sc">+</span> g3 <span class="sc">+</span> g5 <span class="sc">+</span> g2 <span class="sc">+</span> g4 <span class="sc">+</span> g6</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-191-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-187-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>I grafen har vi den ursprungliga variabeln (befolkning per land 2007), den kvadratrot-transformerade variabeln (<code>sqrt()</code>) och den log-transformerade variabeln (<code>log10()</code>). De två första fallen påverkas kraftigt av extremvärden och är klart icke-normala medan den log-transformerade variabeln ger en ungefärlig normalkurva och följer diagonalen väl i QQ-grafen.</p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-106" class="exercise"><strong>Uppgift 4.20  (Transformera medellivslängd) </strong></span>Använd kodstycket ovan som mall och ta fram grafer för medellivslängd (<code>lifeExp</code>) istället för befolkningsstorlek (<code>pop</code>). Visar grafen samma mönster som för befolkningsdatan?</p>
@@ -544,13 +540,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  One Sample t-test
 ## 
 ## data:  dat_sim$x
-## t = -3.2635, df = 9, p-value = 0.009783
+## t = -2.0629, df = 9, p-value = 0.06915
 ## alternative hypothesis: true mean is not equal to 7
 ## 95 percent confidence interval:
-##  3.777177 6.415950
+##  2.108416 7.225300
 ## sample estimates:
 ## mean of x 
-##  5.096563</code></pre>
+##  4.666858</code></pre>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-107" class="exercise"><strong>Uppgift 4.21  (Upprepad simulering) </strong></span>Kör de två raderna i stycket ovan ett tiotal gånger. Du bör se att man ibland förkastar nollhypotesen trots att den ska stämma. Kan du få en känsla för hur stor andel av gångerna man felaktigt förkastar?</p>
 </div>
@@ -567,11 +563,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="ett-stickprov-av-normalfördelad-data.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_sim) <span class="sc">+</span></span>
 <span id="cb294-2"><a href="ett-stickprov-av-normalfördelad-data.html#cb294-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(t_value, <span class="at">y =</span> ..density..), <span class="at">bins =</span> <span class="dv">50</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
 <span id="cb294-3"><a href="ett-stickprov-av-normalfördelad-data.html#cb294-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_function</span>(<span class="at">fun =</span> dt, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">df =</span> <span class="dv">9</span>), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-194-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-190-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Den teoretiska t-fördelning passar histogrammet nästan perfekt.</p>
 <p>Vidare ska p-värdet vara under fem procent fem procent av gångerna.</p>
 <div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="ett-stickprov-av-normalfördelad-data.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(dat_sim<span class="sc">$</span>p_value <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code></pre></div>
-<pre><code>## [1] 0.047</code></pre>
+<pre><code>## [1] 0.052</code></pre>
 <p>Även det stämmer någorlunda väl. Det här innebär alltså att om man har en signifikansnivå på fem procent kommer man förkasta nollhypotesen fem procent av gångerna även om nollhypotesen stämmer. Det kallas ett <em>falskt positivt</em> utfall.</p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-108" class="exercise"><strong>Uppgift 4.22  (Simulerade konfidensintervall) </strong></span>Hur många av de simulerade konfidensintervallen täcker värdet 7?</p>

@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2022-08-16" />
+<meta name="date" content="2022-08-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,13 +51,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -226,6 +219,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="test-för-två-stickprov.html"><a href="test-för-två-stickprov.html#z-test-och-konfidensintervall-för-två-proportioner"><i class="fa fa-check"></i><b>6.3</b> z-test och konfidensintervall för två proportioner</a></li>
 <li class="chapter" data-level="6.4" data-path="test-för-två-stickprov.html"><a href="test-för-två-stickprov.html#chi-två-test-för-korstabeller"><i class="fa fa-check"></i><b>6.4</b> Chi-två-test för korstabeller</a></li>
+<li class="chapter" data-level="6.5" data-path="test-för-två-stickprov.html"><a href="test-för-två-stickprov.html#bonus.-bilder-i-r"><i class="fa fa-check"></i><b>6.5</b> Bonus. Bilder i R</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="variansanalys.html"><a href="variansanalys.html"><i class="fa fa-check"></i><b>7</b> Variansanalys</a>
 <ul>
@@ -235,12 +229,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4" data-path="variansanalys.html"><a href="variansanalys.html#variansanalys.-en-faktor-med-block"><i class="fa fa-check"></i><b>7.4</b> Variansanalys. En faktor med block</a></li>
 <li class="chapter" data-level="7.5" data-path="variansanalys.html"><a href="variansanalys.html#variansanalys.-två-faktorer-med-block"><i class="fa fa-check"></i><b>7.5</b> Variansanalys. Två faktorer med block</a></li>
 <li class="chapter" data-level="7.6" data-path="variansanalys.html"><a href="variansanalys.html#modellantaganden-och-residualer"><i class="fa fa-check"></i><b>7.6</b> Modellantaganden och residualer</a></li>
+<li class="chapter" data-level="7.7" data-path="variansanalys.html"><a href="variansanalys.html#bonus.-statistik-för-ekologi"><i class="fa fa-check"></i><b>7.7</b> Bonus. Statistik för ekologi</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html"><i class="fa fa-check"></i><b>8</b> Regression och korrelation</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html#repetition-av-datorövning-7"><i class="fa fa-check"></i><b>8.1</b> Repetition av datorövning 7</a></li>
 <li class="chapter" data-level="8.2" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html#regression"><i class="fa fa-check"></i><b>8.2</b> Regression</a></li>
 <li class="chapter" data-level="8.3" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html#korrelation"><i class="fa fa-check"></i><b>8.3</b> Korrelation</a></li>
+<li class="chapter" data-level="8.4" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html#bonus.-skrapa-data-från-webbsidor"><i class="fa fa-check"></i><b>8.4</b> Bonus. Skrapa data från webbsidor</a></li>
 </ul></li>
 </ul>
 
@@ -425,7 +421,7 @@ Formulera hypoteser och genomför testet med <code>t.test()</code>. Lös gärna 
 <p>Datan kan illustreras med ett enkelt punktdiagram.</p>
 <div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="test-för-två-stickprov.html#cb387-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_berry, <span class="fu">aes</span>(Behandling, Vikt)) <span class="sc">+</span></span>
 <span id="cb387-2"><a href="test-för-två-stickprov.html#cb387-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-250-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-246-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Ett t-test för två oberoende stickprov har nollhypotesen att grupperna har samma populationsmedelvärde och alternativhypotesen att populationsmedelvärdena är skilda (för det tvåsidiga fallet):</p>
 <p>H0: mu_A är lika med mu_B
 H1: mu_A är ej lika med mu_B</p>
@@ -576,7 +572,7 @@ H1: proportion A är skild från proportion B</p>
 <div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="test-för-två-stickprov.html#cb408-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_titanic, <span class="fu">aes</span>(Class, Freq, <span class="at">fill =</span> Survived)) <span class="sc">+</span></span>
 <span id="cb408-2"><a href="test-för-två-stickprov.html#cb408-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_fill</span>(), <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
 <span id="cb408-3"><a href="test-för-två-stickprov.html#cb408-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;red4&quot;</span>, <span class="st">&quot;white&quot;</span>))</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-264-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-260-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Argumentet <code>position</code> i <code>geom_bar</code> används för att skapa proportionella staplar.</p>
 <p>Ett chi-två-test på en korstabell har nollhypotesen att det inte finns något samband mellan variabeln för rader och variabeln för kolumner. Antal frihetsgrader ges av antal rader minus ett gånger antal kolumner minus ett. Testet kan enkelt göras med <code>chisq.test()</code>. Som ingångsvärde kan man plocka ut kolumnerna med numeriska värden genom hakparenteser.</p>
 <div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="test-för-två-stickprov.html#cb409-1" aria-hidden="true" tabindex="-1"></a>dat_wide[, <span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>] <span class="co"># De två numeriska kolumnerna</span></span></code></pre></div>
@@ -632,23 +628,23 @@ H1: proportion A är skild från proportion B</p>
 <span id="cb420-3"><a href="test-för-två-stickprov.html#cb420-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb420-4"><a href="test-för-två-stickprov.html#cb420-4" aria-hidden="true" tabindex="-1"></a><span class="co"># dat_pot &lt;- read_csv(&quot;https://raw.githubusercontent.com/adamflr/ST0060-2022/main/Data/Uppgiftsdata/Uppgift_Po-ta-toes.csv&quot;)</span></span></code></pre></div>
 </div>
-<p>::: {exercise name=“Po-ta-toes-graf”}
-För att göra en graf kan man pivotera datan till lång form.</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-153" class="exercise"><strong>Uppgift 6.17  (Po-ta-toes-graf) </strong></span>För att göra en graf kan man pivotera datan till lång form.</p>
 <div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="test-för-två-stickprov.html#cb421-1" aria-hidden="true" tabindex="-1"></a>dat_long <span class="ot">&lt;-</span> dat_pot <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="sc">-</span>Färg, <span class="at">values_to =</span> <span class="st">&quot;Antal&quot;</span>, <span class="at">names_to =</span> <span class="st">&quot;Behandling&quot;</span>)</span>
 <span id="cb421-2"><a href="test-för-två-stickprov.html#cb421-2" aria-hidden="true" tabindex="-1"></a>dat_long</span></code></pre></div>
 <p>Skapa ett stapeldiagram med uppdelade staplar genom att fylla i kodstycket nedan. Behandling ska vara på x-axeln och ifylld färg ska ges av <code>Färg</code>.</p>
 <div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="test-för-två-stickprov.html#cb422-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> ___, <span class="at">y =</span> ___, <span class="at">fill =</span> ___)) <span class="sc">+</span></span>
 <span id="cb422-2"><a href="test-för-två-stickprov.html#cb422-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">col =</span> <span class="st">&quot;black&quot;</span>, <span class="at">width =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
 <span id="cb422-3"><a href="test-för-två-stickprov.html#cb422-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Reds&quot;</span>)</span></code></pre></div>
-<p>Finns det några tydliga skillnader mellan behandlingar?
-:::</p>
-<p>::: {exercise name=“Po-ta-toes-test”}
-Beräkna ett chi-två-test på potatisdatan för att se om det finns färgskillnader mellan behandlingarna. Formulera tydliga hypoteser och ge ett tydligt svar.</p>
+<p>Finns det några synbara skillnader mellan behandlingar?</p>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-154" class="exercise"><strong>Uppgift 6.18  (Po-ta-toes-test) </strong></span>Beräkna ett chi-två-test på potatisdatan för att se om det finns färgskillnader mellan behandlingarna. Formulera tydliga hypoteser och ge ett tydligt svar.</p>
 <div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="test-för-två-stickprov.html#cb423-1" aria-hidden="true" tabindex="-1"></a>dat_pot[,<span class="sc">-</span><span class="dv">1</span>]</span>
 <span id="cb423-2"><a href="test-för-två-stickprov.html#cb423-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(___)</span></code></pre></div>
-<p>:::</p>
+</div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-153" class="exercise"><strong>Uppgift 6.17  (Hemmasegrar över årtionden) </strong></span>Vi vill undersöka om andelen hemmasegrar i herrallsvenskan förändrats över tid. Vi importerar data över matchresultat sedan 1920-talet.</p>
+<p><span id="exr:unlabeled-div-155" class="exercise"><strong>Uppgift 6.19  (Hemmasegrar över årtionden) </strong></span>Vi vill undersöka om andelen hemmasegrar i herrallsvenskan förändrats över tid. Vi importerar data över matchresultat sedan 1920-talet.</p>
 <div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="test-för-två-stickprov.html#cb424-1" aria-hidden="true" tabindex="-1"></a>dat_alls <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/adamflr/ST0060-2022/main/Data/Allsvenskan%2C%20herrar%2C%201924-2020.csv&quot;</span>)</span>
 <span id="cb424-2"><a href="test-för-två-stickprov.html#cb424-2" aria-hidden="true" tabindex="-1"></a>dat_alls</span></code></pre></div>
 <pre><code>## # A tibble: 15,236 × 9
@@ -680,8 +676,85 @@ Beräkna ett chi-två-test på potatisdatan för att se om det finns färgskilln
 <span id="cb427-2"><a href="test-för-två-stickprov.html#cb427-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">___</span>()</span></code></pre></div>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-154" class="exercise"><strong>Uppgift 6.18  (1920-talet mot 1960-talet) </strong></span>Använd ett z-test för att se om proportionen hemmasegrar under 1920-talet (371 av 738) är skild från 1960-talet(590 av 1320).</p>
+<p><span id="exr:unlabeled-div-156" class="exercise"><strong>Uppgift 6.20  (1920-talet mot 1960-talet) </strong></span>Använd ett z-test för att se om proportionen hemmasegrar under 1920-talet (371 av 738) är skild från 1960-talet (590 av 1320).</p>
 <div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="test-för-två-stickprov.html#cb428-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.test</span>(<span class="fu">c</span>(___, ___), <span class="at">n =</span> <span class="fu">c</span>(___, ___), <span class="at">correct =</span> F)</span></code></pre></div>
+</div>
+</div>
+<div id="bonus.-bilder-i-r" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Bonus. Bilder i R<a href="test-för-två-stickprov.html#bonus.-bilder-i-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Det finns en stor mängd paket som kan hantera bilder. Låt oss ta en titt på ett av dem - <code>magick</code> - vilket bygger på en koppling till ImageMagick (<a href="https://imagemagick.org/" class="uri">https://imagemagick.org/</a>).</p>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="test-för-två-stickprov.html#cb429-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;magick&quot;)</span></span>
+<span id="cb429-2"><a href="test-för-två-stickprov.html#cb429-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magick)</span></code></pre></div>
+<p>Med funktionen <code>image_read()</code> kan man läsa in en bild, antingen från lokal hårddisk eller från en internetaddress. Här hämtar vi en bild av Nils Dardels <em>Den döende dandyn</em> (1918) från Wikipedia.</p>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="test-för-två-stickprov.html#cb430-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Nils_Dardel_D%C3%B6ende_dandyn.jpg/1920px-Nils_Dardel_D%C3%B6ende_dandyn.jpg&quot;</span></span>
+<span id="cb430-2"><a href="test-för-två-stickprov.html#cb430-2" aria-hidden="true" tabindex="-1"></a>img <span class="ot">&lt;-</span> <span class="fu">image_read</span>(url)</span>
+<span id="cb430-3"><a href="test-för-två-stickprov.html#cb430-3" aria-hidden="true" tabindex="-1"></a>img</span></code></pre></div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-157" class="exercise"><strong>Uppgift 6.21  (Någon annan bild) </strong></span>Hitta någon annan bild online, vad som helst. Gör lämplig ändring i stycken ovan för att läsa in bilden med <code>image_read()</code>.</p>
+</div>
+<p>Låt oss börja med att ändra storleken med <code>image_resize()</code>. Följande ger en bild där den kortaste av höjd och bredd är 500 pixlar.</p>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="test-för-två-stickprov.html#cb431-1" aria-hidden="true" tabindex="-1"></a>img <span class="ot">&lt;-</span> img <span class="sc">%&gt;%</span> </span>
+<span id="cb431-2"><a href="test-för-två-stickprov.html#cb431-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">image_resize</span>(<span class="st">&quot;500&quot;</span>)</span>
+<span id="cb431-3"><a href="test-för-två-stickprov.html#cb431-3" aria-hidden="true" tabindex="-1"></a>img</span></code></pre></div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-158" class="exercise"><strong>Uppgift 6.22  (Storlek) </strong></span>Vad kan vara koden för att sätta en bild till halva storleken, alltså 50% av den ursprungliga bilden?</p>
+</div>
+<p>Man kan också manipulera egenskaper som kontrast, mättnad och färgton.</p>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="test-för-två-stickprov.html#cb432-1" aria-hidden="true" tabindex="-1"></a>img <span class="sc">%&gt;%</span> </span>
+<span id="cb432-2"><a href="test-för-två-stickprov.html#cb432-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">image_modulate</span>(<span class="at">saturation =</span> <span class="dv">50</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb432-3"><a href="test-för-två-stickprov.html#cb432-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">image_modulate</span>(<span class="at">hue =</span> <span class="dv">50</span>)</span></code></pre></div>
+<p>För mer information av tillgängliga funktioner, titta på paketets hjälpsida med <code>?magick</code> och introduktionen på <a href="https://docs.ropensci.org/magick/articles/intro.html" class="uri">https://docs.ropensci.org/magick/articles/intro.html</a>.</p>
+<p>En enkel vetenskaplig tillämpning av bildanalys kan baseras på de relativa andelarna av olika färger. Det kan till exempel användas för att beräkna skadegrad på löv (som efter färgning kan ha specifika färger för skadade delar) eller storlek på trädkronor. Funktionen <code>image_quantize()</code> kan minska antalet färger i en bild till ett mer hanterbart antal.</p>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="test-för-två-stickprov.html#cb433-1" aria-hidden="true" tabindex="-1"></a>img <span class="sc">%&gt;%</span> <span class="fu">image_quantize</span>(<span class="at">max =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-159" class="exercise"><strong>Uppgift 6.23  (Antal färger) </strong></span>Med 50 enskilda färger blir <em>Den döende dandyn</em> något mattare, men karaktärernas klädsel har klara färger. Hur få måste det totala antalet färger bli innan <em>du</em> ser en klar försämring av bilden?</p>
+</div>
+<p>Funktionen <code>image_data()</code> kan användas för att ta ut färgvärdet för varje pixel. Därefter kan man enkelt beräkna andelen för olika färger. Följande stycke förenklar bilden till tio färger, extraherar datan och beräknar antalet pixlar med respektive färg. Den exakta koden är inte så viktig här och kan läsas kursivt.</p>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="test-för-två-stickprov.html#cb434-1" aria-hidden="true" tabindex="-1"></a>img <span class="ot">&lt;-</span> img <span class="sc">%&gt;%</span> <span class="fu">image_quantize</span>(<span class="at">max =</span> <span class="dv">10</span>)</span>
+<span id="cb434-2"><a href="test-för-två-stickprov.html#cb434-2" aria-hidden="true" tabindex="-1"></a>info <span class="ot">&lt;-</span> img <span class="sc">%&gt;%</span> <span class="fu">image_info</span>()</span>
+<span id="cb434-3"><a href="test-för-två-stickprov.html#cb434-3" aria-hidden="true" tabindex="-1"></a>pixel_values <span class="ot">&lt;-</span> img <span class="sc">%&gt;%</span> <span class="fu">image_data</span>() <span class="sc">%&gt;%</span> <span class="fu">as.vector</span>()</span>
+<span id="cb434-4"><a href="test-för-två-stickprov.html#cb434-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb434-5"><a href="test-för-två-stickprov.html#cb434-5" aria-hidden="true" tabindex="-1"></a>dat_pix <span class="ot">&lt;-</span> <span class="fu">expand_grid</span>(<span class="at">y =</span> info<span class="sc">$</span>height<span class="sc">:</span><span class="dv">1</span>, <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span>info<span class="sc">$</span>width, <span class="at">color =</span> <span class="fu">c</span>(<span class="st">&quot;R&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;B&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb434-6"><a href="test-för-två-stickprov.html#cb434-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">value =</span> pixel_values) <span class="sc">%&gt;%</span> </span>
+<span id="cb434-7"><a href="test-för-två-stickprov.html#cb434-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">values_from =</span> value, <span class="at">names_from =</span> color) <span class="sc">%&gt;%</span> </span>
+<span id="cb434-8"><a href="test-för-två-stickprov.html#cb434-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">hex =</span> <span class="fu">paste0</span>(<span class="st">&quot;#&quot;</span>, R, G, B))</span>
+<span id="cb434-9"><a href="test-för-två-stickprov.html#cb434-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb434-10"><a href="test-för-två-stickprov.html#cb434-10" aria-hidden="true" tabindex="-1"></a>dat_pix</span></code></pre></div>
+<p>Den konstruerade datan innehåller koordinater med x och y samt färgvärden i tre färgband och en hexkod som anger färgen. Härifrån kan vi göra en grafversion av bilden med <code>geom_raster()</code>.</p>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="test-för-två-stickprov.html#cb435-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_pix, <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
+<span id="cb435-2"><a href="test-för-två-stickprov.html#cb435-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_raster</span>(<span class="at">fill =</span> dat_pix<span class="sc">$</span>hex)</span></code></pre></div>
+<p>Notera att vi sätter <code>fill</code> i geom-funktionen, eftersom målet är att sätta färgen till den som anges i kolumnen hex.</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-160" class="exercise"><strong>Uppgift 6.24  (Färg som aesthetic) </strong></span>Vad händer om man sätter <code>fill = hex</code> inom <code>aes()</code>-funktionen istället?</p>
+<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="test-för-två-stickprov.html#cb436-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_pix, <span class="fu">aes</span>(x, y, <span class="at">fill =</span> ___)) <span class="sc">+</span></span>
+<span id="cb436-2"><a href="test-för-två-stickprov.html#cb436-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_raster</span>()</span></code></pre></div>
+<p>Funktionen <code>scale_fill_manual()</code> kan styra färgvalet i det fallet.</p>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="test-för-två-stickprov.html#cb437-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_pix, <span class="fu">aes</span>(x, y, <span class="at">fill =</span> ___)) <span class="sc">+</span></span>
+<span id="cb437-2"><a href="test-för-två-stickprov.html#cb437-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_raster</span>() <span class="sc">+</span></span>
+<span id="cb437-3"><a href="test-för-två-stickprov.html#cb437-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&#39;white&#39;</span>, <span class="st">&#39;aliceblue&#39;</span>, </span>
+<span id="cb437-4"><a href="test-för-två-stickprov.html#cb437-4" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&#39;antiquewhite&#39;</span>, <span class="st">&#39;antiquewhite1&#39;</span>, </span>
+<span id="cb437-5"><a href="test-för-två-stickprov.html#cb437-5" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&#39;antiquewhite2&#39;</span>, <span class="st">&#39;antiquewhite3&#39;</span>, </span>
+<span id="cb437-6"><a href="test-för-två-stickprov.html#cb437-6" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&#39;antiquewhite4&#39;</span>, <span class="st">&#39;aquamarine&#39;</span>, </span>
+<span id="cb437-7"><a href="test-för-två-stickprov.html#cb437-7" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&#39;aquamarine1&#39;</span>, <span class="st">&#39;aquamarine2&#39;</span>)) <span class="sc">+</span></span>
+<span id="cb437-8"><a href="test-för-två-stickprov.html#cb437-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code></pre></div>
+<p>Tillgängliga färger kan tas fram med <code>colors()</code>.</p>
+</div>
+<p>Slutligen kan vi nu göra en enkel bildanalys genom att räkna antal eller andel pixlar med en viss färg.</p>
+<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="test-för-två-stickprov.html#cb438-1" aria-hidden="true" tabindex="-1"></a>dat_pix_count <span class="ot">&lt;-</span> dat_pix <span class="sc">%&gt;%</span> </span>
+<span id="cb438-2"><a href="test-för-två-stickprov.html#cb438-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(hex) <span class="sc">%&gt;%</span> </span>
+<span id="cb438-3"><a href="test-för-två-stickprov.html#cb438-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">hex =</span> <span class="fu">reorder</span>(hex, n))</span>
+<span id="cb438-4"><a href="test-för-två-stickprov.html#cb438-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb438-5"><a href="test-för-två-stickprov.html#cb438-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_pix_count, (<span class="fu">aes</span>(n, hex))) <span class="sc">+</span></span>
+<span id="cb438-6"><a href="test-för-två-stickprov.html#cb438-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> dat_pix_count<span class="sc">$</span>hex)</span></code></pre></div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-161" class="exercise"><strong>Uppgift 6.25  (Avslutande proportionstest) </strong></span>Låt oss ta ett mindre stickprov från bilden. Funktionen <code>set.seed()</code> sätter ett startvärde för slumtalsgeneratorn, vilket är bra om man vill reproducera ett visst utfall.</p>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="test-för-två-stickprov.html#cb439-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1573</span>)</span>
+<span id="cb439-2"><a href="test-för-två-stickprov.html#cb439-2" aria-hidden="true" tabindex="-1"></a>dat_sample <span class="ot">&lt;-</span> dat_pix <span class="sc">%&gt;%</span> <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">100</span>)</span>
+<span id="cb439-3"><a href="test-för-två-stickprov.html#cb439-3" aria-hidden="true" tabindex="-1"></a>dat_sample <span class="sc">%&gt;%</span> <span class="fu">count</span>(hex)</span>
+<span id="cb439-4"><a href="test-för-två-stickprov.html#cb439-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb439-5"><a href="test-för-två-stickprov.html#cb439-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_sample, <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
+<span id="cb439-6"><a href="test-för-två-stickprov.html#cb439-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> dat_sample<span class="sc">$</span>hex, <span class="at">size =</span> <span class="dv">8</span>)</span></code></pre></div>
+<p>I stickprovet är 62 av 100 pixlar en mörkblå färg. Genomför ett test med <code>prop.test()</code> för att se om andelen i populationen (som i detta fall är hela tavlan) är skild från 0.7. Jämför med proportionen i den större datamängden <code>dat_pix</code>.</p>
 </div>
 
 </div>

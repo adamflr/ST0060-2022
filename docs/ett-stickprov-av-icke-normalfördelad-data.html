@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2022-08-16" />
+<meta name="date" content="2022-08-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,13 +51,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -226,6 +219,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="test-för-två-stickprov.html"><a href="test-för-två-stickprov.html#z-test-och-konfidensintervall-för-två-proportioner"><i class="fa fa-check"></i><b>6.3</b> z-test och konfidensintervall för två proportioner</a></li>
 <li class="chapter" data-level="6.4" data-path="test-för-två-stickprov.html"><a href="test-för-två-stickprov.html#chi-två-test-för-korstabeller"><i class="fa fa-check"></i><b>6.4</b> Chi-två-test för korstabeller</a></li>
+<li class="chapter" data-level="6.5" data-path="test-för-två-stickprov.html"><a href="test-för-två-stickprov.html#bonus.-bilder-i-r"><i class="fa fa-check"></i><b>6.5</b> Bonus. Bilder i R</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="variansanalys.html"><a href="variansanalys.html"><i class="fa fa-check"></i><b>7</b> Variansanalys</a>
 <ul>
@@ -235,12 +229,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4" data-path="variansanalys.html"><a href="variansanalys.html#variansanalys.-en-faktor-med-block"><i class="fa fa-check"></i><b>7.4</b> Variansanalys. En faktor med block</a></li>
 <li class="chapter" data-level="7.5" data-path="variansanalys.html"><a href="variansanalys.html#variansanalys.-två-faktorer-med-block"><i class="fa fa-check"></i><b>7.5</b> Variansanalys. Två faktorer med block</a></li>
 <li class="chapter" data-level="7.6" data-path="variansanalys.html"><a href="variansanalys.html#modellantaganden-och-residualer"><i class="fa fa-check"></i><b>7.6</b> Modellantaganden och residualer</a></li>
+<li class="chapter" data-level="7.7" data-path="variansanalys.html"><a href="variansanalys.html#bonus.-statistik-för-ekologi"><i class="fa fa-check"></i><b>7.7</b> Bonus. Statistik för ekologi</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html"><i class="fa fa-check"></i><b>8</b> Regression och korrelation</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html#repetition-av-datorövning-7"><i class="fa fa-check"></i><b>8.1</b> Repetition av datorövning 7</a></li>
 <li class="chapter" data-level="8.2" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html#regression"><i class="fa fa-check"></i><b>8.2</b> Regression</a></li>
 <li class="chapter" data-level="8.3" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html#korrelation"><i class="fa fa-check"></i><b>8.3</b> Korrelation</a></li>
+<li class="chapter" data-level="8.4" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html#bonus.-skrapa-data-från-webbsidor"><i class="fa fa-check"></i><b>8.4</b> Bonus. Skrapa data från webbsidor</a></li>
 </ul></li>
 </ul>
 
@@ -284,7 +280,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb301-6"><a href="ett-stickprov-av-icke-normalfördelad-data.html#cb301-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(), </span>
 <span id="cb301-7"><a href="ett-stickprov-av-icke-normalfördelad-data.html#cb301-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(), </span>
 <span id="cb301-8"><a href="ett-stickprov-av-icke-normalfördelad-data.html#cb301-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-200-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-196-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Hypoteser ges av</p>
 <ul>
 <li>H0: mu lika med 7</li>
@@ -308,7 +304,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="ett-stickprov-av-icke-normalfördelad-data.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_pH, <span class="fu">aes</span>(<span class="at">sample =</span> pH)) <span class="sc">+</span></span>
 <span id="cb304-2"><a href="ett-stickprov-av-icke-normalfördelad-data.html#cb304-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
 <span id="cb304-3"><a href="ett-stickprov-av-icke-normalfördelad-data.html#cb304-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>()</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-202-1.png" width="288" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-198-1.png" width="288" style="display: block; margin: auto;" /></p>
 </div>
 <div id="proportioner-från-binär-data" class="section level2 hasAnchor" number="5.2">
 <h2><span class="header-section-number">5.2</span> Proportioner från binär data<a href="ett-stickprov-av-icke-normalfördelad-data.html#proportioner-från-binär-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -319,7 +315,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb305-3"><a href="ett-stickprov-av-icke-normalfördelad-data.html#cb305-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb305-4"><a href="ett-stickprov-av-icke-normalfördelad-data.html#cb305-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_alls, <span class="fu">aes</span>(hemmamal, bortamal)) <span class="sc">+</span></span>
 <span id="cb305-5"><a href="ett-stickprov-av-icke-normalfördelad-data.html#cb305-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">size =</span> <span class="fl">0.1</span>)</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-203-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-199-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-112" class="exercise"><strong>Uppgift 5.1  (En interaktiv målgraf) </strong></span>Kör stycket nedan för en interaktiv målgraf. Vilken match gav det högsta antalet insläppta mål på hemmaplan?</p>
 <div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="ett-stickprov-av-icke-normalfördelad-data.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(plotly)</span></span>
@@ -360,7 +356,7 @@ Alternativhypotes H1: p ej lika med 0.33</p>
 <span id="cb315-5"><a href="ett-stickprov-av-icke-normalfördelad-data.html#cb315-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(x, p)) <span class="sc">+</span></span>
 <span id="cb315-6"><a href="ett-stickprov-av-icke-normalfördelad-data.html#cb315-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> p), <span class="at">data =</span> dat_norm <span class="sc">%&gt;%</span> <span class="fu">filter</span>(x <span class="sc">&gt;</span> <span class="fu">abs</span>(z_value)), <span class="at">fill =</span> <span class="st">&quot;salmon&quot;</span>) <span class="sc">+</span></span>
 <span id="cb315-7"><a href="ett-stickprov-av-icke-normalfördelad-data.html#cb315-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> p), <span class="at">data =</span> dat_norm <span class="sc">%&gt;%</span> <span class="fu">filter</span>(x <span class="sc">&lt;</span> <span class="sc">-</span><span class="fu">abs</span>(z_value)), <span class="at">fill =</span> <span class="st">&quot;salmon&quot;</span>)</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-208-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-204-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Areans yta kan tas fram med normalfördelningens fördelningsfunktion <code>pnorm()</code>.</p>
 <div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="ett-stickprov-av-icke-normalfördelad-data.html#cb316-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">*</span> <span class="fu">pnorm</span>(<span class="sc">-</span>z_value)</span></code></pre></div>
 <pre><code>## [1] 0.1091769</code></pre>
@@ -464,7 +460,7 @@ H1: minst något utfall har en annan sannolikhet än 33, 20 respektive 47</p>
 <span id="cb334-4"><a href="ett-stickprov-av-icke-normalfördelad-data.html#cb334-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb334-5"><a href="ett-stickprov-av-icke-normalfördelad-data.html#cb334-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(x, p), <span class="at">data =</span> dat_chisq) <span class="sc">+</span></span>
 <span id="cb334-6"><a href="ett-stickprov-av-icke-normalfördelad-data.html#cb334-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(x, <span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> p), <span class="at">data =</span> dat_chisq <span class="sc">%&gt;%</span> <span class="fu">filter</span>(x <span class="sc">&gt;</span> chisq_value), <span class="at">fill =</span> <span class="st">&quot;salmon&quot;</span>)</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-220-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-216-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Man kan också beräkna ytan i svansen med <code>pchisq()</code>. Ett minus det resultatet ger den övre delen.</p>
 <div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="ett-stickprov-av-icke-normalfördelad-data.html#cb335-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(chisq_value, <span class="at">df =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1632763</code></pre>
@@ -506,7 +502,7 @@ H1: minst något utfall har en annan sannolikhet än 33, 20 respektive 47</p>
 <span id="cb345-4"><a href="ett-stickprov-av-icke-normalfördelad-data.html#cb345-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_mnm, <span class="fu">aes</span>(Color, Count, <span class="at">fill =</span> Color)) <span class="sc">+</span></span>
 <span id="cb345-5"><a href="ett-stickprov-av-icke-normalfördelad-data.html#cb345-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
 <span id="cb345-6"><a href="ett-stickprov-av-icke-normalfördelad-data.html#cb345-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> dat_mnm<span class="sc">$</span>Color)</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-226-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-222-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Använd de observerade värdena i kolumnen <code>Count</code> för att testa om alla godisfärger är lika vanliga.</p>
 </div>
 <p>Om man har flera klasser kan det vara värdefullt att se vilken klass som bidrar mest till chi-två-värdet. Det kan ge en bild av vilka klasser som är mest speciella. Ett enkelt sätt att göra det på är att spara utfallet av <code>chisq.test()</code> som ett objekt och därifrån hämta <code>observed</code> och <code>expected</code>. Som fortsättning på fotbollsexemplet:</p>

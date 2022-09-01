@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2022-08-16" />
+<meta name="date" content="2022-08-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,13 +51,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -226,6 +219,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="test-för-två-stickprov.html"><a href="test-för-två-stickprov.html#z-test-och-konfidensintervall-för-två-proportioner"><i class="fa fa-check"></i><b>6.3</b> z-test och konfidensintervall för två proportioner</a></li>
 <li class="chapter" data-level="6.4" data-path="test-för-två-stickprov.html"><a href="test-för-två-stickprov.html#chi-två-test-för-korstabeller"><i class="fa fa-check"></i><b>6.4</b> Chi-två-test för korstabeller</a></li>
+<li class="chapter" data-level="6.5" data-path="test-för-två-stickprov.html"><a href="test-för-två-stickprov.html#bonus.-bilder-i-r"><i class="fa fa-check"></i><b>6.5</b> Bonus. Bilder i R</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="variansanalys.html"><a href="variansanalys.html"><i class="fa fa-check"></i><b>7</b> Variansanalys</a>
 <ul>
@@ -235,12 +229,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4" data-path="variansanalys.html"><a href="variansanalys.html#variansanalys.-en-faktor-med-block"><i class="fa fa-check"></i><b>7.4</b> Variansanalys. En faktor med block</a></li>
 <li class="chapter" data-level="7.5" data-path="variansanalys.html"><a href="variansanalys.html#variansanalys.-två-faktorer-med-block"><i class="fa fa-check"></i><b>7.5</b> Variansanalys. Två faktorer med block</a></li>
 <li class="chapter" data-level="7.6" data-path="variansanalys.html"><a href="variansanalys.html#modellantaganden-och-residualer"><i class="fa fa-check"></i><b>7.6</b> Modellantaganden och residualer</a></li>
+<li class="chapter" data-level="7.7" data-path="variansanalys.html"><a href="variansanalys.html#bonus.-statistik-för-ekologi"><i class="fa fa-check"></i><b>7.7</b> Bonus. Statistik för ekologi</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html"><i class="fa fa-check"></i><b>8</b> Regression och korrelation</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html#repetition-av-datorövning-7"><i class="fa fa-check"></i><b>8.1</b> Repetition av datorövning 7</a></li>
 <li class="chapter" data-level="8.2" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html#regression"><i class="fa fa-check"></i><b>8.2</b> Regression</a></li>
 <li class="chapter" data-level="8.3" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html#korrelation"><i class="fa fa-check"></i><b>8.3</b> Korrelation</a></li>
+<li class="chapter" data-level="8.4" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html#bonus.-skrapa-data-från-webbsidor"><i class="fa fa-check"></i><b>8.4</b> Bonus. Skrapa data från webbsidor</a></li>
 </ul></li>
 </ul>
 
@@ -295,7 +291,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="slumpvariabler.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder, <span class="fu">aes</span>(lifeExp, continent, <span class="at">fill =</span> continent)) <span class="sc">+</span></span>
 <span id="cb174-2"><a href="slumpvariabler.html#cb174-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
 <span id="cb174-3"><a href="slumpvariabler.html#cb174-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> year)</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-125-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-121-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Därefter ett exempel på ett stapeldiagram med felstaplar för samma data. Felstapeln ges av standardavvikelsen.</p>
 <div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="slumpvariabler.html#cb175-1" aria-hidden="true" tabindex="-1"></a>dat_sum <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span> </span>
 <span id="cb175-2"><a href="slumpvariabler.html#cb175-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(continent, year) <span class="sc">%&gt;%</span> </span>
@@ -321,7 +317,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb177-2"><a href="slumpvariabler.html#cb177-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
 <span id="cb177-3"><a href="slumpvariabler.html#cb177-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Mean <span class="sc">-</span> SD, <span class="at">ymax =</span> Mean <span class="sc">+</span> SD), <span class="at">width =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
 <span id="cb177-4"><a href="slumpvariabler.html#cb177-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> year)</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-126-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-122-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="diskreta-fördelningar-i-allmänhet" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Diskreta fördelningar i allmänhet<a href="slumpvariabler.html#diskreta-fördelningar-i-allmänhet" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -339,7 +335,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 6 6 0.1666667</code></pre>
 <p>En diskret slumpvariabel illustreras ofta med ett stapeldiagram.</p>
 <div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="slumpvariabler.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_dice6, <span class="fu">aes</span>(x, p)) <span class="sc">+</span> <span class="fu">geom_col</span>()</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-128-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-124-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-61" class="exercise"><strong>Uppgift 3.1  (En annan tärning) </strong></span>Ta fram en tärning som <em>inte</em> har sex sidor. Om du saknar en sådan tärning, fråga lämplig person om du kan få en. Behåll tärningen, då den kan återkomma vid en senare datorövning. Följ exemplet ovan för att kodifiera din tärning som en slumpvariabel. Utfallen <code>x</code> är de möjliga resultaten av att kasta tärningen och sannolikheten <code>p</code> är sannolikheten för varje utfall. Antag att tärningen är balanserad och att alla utfall därför är lika troliga. Ett bra namn på det nya objektet kan vara <code>dat_diceN</code> där N anger antalet sidor på tärningen, t.ex. <code>dat_dice20</code> för en 20-sidig tärning.</p>
 </div>
@@ -387,9 +383,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="slumpvariabler.html#cb186-1" aria-hidden="true" tabindex="-1"></a>slumputfall <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> dat_dice6<span class="sc">$</span>x, <span class="at">size =</span> <span class="dv">10000</span>, <span class="at">replace =</span> T)</span>
 <span id="cb186-2"><a href="slumpvariabler.html#cb186-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb186-3"><a href="slumpvariabler.html#cb186-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(slumputfall)</span></code></pre></div>
-<pre><code>## [1] 3.4766</code></pre>
+<pre><code>## [1] 3.516</code></pre>
 <div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="slumpvariabler.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(slumputfall)</span></code></pre></div>
-<pre><code>## [1] 2.929545</code></pre>
+<pre><code>## [1] 2.891033</code></pre>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-65" class="exercise"><strong>Uppgift 3.5  (Simulera tärningen) </strong></span>Använd <code>sample()</code> för att dra tiotusen observationer från din egen tärning. Beräkna medelvärde och varians från det stickprovet. Är utfallen nära de teoretiska beräkningarna av populationsmedelvärde och -varians?</p>
 </div>
@@ -406,7 +402,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb192-2"><a href="slumpvariabler.html#cb192-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p =</span> <span class="fu">dbinom</span>(x, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>))</span>
 <span id="cb192-3"><a href="slumpvariabler.html#cb192-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb192-4"><a href="slumpvariabler.html#cb192-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_bin, <span class="fu">aes</span>(x, p)) <span class="sc">+</span> <span class="fu">geom_col</span>()</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-134-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-130-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-66" class="exercise"><strong>Uppgift 3.6  (Binomialfördelning för tärningen) </strong></span>Ta tärningen från tidigare uppgift och välj ett av utfallen. Om man kastar tärningen tjugo gånger, vad är fördelningen för antalet gånger man får det utfallet? Fyll i stycket nedan för att beräkna sannolikheterna i den fördelningen och illustrera med ett stapeldiagram.</p>
 <div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="slumpvariabler.html#cb193-1" aria-hidden="true" tabindex="-1"></a>dat_bin <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">20</span>) <span class="sc">%&gt;%</span> </span>
@@ -448,7 +444,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb198-4"><a href="slumpvariabler.html#cb198-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb198-5"><a href="slumpvariabler.html#cb198-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_bin, <span class="fu">aes</span>(x, p, <span class="at">fill =</span> x <span class="sc">&lt;=</span> <span class="dv">7</span>)) <span class="sc">+</span></span>
 <span id="cb198-6"><a href="slumpvariabler.html#cb198-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-137-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-133-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Den blå ytan motsvarar sannolikheten att få sju eller färre krona. Den sannolikheten kan beräknas till 0.945.</p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-69" class="exercise"><strong>Uppgift 3.9  (Illustration av sannolikheten) </strong></span>För en sexsidig tärning illustrerar följande sannolikheten att få tre eller färre sexor vid tjugo kast.</p>
@@ -459,7 +455,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb201-3"><a href="slumpvariabler.html#cb201-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb201-4"><a href="slumpvariabler.html#cb201-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_bin, <span class="fu">aes</span>(x, p, <span class="at">fill =</span> x <span class="sc">&lt;=</span> <span class="dv">3</span>)) <span class="sc">+</span></span>
 <span id="cb201-5"><a href="slumpvariabler.html#cb201-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-138-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-134-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Gör lämpliga ändringar i kodstycket ovan för att illustrera sannolikheten att få tre eller färre positiva utfall i exemplet med tärningskastet.</p>
 </div>
 <div class="exercise">
@@ -515,7 +511,7 @@ Om man tittar på binomialfördelningar med stort antal upprepningar och en låg
 <div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="slumpvariabler.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_two_bin) <span class="sc">+</span></span>
 <span id="cb204-2"><a href="slumpvariabler.html#cb204-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(x, binom1), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
 <span id="cb204-3"><a href="slumpvariabler.html#cb204-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(x, binom2), <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-140-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-136-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Punkterna ligger nästan perfekt på linjen. De två fördelningarna har alltså nästan samma sannolikheter, trots att de har helt olika värden för n och p.</p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-72" class="exercise"><strong>Uppgift 3.12  (Skilda sannolikheter) </strong></span>Följande kod gör samma sak som exemplet ovan, men nu med n1 och n2 som egna objekt.</p>
@@ -576,7 +572,7 @@ Om man tittar på binomialfördelningar med stort antal upprepningar och en låg
 <div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="slumpvariabler.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_two_dist) <span class="sc">+</span></span>
 <span id="cb208-2"><a href="slumpvariabler.html#cb208-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(x, pois), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
 <span id="cb208-3"><a href="slumpvariabler.html#cb208-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(x, binom), <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-142-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-138-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Den röda linjen är poissonfördelningen och de blå punkterna är en binomialfördelning med n = 400 och p = 0.0075. Fördelningarna är nästan identiska. Notera att fördelningarna har samma medelvärde (då 400 gånger 0.0075 ger 3).</p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-73" class="exercise"><strong>Uppgift 3.13  (Skilda sannolikheter) </strong></span>Följande kod gör samma sak som exemplet ovan, men nu med n i binomial som eget objekt.</p>
@@ -622,7 +618,7 @@ En normalfördelning har en karaktäristisk <em>klockform</em>. Vi illustreras t
 <span id="cb214-3"><a href="slumpvariabler.html#cb214-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_function</span>(<span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">3</span>, <span class="at">sd =</span> <span class="dv">1</span>), <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
 <span id="cb214-4"><a href="slumpvariabler.html#cb214-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_function</span>(<span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">1</span>), <span class="at">color =</span> <span class="st">&quot;green3&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
 <span id="cb214-5"><a href="slumpvariabler.html#cb214-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">10</span>)</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-146-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-142-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Den gröna och röda kurvan har samma medelvärde mu men skilda standardavvikelser sigma. Den blå och gröna kurvan har skilda medelvärden mu men samma standardavvikelse sigma.</p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-76" class="exercise"><strong>Uppgift 3.16  (Normalfördelningar) </strong></span>Gör lämpliga ändringar i stycken ovan för att illustrera två normalfördelningar: en med medelvärde 0 och standardavvikelse 1 och en med medelvärde 1 och standardavvikelse 2. Kan du utifrån kurvorna säga vilken av de två fördelningarna som ger störst sannolikhet att få ett utfall under minus två?</p>
@@ -656,7 +652,7 @@ En normalfördelning har en karaktäristisk <em>klockform</em>. Vi illustreras t
 <span id="cb219-16"><a href="slumpvariabler.html#cb219-16" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;patchwork&quot;)</span></span>
 <span id="cb219-17"><a href="slumpvariabler.html#cb219-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
 <span id="cb219-18"><a href="slumpvariabler.html#cb219-18" aria-hidden="true" tabindex="-1"></a>g1 <span class="sc">/</span> g2</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-148-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-144-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Sannolikheten att ligga under ett värde på x ges av kurvan för fördelningsfunktionen vid det x-värdet. Det motsvarar den fyllda ytan under täthetsfunktionen till vänster om x-värdet.</p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-77" class="exercise"><strong>Uppgift 3.17  (Sannolikhet från normalfördelningen) </strong></span>Fyll i kodstycket nedan för att beräkna sannolikheten att få ett värde under minus två i en normalfördelning med medelvärde 0 och standardavvikelse 1, och i en normalfördelning med medelvärde 1 och standardavvikelse 2.</p>
@@ -679,7 +675,7 @@ En normalfördelning har en karaktäristisk <em>klockform</em>. Vi illustreras t
 <span id="cb223-9"><a href="slumpvariabler.html#cb223-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb223-10"><a href="slumpvariabler.html#cb223-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> p), <span class="at">data =</span> dat_norm <span class="sc">%&gt;%</span> <span class="fu">filter</span>(x <span class="sc">&lt;</span> <span class="fu">max</span>(x_values) <span class="sc">&amp;</span> x <span class="sc">&gt;</span> <span class="fu">min</span>(x_values)), <span class="at">fill =</span> <span class="st">&quot;salmon&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
 <span id="cb223-11"><a href="slumpvariabler.html#cb223-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Täthetsfunktion&quot;</span>)</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-151-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-147-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-78" class="exercise"><strong>Uppgift 3.18  (Sannolikhet mellan två värden) </strong></span>Fyll i kodstycket nedan för att beräkna sannolikheten att få ett värde mellan <em>minus två</em> och tre i en normalfördelning med medelvärde 1 och standardavvikelse 2.</p>
 <div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="slumpvariabler.html#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(___, <span class="at">mean =</span> ___, <span class="at">sd =</span> ___) <span class="sc">-</span> <span class="fu">pnorm</span>(___, <span class="at">mean =</span> ___, <span class="at">sd =</span> ___)</span></code></pre></div>
@@ -715,7 +711,7 @@ En normalfördelning har en karaktäristisk <em>klockform</em>. Vi illustreras t
 <span id="cb233-6"><a href="slumpvariabler.html#cb233-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_pois, <span class="fu">aes</span>(x, p)) <span class="sc">+</span></span>
 <span id="cb233-7"><a href="slumpvariabler.html#cb233-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb233-8"><a href="slumpvariabler.html#cb233-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> theoretical_p))</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-158-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-154-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Linjen ger den teoretiska poissonfördelningen och punkterna ger fördelningen för slumptalen. Punkterna ligger nära linjen, vilket är helt efter förväntan. Notera dock att det kommer finnas vissa naturliga avvikelser när man arbetar med slumptal.</p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-81" class="exercise"><strong>Uppgift 3.21  (Poisson från slumptal) </strong></span>Gör lämpliga ändringar i kodstycket ovan för att göra motsvarande beräkning för en poissonfördelning med lambda lika med 2. Ligger slumptalen nära den teoretiska fördelningen?</p>
@@ -731,7 +727,7 @@ En normalfördelning har en karaktäristisk <em>klockform</em>. Vi illustreras t
 <span id="cb234-8"><a href="slumpvariabler.html#cb234-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_pois, <span class="fu">aes</span>(x, p)) <span class="sc">+</span></span>
 <span id="cb234-9"><a href="slumpvariabler.html#cb234-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb234-10"><a href="slumpvariabler.html#cb234-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> theoretical_p))</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-159-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-155-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Summans värden ligger när den teoretiska fördelningen. Det stödjer tanken att summan av två poissonfördelningar är poissonfördelad.</p>
 <p>Vi såg tidigare hur utfallet av en tärning kan ses som en slumpvariabel (n stycken utfall där samtliga är lika sannolika) och att funktionen <code>sample()</code> kan användas för att simulera tärningskast. Vi kan utnyttja det för att undersöka fördelningen för summan av två tärningskast. Exemplet nedan tittar på en sex-sidig tärning.</p>
 <div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="slumpvariabler.html#cb235-1" aria-hidden="true" tabindex="-1"></a>dat_dice_sum <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x1 =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>), <span class="at">size =</span> <span class="dv">10000</span>, <span class="at">replace =</span> T),</span>
@@ -742,7 +738,7 @@ En normalfördelning har en karaktäristisk <em>klockform</em>. Vi illustreras t
 <span id="cb235-6"><a href="slumpvariabler.html#cb235-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb235-7"><a href="slumpvariabler.html#cb235-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_dice_sum, <span class="fu">aes</span>(x, p)) <span class="sc">+</span></span>
 <span id="cb235-8"><a href="slumpvariabler.html#cb235-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-160-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-156-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Summan av två tärningskast har en triangelformad fördelning där 7 är det vanligaste utfallet och 2 och 12 är de ovanligaste.</p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-82" class="exercise"><strong>Uppgift 3.22  (Summan av tärningskast med annan tärning) </strong></span>Gör lämpliga ändringar i stycket ovan för att beräkna summan av två utfall för en åtta-sidig tärning.</p>
@@ -758,23 +754,22 @@ En normalfördelning har en karaktäristisk <em>klockform</em>. Vi illustreras t
 <span id="cb236-2"><a href="slumpvariabler.html#cb236-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggforce)</span>
 <span id="cb236-3"><a href="slumpvariabler.html#cb236-3" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb236-4"><a href="slumpvariabler.html#cb236-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_circle</span>(<span class="fu">aes</span>(<span class="at">x0 =</span> <span class="dv">0</span>, <span class="at">y0 =</span> <span class="dv">0</span>, <span class="at">r =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
-<span id="cb236-5"><a href="slumpvariabler.html#cb236-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rect</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">ymin =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">xmax =</span> <span class="dv">1</span>, <span class="at">ymax =</span> <span class="dv">1</span>), <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb236-6"><a href="slumpvariabler.html#cb236-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>()</span>
-<span id="cb236-7"><a href="slumpvariabler.html#cb236-7" aria-hidden="true" tabindex="-1"></a>g</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-161-1.png" width="672" style="display: block; margin: auto;" /></p>
+<span id="cb236-5"><a href="slumpvariabler.html#cb236-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rect</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">ymin =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">xmax =</span> <span class="dv">1</span>, <span class="at">ymax =</span> <span class="dv">1</span>), <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb236-6"><a href="slumpvariabler.html#cb236-6" aria-hidden="true" tabindex="-1"></a>g</span></code></pre></div>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-157-1.png" width="384" style="display: block; margin: auto;" /></p>
 <p>Funktionen <code>runif()</code> ger ett slumpmässigt värde mellan två gränsvärden (som sätts med argumenten <code>min</code> och <code>max</code>). Slumpmässiga punkter inom kvadraten kan dras genom att dra en x- och en y-koordinat. En fördelning där alla värden är lika sannolika kallas <em>uniform</em> (eller <em>likformig</em>).</p>
 <div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="slumpvariabler.html#cb237-1" aria-hidden="true" tabindex="-1"></a>dat_random <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">100</span>, <span class="at">min =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">max =</span> <span class="dv">1</span>),</span>
 <span id="cb237-2"><a href="slumpvariabler.html#cb237-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> <span class="fu">runif</span>(<span class="dv">100</span>, <span class="at">min =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">max =</span> <span class="dv">1</span>))</span>
 <span id="cb237-3"><a href="slumpvariabler.html#cb237-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb237-4"><a href="slumpvariabler.html#cb237-4" aria-hidden="true" tabindex="-1"></a>g <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(x, y), <span class="at">data =</span> dat_random)</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-162-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>Pytagoras sats kan användas för att beräkna avståndet mellan en slumpmässig punkt och origo (nollpunkten). Punkter med ett avstånd under ett ligger inom cirkeln. Cirkelns area ska ges av andelen punkter i kvadraten som också ligger i cirkeln gånger fyra.</p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-158-1.png" width="384" style="display: block; margin: auto;" /></p>
+<p>Pytagoras sats kan användas för att beräkna avståndet mellan en slumpmässig punkt och origo (nollpunkten). Punkter med ett avstånd under ett ligger inom cirkeln. Cirkelns area ska ges av andelen punkter i kvadraten som också ligger i cirkeln, gånger fyra.</p>
 <div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="slumpvariabler.html#cb238-1" aria-hidden="true" tabindex="-1"></a>dat_random <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">100</span>, <span class="at">min =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">max =</span> <span class="dv">1</span>),</span>
 <span id="cb238-2"><a href="slumpvariabler.html#cb238-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> <span class="fu">runif</span>(<span class="dv">100</span>, <span class="at">min =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">max =</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb238-3"><a href="slumpvariabler.html#cb238-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">inner =</span> x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> y<span class="sc">^</span><span class="dv">2</span> <span class="sc">&lt;</span> <span class="dv">1</span>)</span>
 <span id="cb238-4"><a href="slumpvariabler.html#cb238-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb238-5"><a href="slumpvariabler.html#cb238-5" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="sc">*</span> <span class="fu">mean</span>(dat_random<span class="sc">$</span>inner)</span></code></pre></div>
-<pre><code>## [1] 2.92</code></pre>
+<pre><code>## [1] 3</code></pre>
 <div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="slumpvariabler.html#cb240-1" aria-hidden="true" tabindex="-1"></a>pi</span></code></pre></div>
 <pre><code>## [1] 3.141593</code></pre>
 <p>Den beräknade arean ligger inte så långt från konstanten pi.</p>

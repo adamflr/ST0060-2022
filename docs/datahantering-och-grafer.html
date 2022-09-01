@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2022-08-16" />
+<meta name="date" content="2022-08-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,13 +51,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -226,6 +219,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="test-för-två-stickprov.html"><a href="test-för-två-stickprov.html#z-test-och-konfidensintervall-för-två-proportioner"><i class="fa fa-check"></i><b>6.3</b> z-test och konfidensintervall för två proportioner</a></li>
 <li class="chapter" data-level="6.4" data-path="test-för-två-stickprov.html"><a href="test-för-två-stickprov.html#chi-två-test-för-korstabeller"><i class="fa fa-check"></i><b>6.4</b> Chi-två-test för korstabeller</a></li>
+<li class="chapter" data-level="6.5" data-path="test-för-två-stickprov.html"><a href="test-för-två-stickprov.html#bonus.-bilder-i-r"><i class="fa fa-check"></i><b>6.5</b> Bonus. Bilder i R</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="variansanalys.html"><a href="variansanalys.html"><i class="fa fa-check"></i><b>7</b> Variansanalys</a>
 <ul>
@@ -235,12 +229,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4" data-path="variansanalys.html"><a href="variansanalys.html#variansanalys.-en-faktor-med-block"><i class="fa fa-check"></i><b>7.4</b> Variansanalys. En faktor med block</a></li>
 <li class="chapter" data-level="7.5" data-path="variansanalys.html"><a href="variansanalys.html#variansanalys.-två-faktorer-med-block"><i class="fa fa-check"></i><b>7.5</b> Variansanalys. Två faktorer med block</a></li>
 <li class="chapter" data-level="7.6" data-path="variansanalys.html"><a href="variansanalys.html#modellantaganden-och-residualer"><i class="fa fa-check"></i><b>7.6</b> Modellantaganden och residualer</a></li>
+<li class="chapter" data-level="7.7" data-path="variansanalys.html"><a href="variansanalys.html#bonus.-statistik-för-ekologi"><i class="fa fa-check"></i><b>7.7</b> Bonus. Statistik för ekologi</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html"><i class="fa fa-check"></i><b>8</b> Regression och korrelation</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html#repetition-av-datorövning-7"><i class="fa fa-check"></i><b>8.1</b> Repetition av datorövning 7</a></li>
 <li class="chapter" data-level="8.2" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html#regression"><i class="fa fa-check"></i><b>8.2</b> Regression</a></li>
 <li class="chapter" data-level="8.3" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html#korrelation"><i class="fa fa-check"></i><b>8.3</b> Korrelation</a></li>
+<li class="chapter" data-level="8.4" data-path="regression-och-korrelation.html"><a href="regression-och-korrelation.html#bonus.-skrapa-data-från-webbsidor"><i class="fa fa-check"></i><b>8.4</b> Bonus. Skrapa data från webbsidor</a></li>
 </ul></li>
 </ul>
 
@@ -314,7 +310,7 @@ Skriv</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="datahantering-och-grafer.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(___)</span></code></pre></div>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-6" class="exercise"><strong>Uppgift 1.6  (Paket som inte finns) </strong></span>Vad händer om man försöker installera ett paket som inte finns på <em>CRAN</em> ? Testa till exempel</p>
+<p><span id="exr:unlabeled-div-6" class="exercise"><strong>Uppgift 1.6  (Paket som inte finns) </strong></span>Vad händer om man försöker installera ett paket som inte finns på <em>CRAN</em>? Testa till exempel</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="datahantering-och-grafer.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ThisIsNotTheNameOfAnyPackage&quot;</span>)</span></code></pre></div>
 <p>och</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="datahantering-och-grafer.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ThisIsNotTheNameOfAnyPackage)</span></code></pre></div>
@@ -661,13 +657,13 @@ Den typen av beräkningar kan göras som ett nytt steg i en pipe med hjälp av f
 <div id="grafer-med-ggplot2" class="section level2 hasAnchor" number="1.7">
 <h2><span class="header-section-number">1.7</span> Grafer med <code>ggplot2</code><a href="datahantering-och-grafer.html#grafer-med-ggplot2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Vi kan nu börja titta på grafer. Eftersom datan är ganska stor och grafer lätt blir oöversiktliga, börjar vi med att skapa en lite mindre datamängd.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="datahantering-och-grafer.html#cb62-1" aria-hidden="true" tabindex="-1"></a>dat_small <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> </span>
-<span id="cb62-2"><a href="datahantering-och-grafer.html#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(artist_name <span class="sc">==</span> <span class="st">&quot;Robyn&quot;</span>, album_type <span class="sc">==</span> <span class="st">&quot;album&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="datahantering-och-grafer.html#cb62-1" aria-hidden="true" tabindex="-1"></a>dat_small <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span>                                      <span class="co"># Ta data, och sen</span></span>
+<span id="cb62-2"><a href="datahantering-och-grafer.html#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(artist_name <span class="sc">==</span> <span class="st">&quot;Robyn&quot;</span>, album_type <span class="sc">==</span> <span class="st">&quot;album&quot;</span>)   <span class="co"># filtrera på artist och albumtyp</span></span></code></pre></div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-16" class="exercise"><strong>Uppgift 1.16  (Valfritt artistbyte) </strong></span>Om du vill titta data på något annan artist, gör lämplig ändring i stycket ovan. Kom ihåg att man skriva ut artister i datan med <code>unique(dat$artist_name)</code>.</p>
 </div>
 <p>R har en mängd grundläggande funktioner för grafer. Ett enkelt spridningsdiagram kan till exempel skapas med</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="datahantering-och-grafer.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> dat_small<span class="sc">$</span>tempo, <span class="at">y =</span> dat_small<span class="sc">$</span>danceability)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="datahantering-och-grafer.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> dat_small<span class="sc">$</span>tempo, <span class="at">y =</span> dat_small<span class="sc">$</span>danceability)   <span class="co"># Plotta en graf med tempo och dansbarhet på axlarna</span></span></code></pre></div>
 <p><img src="R-anvisningar_files/figure-html/unnamed-chunk-50-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Tecknet <code>$</code> används här för att välja en kolumn i en tabell.</p>
 <p>För mer avancerade grafer används dock ofta funktioner ur Rs paketbibliotek. Här illustreras det mest populära - <code>ggplot2</code>. I <code>ggplot2</code> byggs grafer upp med tre grundläggande byggstenar:</p>
@@ -677,29 +673,29 @@ Den typen av beräkningar kan göras som ett nytt steg i en pipe med hjälp av f
 <li><em>geometries</em>, de geometriska former som visas i grafen.</li>
 </ul>
 <p>En graf skrivs med en startfunktion <code>ggplot</code> som anger namnet på datan och grafens <em>aestethics</em>, och därefter sätts geometriska element genom funktioner som börjar med <code>geom_</code>. Ett spridningsdiagram kan t.ex. skapas med <code>geom_point</code>.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="datahantering-och-grafer.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_small, <span class="fu">aes</span>(<span class="at">x =</span> tempo, <span class="at">y =</span> danceability)) <span class="sc">+</span></span>
-<span id="cb64-2"><a href="datahantering-och-grafer.html#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="datahantering-och-grafer.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_small, <span class="fu">aes</span>(<span class="at">x =</span> tempo, <span class="at">y =</span> danceability)) <span class="sc">+</span>  <span class="co"># Ta datan, koppla tempo och dansbarhet till x och y</span></span>
+<span id="cb64-2"><a href="datahantering-och-grafer.html#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()                                         <span class="co"># och illustrera varje observation med punkt</span></span></code></pre></div>
 <p><img src="R-anvisningar_files/figure-html/unnamed-chunk-51-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Grafen kan byggas ut genom att sätta <em>aestethics</em> för färg och storlek. Man kan också dela en graf i småfönster med <code>facet_wrap</code> och styra grafens utseende genom att sätta ett tema såsom <code>theme_bw</code>.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="datahantering-och-grafer.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_small, <span class="fu">aes</span>(<span class="at">x =</span> tempo, <span class="at">y =</span> danceability, <span class="at">color =</span> mode_name)) <span class="sc">+</span></span>
-<span id="cb65-2"><a href="datahantering-och-grafer.html#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb65-3"><a href="datahantering-och-grafer.html#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> album_name)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="datahantering-och-grafer.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_small, <span class="fu">aes</span>(<span class="at">x =</span> tempo, <span class="at">y =</span> danceability, <span class="at">color =</span> mode_name)) <span class="sc">+</span>   <span class="co"># Ta datan, koppla tempo, dansbarhet och tonart till axlarna respektive färg</span></span>
+<span id="cb65-2"><a href="datahantering-och-grafer.html#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>                                                           <span class="co"># Illustrera med punkter</span></span>
+<span id="cb65-3"><a href="datahantering-och-grafer.html#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> album_name)                                                 <span class="co"># Skapa småfönster efter album</span></span></code></pre></div>
 <p><img src="R-anvisningar_files/figure-html/unnamed-chunk-52-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-17" class="exercise"><strong>Uppgift 1.17  (Dur och moll) </strong></span>Vad ska ändras i stycket nedan för att skapa en graf med dur/moll (<code>mode_name</code>) på x-axeln, valens (<code>valence</code>) på y-axeln och skilda småfönster för olika år (<code>album_release_year</code>)?</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="datahantering-och-grafer.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_small, <span class="fu">aes</span>(<span class="at">x =</span> mode_name, <span class="at">y =</span> valence, <span class="at">color =</span> album_name)) <span class="sc">+</span></span>
-<span id="cb66-2"><a href="datahantering-och-grafer.html#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb66-3"><a href="datahantering-och-grafer.html#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> album_release_year)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="datahantering-och-grafer.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_small, <span class="fu">aes</span>(<span class="at">x =</span> mode_name, <span class="at">y =</span> valence, <span class="at">color =</span> album_name)) <span class="sc">+</span> <span class="co"># Ta datan och koppla variabler till egenskaper</span></span>
+<span id="cb66-2"><a href="datahantering-och-grafer.html#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>                                                         <span class="co"># Illustrera med punkter</span></span>
+<span id="cb66-3"><a href="datahantering-och-grafer.html#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> album_release_year)                                       <span class="co"># Skapa småfönster efter år</span></span></code></pre></div>
 <p>Har spår i dur (<em>major</em>) högre valens?</p>
 </div>
 <p>Andra graftyper kan skapas med andra <code>geom_</code>-funktioner. För ett linjediagram används <code>geom_line</code>. De observationer som ska ge en specifik linje anges med <code>group</code> i <code>aes</code>-funktionen. Låt oss beräkna medeldansbarhet över tid, uppdelat efter markeringen för <em>explicit</em> (alltså om spåret är barnvänligt eller inte). Exemplet visar också hur man använda flera geometrier genom att lägga till dem efter varandra med <code>+</code>.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="datahantering-och-grafer.html#cb67-1" aria-hidden="true" tabindex="-1"></a>dat_mean_over_time <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> </span>
-<span id="cb67-2"><a href="datahantering-och-grafer.html#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(album_release_year, explicit) <span class="sc">%&gt;%</span> </span>
-<span id="cb67-3"><a href="datahantering-och-grafer.html#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean_danceability =</span> <span class="fu">mean</span>(danceability))</span>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="datahantering-och-grafer.html#cb67-1" aria-hidden="true" tabindex="-1"></a>dat_mean_over_time <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span>                         <span class="co"># Ta datan, och sen</span></span>
+<span id="cb67-2"><a href="datahantering-och-grafer.html#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(album_release_year, explicit) <span class="sc">%&gt;%</span>          <span class="co"># gruppera efter år och explicitet, och sen</span></span>
+<span id="cb67-3"><a href="datahantering-och-grafer.html#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean_danceability =</span> <span class="fu">mean</span>(danceability))   <span class="co"># summera genom att ta medelvärdet av dansbarhet</span></span>
 <span id="cb67-4"><a href="datahantering-och-grafer.html#cb67-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-5"><a href="datahantering-och-grafer.html#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_mean_over_time, <span class="fu">aes</span>(<span class="at">x =</span> album_release_year, <span class="at">y =</span> Mean_danceability, <span class="at">color =</span> explicit)) <span class="sc">+</span></span>
-<span id="cb67-6"><a href="datahantering-och-grafer.html#cb67-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb67-7"><a href="datahantering-och-grafer.html#cb67-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<span id="cb67-5"><a href="datahantering-och-grafer.html#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_mean_over_time, <span class="fu">aes</span>(<span class="at">x =</span> album_release_year, <span class="at">y =</span> Mean_danceability, <span class="at">color =</span> explicit)) <span class="sc">+</span> <span class="co"># Koppla kolumner till egenskaper</span></span>
+<span id="cb67-6"><a href="datahantering-och-grafer.html#cb67-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span>   <span class="co"># Illustrera med linjer</span></span>
+<span id="cb67-7"><a href="datahantering-och-grafer.html#cb67-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()    <span class="co"># Illustrera med punkter</span></span></code></pre></div>
 <p><img src="R-anvisningar_files/figure-html/unnamed-chunk-54-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Här ger färgen uppdelningen i explicit och icke-explicit (<code>TRUE</code> för explicit). Det finns också spår som saknat värde för explicit och därför blir <code>NA</code> här. Kan vi utifrån grafen säga att barnvänlig musik är mer eller mindre dansbar än icke-barnvänlig?</p>
 <div class="exercise">
@@ -716,19 +712,20 @@ Den typen av beräkningar kan göras som ett nytt steg i en pipe med hjälp av f
 <p><img src="R-anvisningar_files/figure-html/unnamed-chunk-55-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Argumentet <code>fill</code> styr färgen för ytor (här staplarnas ytor) medan <code>color</code> i <code>geom_col()</code> styr kanten runt varje stapel.</p>
 <p>Man kan styra grafiken i en <code>ggplot</code> genom funktionen <code>theme()</code>. Det är ett ganska komplicerat ämne, men låt oss titta på några grunder. Vi börjar med att skapa en enkel graf: en boxplot över dansbarhet per album för bandet <em>Beach House</em>.</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="datahantering-och-grafer.html#cb69-1" aria-hidden="true" tabindex="-1"></a>dat_small <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> <span class="fu">filter</span>(artist_name <span class="sc">==</span> <span class="st">&quot;Beach House&quot;</span>, album_type <span class="sc">==</span> <span class="st">&quot;album&quot;</span>)</span>
-<span id="cb69-2"><a href="datahantering-och-grafer.html#cb69-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-3"><a href="datahantering-och-grafer.html#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_small, <span class="fu">aes</span>(danceability, album_name)) <span class="sc">+</span></span>
-<span id="cb69-4"><a href="datahantering-och-grafer.html#cb69-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="datahantering-och-grafer.html#cb69-1" aria-hidden="true" tabindex="-1"></a>dat_small <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span>                                            <span class="co"># Ta datan, och sen</span></span>
+<span id="cb69-2"><a href="datahantering-och-grafer.html#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(artist_name <span class="sc">==</span> <span class="st">&quot;Beach House&quot;</span>, album_type <span class="sc">==</span> <span class="st">&quot;album&quot;</span>)   <span class="co"># filtrera på artist och albumtyp</span></span>
+<span id="cb69-3"><a href="datahantering-och-grafer.html#cb69-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-4"><a href="datahantering-och-grafer.html#cb69-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_small, <span class="fu">aes</span>(<span class="at">x =</span> danceability, <span class="at">y =</span> album_name)) <span class="sc">+</span>      <span class="co"># Ta data och koppla dansbarhet och album till axlarna</span></span>
+<span id="cb69-5"><a href="datahantering-och-grafer.html#cb69-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()                                                <span class="co"># Illustrera med lådagram</span></span></code></pre></div>
 <p><img src="R-anvisningar_files/figure-html/unnamed-chunk-56-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Vi kan ändra utseendet på grafen genom argument inom geometrier och med funktionen <code>theme()</code>. I <code>theme()</code> sätter man de specifika egenskaper man vill ändra genom att tillskriva dem ett <em>element</em>. Valet av element beror på typen av grafiskt objekt - text sätts t.ex. med <code>element_text()</code> och ytor med <code>element_rect()</code> (för <em>rectangle</em>). Vi ger ett exempel med ändrad bakgrund, rutmönster, och teckenstorlek.</p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="datahantering-och-grafer.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_small, <span class="fu">aes</span>(danceability, album_name)) <span class="sc">+</span></span>
-<span id="cb70-2"><a href="datahantering-och-grafer.html#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="sc">+</span></span>
-<span id="cb70-3"><a href="datahantering-och-grafer.html#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;red3&quot;</span>), </span>
-<span id="cb70-4"><a href="datahantering-och-grafer.html#cb70-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">family =</span> <span class="st">&quot;serif&quot;</span>),</span>
-<span id="cb70-5"><a href="datahantering-och-grafer.html#cb70-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">&quot;white&quot;</span>),</span>
-<span id="cb70-6"><a href="datahantering-och-grafer.html#cb70-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;grey30&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>),</span>
-<span id="cb70-7"><a href="datahantering-och-grafer.html#cb70-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<span id="cb70-2"><a href="datahantering-och-grafer.html#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="sc">+</span>                                         <span class="co"># Fyll lådagrammen med en färg</span></span>
+<span id="cb70-3"><a href="datahantering-och-grafer.html#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;red3&quot;</span>),                      <span class="co"># Sätt grafenfönstrets bakgrund</span></span>
+<span id="cb70-4"><a href="datahantering-och-grafer.html#cb70-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">family =</span> <span class="st">&quot;serif&quot;</span>),   <span class="co"># Sätt textens storlek och snitt</span></span>
+<span id="cb70-5"><a href="datahantering-och-grafer.html#cb70-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">&quot;white&quot;</span>),                           <span class="co"># Sätt axel-textens färg</span></span>
+<span id="cb70-6"><a href="datahantering-och-grafer.html#cb70-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;grey30&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>),    <span class="co"># Sätt grafens bakgrund</span></span>
+<span id="cb70-7"><a href="datahantering-och-grafer.html#cb70-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>())                                <span class="co"># Sätt rutnätet till blankt</span></span></code></pre></div>
 <p><img src="R-anvisningar_files/figure-html/unnamed-chunk-57-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-19" class="exercise"><strong>Uppgift 1.19  (Temaval 1) </strong></span>Ändra färgvalen i grafen ovan för att skapa snyggast möjliga graf. Funktionen <code>colors()</code> ger de färger som finns tillängliga i R. Man kan också använda hex-koden för färger, t.ex. <code>fill = "#ffdd00"</code>.</p>
@@ -771,17 +768,17 @@ Den typen av beräkningar kan göras som ett nytt steg i en pipe med hjälp av f
 <span id="cb75-11"><a href="datahantering-och-grafer.html#cb75-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(g)</span></code></pre></div>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-22" class="exercise"><strong>Uppgift 1.22  (Interaktiv graf med andra axlar) </strong></span>Vi fortsätter med ett nytt exempel, nu med ett spridningsdiagram med album på y-axeln och valens på x-axeln.</p>
+<p><span id="exr:unlabeled-div-22" class="exercise"><strong>Uppgift 1.22  (Interaktiv graf med andra axlar) </strong></span>Vi fortsätter med ett nytt exempel, nu med ett spridningsdiagram med album på y-axeln och valens på x-axeln. Funktionen <code>reorder()</code> ordnar en kolumn efter en annan. Här ordnas album efter release-år.</p>
 <div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="datahantering-och-grafer.html#cb76-1" aria-hidden="true" tabindex="-1"></a>dat_small <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> </span>
 <span id="cb76-2"><a href="datahantering-och-grafer.html#cb76-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(artist_name <span class="sc">==</span> <span class="st">&quot;Rihanna&quot;</span>, album_type <span class="sc">==</span> <span class="st">&quot;album&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb76-3"><a href="datahantering-och-grafer.html#cb76-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Decade =</span> <span class="fu">floor</span>(album_release_year <span class="sc">/</span> <span class="dv">10</span>) <span class="sc">*</span> <span class="dv">10</span>,</span>
 <span id="cb76-4"><a href="datahantering-och-grafer.html#cb76-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">Decade =</span> <span class="fu">as.character</span>(Decade),</span>
-<span id="cb76-5"><a href="datahantering-och-grafer.html#cb76-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">album_name =</span> <span class="fu">reorder</span>(album_name, album_release_year)) <span class="co"># Funktionen reorder() ordnar en vektor efter en annan. Här ordnas album efter release-år.</span></span>
+<span id="cb76-5"><a href="datahantering-och-grafer.html#cb76-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">album_name =</span> <span class="fu">reorder</span>(album_name, album_release_year))</span>
 <span id="cb76-6"><a href="datahantering-och-grafer.html#cb76-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb76-7"><a href="datahantering-och-grafer.html#cb76-7" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_small, <span class="fu">aes</span>(valence, album_name, <span class="at">color =</span> Decade, <span class="at">text =</span> track_name)) <span class="sc">+</span></span>
 <span id="cb76-8"><a href="datahantering-och-grafer.html#cb76-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
 <span id="cb76-9"><a href="datahantering-och-grafer.html#cb76-9" aria-hidden="true" tabindex="-1"></a>g</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-63-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-61-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Ändra gärna artist på lämpligt ställe.
 Vad måste läggas till för en interaktiv version av samma graf?</p>
 </div>
@@ -795,7 +792,7 @@ Vad måste läggas till för en interaktiv version av samma graf?</p>
 <p>Vi skapar nu en graf, som alltså ska ha en x-axeln given av år (<code>Year</code>) och ifylld färg som ges av temperatur (<code>Value</code>). Höjden ska vara densamma för alla staplar, men det spelar ingen roll vad den är (så länge den inte är noll).</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="datahantering-och-grafer.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_temp, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> <span class="dv">1</span>, <span class="at">fill =</span> Value)) <span class="sc">+</span></span>
 <span id="cb78-2"><a href="datahantering-och-grafer.html#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code></pre></div>
-<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-65-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="R-anvisningar_files/figure-html/unnamed-chunk-63-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-23" class="exercise"><strong>Uppgift 1.23  (Staplar utan mellanrum) </strong></span>Ett första problem är att staplarna inte fyller ytan. Man kan styra staplars bredd med argumentet <code>width</code>, t.ex.</p>
 <div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="datahantering-och-grafer.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_temp, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> <span class="dv">1</span>, <span class="at">fill =</span> Value)) <span class="sc">+</span></span>
@@ -819,7 +816,7 @@ Vad måste läggas till för en interaktiv version av samma graf?</p>
 <span id="cb81-6"><a href="datahantering-och-grafer.html#cb81-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb81-7"><a href="datahantering-och-grafer.html#cb81-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb81-8"><a href="datahantering-och-grafer.html#cb81-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
-<p>Använd temat från exemplet för att skapa en enklare version av grafen från föregående uppgift.</p>
+<p>Använd temat från exemplet för att skapa en enklare version av grafen från föregående uppgift. Ett liknande resultat kan fås med temat <code>theme_void()</code>.</p>
 </div>
 </div>
 <div id="valfria-hemuppgifter" class="section level2 hasAnchor" number="1.10">

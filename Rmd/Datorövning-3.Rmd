@@ -19,7 +19,7 @@ Datorövning 3 handlar om sannolikhetslära i R. Efter övningen ska vi kunna
 
 När man startar en ny R-session bör man ladda de paket man vet kommer behövas med `library()`. Om paket inte finns installerade måste man först köra `install.packages()`.
 
-```{r}
+```{r thirdFile}
 # install.packages("tidyverse")
 library(tidyverse)
 ```
@@ -557,26 +557,25 @@ Gör lämpliga tillägg i stycket ovan för att beräkna summan av tre utfall f�
 
 En intressant aspekt av slumptal är att de kan användas till att utforska icke-slumpmässiga problem. Som exempel tar vi cirkelns area. I figuren nedan är en cirkel inskriven i en kvadrat. Kvadraten har sidor med längden två, så dess totala yta är fyra (två i kvadrat). Om man vet hur stor andel av ytan upptas av cirkeln kan man beräkna cirkelns area genom att ta den andelen gånger fyra. Från rent matematiska resultat vet vi att arean ska vara lika med pi, alltså runt 3.14.
 
-```{r}
+```{r, fig.height=4, fig.width=4}
 # install.packages("ggforce")
 library(ggforce)
 g <- ggplot() + 
   geom_circle(aes(x0 = 0, y0 = 0, r = 1)) + 
-  geom_rect(aes(xmin = -1, ymin = -1, xmax = 1, ymax = 1), fill = NA, color = "black") +
-  coord_equal()
+  geom_rect(aes(xmin = -1, ymin = -1, xmax = 1, ymax = 1), fill = NA, color = "black")
 g
 ```
 
 Funktionen `runif()` ger ett slumpmässigt värde mellan två gränsvärden (som sätts med argumenten `min` och `max`). Slumpmässiga punkter inom kvadraten kan dras genom att dra en x- och en y-koordinat. En fördelning där alla värden är lika sannolika kallas *uniform* (eller *likformig*).
 
-```{r}
+```{r, fig.height=4, fig.width=4}
 dat_random <- data.frame(x = runif(100, min = -1, max = 1),
                          y = runif(100, min = -1, max = 1))
 
 g + geom_point(aes(x, y), data = dat_random)
 ```
 
-Pytagoras sats kan användas för att beräkna avståndet mellan en slumpmässig punkt och origo (nollpunkten). Punkter med ett avstånd under ett ligger inom cirkeln. Cirkelns area ska ges av andelen punkter i kvadraten som också ligger i cirkeln gånger fyra.
+Pytagoras sats kan användas för att beräkna avståndet mellan en slumpmässig punkt och origo (nollpunkten). Punkter med ett avstånd under ett ligger inom cirkeln. Cirkelns area ska ges av andelen punkter i kvadraten som också ligger i cirkeln, gånger fyra.
 
 ```{r}
 dat_random <- data.frame(x = runif(100, min = -1, max = 1),

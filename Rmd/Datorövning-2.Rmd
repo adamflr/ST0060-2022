@@ -121,7 +121,7 @@ gapminder
 
 Den importerade datan ger medellivslängd, populationsstorlek och bnp per capita per land och år. Vi kan börja med att producera en bubbelgraf över datan - en av de presentationer Gapminder ofta använder. En bubbelgraf är ett spridningsdiagram där punktens storlek beror på en tredje variabel.
 
-```{r}
+```{r, fig.height = 8}
 ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, color = continent)) +
   geom_point() +
   facet_wrap(~ year)
@@ -129,7 +129,7 @@ ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, color = continent)) +
 
 En interaktiv version kan vara bra om man vill identifiera någon punkt.
 
-```{r}
+```{r, eval = F, fig.height = 8}
 g <- ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, color = continent, text = country)) +
   geom_point() +
   facet_wrap(~ year)
@@ -539,9 +539,9 @@ Vad är kopplingen mellan kvantilerna och lådagrammet?
 
 ## Bonus. Tredimensionella grafer med `plotly`
 
-Förra gången anvnäde vi paketet `plotly` för att göra en interaktiv graf. Paketet har också funktioner för 3d-grafer. Börja med att ladda paketet.
+Förra gången använde vi paketet `plotly` för att göra en interaktiv graf. Paketet har också funktioner för 3d-grafer. Börja med att ladda paketet.
 
-```{r}
+```{r loadPlotly, eval = F}
 library(plotly)
 ```
 

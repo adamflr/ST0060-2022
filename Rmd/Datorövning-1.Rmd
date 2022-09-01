@@ -90,7 +90,7 @@ library(___)
 :::
 
 ::: {.exercise name="Paket som inte finns"}
-Vad händer om man försöker installera ett paket som inte finns på *CRAN* ? Testa till exempel
+Vad händer om man försöker installera ett paket som inte finns på *CRAN*? Testa till exempel
 
 ```{r, eval = F}
 install.packages("ThisIsNotTheNameOfAnyPackage")
@@ -438,8 +438,8 @@ dat %>%                                              # Ta data, och sen
 Vi kan nu börja titta på grafer. Eftersom datan är ganska stor och grafer lätt blir oöversiktliga, börjar vi med att skapa en lite mindre datamängd.
 
 ```{r}
-dat_small <- dat %>% 
-  filter(artist_name == "Robyn", album_type == "album")
+dat_small <- dat %>%                                      # Ta data, och sen
+  filter(artist_name == "Robyn", album_type == "album")   # filtrera på artist och albumtyp
 ```
 
 ::: {.exercise name="Valfritt artistbyte"}
@@ -449,7 +449,7 @@ Om du vill titta data på något annan artist, gör lämplig ändring i stycket 
 R har en mängd grundläggande funktioner för grafer. Ett enkelt spridningsdiagram kan till exempel skapas med
 
 ```{r}
-plot(x = dat_small$tempo, y = dat_small$danceability)
+plot(x = dat_small$tempo, y = dat_small$danceability)   # Plotta en graf med tempo och dansbarhet på axlarna
 ```
 
 Tecknet `$` används här för att välja en kolumn i en tabell.
@@ -463,25 +463,25 @@ För mer avancerade grafer används dock ofta funktioner ur Rs paketbibliotek. H
 En graf skrivs med en startfunktion `ggplot` som anger namnet på datan och grafens *aestethics*, och därefter sätts geometriska element genom funktioner som börjar med `geom_`. Ett spridningsdiagram kan t.ex. skapas med `geom_point`.
 
 ```{r}
-ggplot(dat_small, aes(x = tempo, y = danceability)) +
-  geom_point()
+ggplot(dat_small, aes(x = tempo, y = danceability)) +  # Ta datan, koppla tempo och dansbarhet till x och y
+  geom_point()                                         # och illustrera varje observation med punkt
 ```
 
 Grafen kan byggas ut genom att sätta *aestethics*  för färg och storlek. Man kan också dela en graf i småfönster med `facet_wrap` och styra grafens utseende genom att sätta ett tema såsom `theme_bw`.
 
 ```{r, fig.height=6}
-ggplot(dat_small, aes(x = tempo, y = danceability, color = mode_name)) +
-  geom_point() +
-  facet_wrap(~ album_name)
+ggplot(dat_small, aes(x = tempo, y = danceability, color = mode_name)) +   # Ta datan, koppla tempo, dansbarhet och tonart till axlarna respektive färg
+  geom_point() +                                                           # Illustrera med punkter
+  facet_wrap(~ album_name)                                                 # Skapa småfönster efter album
 ```
 
 ::: {.exercise name="Dur och moll"}
 Vad ska ändras i stycket nedan för att skapa en graf med dur/moll (`mode_name`) på x-axeln, valens (`valence`) på y-axeln och skilda småfönster för olika år (`album_release_year`)?
 
 ```{r, eval = F}
-ggplot(dat_small, aes(x = mode_name, y = valence, color = album_name)) +
-  geom_point() +
-  facet_wrap(~ album_release_year)
+ggplot(dat_small, aes(x = mode_name, y = valence, color = album_name)) + # Ta datan och koppla variabler till egenskaper
+  geom_point() +                                                         # Illustrera med punkter
+  facet_wrap(~ album_release_year)                                       # Skapa småfönster efter år
 ```
 
 Har spår i dur (*major*) högre valens?
@@ -490,13 +490,13 @@ Har spår i dur (*major*) högre valens?
 Andra graftyper kan skapas med andra `geom_`-funktioner. För ett linjediagram används `geom_line`. De observationer som ska ge en specifik linje anges med `group` i `aes`-funktionen. Låt oss beräkna medeldansbarhet över tid, uppdelat efter markeringen för *explicit* (alltså om spåret är barnvänligt eller inte). Exemplet visar också hur man använda flera geometrier genom att lägga till dem efter varandra med `+`.
 
 ```{r}
-dat_mean_over_time <- dat %>% 
-  group_by(album_release_year, explicit) %>% 
-  summarise(Mean_danceability = mean(danceability))
+dat_mean_over_time <- dat %>%                         # Ta datan, och sen
+  group_by(album_release_year, explicit) %>%          # gruppera efter år och explicitet, och sen
+  summarise(Mean_danceability = mean(danceability))   # summera genom att ta medelvärdet av dansbarhet
 
-ggplot(dat_mean_over_time, aes(x = album_release_year, y = Mean_danceability, color = explicit)) +
-  geom_line() +
-  geom_point()
+ggplot(dat_mean_over_time, aes(x = album_release_year, y = Mean_danceability, color = explicit)) + # Koppla kolumner till egenskaper
+  geom_line() +   # Illustrera med linjer
+  geom_point()    # Illustrera med punkter
 ```
 
 Här ger färgen uppdelningen i explicit och icke-explicit (`TRUE` för explicit). Det finns också spår som saknat värde för explicit och därför blir `NA` här. Kan vi utifrån grafen säga att barnvänlig musik är mer eller mindre dansbar än icke-barnvänlig?
@@ -522,10 +522,11 @@ Argumentet `fill` styr färgen för ytor (här staplarnas ytor) medan `color` i 
 Man kan styra grafiken i en `ggplot` genom funktionen `theme()`. Det är ett ganska komplicerat ämne, men låt oss titta på några grunder. Vi börjar med att skapa en enkel graf: en boxplot över dansbarhet per album för bandet *Beach House*.
 
 ```{r}
-dat_small <- dat %>% filter(artist_name == "Beach House", album_type == "album")
+dat_small <- dat %>%                                            # Ta datan, och sen
+  filter(artist_name == "Beach House", album_type == "album")   # filtrera på artist och albumtyp
 
-ggplot(dat_small, aes(danceability, album_name)) +
-  geom_boxplot()
+ggplot(dat_small, aes(x = danceability, y = album_name)) +      # Ta data och koppla dansbarhet och album till axlarna
+  geom_boxplot()                                                # Illustrera med lådagram
 
 ```
 
@@ -533,12 +534,12 @@ Vi kan ändra utseendet på grafen genom argument inom geometrier och med funkti
 
 ```{r}
 ggplot(dat_small, aes(danceability, album_name)) +
-  geom_boxplot(fill = "lightblue") +
-  theme(panel.background = element_rect(fill = "red3"), 
-        text = element_text(size = 15, color = "white", family = "serif"),
-        axis.text = element_text(color = "white"),
-        plot.background = element_rect(fill = "grey30", color = "black"),
-        panel.grid.major.y = element_blank())
+  geom_boxplot(fill = "lightblue") +                                         # Fyll lådagrammen med en färg
+  theme(panel.background = element_rect(fill = "red3"),                      # Sätt grafenfönstrets bakgrund
+        text = element_text(size = 15, color = "white", family = "serif"),   # Sätt textens storlek och snitt
+        axis.text = element_text(color = "white"),                           # Sätt axel-textens färg
+        plot.background = element_rect(fill = "grey30", color = "black"),    # Sätt grafens bakgrund
+        panel.grid.major.y = element_blank())                                # Sätt rutnätet till blankt
 ```
 
 ::: {.exercise name="Temaval 1"}
@@ -582,14 +583,14 @@ g
 
 När vi har en färdig ggplot kan `ggplotly()` ge en interaktiv version av samma graf.
 
-```{r, eval=F}
+```{r plotly1, eval=F}
 ggplotly(g)
 ```
 
 ::: {.exercise name="Interaktiv graf med annan artist"}
 Gör lämpliga ändringar i stycket nedan för att skapa en interaktiv graf med en annan artist och med tempo på x-axeln och dansbarhet på y-axeln. Kom ihåg att du kan se tillgängliga artister med raden `unique(dat$artist_name)`.
 
-```{r, eval = F}
+```{r plotly2, eval = F}
 dat_small <- dat %>% 
   filter(artist_name == "David Bowie", album_type == "album") %>% 
   mutate(Decade = floor(album_release_year / 10) * 10)
@@ -605,14 +606,14 @@ ggplotly(g)
 :::
 
 ::: {.exercise name="Interaktiv graf med andra axlar"}
-Vi fortsätter med ett nytt exempel, nu med ett spridningsdiagram med album på y-axeln och valens på x-axeln.
+Vi fortsätter med ett nytt exempel, nu med ett spridningsdiagram med album på y-axeln och valens på x-axeln. Funktionen `reorder()` ordnar en kolumn efter en annan. Här ordnas album efter release-år.
 
 ```{r}
 dat_small <- dat %>% 
   filter(artist_name == "Rihanna", album_type == "album") %>% 
   mutate(Decade = floor(album_release_year / 10) * 10,
          Decade = as.character(Decade),
-         album_name = reorder(album_name, album_release_year)) # Funktionen reorder() ordnar en vektor efter en annan. Här ordnas album efter release-år.
+         album_name = reorder(album_name, album_release_year))
 
 g <- ggplot(dat_small, aes(valence, album_name, color = Decade, text = track_name)) +
   geom_point()
@@ -679,7 +680,7 @@ ggplot(dat_temp, aes(x = Year, y = Value)) +
         axis.ticks = element_blank())
 ```
 
-Använd temat från exemplet för att skapa en enklare version av grafen från föregående uppgift.
+Använd temat från exemplet för att skapa en enklare version av grafen från föregående uppgift. Ett liknande resultat kan fås med temat `theme_void()`.
 :::
 
 ## Valfria hemuppgifter

@@ -1,4 +1,4 @@
-# # Datorövning 1. Datahantering och grafer
+# # Datahantering och grafer
 #
 # Datorövning 1 handlar om grunderna till R. Efter övningen ska vi kunna
 #
@@ -41,7 +41,7 @@
 # strukturera och dokumentera sitt arbete. I RStudio kan man öppna ett nytt skript genom att gå till
 # *File > New File > R Script* eller genom att klicka *Ctrl + Shift + N*. Ett tomt skript öppnar sig
 # då i det övre vänstra delfönstret. Om du läser det här i RStudio, genom att ha laddat ner .R-filen,
-# läster du just nu ett skript.
+# läser du just nu ett skript.
 #
 # Uppgift 3.2. (Ett första skript)
 # Öppna ett nytt skript genom File-menyn eller genom *Ctrl + Shift + N*.
@@ -182,11 +182,11 @@ sum(___)
 
 # :::
 #
-# Vid konstruktionen av vektorn användes också en grundläggande funktion - funktionen `c` som tar
-# en serie värden och skapar en sammanhängande vektor av värden.
+# Vid konstruktionen av vektorn användes också en grundläggande funktion - funktionen `c()`, som
+# tar en serie värden och skapar en sammanhängande vektor av värden.
 #
 # Alla R-funktioner har en tillhörande hjälpfil som kan plockas fram genom att skriva frågetecken
-# följt av funktionsnamnet, t.ex. `?sum`. Från hjälpfilen får man att `sum` tar numeriska vektorer
+# följt av funktionsnamnet, t.ex. `?sum`. Från hjälpfilen får man att `sum()` tar numeriska vektorer
 # som ingående värde och beräknar summan. Man kan styra funktionens beteende genom att sätta ett
 # argument `na.rm` (vilket här styr hur funktionen hanterar saknade värden). Som illustration kan man
 # titta på
@@ -209,49 +209,52 @@ sum(b, na.rm = TRUE)          # na.rm sätts till TRUE
 # resultatet i varje steg och sedan använda utfallet i nästa steg:
 #
 
-c <- c(-4, -2, -1, 1, 2, 4)
-c_absolute <- abs(c)
-sum(c_absolute)
+c <- c(-4, -2, -1, 1, 2, 4)   # Skapa en vektor av värden
+c_absolute <- abs(c)          # Ta absolutvärden. Spara som c_absolut
+sum(c_absolute)               # Summera värden i c_absolut
 
 #
 # Här skapas ett objekt `c` som innehåller en vektor där några tal är negativa. I nästa rad används
 # `abs` för att skapa absolutvärden. Slutligen summeras absolutvärdena med `sum`.
 # Notera att det är möjligt att skapa ett objekt med namnet `c` trots att det redan är namnet på en
-# funktion - R förstår ur sammanhanget om objektet eller funktionen ska användas.
+# funktion - R förstår ur sammanhanget om objektet eller funktionen ska användas. Det kan dock bli
+# lite oklart för en läsare, så försök som regel att undvika att skapa objekt med vanliga
+# funktionsnamn som `sum` och `mean`.
 #
 # Uppgift 3.9. (Kvadrat, summa och roten ur)
 # Fyll i och kör följande rader för att ta varje värde i `new_vector` i kvadrat, *sedan* summera,
 # och sedan ta roten ur.
 #
 
-new_vector_squared <- new_vector^2 # Ta kvadraten av varje värde
-new_vector_squared_sum <- sum(___) # Summera vektorn med kvadrater
-sqrt(___)                          # Ta kvadratroten ur summan
+new_vector_squared <- new_vector^2   # Ta kvadraten av varje värde
+new_vector_squared_sum <- sum(___)   # Summera vektorn med kvadrater
+sqrt(___)                            # Ta kvadratroten ur summan
 
 # :::
 #
-# Ett alternativ är att skriva en senare funktion *runt* en tidigare funktion. Det fungerar för att
-# R utvärderar funktioner inifrån-ut. Med samma exempel som tidigare får man
+# Ett alternativ till att spara utfallet i varje steg är att skriva en senare funktion *runt* en
+# tidigare funktion. Det fungerar för att R utvärderar funktioner inifrån-ut. Med samma exempel som
+# tidigare får man
 #
 
-sum(abs(c(-4, -2, -1, 1, 2, 4)))
+sum(abs(c(-4, -2, -1, 1, 2, 4)))   # Ta summan av absolutvärden av vektorn
 
 #
 # medan beräkningen i övningen blir
 #
 
-sqrt(sum(new_vector^2))
+sqrt(sum(new_vector^2))   # Ta roten ur summan av vektorn i kvadrat
 
 #
 # Den här typen av skrivning kan spara plats men blir snabbt svårläst.
 #
 # Ett sista alternativ är att använda en så kallad *pipe* (namnet kommer från att en sekvens
-# funktioner kallas en *pipeline*). En pipe skrivs `%>%` och tar utfallet av en funktion till vänster
-# och sänder till en funktion till höger. Språkligt kan pipen utläsas *och sen*. Funktionen kan
-# laddas genom att ladda paketet `tidyverse`. Med samma exempel som tidigare kan vi skriva
+# funktioner kallas en *pipeline*). En pipe skrivs `%>%` och kan i RStudio tas fram med kortkommandon
+# *Ctrl + Shift + M*. Pipen tar utfallet av en funktion till vänster och sänder till en funktion till
+# höger. Den kan utläsas i dagligt tal som *och sen*. Med samma exempel som tidigare kan vi skriva
 #
 
-library(tidyverse)
+library(tidyverse)          # Ladda tidyverse, ej nödvändigt om redan gjort
 
 c(-4, -2, -1, 1, 2, 4) %>%  # Skapa en datamängd och sen
   abs() %>%                 # ta absolutvärden, och sen
@@ -266,7 +269,7 @@ c(-4, -2, -1, 1, 2, 4) %>%  # Skapa en datamängd och sen
 
 new_vector^2 %>%        # Ta kvadraterna av new_vector, och sen
   ___() %>%             # beräkna summan, och sen
-  ____()                # Ta kvadratroten (med sqrt())
+  ____()                # Ta kvadratroten med sqrt()
 
 # :::
 #
@@ -288,7 +291,6 @@ dat <- data.frame(Vecka = c(7,7,7,7,7,7,11,11,11,11,11,11),
                   Behandling = c("A","A","A","B","B","B","A","A","A","B","B","B"),
                   Vikt = c(232,161,148,368,218,257,1633,2213,972,2560,2430,855),
                   N = c(2.63,2.90,2.99,3.54,3.30,2.85,1.53,1.90,NA,2.58,NA,NA))
-
 dat
 
 #
@@ -314,11 +316,12 @@ dat_dice
 # Inskrivning av värden är ofta tidskrävande och kan lätt leda till misstag. Det är därför mycket
 # vanligare att data läses in från en extern fil. Det finns en mängd funktioner för dataimport och
 # det exakta valet av funktion beror på vilken typ av fil datan är sparad i. Ett vanligt filformat är
-# .csv (*comma separated values*). Här importerar vi en fil med data från Spotify.
+# .csv (*comma separated values*). Här importerar vi en fil med data från Spotify. Filen ligger på
+# Github, en populär sida för lagring av filer och kod.
 #
 
-dat <- read_csv("https://raw.githubusercontent.com/adamflr/ST0060-2022/main/Data/Spotify_data.csv")
-dat
+dat <- read_csv("https://raw.githubusercontent.com/adamflr/ST0060-2022/main/Data/Spotify_data.csv") # Läs in en csv-fil från Github
+dat   # Skriv ut objektet dat
 
 #
 # Om importen fungerat kan man skriva ut tabellens översta rader genom att köra objektets namn.
@@ -326,7 +329,7 @@ dat
 # För att snabbt se vilka artister datan täcker kan man köra
 #
 
-unique(dat$artist_name)
+unique(dat$artist_name)   # Skriv ut unika (inga dubletter) värden i kolumnen artist_name i dat
 
 #
 # där `unique` är en funktion som tar bort alla dubletter och `dat$artist_name` används för att
@@ -338,76 +341,73 @@ unique(dat$artist_name)
 #
 # En vanlig operation på en tabell är att göra ett urval - antingen ett urval av rader (t.ex. en
 # viss artist), vilket kallas *filtrering* eller ett urval av variabler (t.ex. artist och albumnamn),
-# vilket kallas *selektion*.
-# Det finns flera olika sätt att göra ett urval i R.
-# Det traditionella sättet är att använda index inom hakparenteser (t.ex. `dat[4, 2]` för fjärde
-# raden, andra kolumnen) eller dollartecken för specifika kolumner (t.ex. `dat$artist_name` för
-# artistnamn).
-# Här fokuseras dock på hur det kan göras med funktionerna `filter` och `select` från paketet
-# `tidyverse`.
+# vilket kallas *selektion*. Det finns flera olika sätt att göra ett urval i R. Det traditionella
+# sättet är att använda index inom hakparenteser (t.ex. `dat[4, 2]` för fjärde raden, andra kolumnen)
+# eller dollartecken för specifika kolumner (t.ex. `dat$artist_name` för artistnamn). Här fokuseras
+# dock på hur det kan göras med funktionerna `filter()` och `select()` från paketet `tidyverse`.
 #
 # För att filtrera på ett givet land kan använda pipe-funktionen från datan till en
 # filter-funktion, t.ex.
 #
 
-dat %>%                          # Ta spotify-datan och sen
-  filter(artist_name == "Robyn") # filtrera för en specifik artist
+dat %>%                            # Ta spotify-datan och sen
+  filter(artist_name == "Robyn")   # filtrera för en specifik artist
 
 #
-# Inom filter-funktionen anges ett logisk villkor `country == "Sweden"` och utfallet är de rader
-# där villkoret är sant. Notera de dubbla likhetstecknen - de måste användas för ett logisk villkor
+# Inom filterfunktionen anges ett logisk villkor `country == "Sweden"` och utfallet är de rader där
+# villkoret är sant. Notera de dubbla likhetstecknen - de måste användas för ett logisk villkor
 # eftersom enkelt likhetstecken används för att skapa objekt och sätta funktionsargument.
 #
 # Uppgift 3.12. (Filtrera för artist)
 # Vad måste ändras i koden för att istället plocka ut rader där artisten är Esperanza Spalding? Hur
-# många rader har det urvalet?
+# många rader har det urvalet i datan?
 #
 
-dat %>%                          # Ta spotify-datan och sen
-  filter(artist_name == "Robyn") # filtrera för en specifik artist
+dat %>%                            # Ta spotify-datan och sen
+  filter(artist_name == "Robyn")   # filtrera för en specifik artist
 
 # :::
 #
 # Om man vill välja flera artister kan man använda funktionen `%in%` på ett liknande sätt.
 #
 
-dat %>% 
-  filter(artist_name %in% c("Robyn", "Esperanza Spalding"))
+dat %>%                                                       # Ta datan, och sen
+  filter(artist_name %in% c("Robyn", "Esperanza Spalding"))   # filtrera för specifika artister
 
 #
 # och om man vill ha mer än ett villkor kan man rada dem i filter-funktionen eller ha flera
 # filter-steg:
 #
 
-dat %>% 
-  filter(artist_name %in% c("Robyn", "Esperanza Spalding"),
-         key_name == "D#")
+dat %>%                                                       # Ta datan, och sen
+  filter(artist_name %in% c("Robyn", "Esperanza Spalding"),   # filtrera för specifika artister
+         key_name == "D#")                                    # och för tonart
 
 #
 # alternativt
 #
 
-dat %>% 
-  filter(artist_name %in% c("Robyn", "Esperanza Spalding")) %>% 
-  filter(key_name == "D#")
+dat %>%                                                          # Ta datan, och sen
+  filter(artist_name %in% c("Robyn", "Esperanza Spalding")) %>%  # filtrera för specifika artister, och sen
+  filter(key_name == "D#")                                       # filtrera för tonart
 
 #
-# För att se fler eller färre rader kan man använda en pipe `%>%` till funktionen `print`. Följande
-# skriver ut fem rader
+# För att se fler eller färre rader kan man använda en pipe `%>%` till funktionen `print()`.
+# Följande skriver ut fem rader
 #
 
-dat %>% 
-  filter(artist_name %in% c("Robyn", "Esperanza Spalding")) %>% 
-  filter(key_name == "D#") %>% 
-  print(n = 5)
+dat %>%                                                          # Ta datan, och sen
+  filter(artist_name %in% c("Robyn", "Esperanza Spalding")) %>%  # filtrera för specifika artister, och sen
+  filter(key_name == "D#")  %>%                                  # filtrera för tonart, och sen
+  print(n = 5)                                                   # skriv ut de fem första raderna
 
 #
-# Om man istället vill göra ett urval av kolumner kan man använda `select`. Som argument anges de
+# Om man istället vill göra ett urval av kolumner kan man använda `select()`. Som argument anges de
 # kolumner man vill välja, t.ex.
 #
 
-dat %>% 
-  select(artist_name, album_name)
+dat %>%                             # Ta datan, och sen
+  select(artist_name, album_name)   # väljd kolumnerna artist_name och album_name
 
 #
 # Som avslutning ges ett lite mer komplicerat exempel på ett urval av artist, år och spår för spår
@@ -455,7 +455,7 @@ dat %>% select(tempo, beats_per_second)
 #
 # Uppgift 3.14. (Glädje per dansbarhet)
 # Följande stycke beräknar kvoten av kolumnerna valence och danceability i en ny kolumn
-# `valence_to_danceability.
+# `valence_to_danceability`.
 #
 
 dat %>%                                                        # Ta datan, och sen
@@ -466,6 +466,16 @@ dat %>%                                                        # Ta datan, och s
 # Gör lämpliga ändringar för att multiplicera `tempo` och `time signature`. Ett passande namn för
 # den nya kolumnen kan vara `tempo_times_time_signature`.
 # :::
+#
+# I exemplet och uppgiften ovan skapades nya kolumn namn med understreck `_` istället för
+# mellanrum. Om man vill ha mellanrum i sina kolumnnamn måste man skriva namnet inom *backticks* `\``
+# för att ange att namnet ska tolkas som en enhet.
+#
+
+dat %>% 
+  mutate(`Valence to danceability` = valence / danceability) %>% # Namnet Valence to danceability skrivs inom backticks
+  select(artist_name, `Valence to danceability`)
+
 #
 # ### Summera kolumner med `group_by` och `summarise`
 #
@@ -499,12 +509,14 @@ dat %>%                                   # Ta datan, och sen
 # Uppgift 3.15. (Gladast artist)
 # Vad ska ändras i stycket ovan för att beräkna medelvalence per artist istället för per år?
 #
-# Vad måste ändras i stycket nedan för att se vilka artister som påverkar värdet för 1960?
+# Funktionen `count()` ger antalet rader uppdelat efter valfri kolumn. Den kan användas som en
+# kortform för `group_by()` och `summarise()`. Vad måste ändras i stycket nedan för att se vilka
+# artister som påverkar värdet för 1960?
 #
 
-dat %>% 
-  filter(album_release_year == 1976) %>% 
-  count(artist_name, album_name, album_release_year)
+dat %>%                                              # Ta data, och sen
+  filter(album_release_year == 1976) %>%             # ta ut rader där år är 1976, och sen
+  count(artist_name, album_name, album_release_year) # räkna antalet rader per artist, album och år
 
 # :::
 #
@@ -575,7 +587,8 @@ ggplot(dat_small, aes(x = mode_name, y = valence, color = album_name)) +
 # Andra graftyper kan skapas med andra `geom_`-funktioner. För ett linjediagram används
 # `geom_line`. De observationer som ska ge en specifik linje anges med `group` i `aes`-funktionen.
 # Låt oss beräkna medeldansbarhet över tid, uppdelat efter markeringen för *explicit* (alltså om
-# spåret är barnvänligt eller inte).
+# spåret är barnvänligt eller inte). Exemplet visar också hur man använda flera geometrier genom att
+# lägga till dem efter varandra med `+`.
 #
 
 dat_mean_over_time <- dat %>% 
@@ -583,7 +596,8 @@ dat_mean_over_time <- dat %>%
   summarise(Mean_danceability = mean(danceability))
 
 ggplot(dat_mean_over_time, aes(x = album_release_year, y = Mean_danceability, color = explicit)) +
-  geom_line()
+  geom_line() +
+  geom_point()
 
 #
 # Här ger färgen uppdelningen i explicit och icke-explicit (`TRUE` för explicit). Det finns också
@@ -591,7 +605,7 @@ ggplot(dat_mean_over_time, aes(x = album_release_year, y = Mean_danceability, co
 # barnvänlig musik är mer eller mindre dansbar än icke-barnvänlig?
 #
 # Uppgift 3.18. (Explicit glädje)
-# Vad ska ändras i stycket ovan för att för en graf över medelvalens (`valence`) istället för
+# Vad ska ändras i stycket ovan för att skapa en graf över medelvalens (`valence`) istället för
 # dansbarhet? Är barnvänlig musik gladare eller ledsnare är icke-barnvänlig?
 # :::
 #
@@ -651,7 +665,7 @@ ggplot(dat_small, aes(danceability, album_name)) +
 # annan och se om de kan säga vilken som är vilken.
 # :::
 #
-# ## Bonus: interaktiva grafer med `plotly`
+# ## Bonus. Interaktiva grafer med `plotly`
 #
 # Låt oss ta en titt på `plotly`, ett av flera R-paket som gör det möjligt att skapa interaktiva
 # grafer. Vi börjar med att installera och ladda paketet.
@@ -738,7 +752,7 @@ g
 #
 # Hemsidan https://plotly.com/r/ innehåller fler exempel för den som är intresserad.
 #
-# ## Bonus: Warming stripes
+# ## Bonus. Warming stripes
 #
 # *Warming stripes* har sedan de först introducerades av Ed Hawking 2018 blivit en vanlig
 # illustration av temperaturökning. I en warming stripe-graf anges varje år av en stapel och stapels
