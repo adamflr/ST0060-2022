@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1 Datahantering och grafer | R-anvisningar till Grundläggande statistik</title>
   <meta name="description" content="1 Datahantering och grafer | R-anvisningar till Grundläggande statistik" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1 Datahantering och grafer | R-anvisningar till Grundläggande statistik" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2022-08-30" />
+<meta name="date" content="2022-09-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -345,10 +345,10 @@ Skriv</p>
 </div>
 <p>Vid konstruktionen av vektorn användes också en grundläggande funktion - funktionen <code>c()</code>, som tar en serie värden och skapar en sammanhängande vektor av värden.</p>
 <p>Alla R-funktioner har en tillhörande hjälpfil som kan plockas fram genom att skriva frågetecken följt av funktionsnamnet, t.ex. <code>?sum</code>. Från hjälpfilen får man att <code>sum()</code> tar numeriska vektorer som ingående värde och beräknar summan. Man kan styra funktionens beteende genom att sätta ett argument <code>na.rm</code> (vilket här styr hur funktionen hanterar saknade värden). Som illustration kan man titta på</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="datahantering-och-grafer.html#cb20-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">9</span>, <span class="cn">NA</span>)  <span class="co"># Lägger till ett saknat värde</span></span>
-<span id="cb20-2"><a href="datahantering-och-grafer.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(b)                        <span class="co"># na.rm = FALSE är grundinställning</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="datahantering-och-grafer.html#cb20-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">9</span>, <span class="cn">NA</span>)           <span class="co"># Lägger till ett saknat värde</span></span>
+<span id="cb20-2"><a href="datahantering-och-grafer.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(b)                                 <span class="co"># na.rm = FALSE är grundinställning</span></span></code></pre></div>
 <pre><code>## [1] NA</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="datahantering-och-grafer.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(b, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)          <span class="co"># na.rm sätts till TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="datahantering-och-grafer.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(b, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)                   <span class="co"># na.rm sätts till TRUE</span></span></code></pre></div>
 <pre><code>## [1] 23</code></pre>
 <p>Det första försöket <code>sum(b)</code> ger utfallet <code>NA</code>, men om man sätter <code>na.rm = TRUE</code> beräknas summan efter att det saknade värdet plockats bort. Notera också att skript kan kommenteras med <code>#</code>.</p>
 </div>
@@ -356,35 +356,35 @@ Skriv</p>
 <h2><span class="header-section-number">1.4</span> Sekvenser av funktioner<a href="datahantering-och-grafer.html#sekvenser-av-funktioner" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Ofta vill man genomföra flera operationer på ett objekt. Man behöver då genomföra en sekvens av funktioner. Säg till exempel att man har värdena <span class="math display">\[(-4, -2, -1, 1, 2, 4)\]</span> och vill ta absolutvärde (vilket gör negativa tal till motsvarande positiva tal) och sedan summera.
 Den typen av sekvenser kan genomföras på ett par olika sätt. Ett första sätt är att spara resultatet i varje steg och sedan använda utfallet i nästa steg:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="datahantering-och-grafer.html#cb24-1" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)   <span class="co"># Skapa en vektor av värden</span></span>
-<span id="cb24-2"><a href="datahantering-och-grafer.html#cb24-2" aria-hidden="true" tabindex="-1"></a>c_absolute <span class="ot">&lt;-</span> <span class="fu">abs</span>(c)          <span class="co"># Ta absolutvärden. Spara som c_absolut</span></span>
-<span id="cb24-3"><a href="datahantering-och-grafer.html#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(c_absolute)               <span class="co"># Summera värden i c_absolut</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="datahantering-och-grafer.html#cb24-1" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)            <span class="co"># Skapa en vektor av värden</span></span>
+<span id="cb24-2"><a href="datahantering-och-grafer.html#cb24-2" aria-hidden="true" tabindex="-1"></a>c_absolute <span class="ot">&lt;-</span> <span class="fu">abs</span>(c)                   <span class="co"># Ta absolutvärden. Spara som c_absolut</span></span>
+<span id="cb24-3"><a href="datahantering-och-grafer.html#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(c_absolute)                        <span class="co"># Summera värden i c_absolut</span></span></code></pre></div>
 <pre><code>## [1] 14</code></pre>
 <p>Här skapas ett objekt <code>c</code> som innehåller en vektor där några tal är negativa. I nästa rad används <code>abs</code> för att skapa absolutvärden. Slutligen summeras absolutvärdena med <code>sum</code>.
 Notera att det är möjligt att skapa ett objekt med namnet <code>c</code> trots att det redan är namnet på en funktion - R förstår ur sammanhanget om objektet eller funktionen ska användas. Det kan dock bli lite oklart för en läsare, så försök som regel att undvika att skapa objekt med vanliga funktionsnamn som <code>sum</code> och <code>mean</code>.</p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-9" class="exercise"><strong>Uppgift 1.9  (Kvadrat, summa och roten ur) </strong></span>Fyll i och kör följande rader för att ta varje värde i <code>new_vector</code> i kvadrat, <em>sedan</em> summera, och sedan ta roten ur.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="datahantering-och-grafer.html#cb26-1" aria-hidden="true" tabindex="-1"></a>new_vector_squared <span class="ot">&lt;-</span> new_vector<span class="sc">^</span><span class="dv">2</span>   <span class="co"># Ta kvadraten av varje värde</span></span>
-<span id="cb26-2"><a href="datahantering-och-grafer.html#cb26-2" aria-hidden="true" tabindex="-1"></a>new_vector_squared_sum <span class="ot">&lt;-</span> <span class="fu">sum</span>(___)   <span class="co"># Summera vektorn med kvadrater</span></span>
-<span id="cb26-3"><a href="datahantering-och-grafer.html#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(___)                            <span class="co"># Ta kvadratroten ur summan</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="datahantering-och-grafer.html#cb26-1" aria-hidden="true" tabindex="-1"></a>new_vector_squared <span class="ot">&lt;-</span> new_vector<span class="sc">^</span><span class="dv">2</span>     <span class="co"># Ta kvadraten av varje värde</span></span>
+<span id="cb26-2"><a href="datahantering-och-grafer.html#cb26-2" aria-hidden="true" tabindex="-1"></a>new_vector_squared_sum <span class="ot">&lt;-</span> <span class="fu">sum</span>(___)     <span class="co"># Summera vektorn med kvadrater</span></span>
+<span id="cb26-3"><a href="datahantering-och-grafer.html#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(___)                              <span class="co"># Ta kvadratroten ur summan</span></span></code></pre></div>
 </div>
 <p>Ett alternativ till att spara utfallet i varje steg är att skriva en senare funktion <em>runt</em> en tidigare funktion. Det fungerar för att R utvärderar funktioner inifrån-ut. Med samma exempel som tidigare får man</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="datahantering-och-grafer.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">abs</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)))   <span class="co"># Ta summan av absolutvärden av vektorn</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="datahantering-och-grafer.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">abs</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)))       <span class="co"># Ta summan av absolutvärden av vektorn</span></span></code></pre></div>
 <p>medan beräkningen i övningen blir</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="datahantering-och-grafer.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">sum</span>(new_vector<span class="sc">^</span><span class="dv">2</span>))   <span class="co"># Ta roten ur summan av vektorn i kvadrat</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="datahantering-och-grafer.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">sum</span>(new_vector<span class="sc">^</span><span class="dv">2</span>))                <span class="co"># Ta roten ur summan av vektorn i kvadrat</span></span></code></pre></div>
 <p>Den här typen av skrivning kan spara plats men blir snabbt svårläst.</p>
 <p>Ett sista alternativ är att använda en så kallad <em>pipe</em> (namnet kommer från att en sekvens funktioner kallas en <em>pipeline</em>). En pipe skrivs <code>%&gt;%</code> och kan i RStudio tas fram med kortkommandon <em>Ctrl + Shift + M</em>. Pipen tar utfallet av en funktion till vänster och sänder till en funktion till höger. Den kan utläsas i dagligt tal som <em>och sen</em>. Med samma exempel som tidigare kan vi skriva</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="datahantering-och-grafer.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)          <span class="co"># Ladda tidyverse, ej nödvändigt om redan gjort</span></span>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="datahantering-och-grafer.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)                     <span class="co"># Ladda tidyverse, ej nödvändigt om redan gjort</span></span>
 <span id="cb29-2"><a href="datahantering-och-grafer.html#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-3"><a href="datahantering-och-grafer.html#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>) <span class="sc">%&gt;%</span>  <span class="co"># Skapa en datamängd och sen</span></span>
-<span id="cb29-4"><a href="datahantering-och-grafer.html#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abs</span>() <span class="sc">%&gt;%</span>                 <span class="co"># ta absolutvärden, och sen</span></span>
-<span id="cb29-5"><a href="datahantering-och-grafer.html#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>()                     <span class="co"># beräkna summan.</span></span></code></pre></div>
+<span id="cb29-3"><a href="datahantering-och-grafer.html#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>) <span class="sc">%&gt;%</span>             <span class="co"># Skapa en datamängd och sen</span></span>
+<span id="cb29-4"><a href="datahantering-och-grafer.html#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abs</span>() <span class="sc">%&gt;%</span>                            <span class="co"># ta absolutvärden, och sen</span></span>
+<span id="cb29-5"><a href="datahantering-och-grafer.html#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>()                                <span class="co"># beräkna summan.</span></span></code></pre></div>
 <pre><code>## [1] 14</code></pre>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-10" class="exercise"><strong>Uppgift 1.10  (Kvadrat, summa och rot med pipe) </strong></span>Fyll i de saknade funktionerna och kör följande rader för att ta varje värde i <code>new_vector</code> i kvadrat, <em>sedan</em> summera, och sedan ta roten ur, denna gång genom att länka funktionerna med en pipe <code>%&gt;%</code>.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="datahantering-och-grafer.html#cb31-1" aria-hidden="true" tabindex="-1"></a>new_vector<span class="sc">^</span><span class="dv">2</span> <span class="sc">%&gt;%</span>        <span class="co"># Ta kvadraterna av new_vector, och sen</span></span>
-<span id="cb31-2"><a href="datahantering-och-grafer.html#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">___</span>() <span class="sc">%&gt;%</span>             <span class="co"># beräkna summan, och sen</span></span>
-<span id="cb31-3"><a href="datahantering-och-grafer.html#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">____</span>()                <span class="co"># Ta kvadratroten med sqrt()</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="datahantering-och-grafer.html#cb31-1" aria-hidden="true" tabindex="-1"></a>new_vector<span class="sc">^</span><span class="dv">2</span> <span class="sc">%&gt;%</span>                       <span class="co"># Ta kvadraterna av new_vector, och sen</span></span>
+<span id="cb31-2"><a href="datahantering-och-grafer.html#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">___</span>() <span class="sc">%&gt;%</span>                            <span class="co"># beräkna summan, och sen</span></span>
+<span id="cb31-3"><a href="datahantering-och-grafer.html#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">____</span>()                               <span class="co"># Ta kvadratroten med sqrt()</span></span></code></pre></div>
 </div>
 </div>
 <div id="datainskrivning-och-dataimport-från-web" class="section level2 hasAnchor" number="1.5">
@@ -422,29 +422,32 @@ Notera att det är möjligt att skapa ett objekt med namnet <code>c</code> trots
 <div id="import-från-en-extern-fil" class="section level3 hasAnchor" number="1.5.2">
 <h3><span class="header-section-number">1.5.2</span> Import från en extern fil<a href="datahantering-och-grafer.html#import-från-en-extern-fil" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Inskrivning av värden är ofta tidskrävande och kan lätt leda till misstag. Det är därför mycket vanligare att data läses in från en extern fil. Det finns en mängd funktioner för dataimport och det exakta valet av funktion beror på vilken typ av fil datan är sparad i. Ett vanligt filformat är .csv (<em>comma separated values</em>). Här importerar vi en fil med data från Spotify. Filen ligger på Github, en populär sida för lagring av filer och kod.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="datahantering-och-grafer.html#cb35-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/adamflr/ST0060-2022/main/Data/Spotify_data.csv&quot;</span>) <span class="co"># Läs in en csv-fil från Github</span></span>
-<span id="cb35-2"><a href="datahantering-och-grafer.html#cb35-2" aria-hidden="true" tabindex="-1"></a>dat   <span class="co"># Skriv ut objektet dat</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="datahantering-och-grafer.html#cb35-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/adamflr/ST0060-2022/main/Data/Spotify_data.csv&quot;</span>) </span>
+<span id="cb35-2"><a href="datahantering-och-grafer.html#cb35-2" aria-hidden="true" tabindex="-1"></a>                                       <span class="co"># Läs in en csv-fil från Github</span></span>
+<span id="cb35-3"><a href="datahantering-och-grafer.html#cb35-3" aria-hidden="true" tabindex="-1"></a>dat                                    <span class="co"># Skriv ut objektet dat</span></span></code></pre></div>
 <pre><code>## # A tibble: 76,622 × 24
-##    artist_name album_name    track_number track_name album_type album_release_d…
-##    &lt;chr&gt;       &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;           
-##  1 100 gecs    1000 gecs an…            1 money mac… album      2020-07-10      
-##  2 100 gecs    1000 gecs an…            2 ringtone … album      2020-07-10      
-##  3 100 gecs    1000 gecs an…            3 745 stick… album      2020-07-10      
-##  4 100 gecs    1000 gecs an…            4 gec 2 Ü (… album      2020-07-10      
-##  5 100 gecs    1000 gecs an…            5 hand crus… album      2020-07-10      
-##  6 100 gecs    1000 gecs an…            6 800db clo… album      2020-07-10      
-##  7 100 gecs    1000 gecs an…            7 stupid ho… album      2020-07-10      
-##  8 100 gecs    1000 gecs an…            8 ringtone … album      2020-07-10      
-##  9 100 gecs    1000 gecs an…            9 xXXi_wud_… album      2020-07-10      
-## 10 100 gecs    1000 gecs an…           10 745 stick… album      2020-07-10      
-## # … with 76,612 more rows, and 18 more variables: album_release_year &lt;dbl&gt;,
-## #   danceability &lt;dbl&gt;, energy &lt;dbl&gt;, key &lt;dbl&gt;, loudness &lt;dbl&gt;, mode &lt;dbl&gt;,
+##    artist…¹ album…² track…³ track…⁴ album…⁵ album…⁶ album…⁷ dance…⁸ energy   key
+##    &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+##  1 100 gecs 1000 g…       1 money … album   2020-0…    2020   0.344  0.737     6
+##  2 100 gecs 1000 g…       2 ringto… album   2020-0…    2020   0.849  0.473     8
+##  3 100 gecs 1000 g…       3 745 st… album   2020-0…    2020   0.48   0.576     5
+##  4 100 gecs 1000 g…       4 gec 2 … album   2020-0…    2020   0.411  0.738     0
+##  5 100 gecs 1000 g…       5 hand c… album   2020-0…    2020   0.473  0.936     1
+##  6 100 gecs 1000 g…       6 800db … album   2020-0…    2020   0.434  0.846     8
+##  7 100 gecs 1000 g…       7 stupid… album   2020-0…    2020   0.736  0.859     8
+##  8 100 gecs 1000 g…       8 ringto… album   2020-0…    2020   0.449  0.745    10
+##  9 100 gecs 1000 g…       9 xXXi_w… album   2020-0…    2020   0.379  0.847     1
+## 10 100 gecs 1000 g…      10 745 st… album   2020-0…    2020   0.445  0.98     10
+## # … with 76,612 more rows, 14 more variables: loudness &lt;dbl&gt;, mode &lt;dbl&gt;,
 ## #   speechiness &lt;dbl&gt;, acousticness &lt;dbl&gt;, instrumentalness &lt;dbl&gt;,
 ## #   liveness &lt;dbl&gt;, valence &lt;dbl&gt;, tempo &lt;dbl&gt;, time_signature &lt;dbl&gt;,
-## #   explicit &lt;lgl&gt;, type &lt;chr&gt;, key_name &lt;chr&gt;, mode_name &lt;chr&gt;, key_mode &lt;chr&gt;</code></pre>
+## #   explicit &lt;lgl&gt;, type &lt;chr&gt;, key_name &lt;chr&gt;, mode_name &lt;chr&gt;,
+## #   key_mode &lt;chr&gt;, and abbreviated variable names ¹​artist_name, ²​album_name,
+## #   ³​track_number, ⁴​track_name, ⁵​album_type, ⁶​album_release_date,
+## #   ⁷​album_release_year, ⁸​danceability</code></pre>
 <p>Om importen fungerat kan man skriva ut tabellens översta rader genom att köra objektets namn.</p>
 <p>För att snabbt se vilka artister datan täcker kan man köra</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="datahantering-och-grafer.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(dat<span class="sc">$</span>artist_name)   <span class="co"># Skriv ut unika (inga dubletter) värden i kolumnen artist_name i dat</span></span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="datahantering-och-grafer.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(dat<span class="sc">$</span>artist_name)                <span class="co"># Skriv ut unika värden i kolumnen artist_name i dat</span></span></code></pre></div>
 <p>där <code>unique</code> är en funktion som tar bort alla dubletter och <code>dat$artist_name</code> används för att plocka ut kolumnen <code>artist_name</code> ur tabellen <code>dat</code>.</p>
 </div>
 </div>
@@ -454,64 +457,68 @@ Notera att det är möjligt att skapa ett objekt med namnet <code>c</code> trots
 <h3><span class="header-section-number">1.6.1</span> Urval med <code>select</code> och <code>filter</code><a href="datahantering-och-grafer.html#urval-med-select-och-filter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>En vanlig operation på en tabell är att göra ett urval - antingen ett urval av rader (t.ex. en viss artist), vilket kallas <em>filtrering</em> eller ett urval av variabler (t.ex. artist och albumnamn), vilket kallas <em>selektion</em>. Det finns flera olika sätt att göra ett urval i R. Det traditionella sättet är att använda index inom hakparenteser (t.ex. <code>dat[4, 2]</code> för fjärde raden, andra kolumnen) eller dollartecken för specifika kolumner (t.ex. <code>dat$artist_name</code> för artistnamn). Här fokuseras dock på hur det kan göras med funktionerna <code>filter()</code> och <code>select()</code> från paketet <code>tidyverse</code>.</p>
 <p>För att filtrera på ett givet land kan använda pipe-funktionen från datan till en filter-funktion, t.ex.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="datahantering-och-grafer.html#cb38-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                            <span class="co"># Ta spotify-datan och sen</span></span>
-<span id="cb38-2"><a href="datahantering-och-grafer.html#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(artist_name <span class="sc">==</span> <span class="st">&quot;Robyn&quot;</span>)   <span class="co"># filtrera för en specifik artist</span></span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="datahantering-och-grafer.html#cb38-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                <span class="co"># Ta spotify-datan och sen</span></span>
+<span id="cb38-2"><a href="datahantering-och-grafer.html#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(artist_name <span class="sc">==</span> <span class="st">&quot;Robyn&quot;</span>)       <span class="co"># filtrera för en specifik artist</span></span></code></pre></div>
 <pre><code>## # A tibble: 1,142 × 24
-##    artist_name album_name track_number track_name    album_type album_release_d…
-##    &lt;chr&gt;       &lt;chr&gt;             &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;      &lt;chr&gt;           
-##  1 Robyn       Honey                 1 Missing U     album      2018-10-26      
-##  2 Robyn       Honey                 2 Human Being   album      2018-10-26      
-##  3 Robyn       Honey                 3 Because It&#39;s… album      2018-10-26      
-##  4 Robyn       Honey                 4 Baby Forgive… album      2018-10-26      
-##  5 Robyn       Honey                 5 Send To Robi… album      2018-10-26      
-##  6 Robyn       Honey                 6 Honey         album      2018-10-26      
-##  7 Robyn       Honey                 7 Between The … album      2018-10-26      
-##  8 Robyn       Honey                 8 Beach2k20     album      2018-10-26      
-##  9 Robyn       Honey                 9 Ever Again    album      2018-10-26      
-## 10 Robyn       Honey                 1 Missing U     album      2018-10-26      
-## # … with 1,132 more rows, and 18 more variables: album_release_year &lt;dbl&gt;,
-## #   danceability &lt;dbl&gt;, energy &lt;dbl&gt;, key &lt;dbl&gt;, loudness &lt;dbl&gt;, mode &lt;dbl&gt;,
+##    artist…¹ album…² track…³ track…⁴ album…⁵ album…⁶ album…⁷ dance…⁸ energy   key
+##    &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+##  1 Robyn    Honey         1 Missin… album   2018-1…    2018   0.702  0.666     5
+##  2 Robyn    Honey         2 Human … album   2018-1…    2018   0.729  0.566     1
+##  3 Robyn    Honey         3 Becaus… album   2018-1…    2018   0.764  0.611    11
+##  4 Robyn    Honey         4 Baby F… album   2018-1…    2018   0.683  0.442     9
+##  5 Robyn    Honey         5 Send T… album   2018-1…    2018   0.328  0.48      4
+##  6 Robyn    Honey         6 Honey   album   2018-1…    2018   0.652  0.604    11
+##  7 Robyn    Honey         7 Betwee… album   2018-1…    2018   0.892  0.451     0
+##  8 Robyn    Honey         8 Beach2… album   2018-1…    2018   0.824  0.512    11
+##  9 Robyn    Honey         9 Ever A… album   2018-1…    2018   0.942  0.539     4
+## 10 Robyn    Honey         1 Missin… album   2018-1…    2018   0.702  0.666     5
+## # … with 1,132 more rows, 14 more variables: loudness &lt;dbl&gt;, mode &lt;dbl&gt;,
 ## #   speechiness &lt;dbl&gt;, acousticness &lt;dbl&gt;, instrumentalness &lt;dbl&gt;,
 ## #   liveness &lt;dbl&gt;, valence &lt;dbl&gt;, tempo &lt;dbl&gt;, time_signature &lt;dbl&gt;,
-## #   explicit &lt;lgl&gt;, type &lt;chr&gt;, key_name &lt;chr&gt;, mode_name &lt;chr&gt;, key_mode &lt;chr&gt;</code></pre>
+## #   explicit &lt;lgl&gt;, type &lt;chr&gt;, key_name &lt;chr&gt;, mode_name &lt;chr&gt;,
+## #   key_mode &lt;chr&gt;, and abbreviated variable names ¹​artist_name, ²​album_name,
+## #   ³​track_number, ⁴​track_name, ⁵​album_type, ⁶​album_release_date,
+## #   ⁷​album_release_year, ⁸​danceability</code></pre>
 <p>Inom filterfunktionen anges ett logisk villkor <code>country == "Sweden"</code> och utfallet är de rader där villkoret är sant. Notera de dubbla likhetstecknen - de måste användas för ett logisk villkor eftersom enkelt likhetstecken används för att skapa objekt och sätta funktionsargument.</p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-12" class="exercise"><strong>Uppgift 1.12  (Filtrera för artist) </strong></span>Vad måste ändras i koden för att istället plocka ut rader där artisten är Esperanza Spalding? Hur många rader har det urvalet i datan?</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="datahantering-och-grafer.html#cb40-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                            <span class="co"># Ta spotify-datan och sen</span></span>
-<span id="cb40-2"><a href="datahantering-och-grafer.html#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(artist_name <span class="sc">==</span> <span class="st">&quot;Robyn&quot;</span>)   <span class="co"># filtrera för en specifik artist</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="datahantering-och-grafer.html#cb40-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                <span class="co"># Ta spotify-datan och sen</span></span>
+<span id="cb40-2"><a href="datahantering-och-grafer.html#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(artist_name <span class="sc">==</span> <span class="st">&quot;Robyn&quot;</span>)       <span class="co"># filtrera för en specifik artist</span></span></code></pre></div>
 </div>
 <p>Om man vill välja flera artister kan man använda funktionen <code>%in%</code> på ett liknande sätt.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="datahantering-och-grafer.html#cb41-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                                       <span class="co"># Ta datan, och sen</span></span>
-<span id="cb41-2"><a href="datahantering-och-grafer.html#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(artist_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Robyn&quot;</span>, <span class="st">&quot;Esperanza Spalding&quot;</span>))   <span class="co"># filtrera för specifika artister</span></span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="datahantering-och-grafer.html#cb41-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                                              <span class="co"># Ta datan, och sen</span></span>
+<span id="cb41-2"><a href="datahantering-och-grafer.html#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(artist_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Robyn&quot;</span>, <span class="st">&quot;Esperanza Spalding&quot;</span>))          <span class="co"># filtrera för specifika artister</span></span></code></pre></div>
 <p>och om man vill ha mer än ett villkor kan man rada dem i filter-funktionen eller ha flera filter-steg:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="datahantering-och-grafer.html#cb42-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                                       <span class="co"># Ta datan, och sen</span></span>
-<span id="cb42-2"><a href="datahantering-och-grafer.html#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(artist_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Robyn&quot;</span>, <span class="st">&quot;Esperanza Spalding&quot;</span>),   <span class="co"># filtrera för specifika artister</span></span>
-<span id="cb42-3"><a href="datahantering-och-grafer.html#cb42-3" aria-hidden="true" tabindex="-1"></a>         key_name <span class="sc">==</span> <span class="st">&quot;D#&quot;</span>)                                    <span class="co"># och för tonart</span></span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="datahantering-och-grafer.html#cb42-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                                              <span class="co"># Ta datan, och sen</span></span>
+<span id="cb42-2"><a href="datahantering-och-grafer.html#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(artist_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Robyn&quot;</span>, <span class="st">&quot;Esperanza Spalding&quot;</span>),          <span class="co"># filtrera för specifika artister</span></span>
+<span id="cb42-3"><a href="datahantering-och-grafer.html#cb42-3" aria-hidden="true" tabindex="-1"></a>         key_name <span class="sc">==</span> <span class="st">&quot;D#&quot;</span>)                                           <span class="co"># och för tonart</span></span></code></pre></div>
 <p>alternativt</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="datahantering-och-grafer.html#cb43-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                                          <span class="co"># Ta datan, och sen</span></span>
-<span id="cb43-2"><a href="datahantering-och-grafer.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(artist_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Robyn&quot;</span>, <span class="st">&quot;Esperanza Spalding&quot;</span>)) <span class="sc">%&gt;%</span>  <span class="co"># filtrera för specifika artister, och sen</span></span>
-<span id="cb43-3"><a href="datahantering-och-grafer.html#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(key_name <span class="sc">==</span> <span class="st">&quot;D#&quot;</span>)                                       <span class="co"># filtrera för tonart</span></span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="datahantering-och-grafer.html#cb43-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                                              <span class="co"># Ta datan, och sen</span></span>
+<span id="cb43-2"><a href="datahantering-och-grafer.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(artist_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Robyn&quot;</span>, <span class="st">&quot;Esperanza Spalding&quot;</span>)) <span class="sc">%&gt;%</span>      <span class="co"># filtrera för artister, och sen</span></span>
+<span id="cb43-3"><a href="datahantering-och-grafer.html#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(key_name <span class="sc">==</span> <span class="st">&quot;D#&quot;</span>)                                           <span class="co"># filtrera för tonart</span></span></code></pre></div>
 <p>För att se fler eller färre rader kan man använda en pipe <code>%&gt;%</code> till funktionen <code>print()</code>. Följande skriver ut fem rader</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="datahantering-och-grafer.html#cb44-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                                          <span class="co"># Ta datan, och sen</span></span>
-<span id="cb44-2"><a href="datahantering-och-grafer.html#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(artist_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Robyn&quot;</span>, <span class="st">&quot;Esperanza Spalding&quot;</span>)) <span class="sc">%&gt;%</span>  <span class="co"># filtrera för specifika artister, och sen</span></span>
-<span id="cb44-3"><a href="datahantering-och-grafer.html#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(key_name <span class="sc">==</span> <span class="st">&quot;D#&quot;</span>)  <span class="sc">%&gt;%</span>                                  <span class="co"># filtrera för tonart, och sen</span></span>
-<span id="cb44-4"><a href="datahantering-och-grafer.html#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">5</span>)                                                   <span class="co"># skriv ut de fem första raderna</span></span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="datahantering-och-grafer.html#cb44-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                                              <span class="co"># Ta datan, och sen</span></span>
+<span id="cb44-2"><a href="datahantering-och-grafer.html#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(artist_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Robyn&quot;</span>, <span class="st">&quot;Esperanza Spalding&quot;</span>)) <span class="sc">%&gt;%</span>      <span class="co"># filtrera för artister, och sen</span></span>
+<span id="cb44-3"><a href="datahantering-och-grafer.html#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(key_name <span class="sc">==</span> <span class="st">&quot;D#&quot;</span>)  <span class="sc">%&gt;%</span>                                      <span class="co"># filtrera för tonart, och sen</span></span>
+<span id="cb44-4"><a href="datahantering-och-grafer.html#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">5</span>)                                                       <span class="co"># skriv ut de fem första raderna</span></span></code></pre></div>
 <pre><code>## # A tibble: 21 × 24
-##   artist_name     album_name track_number track_name album_type album_release_d…
-##   &lt;chr&gt;           &lt;chr&gt;             &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;           
-## 1 Esperanza Spal… SONGWRIGH…            7 Formwela 7 album      2021-09-24      
-## 2 Esperanza Spal… 12 Little…            2 To Tide U… album      2019-05-10      
-## 3 Esperanza Spal… 12 Little…            3 &#39;Til the … album      2019-05-10      
-## 4 Esperanza Spal… Emily’s D…            7 Ebony And… album      2016-01-01      
-## 5 Esperanza Spal… Emily’s D…            7 Ebony And… album      2016-01-01      
-## # … with 16 more rows, and 18 more variables: album_release_year &lt;dbl&gt;,
-## #   danceability &lt;dbl&gt;, energy &lt;dbl&gt;, key &lt;dbl&gt;, loudness &lt;dbl&gt;, mode &lt;dbl&gt;,
+##   artist_…¹ album…² track…³ track…⁴ album…⁵ album…⁶ album…⁷ dance…⁸ energy   key
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1 Esperanz… SONGWR…       7 Formwe… album   2021-0…    2021   0.496 0.0268     3
+## 2 Esperanz… 12 Lit…       2 To Tid… album   2019-0…    2019   0.355 0.33       3
+## 3 Esperanz… 12 Lit…       3 &#39;Til t… album   2019-0…    2019   0.502 0.301      3
+## 4 Esperanz… Emily’…       7 Ebony … album   2016-0…    2016   0.578 0.543      3
+## 5 Esperanz… Emily’…       7 Ebony … album   2016-0…    2016   0.567 0.535      3
+## # … with 16 more rows, 14 more variables: loudness &lt;dbl&gt;, mode &lt;dbl&gt;,
 ## #   speechiness &lt;dbl&gt;, acousticness &lt;dbl&gt;, instrumentalness &lt;dbl&gt;,
 ## #   liveness &lt;dbl&gt;, valence &lt;dbl&gt;, tempo &lt;dbl&gt;, time_signature &lt;dbl&gt;,
-## #   explicit &lt;lgl&gt;, type &lt;chr&gt;, key_name &lt;chr&gt;, mode_name &lt;chr&gt;, key_mode &lt;chr&gt;</code></pre>
+## #   explicit &lt;lgl&gt;, type &lt;chr&gt;, key_name &lt;chr&gt;, mode_name &lt;chr&gt;,
+## #   key_mode &lt;chr&gt;, and abbreviated variable names ¹​artist_name, ²​album_name,
+## #   ³​track_number, ⁴​track_name, ⁵​album_type, ⁶​album_release_date,
+## #   ⁷​album_release_year, ⁸​danceability</code></pre>
 <p>Om man istället vill göra ett urval av kolumner kan man använda <code>select()</code>. Som argument anges de kolumner man vill välja, t.ex.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="datahantering-och-grafer.html#cb46-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                             <span class="co"># Ta datan, och sen</span></span>
-<span id="cb46-2"><a href="datahantering-och-grafer.html#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(artist_name, album_name)   <span class="co"># väljd kolumnerna artist_name och album_name</span></span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="datahantering-och-grafer.html#cb46-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                <span class="co"># Ta datan, och sen</span></span>
+<span id="cb46-2"><a href="datahantering-och-grafer.html#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(artist_name, album_name)      <span class="co"># välj kolumnerna artist_name och album_name</span></span></code></pre></div>
 <pre><code>## # A tibble: 76,622 × 2
 ##    artist_name album_name                     
 ##    &lt;chr&gt;       &lt;chr&gt;                          
@@ -527,10 +534,10 @@ Notera att det är möjligt att skapa ett objekt med namnet <code>c</code> trots
 ## 10 100 gecs    1000 gecs and The Tree of Clues
 ## # … with 76,612 more rows</code></pre>
 <p>Som avslutning ges ett lite mer komplicerat exempel på ett urval av artist, år och spår för spår med ett tempo över 180 bpm släppta under 2015.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="datahantering-och-grafer.html#cb48-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                               <span class="co"># Ta datan och sen</span></span>
-<span id="cb48-2"><a href="datahantering-och-grafer.html#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(album_release_year <span class="sc">==</span> <span class="dv">2015</span>,                  <span class="co"># filtrera för rader där år är 2015, och </span></span>
-<span id="cb48-3"><a href="datahantering-och-grafer.html#cb48-3" aria-hidden="true" tabindex="-1"></a>         tempo <span class="sc">&gt;</span> <span class="dv">180</span>) <span class="sc">%&gt;%</span>                             <span class="co"># tempot över 160, och sen</span></span>
-<span id="cb48-4"><a href="datahantering-och-grafer.html#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(artist_name, album_release_year, track_name) <span class="co"># selektera på artist, år och spår</span></span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="datahantering-och-grafer.html#cb48-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                                    <span class="co"># Ta datan och sen</span></span>
+<span id="cb48-2"><a href="datahantering-och-grafer.html#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(album_release_year <span class="sc">==</span> <span class="dv">2015</span>,                       <span class="co"># filtrera för rader där år är 2015, och </span></span>
+<span id="cb48-3"><a href="datahantering-och-grafer.html#cb48-3" aria-hidden="true" tabindex="-1"></a>         tempo <span class="sc">&gt;</span> <span class="dv">180</span>) <span class="sc">%&gt;%</span>                                  <span class="co"># tempot över 160, och sen</span></span>
+<span id="cb48-4"><a href="datahantering-och-grafer.html#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(artist_name, album_release_year, track_name)      <span class="co"># selektera på artist, år och spår</span></span></code></pre></div>
 <pre><code>## # A tibble: 122 × 3
 ##    artist_name            album_release_year track_name                         
 ##    &lt;chr&gt;                               &lt;dbl&gt; &lt;chr&gt;                              
@@ -547,21 +554,21 @@ Notera att det är möjligt att skapa ett objekt med namnet <code>c</code> trots
 ## # … with 112 more rows</code></pre>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-13" class="exercise"><strong>Uppgift 1.13  (Snabba spår) </strong></span>Funktionen <code>arrange</code> sorterar data efter en angiven kolumn. Följande stycke ger oss Björks snabbaste spår.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="datahantering-och-grafer.html#cb50-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                                   <span class="co"># Ta datan, och sen</span></span>
-<span id="cb50-2"><a href="datahantering-och-grafer.html#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(artist_name <span class="sc">==</span> <span class="st">&quot;Björk&quot;</span>) <span class="sc">%&gt;%</span>                      <span class="co"># filtrera för rader där artist är Björk, och sen</span></span>
-<span id="cb50-3"><a href="datahantering-och-grafer.html#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(artist_name, album_name, track_name, tempo) <span class="sc">%&gt;%</span>  <span class="co"># välj kolumner med artist, album, spår och tempo, och sen</span></span>
-<span id="cb50-4"><a href="datahantering-och-grafer.html#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>tempo)                                         <span class="co"># ordna efter tempo (minus för fallande ordning)</span></span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="datahantering-och-grafer.html#cb50-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                                    <span class="co"># Ta datan, och sen</span></span>
+<span id="cb50-2"><a href="datahantering-och-grafer.html#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(artist_name <span class="sc">==</span> <span class="st">&quot;Björk&quot;</span>) <span class="sc">%&gt;%</span>                       <span class="co"># filtrera för rader där artist är Björk, och sen</span></span>
+<span id="cb50-3"><a href="datahantering-och-grafer.html#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(artist_name, album_name, track_name, tempo) <span class="sc">%&gt;%</span>   <span class="co"># välj kolumner med artist, album, spår och tempo, och sen</span></span>
+<span id="cb50-4"><a href="datahantering-och-grafer.html#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>tempo)                                          <span class="co"># ordna efter tempo (minus för fallande ordning)</span></span></code></pre></div>
 <p>Gör lämpliga ändringar för att hitta Kate Bushs snabbaste spår. Gör ytterligare ändringar för att hitta Daft Punks långsammaste spår.</p>
 </div>
 </div>
 <div id="ändra-och-skapa-nya-kolumner-med-mutate" class="section level3 hasAnchor" number="1.6.2">
 <h3><span class="header-section-number">1.6.2</span> Ändra och skapa nya kolumner med <code>mutate</code><a href="datahantering-och-grafer.html#ändra-och-skapa-nya-kolumner-med-mutate" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Variabler kan omräknas och nya variabler kan skapas med <code>mutate</code>-funktionen. I spotify-datan finns tempo som slag per minut. Om man vill ha slag per sekund kan man skapa en nya kolumn och beräkna den som tempo delat på 60.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="datahantering-och-grafer.html#cb51-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> </span>
-<span id="cb51-2"><a href="datahantering-och-grafer.html#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">beats_per_second =</span> tempo <span class="sc">/</span> <span class="dv">60</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="datahantering-och-grafer.html#cb51-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span>                                             <span class="co"># Ta datan, och sen</span></span>
+<span id="cb51-2"><a href="datahantering-och-grafer.html#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">beats_per_second =</span> tempo <span class="sc">/</span> <span class="dv">60</span>)                    <span class="co"># Beräkna en ny kolumn som tempo delat på 60</span></span></code></pre></div>
 <p>Den inledande delen med <code>dat &lt;-</code> gör så att utfallet av beräkningen sparas i objektet <code>dat</code>.
 Vi kan skriva ut objektet och se resultatet av beräkningen:</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="datahantering-och-grafer.html#cb52-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> <span class="fu">select</span>(tempo, beats_per_second)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="datahantering-och-grafer.html#cb52-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> <span class="fu">select</span>(tempo, beats_per_second)                    <span class="co"># Ta datan och sen välj två kolumner</span></span></code></pre></div>
 <pre><code>## # A tibble: 76,622 × 2
 ##    tempo beats_per_second
 ##    &lt;dbl&gt;            &lt;dbl&gt;
@@ -577,38 +584,38 @@ Vi kan skriva ut objektet och se resultatet av beräkningen:</p>
 ## 10  150.             2.50
 ## # … with 76,612 more rows</code></pre>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-14" class="exercise"><strong>Uppgift 1.14  (Glädje per dansbarhet) </strong></span>Följande stycke beräknar kvoten av kolumnerna valence och danceability i en ny kolumn <code>valence_to_danceability</code>.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="datahantering-och-grafer.html#cb54-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                                        <span class="co"># Ta datan, och sen</span></span>
-<span id="cb54-2"><a href="datahantering-och-grafer.html#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">valence_to_danceability =</span> valence <span class="sc">/</span> danceability) <span class="sc">%&gt;%</span> <span class="co"># beräkna valence delat på danceability, och sen</span></span>
-<span id="cb54-3"><a href="datahantering-och-grafer.html#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(valence, danceability, valence_to_danceability)       <span class="co"># välj relevanta kolumner.</span></span></code></pre></div>
+<p><span id="exr:unlabeled-div-14" class="exercise"><strong>Uppgift 1.14  (Glädje per dansbarhet) </strong></span>Följande stycke beräknar kvoten av kolumnerna valence och danceability i en ny kolumn <code>val_to_dan</code>.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="datahantering-och-grafer.html#cb54-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                                    <span class="co"># Ta datan, och sen</span></span>
+<span id="cb54-2"><a href="datahantering-och-grafer.html#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">val_to_dan =</span> valence <span class="sc">/</span> danceability) <span class="sc">%&gt;%</span>          <span class="co"># beräkna valence delat på danceability, och sen</span></span>
+<span id="cb54-3"><a href="datahantering-och-grafer.html#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(valence, danceability, val_to_dan)                <span class="co"># välj relevanta kolumner.</span></span></code></pre></div>
 <p>Gör lämpliga ändringar för att multiplicera <code>tempo</code> och <code>time signature</code>. Ett passande namn för den nya kolumnen kan vara <code>tempo_times_time_signature</code>.</p>
 </div>
 <p>I exemplet och uppgiften ovan skapades nya kolumn namn med understreck <code>_</code> istället för mellanrum. Om man vill ha mellanrum i sina kolumnnamn måste man skriva namnet inom <em>backticks</em> ``` för att ange att namnet ska tolkas som en enhet.</p>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="datahantering-och-grafer.html#cb55-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> </span>
-<span id="cb55-2"><a href="datahantering-och-grafer.html#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Valence to danceability</span><span class="st">`</span> <span class="ot">=</span> valence <span class="sc">/</span> danceability) <span class="sc">%&gt;%</span> <span class="co"># Namnet Valence to danceability skrivs inom backticks</span></span>
-<span id="cb55-3"><a href="datahantering-och-grafer.html#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(artist_name, <span class="st">`</span><span class="at">Valence to danceability</span><span class="st">`</span>)</span></code></pre></div>
+<span id="cb55-2"><a href="datahantering-och-grafer.html#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Val to dan</span><span class="st">`</span> <span class="ot">=</span> valence <span class="sc">/</span> danceability) <span class="sc">%&gt;%</span>        <span class="co"># Namnet Val to dan skrivs inom backticks</span></span>
+<span id="cb55-3"><a href="datahantering-och-grafer.html#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(artist_name, <span class="st">`</span><span class="at">Val to dan</span><span class="st">`</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 76,622 × 2
-##    artist_name `Valence to danceability`
-##    &lt;chr&gt;                           &lt;dbl&gt;
-##  1 100 gecs                        1.81 
-##  2 100 gecs                        0.726
-##  3 100 gecs                        0.683
-##  4 100 gecs                        0.954
-##  5 100 gecs                        1.15 
-##  6 100 gecs                        1.12 
-##  7 100 gecs                        0.921
-##  8 100 gecs                        0.791
-##  9 100 gecs                        1.01 
-## 10 100 gecs                        1.02 
+##    artist_name `Val to dan`
+##    &lt;chr&gt;              &lt;dbl&gt;
+##  1 100 gecs           1.81 
+##  2 100 gecs           0.726
+##  3 100 gecs           0.683
+##  4 100 gecs           0.954
+##  5 100 gecs           1.15 
+##  6 100 gecs           1.12 
+##  7 100 gecs           0.921
+##  8 100 gecs           0.791
+##  9 100 gecs           1.01 
+## 10 100 gecs           1.02 
 ## # … with 76,612 more rows</code></pre>
 </div>
 <div id="summera-kolumner-med-group_by-och-summarise" class="section level3 hasAnchor" number="1.6.3">
 <h3><span class="header-section-number">1.6.3</span> Summera kolumner med <code>group_by</code> och <code>summarise</code><a href="datahantering-och-grafer.html#summera-kolumner-med-group_by-och-summarise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>För att presentera insamlad data på ett tolkningsbart sätt används sammanfattande mått såsom summor, medelvärden, medianer och standardavvikelser.
 Den typen av beräkningar kan göras som ett nytt steg i en pipe med hjälp av funktionen <code>summarise</code>. Om man kombinerar <code>summarise</code> med funktionen <code>group_by</code> kan man dessutom summera efter en indelning given av en annan variabel. En beräkning av genomsnittligt tempo per år kan till exempel ges av</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="datahantering-och-grafer.html#cb57-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                       <span class="co"># Ta datan, och sen</span></span>
-<span id="cb57-2"><a href="datahantering-och-grafer.html#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(album_release_year) <span class="sc">%&gt;%</span>            <span class="co"># gruppera efter år, och sen</span></span>
-<span id="cb57-3"><a href="datahantering-och-grafer.html#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Medeltempo =</span> <span class="fu">mean</span>(tempo))         <span class="co"># beräkna medelvärde av tempo</span></span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="datahantering-och-grafer.html#cb57-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                          <span class="co"># Ta datan, och sen</span></span>
+<span id="cb57-2"><a href="datahantering-och-grafer.html#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(album_release_year) <span class="sc">%&gt;%</span>               <span class="co"># gruppera efter år, och sen</span></span>
+<span id="cb57-3"><a href="datahantering-och-grafer.html#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Medeltempo =</span> <span class="fu">mean</span>(tempo))            <span class="co"># beräkna medelvärde av tempo</span></span></code></pre></div>
 <pre><code>## # A tibble: 63 × 2
 ##    album_release_year Medeltempo
 ##                 &lt;dbl&gt;      &lt;dbl&gt;
@@ -625,12 +632,12 @@ Den typen av beräkningar kan göras som ett nytt steg i en pipe med hjälp av f
 ## # … with 53 more rows</code></pre>
 <p>I det sista steget skapas en variabel <em>Medeltempo</em> som ges av medelvärde av den ursprungliga variabeln <em>tempo</em>. Här använder vi också funktionen <code>mean</code> för att beräkna medelvärdet.</p>
 <p>Om man vill summera flera variabler kan man ange flera beräkning inom <code>summarise</code>, t.ex.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="datahantering-och-grafer.html#cb59-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                   <span class="co"># Ta datan, och sen</span></span>
-<span id="cb59-2"><a href="datahantering-och-grafer.html#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(album_release_year) <span class="sc">%&gt;%</span>        <span class="co"># gruppera efter år, och sen</span></span>
-<span id="cb59-3"><a href="datahantering-och-grafer.html#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Medeltempo =</span> <span class="fu">mean</span>(tempo),     <span class="co"># beräkna medelvärde av tempo</span></span>
-<span id="cb59-4"><a href="datahantering-och-grafer.html#cb59-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Medelvalence =</span> <span class="fu">mean</span>(valence), <span class="co"># beräkna medelvärde av valence</span></span>
-<span id="cb59-5"><a href="datahantering-och-grafer.html#cb59-5" aria-hidden="true" tabindex="-1"></a>            antal_spår <span class="ot">=</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span>         <span class="co"># beräkna antalet spår, och sen</span></span>
-<span id="cb59-6"><a href="datahantering-och-grafer.html#cb59-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>Medelvalence)                  <span class="co"># ordna efter medelvalence i sjunkande ordning</span></span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="datahantering-och-grafer.html#cb59-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                          <span class="co"># Ta datan, och sen</span></span>
+<span id="cb59-2"><a href="datahantering-och-grafer.html#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(album_release_year) <span class="sc">%&gt;%</span>               <span class="co"># gruppera efter år, och sen</span></span>
+<span id="cb59-3"><a href="datahantering-och-grafer.html#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Medeltempo =</span> <span class="fu">mean</span>(tempo),            <span class="co"># beräkna medelvärde av tempo</span></span>
+<span id="cb59-4"><a href="datahantering-och-grafer.html#cb59-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Medelvalence =</span> <span class="fu">mean</span>(valence),        <span class="co"># beräkna medelvärde av valence</span></span>
+<span id="cb59-5"><a href="datahantering-och-grafer.html#cb59-5" aria-hidden="true" tabindex="-1"></a>            antal_spår <span class="ot">=</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span>                <span class="co"># beräkna antalet spår, och sen</span></span>
+<span id="cb59-6"><a href="datahantering-och-grafer.html#cb59-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>Medelvalence)                         <span class="co"># ordna efter medelvalence i sjunkande ordning</span></span></code></pre></div>
 <pre><code>## # A tibble: 63 × 4
 ##    album_release_year Medeltempo Medelvalence antal_spår
 ##                 &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;      &lt;int&gt;
@@ -693,9 +700,10 @@ Den typen av beräkningar kan göras som ett nytt steg i en pipe med hjälp av f
 <span id="cb67-2"><a href="datahantering-och-grafer.html#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(album_release_year, explicit) <span class="sc">%&gt;%</span>          <span class="co"># gruppera efter år och explicitet, och sen</span></span>
 <span id="cb67-3"><a href="datahantering-och-grafer.html#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean_danceability =</span> <span class="fu">mean</span>(danceability))   <span class="co"># summera genom att ta medelvärdet av dansbarhet</span></span>
 <span id="cb67-4"><a href="datahantering-och-grafer.html#cb67-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-5"><a href="datahantering-och-grafer.html#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_mean_over_time, <span class="fu">aes</span>(<span class="at">x =</span> album_release_year, <span class="at">y =</span> Mean_danceability, <span class="at">color =</span> explicit)) <span class="sc">+</span> <span class="co"># Koppla kolumner till egenskaper</span></span>
-<span id="cb67-6"><a href="datahantering-och-grafer.html#cb67-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span>   <span class="co"># Illustrera med linjer</span></span>
-<span id="cb67-7"><a href="datahantering-och-grafer.html#cb67-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()    <span class="co"># Illustrera med punkter</span></span></code></pre></div>
+<span id="cb67-5"><a href="datahantering-och-grafer.html#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_mean_over_time, <span class="fu">aes</span>(<span class="at">x =</span> album_release_year, <span class="at">y =</span> Mean_danceability, <span class="at">color =</span> explicit)) <span class="sc">+</span> </span>
+<span id="cb67-6"><a href="datahantering-och-grafer.html#cb67-6" aria-hidden="true" tabindex="-1"></a>                                                      <span class="co"># Koppla kolumner till egenskaper</span></span>
+<span id="cb67-7"><a href="datahantering-och-grafer.html#cb67-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span>                                       <span class="co"># Illustrera med linjer</span></span>
+<span id="cb67-8"><a href="datahantering-och-grafer.html#cb67-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()                                        <span class="co"># Illustrera med punkter</span></span></code></pre></div>
 <p><img src="R-anvisningar_files/figure-html/unnamed-chunk-54-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Här ger färgen uppdelningen i explicit och icke-explicit (<code>TRUE</code> för explicit). Det finns också spår som saknat värde för explicit och därför blir <code>NA</code> här. Kan vi utifrån grafen säga att barnvänlig musik är mer eller mindre dansbar än icke-barnvänlig?</p>
 <div class="exercise">
@@ -737,19 +745,19 @@ Den typen av beräkningar kan göras som ett nytt steg i en pipe med hjälp av f
 <div id="bonus.-interaktiva-grafer-med-plotly" class="section level2 hasAnchor" number="1.8">
 <h2><span class="header-section-number">1.8</span> Bonus. Interaktiva grafer med <code>plotly</code><a href="datahantering-och-grafer.html#bonus.-interaktiva-grafer-med-plotly" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Låt oss ta en titt på <code>plotly</code>, ett av flera R-paket som gör det möjligt att skapa interaktiva grafer. Vi börjar med att installera och ladda paketet.</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="datahantering-och-grafer.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;plotly&quot;)</span></span>
-<span id="cb71-2"><a href="datahantering-och-grafer.html#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="datahantering-och-grafer.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;plotly&quot;)                     # Installera plotly (ej nödvändigt om redan installerat)</span></span>
+<span id="cb71-2"><a href="datahantering-och-grafer.html#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)                                  <span class="co"># Ladda plotly</span></span></code></pre></div>
 <p>Paketet innehåller en smidig funktion <code>ggplotly()</code> för att göra en interaktiv graf från en <code>ggplot</code>. Vi börjar med att filtrera datan för en specifik artist och albumtyp. I samma pipe skapar vi en ny kolumn decade, som beräknar årtiondet utifrån året. Den exakta beräkning är inte så viktig, men ta gärna en titt och se om du förstår vad som delarna gör.</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="datahantering-och-grafer.html#cb72-1" aria-hidden="true" tabindex="-1"></a>dat_small <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> </span>
-<span id="cb72-2"><a href="datahantering-och-grafer.html#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(artist_name <span class="sc">==</span> <span class="st">&quot;David Bowie&quot;</span>, album_type <span class="sc">==</span> <span class="st">&quot;album&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb72-3"><a href="datahantering-och-grafer.html#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Decade =</span> <span class="fu">floor</span>(album_release_year <span class="sc">/</span> <span class="dv">10</span>) <span class="sc">*</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="datahantering-och-grafer.html#cb72-1" aria-hidden="true" tabindex="-1"></a>dat_small <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span>                                                 <span class="co"># Ta datan, och sen</span></span>
+<span id="cb72-2"><a href="datahantering-och-grafer.html#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(artist_name <span class="sc">==</span> <span class="st">&quot;David Bowie&quot;</span>, album_type <span class="sc">==</span> <span class="st">&quot;album&quot;</span>) <span class="sc">%&gt;%</span>    <span class="co"># filtrera på artist och albumtyp, och sen</span></span>
+<span id="cb72-3"><a href="datahantering-och-grafer.html#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Decade =</span> <span class="fu">floor</span>(album_release_year <span class="sc">/</span> <span class="dv">10</span>) <span class="sc">*</span> <span class="dv">10</span>)               <span class="co"># skapa en variable för årtionde.</span></span></code></pre></div>
 <p>(Säg t.ex. att vi har året 1979. Att dela med 10 ger 197.9. Funktionen <code>floor</code> avrundar nedåt till 197. Multiplikationen med 10 ger 1970.)</p>
 <p>Vi kan nu konstruera en graf med <code>ggplot()</code>. Låt oss ha dansbarhet på x-axeln och valens på y-axeln. Geomet <code>geom_point()</code> ger ett spridningdiagram och <code>facet_wrap(~ Decade)</code> delar i småfönster efter årtionde. Slutligen tar <code>theme(legend.position = "none")</code> bort <em>legenden</em> - guiden som anger vilken färg som är vilket album.</p>
 <p>Notera att vi sparar grafen som ett objekt <code>g</code>. För att se grafen kör vi objektnamnet.</p>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="datahantering-och-grafer.html#cb73-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_small, <span class="fu">aes</span>(danceability, valence, <span class="at">color =</span> album_name, <span class="at">text =</span> track_name)) <span class="sc">+</span></span>
 <span id="cb73-2"><a href="datahantering-och-grafer.html#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb73-3"><a href="datahantering-och-grafer.html#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Decade) <span class="sc">+</span>            <span class="co"># Skapar småfönster per årtionde</span></span>
-<span id="cb73-4"><a href="datahantering-och-grafer.html#cb73-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)   <span class="co"># Tar bort legenden (kopplingen mellan färg och album)</span></span>
+<span id="cb73-3"><a href="datahantering-och-grafer.html#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Decade) <span class="sc">+</span>            <span class="co"># Skapa småfönster per årtionde</span></span>
+<span id="cb73-4"><a href="datahantering-och-grafer.html#cb73-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)   <span class="co"># Ta bort legenden (kopplingen mellan färg och album)</span></span>
 <span id="cb73-5"><a href="datahantering-och-grafer.html#cb73-5" aria-hidden="true" tabindex="-1"></a>g</span></code></pre></div>
 <p>När vi har en färdig ggplot kan <code>ggplotly()</code> ge en interaktiv version av samma graf.</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="datahantering-och-grafer.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(g)</span></code></pre></div>
@@ -760,9 +768,9 @@ Den typen av beräkningar kan göras som ett nytt steg i en pipe med hjälp av f
 <span id="cb75-3"><a href="datahantering-och-grafer.html#cb75-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Decade =</span> <span class="fu">floor</span>(album_release_year <span class="sc">/</span> <span class="dv">10</span>) <span class="sc">*</span> <span class="dv">10</span>)</span>
 <span id="cb75-4"><a href="datahantering-och-grafer.html#cb75-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb75-5"><a href="datahantering-och-grafer.html#cb75-5" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_small, <span class="fu">aes</span>(danceability, valence, <span class="at">color =</span> album_name, <span class="at">text =</span> track_name)) <span class="sc">+</span></span>
-<span id="cb75-6"><a href="datahantering-och-grafer.html#cb75-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb75-7"><a href="datahantering-och-grafer.html#cb75-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Decade) <span class="sc">+</span>            <span class="co"># Skapar småfönster per årtionde</span></span>
-<span id="cb75-8"><a href="datahantering-och-grafer.html#cb75-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)   <span class="co"># Tar bort legenden (kopplingen mellan färg och album)</span></span>
+<span id="cb75-6"><a href="datahantering-och-grafer.html#cb75-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>                                 <span class="co"># Skapa punkter</span></span>
+<span id="cb75-7"><a href="datahantering-och-grafer.html#cb75-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Decade) <span class="sc">+</span>                         <span class="co"># Skapa småfönster per årtionde</span></span>
+<span id="cb75-8"><a href="datahantering-och-grafer.html#cb75-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)                <span class="co"># Ta bort legenden (kopplingen mellan färg och album)</span></span>
 <span id="cb75-9"><a href="datahantering-och-grafer.html#cb75-9" aria-hidden="true" tabindex="-1"></a>g</span>
 <span id="cb75-10"><a href="datahantering-och-grafer.html#cb75-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb75-11"><a href="datahantering-och-grafer.html#cb75-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(g)</span></code></pre></div>
@@ -788,10 +796,11 @@ Vad måste läggas till för en interaktiv version av samma graf?</p>
 <h2><span class="header-section-number">1.9</span> Bonus. Warming stripes<a href="datahantering-och-grafer.html#bonus.-warming-stripes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><em>Warming stripes</em> har sedan de först introducerades av Ed Hawking 2018 blivit en vanlig illustration av temperaturökning. I en warming stripe-graf anges varje år av en stapel och stapels färg ges av ett temperaturmått, vanligen årets medeltemperatur. I ggplot-terminologi har vi geometrier (staplar eller kolumner) med en x-position som ges av år och en ifylld färg som ges av temperatur.</p>
 <p>För att göra en graf behöver vi data över temperaturer. Följande rad hämtar temperaturdata från Stockholm. Källa: <a href="https://miljobarometern.stockholm.se/klimat/klimat-och-vaderstatistik/medeltemperatur/" class="uri">https://miljobarometern.stockholm.se/klimat/klimat-och-vaderstatistik/medeltemperatur/</a></p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="datahantering-och-grafer.html#cb77-1" aria-hidden="true" tabindex="-1"></a>dat_temp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/adamflr/ST0060-2022/main/Data/Temperatur%2C%20Stockholm.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="datahantering-och-grafer.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Läs in data från fil</span></span>
+<span id="cb77-2"><a href="datahantering-och-grafer.html#cb77-2" aria-hidden="true" tabindex="-1"></a>dat_temp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/adamflr/ST0060-2022/main/Data/Temperatur%2C%20Stockholm.csv&quot;</span>)</span></code></pre></div>
 <p>Vi skapar nu en graf, som alltså ska ha en x-axeln given av år (<code>Year</code>) och ifylld färg som ges av temperatur (<code>Value</code>). Höjden ska vara densamma för alla staplar, men det spelar ingen roll vad den är (så länge den inte är noll).</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="datahantering-och-grafer.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_temp, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> <span class="dv">1</span>, <span class="at">fill =</span> Value)) <span class="sc">+</span></span>
-<span id="cb78-2"><a href="datahantering-och-grafer.html#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code></pre></div>
+<span id="cb78-2"><a href="datahantering-och-grafer.html#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() </span></code></pre></div>
 <p><img src="R-anvisningar_files/figure-html/unnamed-chunk-63-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-23" class="exercise"><strong>Uppgift 1.23  (Staplar utan mellanrum) </strong></span>Ett första problem är att staplarna inte fyller ytan. Man kan styra staplars bredd med argumentet <code>width</code>, t.ex.</p>
@@ -810,12 +819,12 @@ Vad måste läggas till för en interaktiv version av samma graf?</p>
 <p><span id="exr:unlabeled-div-25" class="exercise"><strong>Uppgift 1.25  (Enkel graf) </strong></span>Slutligen brukar warming stripes presenteras med så lite kringinformation som möjligt. I ggplot kan grafelement tas bort med <code>theme()</code>. Här är som exempel en graf utan y-axel, tickmärken och legend.</p>
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="datahantering-och-grafer.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_temp, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Value)) <span class="sc">+</span></span>
 <span id="cb81-2"><a href="datahantering-och-grafer.html#cb81-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb81-3"><a href="datahantering-och-grafer.html#cb81-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_blank</span>(), </span>
-<span id="cb81-4"><a href="datahantering-och-grafer.html#cb81-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
-<span id="cb81-5"><a href="datahantering-och-grafer.html#cb81-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb81-6"><a href="datahantering-och-grafer.html#cb81-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb81-7"><a href="datahantering-och-grafer.html#cb81-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb81-8"><a href="datahantering-och-grafer.html#cb81-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<span id="cb81-3"><a href="datahantering-och-grafer.html#cb81-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_blank</span>(),            <span class="co"># Sätt titel till blank</span></span>
+<span id="cb81-4"><a href="datahantering-och-grafer.html#cb81-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,                <span class="co"># Ta bort legenden</span></span>
+<span id="cb81-5"><a href="datahantering-och-grafer.html#cb81-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_blank</span>(),       <span class="co"># Sätt bakgrunden till blank</span></span>
+<span id="cb81-6"><a href="datahantering-och-grafer.html#cb81-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(),      <span class="co"># Sätt graffältets bakgrund till blank</span></span>
+<span id="cb81-7"><a href="datahantering-och-grafer.html#cb81-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),           <span class="co"># Sätt axeltext till blank</span></span>
+<span id="cb81-8"><a href="datahantering-och-grafer.html#cb81-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>())            <span class="co"># Sätt axelticks till blank</span></span></code></pre></div>
 <p>Använd temat från exemplet för att skapa en enklare version av grafen från föregående uppgift. Ett liknande resultat kan fås med temat <code>theme_void()</code>.</p>
 </div>
 </div>
@@ -906,7 +915,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7 Variansanalys | R-anvisningar till Grundläggande statistik</title>
   <meta name="description" content="7 Variansanalys | R-anvisningar till Grundläggande statistik" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7 Variansanalys | R-anvisningar till Grundläggande statistik" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2022-08-30" />
+<meta name="date" content="2022-09-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -471,9 +471,9 @@ H1: alla behandlingsgrupper har inte samma medelvärde</p>
 ## Confidence level used: 0.95 
 ## P value adjustment: tukey method for comparing a family of 3 estimates 
 ## significance level used: alpha = 0.05 
-## NOTE: Compact letter displays can be misleading
-##       because they show NON-findings rather than findings.
-##       Consider using &#39;pairs()&#39;, &#39;pwpp()&#39;, or &#39;pwpm()&#39; instead.</code></pre>
+## NOTE: If two or more means share the same grouping letter,
+##       then we cannot show them to be different.
+##       But we also did not show them to be the same.</code></pre>
 <p>Tolkning av grupperingen till höger är att grupper som delar en bokstav inte är signifikant skilda. I det här fallet är den lägsta nivån skild från de två högsta. I övrigt finns inga signifikanta skillnader. Jämför gärna med p-värdena från tabellen med parvisa jämförelser. Man bör se att parvisa jämförelser med ett p-värde under fem procent motsvaras av att de behandlingarna inte delar någon bokstav i bokstavstabellen.</p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-164" class="exercise"><strong>Uppgift 7.3  (Anova med två behandlingar) </strong></span>Följande kod skapar en datamängd med två behandlingar.</p>
@@ -492,27 +492,27 @@ H1: alla behandlingsgrupper har inte samma medelvärde</p>
 <span id="cb469-3"><a href="variansanalys.html#cb469-3" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> group, dat_sim)</span>
 <span id="cb469-4"><a href="variansanalys.html#cb469-4" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(mod, pairwise <span class="sc">~</span> group, <span class="at">adjust =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <pre><code>## $emmeans
-##  group emmean   SE df lower.CL upper.CL
-##  a     -0.181 0.29 45   -0.765  0.40366
-##  b      0.106 0.29 45   -0.478  0.69085
-##  c     -0.589 0.29 45   -1.173 -0.00461
-##  d      0.132 0.29 45   -0.453  0.71612
-##  e     -0.550 0.29 45   -1.135  0.03393
+##  group  emmean    SE df lower.CL upper.CL
+##  a     -0.0962 0.258 45   -0.616    0.423
+##  b     -0.2548 0.258 45   -0.774    0.265
+##  c     -0.6741 0.258 45   -1.194   -0.154
+##  d     -0.0984 0.258 45   -0.618    0.421
+##  e     -0.0743 0.258 45   -0.594    0.445
 ## 
 ## Confidence level used: 0.95 
 ## 
 ## $contrasts
-##  contrast estimate   SE df t.ratio p.value
-##  a - b     -0.2872 0.41 45  -0.700  0.4876
-##  a - c      0.4083 0.41 45   0.995  0.3250
-##  a - d     -0.3125 0.41 45  -0.762  0.4503
-##  a - e      0.3697 0.41 45   0.901  0.3723
-##  b - c      0.6955 0.41 45   1.695  0.0970
-##  b - d     -0.0253 0.41 45  -0.062  0.9512
-##  b - e      0.6569 0.41 45   1.601  0.1164
-##  c - d     -0.7207 0.41 45  -1.757  0.0858
-##  c - e     -0.0385 0.41 45  -0.094  0.9256
-##  d - e      0.6822 0.41 45   1.663  0.1033</code></pre>
+##  contrast estimate    SE df t.ratio p.value
+##  a - b     0.15860 0.365 45   0.435  0.6659
+##  a - c     0.57792 0.365 45   1.584  0.1202
+##  a - d     0.00222 0.365 45   0.006  0.9952
+##  a - e    -0.02187 0.365 45  -0.060  0.9525
+##  b - c     0.41932 0.365 45   1.149  0.2565
+##  b - d    -0.15638 0.365 45  -0.429  0.6703
+##  b - e    -0.18047 0.365 45  -0.495  0.6233
+##  c - d    -0.57570 0.365 45  -1.578  0.1216
+##  c - e    -0.59980 0.365 45  -1.644  0.1072
+##  d - e    -0.02409 0.365 45  -0.066  0.9476</code></pre>
 <p>Kör koden tio gånger. Hur många gånger av de tio ger de parvisa jämförelserna <em>någon</em> signifikant skillnad (det vill säga något p-värde under 0.05)?</p>
 <p>En passande xkcd-serie: <a href="https://xkcd.com/882/" class="uri">https://xkcd.com/882/</a></p>
 </div>
@@ -605,9 +605,9 @@ H1: alla behandlingsgrupper har inte samma medelvärde</p>
 ## Confidence level used: 0.95 
 ## P value adjustment: tukey method for comparing a family of 4 estimates 
 ## significance level used: alpha = 0.05 
-## NOTE: Compact letter displays can be misleading
-##       because they show NON-findings rather than findings.
-##       Consider using &#39;pairs()&#39;, &#39;pwpp()&#39;, or &#39;pwpm()&#39; instead.</code></pre>
+## NOTE: If two or more means share the same grouping letter,
+##       then we cannot show them to be different.
+##       But we also did not show them to be the same.</code></pre>
 <p>Signifikansbokstäver anger att den lägsta nivån är skild från övriga och att den näst lägsta är skild från den högsta. Även här kan det vara intressant att jämföra med modellen utan block.</p>
 <div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="variansanalys.html#cb482-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cld</span>(<span class="fu">emmeans</span>(mod_wo_block, <span class="sc">~</span> N), <span class="at">Letters =</span> letters)</span></code></pre></div>
 <pre><code>##  N      emmean   SE df lower.CL upper.CL .group
@@ -619,9 +619,9 @@ H1: alla behandlingsgrupper har inte samma medelvärde</p>
 ## Confidence level used: 0.95 
 ## P value adjustment: tukey method for comparing a family of 4 estimates 
 ## significance level used: alpha = 0.05 
-## NOTE: Compact letter displays can be misleading
-##       because they show NON-findings rather than findings.
-##       Consider using &#39;pairs()&#39;, &#39;pwpp()&#39;, or &#39;pwpm()&#39; instead.</code></pre>
+## NOTE: If two or more means share the same grouping letter,
+##       then we cannot show them to be different.
+##       But we also did not show them to be the same.</code></pre>
 <p>Modellen utan block ger samma medelvärden <code>emmean</code> men större medelfel <code>SE</code> och färre signifikanta skillnader.</p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-169" class="exercise"><strong>Uppgift 7.8  (Block med två behandlingar. Graf) </strong></span>Det minsta möjliga blocket är det med två behandlingar. Vi filtrerar havredatan för att den situationen.</p>
@@ -969,7 +969,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

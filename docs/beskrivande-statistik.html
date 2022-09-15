@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 Beskrivande statistik | R-anvisningar till Grundläggande statistik</title>
   <meta name="description" content="2 Beskrivande statistik | R-anvisningar till Grundläggande statistik" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Beskrivande statistik | R-anvisningar till Grundläggande statistik" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2022-08-30" />
+<meta name="date" content="2022-09-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -268,36 +268,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.1</span> Repetition från datorövning 1<a href="beskrivande-statistik.html#repetition-från-datorövning-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>När man arbetar i R är det klokt att använda ett avancerat gränssnitt som RStudio och att skriva sin kod i ett separat skript. I RStudio kan man starta ett nytt skript genom <em>Ctrl + Shift + N</em>.</p>
 <p>Mycket funktionalitet i R ligger i tilläggspaket (<em>Packages</em>). Paket måste installeras första gången de används och laddas varje session de används, t.ex.</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="beskrivande-statistik.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;tidyverse&quot;)</span></span>
-<span id="cb82-2"><a href="beskrivande-statistik.html#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># Ger ett felmeddelande om paketet inte installerats tidigare.</span></span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="beskrivande-statistik.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;tidyverse&quot;)        # Installera tidyverse (behövs ej om redan gjort)</span></span>
+<span id="cb82-2"><a href="beskrivande-statistik.html#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)                     <span class="co"># Ger ett felmeddelande om paketet inte installerats</span></span></code></pre></div>
 <p>Data läses in med import-funktioner där valet av funktion beror på typen av fil. Importerad data sparas som ett objekt i R genom <em>assign</em>-pilen <code>&lt;-</code>.</p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="beskrivande-statistik.html#cb83-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/adamflr/ST0060-2022/main/Data/Spotify_data.csv&quot;</span>)</span>
-<span id="cb83-2"><a href="beskrivande-statistik.html#cb83-2" aria-hidden="true" tabindex="-1"></a>dat</span></code></pre></div>
+<span id="cb83-2"><a href="beskrivande-statistik.html#cb83-2" aria-hidden="true" tabindex="-1"></a>dat                                              <span class="co"># Skriv ut objektet dat</span></span></code></pre></div>
 <pre><code>## # A tibble: 76,622 × 24
-##    artist_name album_name    track_number track_name album_type album_release_d…
-##    &lt;chr&gt;       &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;           
-##  1 100 gecs    1000 gecs an…            1 money mac… album      2020-07-10      
-##  2 100 gecs    1000 gecs an…            2 ringtone … album      2020-07-10      
-##  3 100 gecs    1000 gecs an…            3 745 stick… album      2020-07-10      
-##  4 100 gecs    1000 gecs an…            4 gec 2 Ü (… album      2020-07-10      
-##  5 100 gecs    1000 gecs an…            5 hand crus… album      2020-07-10      
-##  6 100 gecs    1000 gecs an…            6 800db clo… album      2020-07-10      
-##  7 100 gecs    1000 gecs an…            7 stupid ho… album      2020-07-10      
-##  8 100 gecs    1000 gecs an…            8 ringtone … album      2020-07-10      
-##  9 100 gecs    1000 gecs an…            9 xXXi_wud_… album      2020-07-10      
-## 10 100 gecs    1000 gecs an…           10 745 stick… album      2020-07-10      
-## # … with 76,612 more rows, and 18 more variables: album_release_year &lt;dbl&gt;,
-## #   danceability &lt;dbl&gt;, energy &lt;dbl&gt;, key &lt;dbl&gt;, loudness &lt;dbl&gt;, mode &lt;dbl&gt;,
+##    artist…¹ album…² track…³ track…⁴ album…⁵ album…⁶ album…⁷ dance…⁸ energy   key
+##    &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+##  1 100 gecs 1000 g…       1 money … album   2020-0…    2020   0.344  0.737     6
+##  2 100 gecs 1000 g…       2 ringto… album   2020-0…    2020   0.849  0.473     8
+##  3 100 gecs 1000 g…       3 745 st… album   2020-0…    2020   0.48   0.576     5
+##  4 100 gecs 1000 g…       4 gec 2 … album   2020-0…    2020   0.411  0.738     0
+##  5 100 gecs 1000 g…       5 hand c… album   2020-0…    2020   0.473  0.936     1
+##  6 100 gecs 1000 g…       6 800db … album   2020-0…    2020   0.434  0.846     8
+##  7 100 gecs 1000 g…       7 stupid… album   2020-0…    2020   0.736  0.859     8
+##  8 100 gecs 1000 g…       8 ringto… album   2020-0…    2020   0.449  0.745    10
+##  9 100 gecs 1000 g…       9 xXXi_w… album   2020-0…    2020   0.379  0.847     1
+## 10 100 gecs 1000 g…      10 745 st… album   2020-0…    2020   0.445  0.98     10
+## # … with 76,612 more rows, 14 more variables: loudness &lt;dbl&gt;, mode &lt;dbl&gt;,
 ## #   speechiness &lt;dbl&gt;, acousticness &lt;dbl&gt;, instrumentalness &lt;dbl&gt;,
 ## #   liveness &lt;dbl&gt;, valence &lt;dbl&gt;, tempo &lt;dbl&gt;, time_signature &lt;dbl&gt;,
-## #   explicit &lt;lgl&gt;, type &lt;chr&gt;, key_name &lt;chr&gt;, mode_name &lt;chr&gt;, key_mode &lt;chr&gt;</code></pre>
+## #   explicit &lt;lgl&gt;, type &lt;chr&gt;, key_name &lt;chr&gt;, mode_name &lt;chr&gt;,
+## #   key_mode &lt;chr&gt;, and abbreviated variable names ¹​artist_name, ²​album_name,
+## #   ³​track_number, ⁴​track_name, ⁵​album_type, ⁶​album_release_date,
+## #   ⁷​album_release_year, ⁸​danceability</code></pre>
 <p>Funktioner agerar på objekt och ger något utfall. Här beräknas medeltempot med funktionen <code>mean()</code>. Dollartecknet används för att ange en specifik kolumn i dataobjektet. Funktioner styrs av möjliga argument - här används <code>na.rm</code> för att ange att saknade värden inte ska tas med i beräkningen</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="beskrivande-statistik.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(dat<span class="sc">$</span>tempo, <span class="at">na.rm =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="beskrivande-statistik.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(dat<span class="sc">$</span>tempo, <span class="at">na.rm =</span> T)                       <span class="co"># Beräkna medelvärdet av kolumnen tempo i datan dat</span></span></code></pre></div>
 <pre><code>## [1] 119.0361</code></pre>
 <p>Funktionerna <code>filter()</code> och <code>select()</code> kan användas för att välja kolumner och rader. Funktioner kan länkas samman med en pipe <code>%&gt;%</code> för att skapa sekvenser av funktioner. Man kan tänka på pipen som <em>och sen</em>.</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="beskrivande-statistik.html#cb87-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                                 <span class="co"># ta datan, och sen</span></span>
-<span id="cb87-2"><a href="beskrivande-statistik.html#cb87-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(artist_name <span class="sc">==</span> <span class="st">&quot;Tame Impala&quot;</span>, tempo <span class="sc">&gt;</span> <span class="dv">170</span>) <span class="sc">%&gt;%</span> <span class="co"># ta ut rader där artisten är Tame Impala och tempot är större än 170, och sen</span></span>
-<span id="cb87-3"><a href="beskrivande-statistik.html#cb87-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(artist_name, track_name, tempo)                <span class="co"># ta ut kolumnerna artist_name, track_name och tempo</span></span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="beskrivande-statistik.html#cb87-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                                    <span class="co"># Ta datan, och sen</span></span>
+<span id="cb87-2"><a href="beskrivande-statistik.html#cb87-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(artist_name <span class="sc">==</span> <span class="st">&quot;Tame Impala&quot;</span>, tempo <span class="sc">&gt;</span> <span class="dv">170</span>) <span class="sc">%&gt;%</span>    <span class="co"># ta ut rader där artisten är Tame Impala och tempot är större än 170, och sen</span></span>
+<span id="cb87-3"><a href="beskrivande-statistik.html#cb87-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(artist_name, track_name, tempo)                   <span class="co"># ta ut kolumnerna artist_name, track_name och tempo</span></span></code></pre></div>
 <pre><code>## # A tibble: 8 × 3
 ##   artist_name track_name                                         tempo
 ##   &lt;chr&gt;       &lt;chr&gt;                                              &lt;dbl&gt;
@@ -310,11 +312,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 7 Tame Impala Guilty Conscience - Tame Impala Remix Instrumental  192.
 ## 8 Tame Impala Guilty Conscience - Tame Impala Remix               192.</code></pre>
 <p>Funktionen <code>summarise()</code> ger ett sammanfattande mått (som <code>mean()</code> för medelvärde eller <code>sum()</code> för summa) för någon eller några variabler. Funktionen <code>group_by()</code> kan användas för att göra beräkningen efter någon gruppering.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="beskrivande-statistik.html#cb89-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> </span>
-<span id="cb89-2"><a href="beskrivande-statistik.html#cb89-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(artist_name) <span class="sc">%&gt;%</span> </span>
-<span id="cb89-3"><a href="beskrivande-statistik.html#cb89-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(Antal_spår <span class="ot">=</span> <span class="fu">n</span>(),</span>
-<span id="cb89-4"><a href="beskrivande-statistik.html#cb89-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Medeltempo =</span> <span class="fu">mean</span>(tempo),</span>
-<span id="cb89-5"><a href="beskrivande-statistik.html#cb89-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">Maxdansbarhet =</span> <span class="fu">max</span>(danceability))</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="beskrivande-statistik.html#cb89-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                                    <span class="co"># Ta datan, och sen</span></span>
+<span id="cb89-2"><a href="beskrivande-statistik.html#cb89-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(artist_name) <span class="sc">%&gt;%</span>                                <span class="co"># gruppera efter artist, och sen</span></span>
+<span id="cb89-3"><a href="beskrivande-statistik.html#cb89-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(Antal_spår <span class="ot">=</span> <span class="fu">n</span>(),                              <span class="co"># beräkna antal spår,</span></span>
+<span id="cb89-4"><a href="beskrivande-statistik.html#cb89-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Medeltempo =</span> <span class="fu">mean</span>(tempo),                      <span class="co"># medeltempo, och</span></span>
+<span id="cb89-5"><a href="beskrivande-statistik.html#cb89-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">Maxdansbarhet =</span> <span class="fu">max</span>(danceability))             <span class="co"># maximal dansbarhet</span></span></code></pre></div>
 <pre><code>## # A tibble: 363 × 4
 ##    artist_name            Antal_spår Medeltempo Maxdansbarhet
 ##    &lt;chr&gt;                       &lt;int&gt;      &lt;dbl&gt;         &lt;dbl&gt;
@@ -330,10 +332,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10 Alex G                        179       122.         0.807
 ## # … with 353 more rows</code></pre>
 <p>Slutligen tittade vi på grafer med ggplot2-paketet. En ggplot byggs upp med tre grundelar: data, geometrier (grafens objekt och former), och <em>aesthetics</em> (utseende och placering av geometrierna). I ett enkelt spridningsdiagram är data två numeriska variabler, geometrierna är punkter, och punkternas placering ges av en x-koordinat och en y-koordinat. Ytterligare <em>aesthetics</em> kan vara punkternas färger (<code>color</code>) och storlek (<code>size</code>).</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="beskrivande-statistik.html#cb91-1" aria-hidden="true" tabindex="-1"></a>dat_small <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> <span class="fu">filter</span>(artist_name <span class="sc">==</span> <span class="st">&quot;The Weeknd&quot;</span>)</span>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="beskrivande-statistik.html#cb91-1" aria-hidden="true" tabindex="-1"></a>dat_small <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> <span class="fu">filter</span>(artist_name <span class="sc">==</span> <span class="st">&quot;The Weeknd&quot;</span>)                            <span class="co"># Skapa en mindre datamängd genom att filtrera på en artist</span></span>
 <span id="cb91-2"><a href="beskrivande-statistik.html#cb91-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-3"><a href="beskrivande-statistik.html#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_small, <span class="fu">aes</span>(tempo, danceability, <span class="at">size =</span> valence, <span class="at">color =</span> mode_name)) <span class="sc">+</span></span>
-<span id="cb91-4"><a href="beskrivande-statistik.html#cb91-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<span id="cb91-3"><a href="beskrivande-statistik.html#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_small, <span class="fu">aes</span>(tempo, danceability, <span class="at">size =</span> valence, <span class="at">color =</span> mode_name)) <span class="sc">+</span>    <span class="co"># Koppla grafegenskaper och variabler</span></span>
+<span id="cb91-4"><a href="beskrivande-statistik.html#cb91-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()                                                                      <span class="co"># Illustrera med punkter</span></span></code></pre></div>
 <p><img src="R-anvisningar_files/figure-html/unnamed-chunk-72-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="import-av-data-från-en-excelfil" class="section level2 hasAnchor" number="2.2">
@@ -343,17 +345,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span id="exr:unlabeled-div-31" class="exercise"><strong>Uppgift 2.1  (Excelfil från Canvas) </strong></span>Hitta excelfilen <em>Gapminder.xlsx</em> på Canvas och ladda ner den. Hitta mappen som filen laddats ned till.</p>
 </div>
 <p>I R kan man läsa in data från en Excel-fil med funktionen <code>read_excel()</code> från paketet <code>readxl</code>. Som argument till funktionen sätts filens sökväg - dess placering på hårddisken. Stycket nedan importerar från en excelfil som ligger på hårddisken <em>C:</em> i mappen <em>Downloads</em>, under <em>User_name</em>, under <em>Users</em>.</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="beskrivande-statistik.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl) <span class="co"># Ladda readxl</span></span></code></pre></div>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="beskrivande-statistik.html#cb93-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;C:/Users/User_name/Downloads/Gapminder.xlsx&quot;</span>)</span>
-<span id="cb93-2"><a href="beskrivande-statistik.html#cb93-2" aria-hidden="true" tabindex="-1"></a>gapminder</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="beskrivande-statistik.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)                                                           <span class="co"># Ladda readxl</span></span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="beskrivande-statistik.html#cb93-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;C:/Users/User_name/Downloads/Gapminder.xlsx&quot;</span>)    <span class="co"># Läs in från en lokal excelfil</span></span>
+<span id="cb93-2"><a href="beskrivande-statistik.html#cb93-2" aria-hidden="true" tabindex="-1"></a>gapminder                                                                 <span class="co"># Skriv ut objektet gapminder</span></span></code></pre></div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-32" class="exercise"><strong>Uppgift 2.2  (Importera från excelfil) </strong></span>Var ligger den nedladdade filen <em>Gapminder.xlsx</em>? Gör lämplig ändring i koden ovan för att läsa in data från den filen. Notera att R använder högerlutande snedstreck <code>/</code>, så om en kopierad sökväg har vänster-snedstreck måste de ändras. Kontrollera att datan blivit korrekt inläst genom att köra objektnamnet <code>gapminder</code>.</p>
 </div>
 <p>En R-session har alltid en grundmapp, ett <em>Working directory</em>. Man kan se vilken mapp det är genom att köra</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="beskrivande-statistik.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="beskrivande-statistik.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()                                <span class="co"># Ange working directory</span></span></code></pre></div>
 <p>En filsökväg kan anges antingen som en fullständig sökväg, som ovan, eller relativt <em>working directory</em>. Om man till exempel har en fil <em>Gapminder.xlsx</em> som ligger i en mapp <em>Data</em> som i sin tur ligger i <em>working directory</em>, kan man importera data från filen med</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="beskrivande-statistik.html#cb95-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;Data/Gapminder.xlsx&quot;</span>)</span>
-<span id="cb95-2"><a href="beskrivande-statistik.html#cb95-2" aria-hidden="true" tabindex="-1"></a>gapminder</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="beskrivande-statistik.html#cb95-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;Data/Gapminder.xlsx&quot;</span>)             <span class="co"># Läs in från en lokal excelfil (relativt wd)</span></span>
+<span id="cb95-2"><a href="beskrivande-statistik.html#cb95-2" aria-hidden="true" tabindex="-1"></a>gapminder                                                  <span class="co"># Skriv ut objektet gapminder</span></span></code></pre></div>
 <pre><code>## # A tibble: 1,704 × 6
 ##    country     continent  year lifeExp      pop gdpPercap
 ##    &lt;chr&gt;       &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
@@ -373,34 +375,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>RStudio har också en inbyggd funktionalitet för att importera data. Man kan hitta den genom att gå till <em>Environment</em>-fliken och sedan <em>Import Dataset</em>. Det kan vara en bra hjälp, i synnerhet om man vill sätta datatyp för någon specifik kolumn.</p>
 <p>Om du inte har tillgång till Canvas kan Gapminder-datan alternativt hämtas från paketet Gapminder.</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="beskrivande-statistik.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;gapminder&quot;)</span></span>
-<span id="cb97-2"><a href="beskrivande-statistik.html#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gapminder)</span>
-<span id="cb97-3"><a href="beskrivande-statistik.html#cb97-3" aria-hidden="true" tabindex="-1"></a>gapminder</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="beskrivande-statistik.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;gapminder&quot;)        # Installera paketet gapminder (behövs ej om redan gjort)</span></span>
+<span id="cb97-2"><a href="beskrivande-statistik.html#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gapminder)                     <span class="co"># Ladda gapminder</span></span>
+<span id="cb97-3"><a href="beskrivande-statistik.html#cb97-3" aria-hidden="true" tabindex="-1"></a>gapminder                              <span class="co"># Skriv ut objektet gapminder</span></span></code></pre></div>
 </div>
 <div id="sammanfattande-lägesmått" class="section level2 hasAnchor" number="2.3">
 <h2><span class="header-section-number">2.3</span> Sammanfattande lägesmått<a href="beskrivande-statistik.html#sammanfattande-lägesmått" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Den importerade datan ger medellivslängd, populationsstorlek och bnp per capita per land och år. Vi kan börja med att producera en bubbelgraf över datan - en av de presentationer Gapminder ofta använder. En bubbelgraf är ett spridningsdiagram där punktens storlek beror på en tredje variabel.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="beskrivande-statistik.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder, <span class="fu">aes</span>(gdpPercap, lifeExp, <span class="at">size =</span> pop, <span class="at">color =</span> continent)) <span class="sc">+</span></span>
-<span id="cb98-2"><a href="beskrivande-statistik.html#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb98-3"><a href="beskrivande-statistik.html#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> year)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="beskrivande-statistik.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder, <span class="fu">aes</span>(gdpPercap, lifeExp, <span class="at">size =</span> pop, <span class="at">color =</span> continent)) <span class="sc">+</span>    <span class="co"># Koppla grafens egenskaper till kolumner</span></span>
+<span id="cb98-2"><a href="beskrivande-statistik.html#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>                                                               <span class="co"># Illustrera med punkter</span></span>
+<span id="cb98-3"><a href="beskrivande-statistik.html#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> year)                                                           <span class="co"># Skapa småfönster efter år</span></span></code></pre></div>
 <p><img src="R-anvisningar_files/figure-html/unnamed-chunk-78-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>En interaktiv version kan vara bra om man vill identifiera någon punkt.</p>
+<p>En interaktiv version kan vara bra om man vill identifiera någon specifik punkt.</p>
 <div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="beskrivande-statistik.html#cb99-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(gapminder, <span class="fu">aes</span>(gdpPercap, lifeExp, <span class="at">size =</span> pop, <span class="at">color =</span> continent, <span class="at">text =</span> country)) <span class="sc">+</span></span>
 <span id="cb99-2"><a href="beskrivande-statistik.html#cb99-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb99-3"><a href="beskrivande-statistik.html#cb99-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> year)</span>
 <span id="cb99-4"><a href="beskrivande-statistik.html#cb99-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-5"><a href="beskrivande-statistik.html#cb99-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
-<span id="cb99-6"><a href="beskrivande-statistik.html#cb99-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(g)</span></code></pre></div>
+<span id="cb99-5"><a href="beskrivande-statistik.html#cb99-5" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;plotly&quot;)</span></span>
+<span id="cb99-6"><a href="beskrivande-statistik.html#cb99-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)                        <span class="co"># Ladda paketet plotly</span></span>
+<span id="cb99-7"><a href="beskrivande-statistik.html#cb99-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(g)                            <span class="co"># Ta fram en interaktiv version av grafen g</span></span></code></pre></div>
 <p>Under föreläsningen såg vi exempel på två lägesmått: medelvärdet (egentligen det <em>aritmetiska</em> medelvärdet) och medianen. De har bägge enkla funktioner i R: <code>mean()</code> respektive <code>median()</code>. Vi plockar ut en variabel ur datan och beräknar bägge.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="beskrivande-statistik.html#cb100-1" aria-hidden="true" tabindex="-1"></a>gdpPercap <span class="ot">&lt;-</span> gapminder<span class="sc">$</span>gdpPercap</span>
-<span id="cb100-2"><a href="beskrivande-statistik.html#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(gdpPercap)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="beskrivande-statistik.html#cb100-1" aria-hidden="true" tabindex="-1"></a>gdpPercap <span class="ot">&lt;-</span> gapminder<span class="sc">$</span>gdpPercap       <span class="co"># Skapa en vektor gdpPercap genom att ta ut kolumnen från gapminder</span></span>
+<span id="cb100-2"><a href="beskrivande-statistik.html#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(gdpPercap)                        <span class="co"># Beräkna medelvärdet av gdpPercap</span></span></code></pre></div>
 <pre><code>## [1] 7215.327</code></pre>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="beskrivande-statistik.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(gdpPercap)</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="beskrivande-statistik.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(gdpPercap)                      <span class="co"># Beräkna medianen av gdpPercap</span></span></code></pre></div>
 <pre><code>## [1] 3531.847</code></pre>
 <p>Samma sak kan göras med en pipe <code>%&gt;%</code> och <code>summarise()</code>.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="beskrivande-statistik.html#cb104-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
-<span id="cb104-2"><a href="beskrivande-statistik.html#cb104-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean =</span> <span class="fu">mean</span>(gdpPercap),</span>
-<span id="cb104-3"><a href="beskrivande-statistik.html#cb104-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">Median =</span> <span class="fu">median</span>(gdpPercap))</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="beskrivande-statistik.html#cb104-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span>                                    <span class="co"># Ta datan, och sen</span></span>
+<span id="cb104-2"><a href="beskrivande-statistik.html#cb104-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean =</span> <span class="fu">mean</span>(gdpPercap),              <span class="co"># summera med medelvärdet av gdpPercap och</span></span>
+<span id="cb104-3"><a href="beskrivande-statistik.html#cb104-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">Median =</span> <span class="fu">median</span>(gdpPercap))          <span class="co"># med medianen av gdpPercap</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 2
 ##    Mean Median
 ##   &lt;dbl&gt;  &lt;dbl&gt;
@@ -409,10 +412,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span id="exr:unlabeled-div-34" class="exercise"><strong>Uppgift 2.4  (Lägesmått av livslängd) </strong></span>Gör lämpliga ändringar i exemplet ovan för att beräkna lägesmått för medellivslängd (<code>lifeExp</code>).</p>
 </div>
 <p>Den andra lösningen, med en pipe och <code>summarise()</code>, kan enkelt utvecklas med ett <code>group_by()</code>-steg för att beräkna medel och median per någon grupp, t.ex. per år.</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="beskrivande-statistik.html#cb106-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
-<span id="cb106-2"><a href="beskrivande-statistik.html#cb106-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span> </span>
-<span id="cb106-3"><a href="beskrivande-statistik.html#cb106-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean =</span> <span class="fu">mean</span>(gdpPercap),</span>
-<span id="cb106-4"><a href="beskrivande-statistik.html#cb106-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Median =</span> <span class="fu">median</span>(gdpPercap))</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="beskrivande-statistik.html#cb106-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span>                                    <span class="co"># Ta datan, och sen</span></span>
+<span id="cb106-2"><a href="beskrivande-statistik.html#cb106-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span>                             <span class="co"># gruppera efter år, och sen</span></span>
+<span id="cb106-3"><a href="beskrivande-statistik.html#cb106-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean =</span> <span class="fu">mean</span>(gdpPercap),              <span class="co"># summera med medelvärdet av gdpPercap och</span></span>
+<span id="cb106-4"><a href="beskrivande-statistik.html#cb106-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Median =</span> <span class="fu">median</span>(gdpPercap))          <span class="co"># med medianen av gdpPercap</span></span></code></pre></div>
 <pre><code>## # A tibble: 12 × 3
 ##     year   Mean Median
 ##    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
@@ -435,13 +438,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span id="exr:unlabeled-div-36" class="exercise"><strong>Uppgift 2.6  (Upprepade mätningar) </strong></span>Finns det några problem med att beräkna medelvärde per kontinent på den här datan? (Jag kan se minst två.)</p>
 </div>
 <p>I vetenskapliga publikationer redovisas medelvärden ofta med ett stapeldiagram. Som exempel ges staplar för medelvärdet av bnp per kontinent för 2007.</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="beskrivande-statistik.html#cb108-1" aria-hidden="true" tabindex="-1"></a>dat_gdp_2007 <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span> </span>
-<span id="cb108-2"><a href="beskrivande-statistik.html#cb108-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb108-3"><a href="beskrivande-statistik.html#cb108-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(continent) <span class="sc">%&gt;%</span> </span>
-<span id="cb108-4"><a href="beskrivande-statistik.html#cb108-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean =</span> <span class="fu">mean</span>(gdpPercap))</span>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="beskrivande-statistik.html#cb108-1" aria-hidden="true" tabindex="-1"></a>dat_gdp_2007 <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span>                    <span class="co"># Ta datan, och sen</span></span>
+<span id="cb108-2"><a href="beskrivande-statistik.html#cb108-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">%&gt;%</span>                       <span class="co"># filtrera för 2007, och sen</span></span>
+<span id="cb108-3"><a href="beskrivande-statistik.html#cb108-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(continent) <span class="sc">%&gt;%</span>                        <span class="co"># gruppera efter kontinent, och sen</span></span>
+<span id="cb108-4"><a href="beskrivande-statistik.html#cb108-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean =</span> <span class="fu">mean</span>(gdpPercap))              <span class="co"># summera med medelvärdet av gdpPercap</span></span>
 <span id="cb108-5"><a href="beskrivande-statistik.html#cb108-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb108-6"><a href="beskrivande-statistik.html#cb108-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_gdp_2007, <span class="fu">aes</span>(continent, Mean)) <span class="sc">+</span></span>
-<span id="cb108-7"><a href="beskrivande-statistik.html#cb108-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code></pre></div>
+<span id="cb108-6"><a href="beskrivande-statistik.html#cb108-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_gdp_2007, <span class="fu">aes</span>(continent, Mean)) <span class="sc">+</span>     <span class="co"># Skapa en ggplot med continent på x-axeln och Mean på y-axeln</span></span>
+<span id="cb108-7"><a href="beskrivande-statistik.html#cb108-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()                                     <span class="co"># Illustrera med kolumner (columns)</span></span></code></pre></div>
 <p><img src="R-anvisningar_files/figure-html/unnamed-chunk-83-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>För att få lite mer information kan man lägga till de individuella punkterna.</p>
 <div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="beskrivande-statistik.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_gdp_2007, <span class="fu">aes</span>(continent, Mean)) <span class="sc">+</span></span>
@@ -459,29 +462,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="sammanfattande-spridningsmått" class="section level2 hasAnchor" number="2.4">
 <h2><span class="header-section-number">2.4</span> Sammanfattande spridningsmått<a href="beskrivande-statistik.html#sammanfattande-spridningsmått" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Under föreläsningarna såg vi några mått på spridning: varians, standardavvikelse och kvartilavstånd (IQR, <em>inter-quartile range</em>). De har alla motsvarande funktioner i R (<code>var()</code>, <code>sd()</code>, och <code>IQR()</code>) som kan användas på samma sätt som funktionerna för lägesmått.</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="beskrivande-statistik.html#cb111-1" aria-hidden="true" tabindex="-1"></a>gdpPercap <span class="ot">&lt;-</span> gapminder<span class="sc">$</span>gdpPercap</span>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="beskrivande-statistik.html#cb111-1" aria-hidden="true" tabindex="-1"></a>gdpPercap <span class="ot">&lt;-</span> gapminder<span class="sc">$</span>gdpPercap                 <span class="co"># Skapa en vektor gdpPercap genom att ta ut kolumnen från gapminder</span></span>
 <span id="cb111-2"><a href="beskrivande-statistik.html#cb111-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb111-3"><a href="beskrivande-statistik.html#cb111-3" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(gdpPercap)</span></code></pre></div>
+<span id="cb111-3"><a href="beskrivande-statistik.html#cb111-3" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(gdpPercap)                                   <span class="co"># Beräkna variansen av gdpPercap</span></span></code></pre></div>
 <pre><code>## [1] 97169410</code></pre>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="beskrivande-statistik.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(gdpPercap)</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="beskrivande-statistik.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(gdpPercap)                                    <span class="co"># Beräkna standardavvikelsen av gdpPercap</span></span></code></pre></div>
 <pre><code>## [1] 9857.455</code></pre>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="beskrivande-statistik.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">IQR</span>(gdpPercap)</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="beskrivande-statistik.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">IQR</span>(gdpPercap)                                   <span class="co"># Beräkna kvartilavståndet av gdpPercap</span></span></code></pre></div>
 <pre><code>## [1] 8123.402</code></pre>
 <p>Alternativt med en pipe och <code>summarise()</code>.</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="beskrivande-statistik.html#cb117-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
-<span id="cb117-2"><a href="beskrivande-statistik.html#cb117-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Varians =</span> <span class="fu">var</span>(gdpPercap),</span>
-<span id="cb117-3"><a href="beskrivande-statistik.html#cb117-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">Standardavvikelse =</span> <span class="fu">sd</span>(gdpPercap),</span>
-<span id="cb117-4"><a href="beskrivande-statistik.html#cb117-4" aria-hidden="true" tabindex="-1"></a>            Kvartilavstånd <span class="ot">=</span> <span class="fu">IQR</span>(gdpPercap))</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="beskrivande-statistik.html#cb117-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span>                                    <span class="co"># Ta datan, och sen</span></span>
+<span id="cb117-2"><a href="beskrivande-statistik.html#cb117-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Varians =</span> <span class="fu">var</span>(gdpPercap),            <span class="co"># summera med varians,</span></span>
+<span id="cb117-3"><a href="beskrivande-statistik.html#cb117-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">Standardavvikelse =</span> <span class="fu">sd</span>(gdpPercap),   <span class="co"># standardavvikelse,</span></span>
+<span id="cb117-4"><a href="beskrivande-statistik.html#cb117-4" aria-hidden="true" tabindex="-1"></a>            Kvartilavstånd <span class="ot">=</span> <span class="fu">IQR</span>(gdpPercap))     <span class="co"># och kvartilavstånd</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 3
 ##     Varians Standardavvikelse Kvartilavstånd
 ##       &lt;dbl&gt;             &lt;dbl&gt;          &lt;dbl&gt;
 ## 1 97169410.             9857.          8123.</code></pre>
 <p>Lösningen med pipe och <code>summarise()</code> kan som tidigare utvecklas med <code>group_by()</code>.</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="beskrivande-statistik.html#cb119-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
-<span id="cb119-2"><a href="beskrivande-statistik.html#cb119-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span> </span>
-<span id="cb119-3"><a href="beskrivande-statistik.html#cb119-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Varians =</span> <span class="fu">var</span>(gdpPercap),</span>
-<span id="cb119-4"><a href="beskrivande-statistik.html#cb119-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Standardavvikelse =</span> <span class="fu">sd</span>(gdpPercap),</span>
-<span id="cb119-5"><a href="beskrivande-statistik.html#cb119-5" aria-hidden="true" tabindex="-1"></a>            Kvartilavstånd <span class="ot">=</span> <span class="fu">IQR</span>(gdpPercap))</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="beskrivande-statistik.html#cb119-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span>                                    <span class="co"># Ta datan, och sen</span></span>
+<span id="cb119-2"><a href="beskrivande-statistik.html#cb119-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span>                             <span class="co"># gruppera efter år, och sen</span></span>
+<span id="cb119-3"><a href="beskrivande-statistik.html#cb119-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Varians =</span> <span class="fu">var</span>(gdpPercap),            <span class="co"># summera med varians,</span></span>
+<span id="cb119-4"><a href="beskrivande-statistik.html#cb119-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Standardavvikelse =</span> <span class="fu">sd</span>(gdpPercap),   <span class="co"># standardavvikelse,</span></span>
+<span id="cb119-5"><a href="beskrivande-statistik.html#cb119-5" aria-hidden="true" tabindex="-1"></a>            Kvartilavstånd <span class="ot">=</span> <span class="fu">IQR</span>(gdpPercap))     <span class="co"># och kvartilavstånd</span></span></code></pre></div>
 <pre><code>## # A tibble: 12 × 4
 ##     year    Varians Standardavvikelse Kvartilavstånd
 ##    &lt;dbl&gt;      &lt;dbl&gt;             &lt;dbl&gt;          &lt;dbl&gt;
@@ -501,10 +504,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span id="exr:unlabeled-div-38" class="exercise"><strong>Uppgift 2.8  (Graf för livslängd) </strong></span>Gör lämpliga ändringar i det sista exempel för att istället beräkna spridningsmått för livslängd.</p>
 </div>
 <p>Vi avslutar med tre vanliga illustrationer av vetenskaplig data - ett linjediagram med felstaplar, ett stapeldiagram med felstaplar, och ett lådagram. För linjediagrammet beräknar vi medelvärdet och spridningsmått för bnp över år och kontinent. Som spridningsmått använder vi <em>medelfelet</em>, vilket beräknas som standardavvikelse delat på roten ur antalet observationer.</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="beskrivande-statistik.html#cb121-1" aria-hidden="true" tabindex="-1"></a>dat_sum <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span> </span>
-<span id="cb121-2"><a href="beskrivande-statistik.html#cb121-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, continent) <span class="sc">%&gt;%</span> </span>
-<span id="cb121-3"><a href="beskrivande-statistik.html#cb121-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean =</span> <span class="fu">mean</span>(gdpPercap),</span>
-<span id="cb121-4"><a href="beskrivande-statistik.html#cb121-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">SE =</span> <span class="fu">sd</span>(gdpPercap) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()))</span>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="beskrivande-statistik.html#cb121-1" aria-hidden="true" tabindex="-1"></a>dat_sum <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span>                         <span class="co"># Ta datan, och sen</span></span>
+<span id="cb121-2"><a href="beskrivande-statistik.html#cb121-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, continent) <span class="sc">%&gt;%</span>                  <span class="co"># grupper efter år och kontinent, och sen</span></span>
+<span id="cb121-3"><a href="beskrivande-statistik.html#cb121-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean =</span> <span class="fu">mean</span>(gdpPercap),              <span class="co"># summera med medelvärde</span></span>
+<span id="cb121-4"><a href="beskrivande-statistik.html#cb121-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">SE =</span> <span class="fu">sd</span>(gdpPercap) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()))      <span class="co"># och medelfel (standardavvikelsen delat på roten ur n)</span></span>
 <span id="cb121-5"><a href="beskrivande-statistik.html#cb121-5" aria-hidden="true" tabindex="-1"></a>dat_sum</span></code></pre></div>
 <pre><code>## # A tibble: 60 × 4
 ## # Groups:   year [12]
@@ -522,19 +525,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10  1957 Oceania   11599.  649.
 ## # … with 50 more rows</code></pre>
 <p>Med <code>ggplot2</code> kan vi bygga ett linjediagram med <code>geom_line()</code> och lägga till felstaplar med <code>geom_errorbar()</code>. Den senare behöver <code>aes()</code>-argument för <code>ymin</code> och <code>ymax</code> - nedre och övre del av felstapeln. Vi sätter dem till medelvärdet minus respektive plus ett medelfel.</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="beskrivande-statistik.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_sum, <span class="fu">aes</span>(year, Mean, <span class="at">color =</span> continent)) <span class="sc">+</span></span>
-<span id="cb123-2"><a href="beskrivande-statistik.html#cb123-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb123-3"><a href="beskrivande-statistik.html#cb123-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Mean <span class="sc">-</span> SE, <span class="at">ymax =</span> Mean <span class="sc">+</span> SE))</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="beskrivande-statistik.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_sum, <span class="fu">aes</span>(year, Mean, <span class="at">color =</span> continent)) <span class="sc">+</span>      <span class="co"># Skapa en ggplot från datan dat_sum med year som x-axel, Mean som y-axel och färg efter kontinent</span></span>
+<span id="cb123-2"><a href="beskrivande-statistik.html#cb123-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span>                                            <span class="co"># Illustrera med linjer</span></span>
+<span id="cb123-3"><a href="beskrivande-statistik.html#cb123-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Mean <span class="sc">-</span> SE, <span class="at">ymax =</span> Mean <span class="sc">+</span> SE))   <span class="co"># Illustrera med felstaplar</span></span></code></pre></div>
 <p><img src="R-anvisningar_files/figure-html/unnamed-chunk-90-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-39" class="exercise"><strong>Uppgift 2.9  (Bredd) </strong></span>Felstaplarna från <code>geom_errorbar()</code> har väldigt breda ändar. Använd hjälpsidan för geomet <code>?geom_errorbar</code>, i synnerhet exemplen längst ned, och se om det går att ändra bredden.</p>
 </div>
 <p>En graf med staplar och felstaplar kan konstrueras på ett likande sätt. Följande exempel visar staplar över livslängd per kontinent. Felstapeln ges av standardavvikelsen.</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="beskrivande-statistik.html#cb124-1" aria-hidden="true" tabindex="-1"></a>dat_sum <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span> </span>
-<span id="cb124-2"><a href="beskrivande-statistik.html#cb124-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb124-3"><a href="beskrivande-statistik.html#cb124-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(continent) <span class="sc">%&gt;%</span> </span>
-<span id="cb124-4"><a href="beskrivande-statistik.html#cb124-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean =</span> <span class="fu">mean</span>(lifeExp),</span>
-<span id="cb124-5"><a href="beskrivande-statistik.html#cb124-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">SD =</span> <span class="fu">sd</span>(lifeExp))</span>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="beskrivande-statistik.html#cb124-1" aria-hidden="true" tabindex="-1"></a>dat_sum <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span>                         <span class="co"># Ta datan, och sen</span></span>
+<span id="cb124-2"><a href="beskrivande-statistik.html#cb124-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">%&gt;%</span>                       <span class="co"># filtrera på år, och sen</span></span>
+<span id="cb124-3"><a href="beskrivande-statistik.html#cb124-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(continent) <span class="sc">%&gt;%</span>                        <span class="co"># gruppera efter kontinent, och sen</span></span>
+<span id="cb124-4"><a href="beskrivande-statistik.html#cb124-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean =</span> <span class="fu">mean</span>(lifeExp),                <span class="co"># summera med medelvärde,</span></span>
+<span id="cb124-5"><a href="beskrivande-statistik.html#cb124-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">SD =</span> <span class="fu">sd</span>(lifeExp))                    <span class="co"># och standardavvikelse</span></span>
 <span id="cb124-6"><a href="beskrivande-statistik.html#cb124-6" aria-hidden="true" tabindex="-1"></a>dat_sum</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 3
 ##   continent  Mean    SD
@@ -545,10 +548,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4 Europe     77.6 2.98 
 ## 5 Oceania    80.7 0.729</code></pre>
 <p>Vi bygger en ggplot med <code>geom_col()</code> och <code>geom_errorbar()</code>. Felstapels konstruktion kan anges i en notis med funktionen <code>labs()</code>.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="beskrivande-statistik.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_sum, <span class="fu">aes</span>(continent, Mean, <span class="at">fill =</span> continent)) <span class="sc">+</span></span>
-<span id="cb126-2"><a href="beskrivande-statistik.html#cb126-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()<span class="sc">+</span></span>
-<span id="cb126-3"><a href="beskrivande-statistik.html#cb126-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Mean <span class="sc">-</span> SD, <span class="at">ymax =</span> Mean <span class="sc">+</span> SD)) <span class="sc">+</span></span>
-<span id="cb126-4"><a href="beskrivande-statistik.html#cb126-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Average life expectancy by continent, 2007&quot;</span>,</span>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="beskrivande-statistik.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_sum, <span class="fu">aes</span>(continent, Mean, <span class="at">fill =</span> continent)) <span class="sc">+</span>          <span class="co"># Skapa en ggplot med continent och Mean på axlarna och ifylld färg given av kontinent</span></span>
+<span id="cb126-2"><a href="beskrivande-statistik.html#cb126-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()<span class="sc">+</span>                                                      <span class="co"># Illustrera med kolumner</span></span>
+<span id="cb126-3"><a href="beskrivande-statistik.html#cb126-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Mean <span class="sc">-</span> SD, <span class="at">ymax =</span> Mean <span class="sc">+</span> SD)) <span class="sc">+</span>         <span class="co"># Illustrera med felstaplar</span></span>
+<span id="cb126-4"><a href="beskrivande-statistik.html#cb126-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Average life expectancy by continent, 2007&quot;</span>,       <span class="co"># Ange titel och förklarande text</span></span>
 <span id="cb126-5"><a href="beskrivande-statistik.html#cb126-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Errorbars given by mean +/- standard deviation.</span></span>
 <span id="cb126-6"><a href="beskrivande-statistik.html#cb126-6" aria-hidden="true" tabindex="-1"></a><span class="st">       Source: Gapminder&quot;</span>)</span></code></pre></div>
 <p><img src="R-anvisningar_files/figure-html/unnamed-chunk-92-1.png" width="672" style="display: block; margin: auto;" /></p>
@@ -556,9 +559,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span id="exr:unlabeled-div-40" class="exercise"><strong>Uppgift 2.10  (Staplar för 1982) </strong></span>Gör lämpliga ändringar i exempel ovan för att konstruera ett stapeldiagram med felstaplar för året 1982 och variabeln gdpPercap.</p>
 </div>
 <p>Ett lådagram anger fördelningen av en variabel genom att illustrera minimum, maximum och kvartiler. Kvartiler är mått som delar en datamängd i fyra lika stora delar (så att en fjärdedel ligger under första kvartilen, en fjärdedel mellan första och andra kvartil, och så vidare). Med <code>ggplot2</code> kan vi bygga ett lådagram med <code>geom_boxplot()</code>. Exempel ger en låda per år och kontinent.</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="beskrivande-statistik.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder, <span class="fu">aes</span>(year, lifeExp, <span class="at">fill =</span> continent, <span class="at">group =</span> year)) <span class="sc">+</span></span>
-<span id="cb127-2"><a href="beskrivande-statistik.html#cb127-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb127-3"><a href="beskrivande-statistik.html#cb127-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> continent)</span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="beskrivande-statistik.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder, <span class="fu">aes</span>(year, lifeExp, <span class="at">fill =</span> continent, <span class="at">group =</span> year)) <span class="sc">+</span>        <span class="co"># Skapa en ggplot med år och lifeExp på axlarna, kontinent som ifylld färg, och gruppera efter år</span></span>
+<span id="cb127-2"><a href="beskrivande-statistik.html#cb127-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span>                                                             <span class="co"># Illustrera med lådagram</span></span>
+<span id="cb127-3"><a href="beskrivande-statistik.html#cb127-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> continent)                                                      <span class="co"># Småfönster efter kontinent</span></span></code></pre></div>
 <p><img src="R-anvisningar_files/figure-html/unnamed-chunk-93-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-41" class="exercise"><strong>Uppgift 2.11  (Group-argumentet) </strong></span>I lådagrammet används argumentet <code>group</code>. Vad gör det? Vad händer om man tar bort det?</p>
@@ -567,11 +570,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="ordna-upp-beskrivande-statistik-och-exportera" class="section level2 hasAnchor" number="2.5">
 <h2><span class="header-section-number">2.5</span> Ordna upp beskrivande statistik och exportera<a href="beskrivande-statistik.html#ordna-upp-beskrivande-statistik-och-exportera" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Efter att ha beräknat någon beskrivande statistik kan det vara bra att titta på hur resultaten kan snyggas upp och exporteras i något lämpligt format. Ta den tabell med medelvärden vi producerade i ett tidigare exempel.</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="beskrivande-statistik.html#cb128-1" aria-hidden="true" tabindex="-1"></a>dat_sum <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span> </span>
-<span id="cb128-2"><a href="beskrivande-statistik.html#cb128-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb128-3"><a href="beskrivande-statistik.html#cb128-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(continent) <span class="sc">%&gt;%</span> </span>
-<span id="cb128-4"><a href="beskrivande-statistik.html#cb128-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean =</span> <span class="fu">mean</span>(lifeExp),</span>
-<span id="cb128-5"><a href="beskrivande-statistik.html#cb128-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">SD =</span> <span class="fu">sd</span>(lifeExp))</span>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="beskrivande-statistik.html#cb128-1" aria-hidden="true" tabindex="-1"></a>dat_sum <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span>                         <span class="co"># Ta datan, och sen</span></span>
+<span id="cb128-2"><a href="beskrivande-statistik.html#cb128-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">%&gt;%</span>                       <span class="co"># filtrera på år, och sen</span></span>
+<span id="cb128-3"><a href="beskrivande-statistik.html#cb128-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(continent) <span class="sc">%&gt;%</span>                        <span class="co"># gruppera efter kontinent, och sen</span></span>
+<span id="cb128-4"><a href="beskrivande-statistik.html#cb128-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean =</span> <span class="fu">mean</span>(lifeExp),                <span class="co"># summera med medelvärde,</span></span>
+<span id="cb128-5"><a href="beskrivande-statistik.html#cb128-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">SD =</span> <span class="fu">sd</span>(lifeExp))                    <span class="co"># och standardavvikelse</span></span>
 <span id="cb128-6"><a href="beskrivande-statistik.html#cb128-6" aria-hidden="true" tabindex="-1"></a>dat_sum</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 3
 ##   continent  Mean    SD
@@ -583,7 +586,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5 Oceania    80.7 0.729</code></pre>
 <p>Ett vanligt skrivsätt för medelvärde och standardavvikelse är som <em>m ± sd</em>. Vi kan använda funktionen <code>paste()</code> för att slå ihop kolumner till en sammanhängande text.</p>
 <div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="beskrivande-statistik.html#cb130-1" aria-hidden="true" tabindex="-1"></a>dat_sum <span class="sc">%&gt;%</span> </span>
-<span id="cb130-2"><a href="beskrivande-statistik.html#cb130-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mean_plus_minus_sd =</span> <span class="fu">paste</span>(Mean, <span class="st">&quot;±&quot;</span>, SD))</span></code></pre></div>
+<span id="cb130-2"><a href="beskrivande-statistik.html#cb130-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mean_plus_minus_sd =</span> <span class="fu">paste</span>(Mean, <span class="st">&quot;±&quot;</span>, SD))        <span class="co"># Skapa en ny kolumn genom att slå ihop Mean och SD</span></span></code></pre></div>
 <pre><code>## # A tibble: 5 × 4
 ##   continent  Mean    SD mean_plus_minus_sd                 
 ##   &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                              
@@ -594,7 +597,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5 Oceania    80.7 0.729 80.7195 ± 0.729027091403335</code></pre>
 <p>Vi måste avrunda medelvärdet och standardavvikelsen först. Det kan man göra med <code>round()</code>, vars argument är den variabel man vill avrunda och antalet decimaler man vill avrunda till.</p>
 <div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="beskrivande-statistik.html#cb132-1" aria-hidden="true" tabindex="-1"></a>dat_sum <span class="ot">&lt;-</span> dat_sum <span class="sc">%&gt;%</span> </span>
-<span id="cb132-2"><a href="beskrivande-statistik.html#cb132-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mean_plus_minus_sd =</span> <span class="fu">paste</span>(<span class="fu">round</span>(Mean, <span class="dv">1</span>), <span class="st">&quot;±&quot;</span>, <span class="fu">round</span>(SD, <span class="dv">1</span>)))</span></code></pre></div>
+<span id="cb132-2"><a href="beskrivande-statistik.html#cb132-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mean_plus_minus_sd =</span> <span class="fu">paste</span>(<span class="fu">round</span>(Mean, <span class="dv">1</span>), <span class="st">&quot;±&quot;</span>, <span class="fu">round</span>(SD, <span class="dv">1</span>)))        <span class="co"># Skapa en ny kolumn med avrundade värden</span></span></code></pre></div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-42" class="exercise"><strong>Uppgift 2.12  (Tappade nollor) </strong></span>Utfallet ovan är nära men inte heller riktigt vad som behövs. I de fall där funktionen avrundat till en nolla har decimal tappats. Hur kan man visa en avslutande nolla? Följande tråd på StackOverflow besvarar samma fråga.</p>
 <p><a href="https://stackoverflow.com/questions/42105336/how-to-round-a-number-and-make-it-show-zeros" class="uri">https://stackoverflow.com/questions/42105336/how-to-round-a-number-and-make-it-show-zeros</a></p>
@@ -602,14 +605,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Objekt kan exporteras från R på liknande som det importeras - med särskilda exportfunktioner (<em>write</em>-funktioner) beroende på filtyp. För att exportera till en csv-fil man man anvnäda <code>write_csv()</code>. Ingående argument är det objekt man vill exportera och den fil man vill exportera till. R ger ingen varning om man skriver över en existerande fil, så var lite försiktiga här.</p>
 <p>Precis som vid import använda R <em>working directory</em> om inget annat anges. Följande exporterar objektet <code>dat_sum</code> till en csv-fil <em>Exporterad data från R.csv</em> i <em>working directory</em>.</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="beskrivande-statistik.html#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
-<span id="cb133-2"><a href="beskrivande-statistik.html#cb133-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(dat_sum, <span class="st">&quot;Exporterad data från R.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="beskrivande-statistik.html#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()                                                    <span class="co"># Se nuvarande working directory</span></span>
+<span id="cb133-2"><a href="beskrivande-statistik.html#cb133-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(dat_sum, <span class="st">&quot;Exporterad data från R.csv&quot;</span>)           <span class="co"># Skriv datan till en csv-fil.</span></span></code></pre></div>
 <p>Därifrån skulle man kunna öppna filen i något kalkylprogram, snygga till layouten, och sedan klippa in i ett textdokument.</p>
 </div>
 <div id="stegvis-beräkning-av-varians" class="section level2 hasAnchor" number="2.6">
 <h2><span class="header-section-number">2.6</span> Stegvis beräkning av varians<a href="beskrivande-statistik.html#stegvis-beräkning-av-varians" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Det vara nyttigt att göra en stegvis beräkning av varians (och standardavvikelse) för att få en lite bättre förståelse av vad det faktiskt beskriver. Nedan ges en slumpmässig exempeldata med fem observationer. Om du har en tärning från datorövning 1 kan du med fördel kasta den nu, och ersätta värdena med dina egna utfall</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="beskrivande-statistik.html#cb134-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Rad =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>), <span class="at">x =</span> <span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>))</span>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="beskrivande-statistik.html#cb134-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Rad =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>), <span class="at">x =</span> <span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>))    <span class="co"># Skapa en datamängd med kolumner Rad och x</span></span>
 <span id="cb134-2"><a href="beskrivande-statistik.html#cb134-2" aria-hidden="true" tabindex="-1"></a>dat</span></code></pre></div>
 <pre><code>##   Rad x
 ## 1   1 6
@@ -627,7 +630,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>Vi har tidigare sett beräkningen av medelvärden med <code>mean()</code>. En skillnad mot tidigare är att vi gör det i ett <code>mutate()</code> steg istället för <code>summarise()</code>, eftersom vi vill ha kvar den tidigare strukturen med flera rader.</p>
 <div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="beskrivande-statistik.html#cb136-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> </span>
-<span id="cb136-2"><a href="beskrivande-statistik.html#cb136-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(Medelvärde <span class="ot">=</span> <span class="fu">mean</span>(x))</span>
+<span id="cb136-2"><a href="beskrivande-statistik.html#cb136-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(Medelvärde <span class="ot">=</span> <span class="fu">mean</span>(x))                   <span class="co"># Beräkna medelvärdet av x i en ny kolumn</span></span>
 <span id="cb136-3"><a href="beskrivande-statistik.html#cb136-3" aria-hidden="true" tabindex="-1"></a>dat</span></code></pre></div>
 <pre><code>##   Rad x Medelvärde
 ## 1   1 6        3.8
@@ -637,7 +640,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5   5 5        3.8</code></pre>
 <p>Därefter tar vi differensen mellan observationernas värden och medelvärdet.</p>
 <div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="beskrivande-statistik.html#cb138-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> </span>
-<span id="cb138-2"><a href="beskrivande-statistik.html#cb138-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Differenser =</span> x <span class="sc">-</span> Medelvärde)</span>
+<span id="cb138-2"><a href="beskrivande-statistik.html#cb138-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Differenser =</span> x <span class="sc">-</span> Medelvärde)           <span class="co"># Beräkna differenser till medelvärdet</span></span>
 <span id="cb138-3"><a href="beskrivande-statistik.html#cb138-3" aria-hidden="true" tabindex="-1"></a>dat</span></code></pre></div>
 <pre><code>##   Rad x Medelvärde Differenser
 ## 1   1 6        3.8         2.2
@@ -647,7 +650,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5   5 5        3.8         1.2</code></pre>
 <p>Därefter tar vi kvadrater av differenserna. För att ange en kvadrat används symbolen <code>^2</code>, t.ex. <code>3^2</code> för tre i kvadrat.</p>
 <div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="beskrivande-statistik.html#cb140-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> </span>
-<span id="cb140-2"><a href="beskrivande-statistik.html#cb140-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Kvadrater =</span> Differenser<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb140-2"><a href="beskrivande-statistik.html#cb140-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Kvadrater =</span> Differenser<span class="sc">^</span><span class="dv">2</span>)              <span class="co"># Beräkna kvadrerade differenser</span></span>
 <span id="cb140-3"><a href="beskrivande-statistik.html#cb140-3" aria-hidden="true" tabindex="-1"></a>dat</span></code></pre></div>
 <pre><code>##   Rad x Medelvärde Differenser Kvadrater
 ## 1   1 6        3.8         2.2      4.84
@@ -657,24 +660,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5   5 5        3.8         1.2      1.44</code></pre>
 <p>Först i nästa steg summerar vi kvadraterna.</p>
 <div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="beskrivande-statistik.html#cb142-1" aria-hidden="true" tabindex="-1"></a>dat_sum <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> </span>
-<span id="cb142-2"><a href="beskrivande-statistik.html#cb142-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Kvadratsumma =</span> <span class="fu">sum</span>(Kvadrater))</span>
+<span id="cb142-2"><a href="beskrivande-statistik.html#cb142-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Kvadratsumma =</span> <span class="fu">sum</span>(Kvadrater))       <span class="co"># Summera kvadraterna</span></span>
 <span id="cb142-3"><a href="beskrivande-statistik.html#cb142-3" aria-hidden="true" tabindex="-1"></a>dat_sum</span></code></pre></div>
 <pre><code>##   Kvadratsumma
 ## 1         10.8</code></pre>
 <p>Som avslutande steg delar vi kvadratsumman med antalet observationer minus ett. För fem observationer delar vi alltså med fyra.</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="beskrivande-statistik.html#cb144-1" aria-hidden="true" tabindex="-1"></a>dat_sum <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Varians =</span> Kvadratsumma <span class="sc">/</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="beskrivande-statistik.html#cb144-1" aria-hidden="true" tabindex="-1"></a>dat_sum <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Varians =</span> Kvadratsumma <span class="sc">/</span> <span class="dv">4</span>)   <span class="co"># Dela summan med fyra (antalet observationer minus 1)</span></span></code></pre></div>
 <pre><code>##   Kvadratsumma Varians
 ## 1         10.8     2.7</code></pre>
 <p>Vi kan se om vi fått rätt genom att beräkna variansen med funktionen <code>var()</code>.</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="beskrivande-statistik.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(dat<span class="sc">$</span>x)  <span class="co"># Dollartecken för att ta ut kolumnen x i objektet dat</span></span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="beskrivande-statistik.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(dat<span class="sc">$</span>x)                                       <span class="co"># Dollartecken för att ta ut kolumnen x i objektet dat</span></span></code></pre></div>
 <pre><code>## [1] 2.7</code></pre>
 </div>
 <div id="kumulativt-medelvärde" class="section level2 hasAnchor" number="2.7">
 <h2><span class="header-section-number">2.7</span> Kumulativt medelvärde<a href="beskrivande-statistik.html#kumulativt-medelvärde" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Om man har data som av någon anledning samlas in i sekvens kan det vara intressant att beräkna och illustrera den med ett <em>kumulativt medelvärde</em>. En serie med kumulativa medelvärden beräknas genom att för varje nytt värde ta medelvärden av de värden man hittills samlat in - vid tio värden tar man medelvärdet av de tio, vid elva värden medelvärdet av de elva, och så vidare.</p>
 <p>Med de tärningsvärden vi hade innan kan vi beräkna ett kumulativt medelvärde genom att först beräkna summan med <code>cumsum()</code> och sedan dela på antalet kast. För att förenkla beräkningen av antalen tar vi fram sekvensen med antal kast i ett <code>mutate()</code>-steg.</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="beskrivande-statistik.html#cb148-1" aria-hidden="true" tabindex="-1"></a>dat_dice <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Utfall =</span> <span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb148-2"><a href="beskrivande-statistik.html#cb148-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Kast =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>())</span>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="beskrivande-statistik.html#cb148-1" aria-hidden="true" tabindex="-1"></a>dat_dice <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Utfall =</span> <span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>)) <span class="sc">%&gt;%</span>               <span class="co"># Skapa data med kolumnen Utfall, och sen</span></span>
+<span id="cb148-2"><a href="beskrivande-statistik.html#cb148-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Kast =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>())                                          <span class="co"># skapa en kolumn med antal kast från 1 löpande</span></span>
 <span id="cb148-3"><a href="beskrivande-statistik.html#cb148-3" aria-hidden="true" tabindex="-1"></a>dat_dice</span></code></pre></div>
 <pre><code>##   Utfall Kast
 ## 1      6    1
@@ -682,9 +685,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 3      2    3
 ## 4      3    4
 ## 5      5    5</code></pre>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="beskrivande-statistik.html#cb150-1" aria-hidden="true" tabindex="-1"></a>dat_dice <span class="ot">&lt;-</span> dat_dice <span class="sc">%&gt;%</span> </span>
-<span id="cb150-2"><a href="beskrivande-statistik.html#cb150-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Kumulativ summa</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">cumsum</span>(Utfall),</span>
-<span id="cb150-3"><a href="beskrivande-statistik.html#cb150-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Kumulativt medelvärde</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">Kumulativ summa</span><span class="st">`</span> <span class="sc">/</span> Kast)</span>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="beskrivande-statistik.html#cb150-1" aria-hidden="true" tabindex="-1"></a>dat_dice <span class="ot">&lt;-</span> dat_dice <span class="sc">%&gt;%</span>                                        <span class="co"># Ta datan, och sen</span></span>
+<span id="cb150-2"><a href="beskrivande-statistik.html#cb150-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Kumulativ summa</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">cumsum</span>(Utfall),                    <span class="co"># skapa en kolumn som ger den kumulativa summan och</span></span>
+<span id="cb150-3"><a href="beskrivande-statistik.html#cb150-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Kumulativt medelvärde</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">Kumulativ summa</span><span class="st">`</span> <span class="sc">/</span> Kast)    <span class="co"># dela den kumulativa summan med antalet kast</span></span>
 <span id="cb150-4"><a href="beskrivande-statistik.html#cb150-4" aria-hidden="true" tabindex="-1"></a>dat_dice</span></code></pre></div>
 <pre><code>##   Utfall Kast Kumulativ summa Kumulativt medelvärde
 ## 1      6    1               6              6.000000
@@ -933,7 +936,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

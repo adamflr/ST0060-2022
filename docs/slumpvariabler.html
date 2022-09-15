@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Slumpvariabler | R-anvisningar till Grundläggande statistik</title>
   <meta name="description" content="3 Slumpvariabler | R-anvisningar till Grundläggande statistik" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Slumpvariabler | R-anvisningar till Grundläggande statistik" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2022-08-30" />
+<meta name="date" content="2022-09-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -280,13 +280,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb172-8"><a href="slumpvariabler.html#cb172-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Befolkning, median</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">median</span>(pop),</span>
 <span id="cb172-9"><a href="slumpvariabler.html#cb172-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Bnp per capita, standardavvikelse</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sd</span>(gdpPercap))</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 4
-##   continent `Livslängd, medel` `Befolkning, median` `Bnp per capita, standarda…`
+##   continent `Livslängd, medel` `Befolkning, median` Bnp per capita, standardav…¹
 ##   &lt;chr&gt;                  &lt;dbl&gt;                &lt;dbl&gt;                        &lt;dbl&gt;
 ## 1 Africa                  54.8            10093310.                        3618.
 ## 2 Americas                73.6             9319622                         9713.
 ## 3 Asia                    70.7            24821286                        14155.
 ## 4 Europe                  77.6             9493598                        11800.
-## 5 Oceania                 80.7            12274974.                        6541.</code></pre>
+## 5 Oceania                 80.7            12274974.                        6541.
+## # … with abbreviated variable name ¹​`Bnp per capita, standardavvikelse`</code></pre>
 <p>Beskrivande mått sammanfattas ofta i någon enkel vetenskaplig graf. Två vanliga val är lådagrammet, som illustrerar kvartiler och möjliga extremvärden, och stapeldiagrammet med felstaplar. Vi ger först ett exempel på ett lådagram över livslängd per kontinent uppdelat efter år.</p>
 <div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="slumpvariabler.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder, <span class="fu">aes</span>(lifeExp, continent, <span class="at">fill =</span> continent)) <span class="sc">+</span></span>
 <span id="cb174-2"><a href="slumpvariabler.html#cb174-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
@@ -383,9 +384,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="slumpvariabler.html#cb186-1" aria-hidden="true" tabindex="-1"></a>slumputfall <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> dat_dice6<span class="sc">$</span>x, <span class="at">size =</span> <span class="dv">10000</span>, <span class="at">replace =</span> T)</span>
 <span id="cb186-2"><a href="slumpvariabler.html#cb186-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb186-3"><a href="slumpvariabler.html#cb186-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(slumputfall)</span></code></pre></div>
-<pre><code>## [1] 3.516</code></pre>
+<pre><code>## [1] 3.5013</code></pre>
 <div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="slumpvariabler.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(slumputfall)</span></code></pre></div>
-<pre><code>## [1] 2.891033</code></pre>
+<pre><code>## [1] 2.884887</code></pre>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-65" class="exercise"><strong>Uppgift 3.5  (Simulera tärningen) </strong></span>Använd <code>sample()</code> för att dra tiotusen observationer från din egen tärning. Beräkna medelvärde och varians från det stickprovet. Är utfallen nära de teoretiska beräkningarna av populationsmedelvärde och -varians?</p>
 </div>
@@ -769,7 +770,7 @@ En normalfördelning har en karaktäristisk <em>klockform</em>. Vi illustreras t
 <span id="cb238-3"><a href="slumpvariabler.html#cb238-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">inner =</span> x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> y<span class="sc">^</span><span class="dv">2</span> <span class="sc">&lt;</span> <span class="dv">1</span>)</span>
 <span id="cb238-4"><a href="slumpvariabler.html#cb238-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb238-5"><a href="slumpvariabler.html#cb238-5" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="sc">*</span> <span class="fu">mean</span>(dat_random<span class="sc">$</span>inner)</span></code></pre></div>
-<pre><code>## [1] 3</code></pre>
+<pre><code>## [1] 2.92</code></pre>
 <div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="slumpvariabler.html#cb240-1" aria-hidden="true" tabindex="-1"></a>pi</span></code></pre></div>
 <pre><code>## [1] 3.141593</code></pre>
 <p>Den beräknade arean ligger inte så långt från konstanten pi.</p>
@@ -888,7 +889,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

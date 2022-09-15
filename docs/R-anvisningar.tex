@@ -130,7 +130,7 @@
 
 \title{R-anvisningar till \emph{Grundläggande statistik}}
 \author{}
-\date{\vspace{-2.5em}2022-08-16}
+\date{\vspace{-2.5em}2022-09-15}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Sats}[chapter]
@@ -381,7 +381,7 @@ Ladda paketet \texttt{gapminder} genom att fylla i och köra raden nedan.
 
 \begin{exercise}[Paket som inte finns]
 
-Vad händer om man försöker installera ett paket som inte finns på \emph{CRAN} ? Testa till exempel
+Vad händer om man försöker installera ett paket som inte finns på \emph{CRAN}? Testa till exempel
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -490,8 +490,8 @@ Alla R-funktioner har en tillhörande hjälpfil som kan plockas fram genom att s
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{b }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{9}\NormalTok{, }\ConstantTok{NA}\NormalTok{)  }\CommentTok{\# Lägger till ett saknat värde}
-\FunctionTok{sum}\NormalTok{(b)                        }\CommentTok{\# na.rm = FALSE är grundinställning}
+\NormalTok{b }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{9}\NormalTok{, }\ConstantTok{NA}\NormalTok{)           }\CommentTok{\# Lägger till ett saknat värde}
+\FunctionTok{sum}\NormalTok{(b)                                 }\CommentTok{\# na.rm = FALSE är grundinställning}
 \end{Highlighting}
 \end{Shaded}
 
@@ -501,7 +501,7 @@ Alla R-funktioner har en tillhörande hjälpfil som kan plockas fram genom att s
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{sum}\NormalTok{(b, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)          }\CommentTok{\# na.rm sätts till TRUE}
+\FunctionTok{sum}\NormalTok{(b, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)                   }\CommentTok{\# na.rm sätts till TRUE}
 \end{Highlighting}
 \end{Shaded}
 
@@ -519,9 +519,9 @@ Den typen av sekvenser kan genomföras på ett par olika sätt. Ett första sät
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{c }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{4}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{)   }\CommentTok{\# Skapa en vektor av värden}
-\NormalTok{c\_absolute }\OtherTok{\textless{}{-}} \FunctionTok{abs}\NormalTok{(c)          }\CommentTok{\# Ta absolutvärden. Spara som c\_absolut}
-\FunctionTok{sum}\NormalTok{(c\_absolute)               }\CommentTok{\# Summera värden i c\_absolut}
+\NormalTok{c }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{4}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{)            }\CommentTok{\# Skapa en vektor av värden}
+\NormalTok{c\_absolute }\OtherTok{\textless{}{-}} \FunctionTok{abs}\NormalTok{(c)                   }\CommentTok{\# Ta absolutvärden. Spara som c\_absolut}
+\FunctionTok{sum}\NormalTok{(c\_absolute)                        }\CommentTok{\# Summera värden i c\_absolut}
 \end{Highlighting}
 \end{Shaded}
 
@@ -538,9 +538,9 @@ Fyll i och kör följande rader för att ta varje värde i \texttt{new\_vector} 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{new\_vector\_squared }\OtherTok{\textless{}{-}}\NormalTok{ new\_vector}\SpecialCharTok{\^{}}\DecValTok{2}   \CommentTok{\# Ta kvadraten av varje värde}
-\NormalTok{new\_vector\_squared\_sum }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(\_\_\_)   }\CommentTok{\# Summera vektorn med kvadrater}
-\FunctionTok{sqrt}\NormalTok{(\_\_\_)                            }\CommentTok{\# Ta kvadratroten ur summan}
+\NormalTok{new\_vector\_squared }\OtherTok{\textless{}{-}}\NormalTok{ new\_vector}\SpecialCharTok{\^{}}\DecValTok{2}     \CommentTok{\# Ta kvadraten av varje värde}
+\NormalTok{new\_vector\_squared\_sum }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(\_\_\_)     }\CommentTok{\# Summera vektorn med kvadrater}
+\FunctionTok{sqrt}\NormalTok{(\_\_\_)                              }\CommentTok{\# Ta kvadratroten ur summan}
 \end{Highlighting}
 \end{Shaded}
 
@@ -550,7 +550,7 @@ Ett alternativ till att spara utfallet i varje steg är att skriva en senare fun
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{sum}\NormalTok{(}\FunctionTok{abs}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{4}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{)))   }\CommentTok{\# Ta summan av absolutvärden av vektorn}
+\FunctionTok{sum}\NormalTok{(}\FunctionTok{abs}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{4}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{)))       }\CommentTok{\# Ta summan av absolutvärden av vektorn}
 \end{Highlighting}
 \end{Shaded}
 
@@ -558,7 +558,7 @@ medan beräkningen i övningen blir
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{sqrt}\NormalTok{(}\FunctionTok{sum}\NormalTok{(new\_vector}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{))   }\CommentTok{\# Ta roten ur summan av vektorn i kvadrat}
+\FunctionTok{sqrt}\NormalTok{(}\FunctionTok{sum}\NormalTok{(new\_vector}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{))                }\CommentTok{\# Ta roten ur summan av vektorn i kvadrat}
 \end{Highlighting}
 \end{Shaded}
 
@@ -568,11 +568,11 @@ Ett sista alternativ är att använda en så kallad \emph{pipe} (namnet kommer f
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(tidyverse)          }\CommentTok{\# Ladda tidyverse, ej nödvändigt om redan gjort}
+\FunctionTok{library}\NormalTok{(tidyverse)                     }\CommentTok{\# Ladda tidyverse, ej nödvändigt om redan gjort}
 
-\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{4}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}  \CommentTok{\# Skapa en datamängd och sen}
-  \FunctionTok{abs}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}                 \CommentTok{\# ta absolutvärden, och sen}
-  \FunctionTok{sum}\NormalTok{()                     }\CommentTok{\# beräkna summan.}
+\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{4}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}             \CommentTok{\# Skapa en datamängd och sen}
+  \FunctionTok{abs}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}                            \CommentTok{\# ta absolutvärden, och sen}
+  \FunctionTok{sum}\NormalTok{()                                }\CommentTok{\# beräkna summan.}
 \end{Highlighting}
 \end{Shaded}
 
@@ -586,9 +586,9 @@ Fyll i de saknade funktionerna och kör följande rader för att ta varje värde
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{new\_vector}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{\%\textgreater{}\%}        \CommentTok{\# Ta kvadraterna av new\_vector, och sen}
-  \FunctionTok{\_\_\_}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}             \CommentTok{\# beräkna summan, och sen}
-  \FunctionTok{\_\_\_\_}\NormalTok{()                }\CommentTok{\# Ta kvadratroten med sqrt()}
+\NormalTok{new\_vector}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{\%\textgreater{}\%}                       \CommentTok{\# Ta kvadraterna av new\_vector, och sen}
+  \FunctionTok{\_\_\_}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}                            \CommentTok{\# beräkna summan, och sen}
+  \FunctionTok{\_\_\_\_}\NormalTok{()                               }\CommentTok{\# Ta kvadratroten med sqrt()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -653,30 +653,33 @@ Inskrivning av värden är ofta tidskrävande och kan lätt leda till misstag. D
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"https://raw.githubusercontent.com/adamflr/ST0060{-}2022/main/Data/Spotify\_data.csv"}\NormalTok{) }\CommentTok{\# Läs in en csv{-}fil från Github}
-\NormalTok{dat   }\CommentTok{\# Skriv ut objektet dat}
+\NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"https://raw.githubusercontent.com/adamflr/ST0060{-}2022/main/Data/Spotify\_data.csv"}\NormalTok{) }
+                                       \CommentTok{\# Läs in en csv{-}fil från Github}
+\NormalTok{dat                                    }\CommentTok{\# Skriv ut objektet dat}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## # A tibble: 76,622 x 24
-##    artist_name album_name    track_number track_name album_type album_release_d~
-##    <chr>       <chr>                <dbl> <chr>      <chr>      <chr>           
-##  1 100 gecs    1000 gecs an~            1 money mac~ album      2020-07-10      
-##  2 100 gecs    1000 gecs an~            2 ringtone ~ album      2020-07-10      
-##  3 100 gecs    1000 gecs an~            3 745 stick~ album      2020-07-10      
-##  4 100 gecs    1000 gecs an~            4 gec 2 Ü (~ album      2020-07-10      
-##  5 100 gecs    1000 gecs an~            5 hand crus~ album      2020-07-10      
-##  6 100 gecs    1000 gecs an~            6 800db clo~ album      2020-07-10      
-##  7 100 gecs    1000 gecs an~            7 stupid ho~ album      2020-07-10      
-##  8 100 gecs    1000 gecs an~            8 ringtone ~ album      2020-07-10      
-##  9 100 gecs    1000 gecs an~            9 xXXi_wud_~ album      2020-07-10      
-## 10 100 gecs    1000 gecs an~           10 745 stick~ album      2020-07-10      
-## # ... with 76,612 more rows, and 18 more variables: album_release_year <dbl>,
-## #   danceability <dbl>, energy <dbl>, key <dbl>, loudness <dbl>, mode <dbl>,
+##    artist~1 album~2 track~3 track~4 album~5 album~6 album~7 dance~8 energy   key
+##    <chr>    <chr>     <dbl> <chr>   <chr>   <chr>     <dbl>   <dbl>  <dbl> <dbl>
+##  1 100 gecs 1000 g~       1 money ~ album   2020-0~    2020   0.344  0.737     6
+##  2 100 gecs 1000 g~       2 ringto~ album   2020-0~    2020   0.849  0.473     8
+##  3 100 gecs 1000 g~       3 745 st~ album   2020-0~    2020   0.48   0.576     5
+##  4 100 gecs 1000 g~       4 gec 2 ~ album   2020-0~    2020   0.411  0.738     0
+##  5 100 gecs 1000 g~       5 hand c~ album   2020-0~    2020   0.473  0.936     1
+##  6 100 gecs 1000 g~       6 800db ~ album   2020-0~    2020   0.434  0.846     8
+##  7 100 gecs 1000 g~       7 stupid~ album   2020-0~    2020   0.736  0.859     8
+##  8 100 gecs 1000 g~       8 ringto~ album   2020-0~    2020   0.449  0.745    10
+##  9 100 gecs 1000 g~       9 xXXi_w~ album   2020-0~    2020   0.379  0.847     1
+## 10 100 gecs 1000 g~      10 745 st~ album   2020-0~    2020   0.445  0.98     10
+## # ... with 76,612 more rows, 14 more variables: loudness <dbl>, mode <dbl>,
 ## #   speechiness <dbl>, acousticness <dbl>, instrumentalness <dbl>,
 ## #   liveness <dbl>, valence <dbl>, tempo <dbl>, time_signature <dbl>,
-## #   explicit <lgl>, type <chr>, key_name <chr>, mode_name <chr>, key_mode <chr>
+## #   explicit <lgl>, type <chr>, key_name <chr>, mode_name <chr>,
+## #   key_mode <chr>, and abbreviated variable names 1: artist_name,
+## #   2: album_name, 3: track_number, 4: track_name, 5: album_type,
+## #   6: album_release_date, 7: album_release_year, 8: danceability
 \end{verbatim}
 
 Om importen fungerat kan man skriva ut tabellens översta rader genom att köra objektets namn.
@@ -685,7 +688,7 @@ För att snabbt se vilka artister datan täcker kan man köra
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{unique}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{artist\_name)   }\CommentTok{\# Skriv ut unika (inga dubletter) värden i kolumnen artist\_name i dat}
+\FunctionTok{unique}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{artist\_name)                }\CommentTok{\# Skriv ut unika värden i kolumnen artist\_name i dat}
 \end{Highlighting}
 \end{Shaded}
 
@@ -703,30 +706,32 @@ För att filtrera på ett givet land kan använda pipe-funktionen från datan ti
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                            \CommentTok{\# Ta spotify{-}datan och sen}
-  \FunctionTok{filter}\NormalTok{(artist\_name }\SpecialCharTok{==} \StringTok{"Robyn"}\NormalTok{)   }\CommentTok{\# filtrera för en specifik artist}
+\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                                \CommentTok{\# Ta spotify{-}datan och sen}
+  \FunctionTok{filter}\NormalTok{(artist\_name }\SpecialCharTok{==} \StringTok{"Robyn"}\NormalTok{)       }\CommentTok{\# filtrera för en specifik artist}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## # A tibble: 1,142 x 24
-##    artist_name album_name track_number track_name    album_type album_release_d~
-##    <chr>       <chr>             <dbl> <chr>         <chr>      <chr>           
-##  1 Robyn       Honey                 1 Missing U     album      2018-10-26      
-##  2 Robyn       Honey                 2 Human Being   album      2018-10-26      
-##  3 Robyn       Honey                 3 Because It's~ album      2018-10-26      
-##  4 Robyn       Honey                 4 Baby Forgive~ album      2018-10-26      
-##  5 Robyn       Honey                 5 Send To Robi~ album      2018-10-26      
-##  6 Robyn       Honey                 6 Honey         album      2018-10-26      
-##  7 Robyn       Honey                 7 Between The ~ album      2018-10-26      
-##  8 Robyn       Honey                 8 Beach2k20     album      2018-10-26      
-##  9 Robyn       Honey                 9 Ever Again    album      2018-10-26      
-## 10 Robyn       Honey                 1 Missing U     album      2018-10-26      
-## # ... with 1,132 more rows, and 18 more variables: album_release_year <dbl>,
-## #   danceability <dbl>, energy <dbl>, key <dbl>, loudness <dbl>, mode <dbl>,
+##    artist~1 album~2 track~3 track~4 album~5 album~6 album~7 dance~8 energy   key
+##    <chr>    <chr>     <dbl> <chr>   <chr>   <chr>     <dbl>   <dbl>  <dbl> <dbl>
+##  1 Robyn    Honey         1 Missin~ album   2018-1~    2018   0.702  0.666     5
+##  2 Robyn    Honey         2 Human ~ album   2018-1~    2018   0.729  0.566     1
+##  3 Robyn    Honey         3 Becaus~ album   2018-1~    2018   0.764  0.611    11
+##  4 Robyn    Honey         4 Baby F~ album   2018-1~    2018   0.683  0.442     9
+##  5 Robyn    Honey         5 Send T~ album   2018-1~    2018   0.328  0.48      4
+##  6 Robyn    Honey         6 Honey   album   2018-1~    2018   0.652  0.604    11
+##  7 Robyn    Honey         7 Betwee~ album   2018-1~    2018   0.892  0.451     0
+##  8 Robyn    Honey         8 Beach2~ album   2018-1~    2018   0.824  0.512    11
+##  9 Robyn    Honey         9 Ever A~ album   2018-1~    2018   0.942  0.539     4
+## 10 Robyn    Honey         1 Missin~ album   2018-1~    2018   0.702  0.666     5
+## # ... with 1,132 more rows, 14 more variables: loudness <dbl>, mode <dbl>,
 ## #   speechiness <dbl>, acousticness <dbl>, instrumentalness <dbl>,
 ## #   liveness <dbl>, valence <dbl>, tempo <dbl>, time_signature <dbl>,
-## #   explicit <lgl>, type <chr>, key_name <chr>, mode_name <chr>, key_mode <chr>
+## #   explicit <lgl>, type <chr>, key_name <chr>, mode_name <chr>,
+## #   key_mode <chr>, and abbreviated variable names 1: artist_name,
+## #   2: album_name, 3: track_number, 4: track_name, 5: album_type,
+## #   6: album_release_date, 7: album_release_year, 8: danceability
 \end{verbatim}
 
 Inom filterfunktionen anges ett logisk villkor \texttt{country\ ==\ "Sweden"} och utfallet är de rader där villkoret är sant. Notera de dubbla likhetstecknen - de måste användas för ett logisk villkor eftersom enkelt likhetstecken används för att skapa objekt och sätta funktionsargument.
@@ -737,8 +742,8 @@ Vad måste ändras i koden för att istället plocka ut rader där artisten är 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                            \CommentTok{\# Ta spotify{-}datan och sen}
-  \FunctionTok{filter}\NormalTok{(artist\_name }\SpecialCharTok{==} \StringTok{"Robyn"}\NormalTok{)   }\CommentTok{\# filtrera för en specifik artist}
+\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                                \CommentTok{\# Ta spotify{-}datan och sen}
+  \FunctionTok{filter}\NormalTok{(artist\_name }\SpecialCharTok{==} \StringTok{"Robyn"}\NormalTok{)       }\CommentTok{\# filtrera för en specifik artist}
 \end{Highlighting}
 \end{Shaded}
 
@@ -748,8 +753,8 @@ Om man vill välja flera artister kan man använda funktionen \texttt{\%in\%} p�
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                                                       \CommentTok{\# Ta datan, och sen}
-  \FunctionTok{filter}\NormalTok{(artist\_name }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Robyn"}\NormalTok{, }\StringTok{"Esperanza Spalding"}\NormalTok{))   }\CommentTok{\# filtrera för specifika artister}
+\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                                                              \CommentTok{\# Ta datan, och sen}
+  \FunctionTok{filter}\NormalTok{(artist\_name }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Robyn"}\NormalTok{, }\StringTok{"Esperanza Spalding"}\NormalTok{))          }\CommentTok{\# filtrera för specifika artister}
 \end{Highlighting}
 \end{Shaded}
 
@@ -757,9 +762,9 @@ och om man vill ha mer än ett villkor kan man rada dem i filter-funktionen elle
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                                                       \CommentTok{\# Ta datan, och sen}
-  \FunctionTok{filter}\NormalTok{(artist\_name }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Robyn"}\NormalTok{, }\StringTok{"Esperanza Spalding"}\NormalTok{),   }\CommentTok{\# filtrera för specifika artister}
-\NormalTok{         key\_name }\SpecialCharTok{==} \StringTok{"D\#"}\NormalTok{)                                    }\CommentTok{\# och för tonart}
+\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                                                              \CommentTok{\# Ta datan, och sen}
+  \FunctionTok{filter}\NormalTok{(artist\_name }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Robyn"}\NormalTok{, }\StringTok{"Esperanza Spalding"}\NormalTok{),          }\CommentTok{\# filtrera för specifika artister}
+\NormalTok{         key\_name }\SpecialCharTok{==} \StringTok{"D\#"}\NormalTok{)                                           }\CommentTok{\# och för tonart}
 \end{Highlighting}
 \end{Shaded}
 
@@ -767,9 +772,9 @@ alternativt
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                                                          \CommentTok{\# Ta datan, och sen}
-  \FunctionTok{filter}\NormalTok{(artist\_name }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Robyn"}\NormalTok{, }\StringTok{"Esperanza Spalding"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}  \CommentTok{\# filtrera för specifika artister, och sen}
-  \FunctionTok{filter}\NormalTok{(key\_name }\SpecialCharTok{==} \StringTok{"D\#"}\NormalTok{)                                       }\CommentTok{\# filtrera för tonart}
+\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                                                              \CommentTok{\# Ta datan, och sen}
+  \FunctionTok{filter}\NormalTok{(artist\_name }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Robyn"}\NormalTok{, }\StringTok{"Esperanza Spalding"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}      \CommentTok{\# filtrera för artister, och sen}
+  \FunctionTok{filter}\NormalTok{(key\_name }\SpecialCharTok{==} \StringTok{"D\#"}\NormalTok{)                                           }\CommentTok{\# filtrera för tonart}
 \end{Highlighting}
 \end{Shaded}
 
@@ -777,35 +782,37 @@ För att se fler eller färre rader kan man använda en pipe \texttt{\%\textgrea
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                                                          \CommentTok{\# Ta datan, och sen}
-  \FunctionTok{filter}\NormalTok{(artist\_name }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Robyn"}\NormalTok{, }\StringTok{"Esperanza Spalding"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}  \CommentTok{\# filtrera för specifika artister, och sen}
-  \FunctionTok{filter}\NormalTok{(key\_name }\SpecialCharTok{==} \StringTok{"D\#"}\NormalTok{)  }\SpecialCharTok{\%\textgreater{}\%}                                  \CommentTok{\# filtrera för tonart, och sen}
-  \FunctionTok{print}\NormalTok{(}\AttributeTok{n =} \DecValTok{5}\NormalTok{)                                                   }\CommentTok{\# skriv ut de fem första raderna}
+\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                                                              \CommentTok{\# Ta datan, och sen}
+  \FunctionTok{filter}\NormalTok{(artist\_name }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Robyn"}\NormalTok{, }\StringTok{"Esperanza Spalding"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}      \CommentTok{\# filtrera för artister, och sen}
+  \FunctionTok{filter}\NormalTok{(key\_name }\SpecialCharTok{==} \StringTok{"D\#"}\NormalTok{)  }\SpecialCharTok{\%\textgreater{}\%}                                      \CommentTok{\# filtrera för tonart, och sen}
+  \FunctionTok{print}\NormalTok{(}\AttributeTok{n =} \DecValTok{5}\NormalTok{)                                                       }\CommentTok{\# skriv ut de fem första raderna}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## # A tibble: 21 x 24
-##   artist_name     album_name track_number track_name album_type album_release_d~
-##   <chr>           <chr>             <dbl> <chr>      <chr>      <chr>           
-## 1 Esperanza Spal~ SONGWRIGH~            7 Formwela 7 album      2021-09-24      
-## 2 Esperanza Spal~ 12 Little~            2 To Tide U~ album      2019-05-10      
-## 3 Esperanza Spal~ 12 Little~            3 'Til the ~ album      2019-05-10      
-## 4 Esperanza Spal~ Emily’s D~            7 Ebony And~ album      2016-01-01      
-## 5 Esperanza Spal~ Emily’s D~            7 Ebony And~ album      2016-01-01      
-## # ... with 16 more rows, and 18 more variables: album_release_year <dbl>,
-## #   danceability <dbl>, energy <dbl>, key <dbl>, loudness <dbl>, mode <dbl>,
+##   artist_~1 album~2 track~3 track~4 album~5 album~6 album~7 dance~8 energy   key
+##   <chr>     <chr>     <dbl> <chr>   <chr>   <chr>     <dbl>   <dbl>  <dbl> <dbl>
+## 1 Esperanz~ SONGWR~       7 Formwe~ album   2021-0~    2021   0.496 0.0268     3
+## 2 Esperanz~ 12 Lit~       2 To Tid~ album   2019-0~    2019   0.355 0.33       3
+## 3 Esperanz~ 12 Lit~       3 'Til t~ album   2019-0~    2019   0.502 0.301      3
+## 4 Esperanz~ Emily’~       7 Ebony ~ album   2016-0~    2016   0.578 0.543      3
+## 5 Esperanz~ Emily’~       7 Ebony ~ album   2016-0~    2016   0.567 0.535      3
+## # ... with 16 more rows, 14 more variables: loudness <dbl>, mode <dbl>,
 ## #   speechiness <dbl>, acousticness <dbl>, instrumentalness <dbl>,
 ## #   liveness <dbl>, valence <dbl>, tempo <dbl>, time_signature <dbl>,
-## #   explicit <lgl>, type <chr>, key_name <chr>, mode_name <chr>, key_mode <chr>
+## #   explicit <lgl>, type <chr>, key_name <chr>, mode_name <chr>,
+## #   key_mode <chr>, and abbreviated variable names 1: artist_name,
+## #   2: album_name, 3: track_number, 4: track_name, 5: album_type,
+## #   6: album_release_date, 7: album_release_year, 8: danceability
 \end{verbatim}
 
 Om man istället vill göra ett urval av kolumner kan man använda \texttt{select()}. Som argument anges de kolumner man vill välja, t.ex.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                             \CommentTok{\# Ta datan, och sen}
-  \FunctionTok{select}\NormalTok{(artist\_name, album\_name)   }\CommentTok{\# väljd kolumnerna artist\_name och album\_name}
+\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                                \CommentTok{\# Ta datan, och sen}
+  \FunctionTok{select}\NormalTok{(artist\_name, album\_name)      }\CommentTok{\# välj kolumnerna artist\_name och album\_name}
 \end{Highlighting}
 \end{Shaded}
 
@@ -830,10 +837,10 @@ Som avslutning ges ett lite mer komplicerat exempel på ett urval av artist, år
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                                               \CommentTok{\# Ta datan och sen}
-  \FunctionTok{filter}\NormalTok{(album\_release\_year }\SpecialCharTok{==} \DecValTok{2015}\NormalTok{,                  }\CommentTok{\# filtrera för rader där år är 2015, och }
-\NormalTok{         tempo }\SpecialCharTok{\textgreater{}} \DecValTok{180}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}                             \CommentTok{\# tempot över 160, och sen}
-  \FunctionTok{select}\NormalTok{(artist\_name, album\_release\_year, track\_name) }\CommentTok{\# selektera på artist, år och spår}
+\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                                                    \CommentTok{\# Ta datan och sen}
+  \FunctionTok{filter}\NormalTok{(album\_release\_year }\SpecialCharTok{==} \DecValTok{2015}\NormalTok{,                       }\CommentTok{\# filtrera för rader där år är 2015, och }
+\NormalTok{         tempo }\SpecialCharTok{\textgreater{}} \DecValTok{180}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}                                  \CommentTok{\# tempot över 160, och sen}
+  \FunctionTok{select}\NormalTok{(artist\_name, album\_release\_year, track\_name)      }\CommentTok{\# selektera på artist, år och spår}
 \end{Highlighting}
 \end{Shaded}
 
@@ -859,10 +866,10 @@ Funktionen \texttt{arrange} sorterar data efter en angiven kolumn. Följande sty
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                                                   \CommentTok{\# Ta datan, och sen}
-  \FunctionTok{filter}\NormalTok{(artist\_name }\SpecialCharTok{==} \StringTok{"Björk"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}                      \CommentTok{\# filtrera för rader där artist är Björk, och sen}
-  \FunctionTok{select}\NormalTok{(artist\_name, album\_name, track\_name, tempo) }\SpecialCharTok{\%\textgreater{}\%}  \CommentTok{\# välj kolumner med artist, album, spår och tempo, och sen}
-  \FunctionTok{arrange}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{tempo)                                         }\CommentTok{\# ordna efter tempo (minus för fallande ordning)}
+\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                                                    \CommentTok{\# Ta datan, och sen}
+  \FunctionTok{filter}\NormalTok{(artist\_name }\SpecialCharTok{==} \StringTok{"Björk"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}                       \CommentTok{\# filtrera för rader där artist är Björk, och sen}
+  \FunctionTok{select}\NormalTok{(artist\_name, album\_name, track\_name, tempo) }\SpecialCharTok{\%\textgreater{}\%}   \CommentTok{\# välj kolumner med artist, album, spår och tempo, och sen}
+  \FunctionTok{arrange}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{tempo)                                          }\CommentTok{\# ordna efter tempo (minus för fallande ordning)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -876,8 +883,8 @@ Variabler kan omräknas och nya variabler kan skapas med \texttt{mutate}-funktio
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat }\OtherTok{\textless{}{-}}\NormalTok{ dat }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{beats\_per\_second =}\NormalTok{ tempo }\SpecialCharTok{/} \DecValTok{60}\NormalTok{)}
+\NormalTok{dat }\OtherTok{\textless{}{-}}\NormalTok{ dat }\SpecialCharTok{\%\textgreater{}\%}                                             \CommentTok{\# Ta datan, och sen}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{beats\_per\_second =}\NormalTok{ tempo }\SpecialCharTok{/} \DecValTok{60}\NormalTok{)                    }\CommentTok{\# Beräkna en ny kolumn som tempo delat på 60}
 \end{Highlighting}
 \end{Shaded}
 
@@ -886,7 +893,7 @@ Vi kan skriva ut objektet och se resultatet av beräkningen:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(tempo, beats\_per\_second)}
+\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(tempo, beats\_per\_second)                    }\CommentTok{\# Ta datan och sen välj två kolumner}
 \end{Highlighting}
 \end{Shaded}
 
@@ -908,13 +915,13 @@ Vi kan skriva ut objektet och se resultatet av beräkningen:
 \end{verbatim}
 
 \begin{exercise}[Glädje per dansbarhet]
-Följande stycke beräknar kvoten av kolumnerna valence och danceability i en ny kolumn \texttt{valence\_to\_danceability}.
+Följande stycke beräknar kvoten av kolumnerna valence och danceability i en ny kolumn \texttt{val\_to\_dan}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                                                        \CommentTok{\# Ta datan, och sen}
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{valence\_to\_danceability =}\NormalTok{ valence }\SpecialCharTok{/}\NormalTok{ danceability) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# beräkna valence delat på danceability, och sen}
-  \FunctionTok{select}\NormalTok{(valence, danceability, valence\_to\_danceability)       }\CommentTok{\# välj relevanta kolumner.}
+\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                                                    \CommentTok{\# Ta datan, och sen}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{val\_to\_dan =}\NormalTok{ valence }\SpecialCharTok{/}\NormalTok{ danceability) }\SpecialCharTok{\%\textgreater{}\%}          \CommentTok{\# beräkna valence delat på danceability, och sen}
+  \FunctionTok{select}\NormalTok{(valence, danceability, val\_to\_dan)                }\CommentTok{\# välj relevanta kolumner.}
 \end{Highlighting}
 \end{Shaded}
 
@@ -926,25 +933,25 @@ I exemplet och uppgiften ovan skapades nya kolumn namn med understreck \texttt{\
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Valence to danceability}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ valence }\SpecialCharTok{/}\NormalTok{ danceability) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# Namnet Valence to danceability skrivs inom backticks}
-  \FunctionTok{select}\NormalTok{(artist\_name, }\StringTok{\textasciigrave{}}\AttributeTok{Valence to danceability}\StringTok{\textasciigrave{}}\NormalTok{)}
+  \FunctionTok{mutate}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Val to dan}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ valence }\SpecialCharTok{/}\NormalTok{ danceability) }\SpecialCharTok{\%\textgreater{}\%}        \CommentTok{\# Namnet Val to dan skrivs inom backticks}
+  \FunctionTok{select}\NormalTok{(artist\_name, }\StringTok{\textasciigrave{}}\AttributeTok{Val to dan}\StringTok{\textasciigrave{}}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## # A tibble: 76,622 x 2
-##    artist_name `Valence to danceability`
-##    <chr>                           <dbl>
-##  1 100 gecs                        1.81 
-##  2 100 gecs                        0.726
-##  3 100 gecs                        0.683
-##  4 100 gecs                        0.954
-##  5 100 gecs                        1.15 
-##  6 100 gecs                        1.12 
-##  7 100 gecs                        0.921
-##  8 100 gecs                        0.791
-##  9 100 gecs                        1.01 
-## 10 100 gecs                        1.02 
+##    artist_name `Val to dan`
+##    <chr>              <dbl>
+##  1 100 gecs           1.81 
+##  2 100 gecs           0.726
+##  3 100 gecs           0.683
+##  4 100 gecs           0.954
+##  5 100 gecs           1.15 
+##  6 100 gecs           1.12 
+##  7 100 gecs           0.921
+##  8 100 gecs           0.791
+##  9 100 gecs           1.01 
+## 10 100 gecs           1.02 
 ## # ... with 76,612 more rows
 \end{verbatim}
 
@@ -956,9 +963,9 @@ Den typen av beräkningar kan göras som ett nytt steg i en pipe med hjälp av f
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                                       \CommentTok{\# Ta datan, och sen}
-  \FunctionTok{group\_by}\NormalTok{(album\_release\_year) }\SpecialCharTok{\%\textgreater{}\%}            \CommentTok{\# gruppera efter år, och sen}
-  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Medeltempo =} \FunctionTok{mean}\NormalTok{(tempo))         }\CommentTok{\# beräkna medelvärde av tempo}
+\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                                          \CommentTok{\# Ta datan, och sen}
+  \FunctionTok{group\_by}\NormalTok{(album\_release\_year) }\SpecialCharTok{\%\textgreater{}\%}               \CommentTok{\# gruppera efter år, och sen}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Medeltempo =} \FunctionTok{mean}\NormalTok{(tempo))            }\CommentTok{\# beräkna medelvärde av tempo}
 \end{Highlighting}
 \end{Shaded}
 
@@ -985,12 +992,12 @@ Om man vill summera flera variabler kan man ange flera beräkning inom \texttt{s
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                                   \CommentTok{\# Ta datan, och sen}
-  \FunctionTok{group\_by}\NormalTok{(album\_release\_year) }\SpecialCharTok{\%\textgreater{}\%}        \CommentTok{\# gruppera efter år, och sen}
-  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Medeltempo =} \FunctionTok{mean}\NormalTok{(tempo),     }\CommentTok{\# beräkna medelvärde av tempo}
-            \AttributeTok{Medelvalence =} \FunctionTok{mean}\NormalTok{(valence), }\CommentTok{\# beräkna medelvärde av valence}
-\NormalTok{            antal\_spår }\OtherTok{=} \FunctionTok{n}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%}         \CommentTok{\# beräkna antalet spår, och sen}
-  \FunctionTok{arrange}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{Medelvalence)                  }\CommentTok{\# ordna efter medelvalence i sjunkande ordning}
+\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                                          \CommentTok{\# Ta datan, och sen}
+  \FunctionTok{group\_by}\NormalTok{(album\_release\_year) }\SpecialCharTok{\%\textgreater{}\%}               \CommentTok{\# gruppera efter år, och sen}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Medeltempo =} \FunctionTok{mean}\NormalTok{(tempo),            }\CommentTok{\# beräkna medelvärde av tempo}
+            \AttributeTok{Medelvalence =} \FunctionTok{mean}\NormalTok{(valence),        }\CommentTok{\# beräkna medelvärde av valence}
+\NormalTok{            antal\_spår }\OtherTok{=} \FunctionTok{n}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%}                \CommentTok{\# beräkna antalet spår, och sen}
+  \FunctionTok{arrange}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{Medelvalence)                         }\CommentTok{\# ordna efter medelvalence i sjunkande ordning}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1112,9 +1119,10 @@ Andra graftyper kan skapas med andra \texttt{geom\_}-funktioner. För ett linjed
   \FunctionTok{group\_by}\NormalTok{(album\_release\_year, explicit) }\SpecialCharTok{\%\textgreater{}\%}          \CommentTok{\# gruppera efter år och explicitet, och sen}
   \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Mean\_danceability =} \FunctionTok{mean}\NormalTok{(danceability))   }\CommentTok{\# summera genom att ta medelvärdet av dansbarhet}
 
-\FunctionTok{ggplot}\NormalTok{(dat\_mean\_over\_time, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ album\_release\_year, }\AttributeTok{y =}\NormalTok{ Mean\_danceability, }\AttributeTok{color =}\NormalTok{ explicit)) }\SpecialCharTok{+} \CommentTok{\# Koppla kolumner till egenskaper}
-  \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}   \CommentTok{\# Illustrera med linjer}
-  \FunctionTok{geom\_point}\NormalTok{()    }\CommentTok{\# Illustrera med punkter}
+\FunctionTok{ggplot}\NormalTok{(dat\_mean\_over\_time, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ album\_release\_year, }\AttributeTok{y =}\NormalTok{ Mean\_danceability, }\AttributeTok{color =}\NormalTok{ explicit)) }\SpecialCharTok{+} 
+                                                      \CommentTok{\# Koppla kolumner till egenskaper}
+  \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}                                       \CommentTok{\# Illustrera med linjer}
+  \FunctionTok{geom\_point}\NormalTok{()                                        }\CommentTok{\# Illustrera med punkter}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1189,8 +1197,8 @@ Låt oss ta en titt på \texttt{plotly}, ett av flera R-paket som gör det möjl
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# install.packages("plotly")}
-\FunctionTok{library}\NormalTok{(plotly)}
+\CommentTok{\# install.packages("plotly")                     \# Installera plotly (ej nödvändigt om redan installerat)}
+\FunctionTok{library}\NormalTok{(plotly)                                  }\CommentTok{\# Ladda plotly}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1198,9 +1206,9 @@ Paketet innehåller en smidig funktion \texttt{ggplotly()} för att göra en int
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat\_small }\OtherTok{\textless{}{-}}\NormalTok{ dat }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{filter}\NormalTok{(artist\_name }\SpecialCharTok{==} \StringTok{"David Bowie"}\NormalTok{, album\_type }\SpecialCharTok{==} \StringTok{"album"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Decade =} \FunctionTok{floor}\NormalTok{(album\_release\_year }\SpecialCharTok{/} \DecValTok{10}\NormalTok{) }\SpecialCharTok{*} \DecValTok{10}\NormalTok{)}
+\NormalTok{dat\_small }\OtherTok{\textless{}{-}}\NormalTok{ dat }\SpecialCharTok{\%\textgreater{}\%}                                                 \CommentTok{\# Ta datan, och sen}
+  \FunctionTok{filter}\NormalTok{(artist\_name }\SpecialCharTok{==} \StringTok{"David Bowie"}\NormalTok{, album\_type }\SpecialCharTok{==} \StringTok{"album"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}    \CommentTok{\# filtrera på artist och albumtyp, och sen}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Decade =} \FunctionTok{floor}\NormalTok{(album\_release\_year }\SpecialCharTok{/} \DecValTok{10}\NormalTok{) }\SpecialCharTok{*} \DecValTok{10}\NormalTok{)               }\CommentTok{\# skapa en variable för årtionde.}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1214,8 +1222,8 @@ Notera att vi sparar grafen som ett objekt \texttt{g}. För att se grafen kör v
 \begin{Highlighting}[]
 \NormalTok{g }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(dat\_small, }\FunctionTok{aes}\NormalTok{(danceability, valence, }\AttributeTok{color =}\NormalTok{ album\_name, }\AttributeTok{text =}\NormalTok{ track\_name)) }\SpecialCharTok{+}
   \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ Decade) }\SpecialCharTok{+}            \CommentTok{\# Skapar småfönster per årtionde}
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{)   }\CommentTok{\# Tar bort legenden (kopplingen mellan färg och album)}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ Decade) }\SpecialCharTok{+}            \CommentTok{\# Skapa småfönster per årtionde}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{)   }\CommentTok{\# Ta bort legenden (kopplingen mellan färg och album)}
 \NormalTok{g}
 \end{Highlighting}
 \end{Shaded}
@@ -1239,9 +1247,9 @@ Gör lämpliga ändringar i stycket nedan för att skapa en interaktiv graf med 
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Decade =} \FunctionTok{floor}\NormalTok{(album\_release\_year }\SpecialCharTok{/} \DecValTok{10}\NormalTok{) }\SpecialCharTok{*} \DecValTok{10}\NormalTok{)}
 
 \NormalTok{g }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(dat\_small, }\FunctionTok{aes}\NormalTok{(danceability, valence, }\AttributeTok{color =}\NormalTok{ album\_name, }\AttributeTok{text =}\NormalTok{ track\_name)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ Decade) }\SpecialCharTok{+}            \CommentTok{\# Skapar småfönster per årtionde}
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{)   }\CommentTok{\# Tar bort legenden (kopplingen mellan färg och album)}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}                                 \CommentTok{\# Skapa punkter}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ Decade) }\SpecialCharTok{+}                         \CommentTok{\# Skapa småfönster per årtionde}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{)                }\CommentTok{\# Ta bort legenden (kopplingen mellan färg och album)}
 \NormalTok{g}
 
 \FunctionTok{ggplotly}\NormalTok{(g)}
@@ -1284,6 +1292,7 @@ För att göra en graf behöver vi data över temperaturer. Följande rad hämta
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# Läs in data från fil}
 \NormalTok{dat\_temp }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"https://raw.githubusercontent.com/adamflr/ST0060{-}2022/main/Data/Temperatur\%2C\%20Stockholm.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1293,7 +1302,7 @@ Vi skapar nu en graf, som alltså ska ha en x-axeln given av år (\texttt{Year})
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(dat\_temp, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Year, }\AttributeTok{y =} \DecValTok{1}\NormalTok{, }\AttributeTok{fill =}\NormalTok{ Value)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_col}\NormalTok{()}
+  \FunctionTok{geom\_col}\NormalTok{() }
 \end{Highlighting}
 \end{Shaded}
 
@@ -1333,12 +1342,12 @@ Slutligen brukar warming stripes presenteras med så lite kringinformation som m
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(dat\_temp, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Year, }\AttributeTok{y =}\NormalTok{ Value)) }\SpecialCharTok{+}
   \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title =} \FunctionTok{element\_blank}\NormalTok{(), }
-        \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{,}
-        \AttributeTok{plot.background =} \FunctionTok{element\_blank}\NormalTok{(),}
-        \AttributeTok{panel.background =} \FunctionTok{element\_blank}\NormalTok{(),}
-        \AttributeTok{axis.text.y =} \FunctionTok{element\_blank}\NormalTok{(),}
-        \AttributeTok{axis.ticks =} \FunctionTok{element\_blank}\NormalTok{())}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title =} \FunctionTok{element\_blank}\NormalTok{(),            }\CommentTok{\# Sätt titel till blank}
+        \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{,                }\CommentTok{\# Ta bort legenden}
+        \AttributeTok{plot.background =} \FunctionTok{element\_blank}\NormalTok{(),       }\CommentTok{\# Sätt bakgrunden till blank}
+        \AttributeTok{panel.background =} \FunctionTok{element\_blank}\NormalTok{(),      }\CommentTok{\# Sätt graffältets bakgrund till blank}
+        \AttributeTok{axis.text.y =} \FunctionTok{element\_blank}\NormalTok{(),           }\CommentTok{\# Sätt axeltext till blank}
+        \AttributeTok{axis.ticks =} \FunctionTok{element\_blank}\NormalTok{())            }\CommentTok{\# Sätt axelticks till blank}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1394,8 +1403,8 @@ Mycket funktionalitet i R ligger i tilläggspaket (\emph{Packages}). Paket måst
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# install.packages("tidyverse")}
-\FunctionTok{library}\NormalTok{(tidyverse) }\CommentTok{\# Ger ett felmeddelande om paketet inte installerats tidigare.}
+\CommentTok{\# install.packages("tidyverse")        \# Installera tidyverse (behövs ej om redan gjort)}
+\FunctionTok{library}\NormalTok{(tidyverse)                     }\CommentTok{\# Ger ett felmeddelande om paketet inte installerats}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1404,36 +1413,38 @@ Data läses in med import-funktioner där valet av funktion beror på typen av f
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"https://raw.githubusercontent.com/adamflr/ST0060{-}2022/main/Data/Spotify\_data.csv"}\NormalTok{)}
-\NormalTok{dat}
+\NormalTok{dat                                              }\CommentTok{\# Skriv ut objektet dat}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## # A tibble: 76,622 x 24
-##    artist_name album_name    track_number track_name album_type album_release_d~
-##    <chr>       <chr>                <dbl> <chr>      <chr>      <chr>           
-##  1 100 gecs    1000 gecs an~            1 money mac~ album      2020-07-10      
-##  2 100 gecs    1000 gecs an~            2 ringtone ~ album      2020-07-10      
-##  3 100 gecs    1000 gecs an~            3 745 stick~ album      2020-07-10      
-##  4 100 gecs    1000 gecs an~            4 gec 2 Ü (~ album      2020-07-10      
-##  5 100 gecs    1000 gecs an~            5 hand crus~ album      2020-07-10      
-##  6 100 gecs    1000 gecs an~            6 800db clo~ album      2020-07-10      
-##  7 100 gecs    1000 gecs an~            7 stupid ho~ album      2020-07-10      
-##  8 100 gecs    1000 gecs an~            8 ringtone ~ album      2020-07-10      
-##  9 100 gecs    1000 gecs an~            9 xXXi_wud_~ album      2020-07-10      
-## 10 100 gecs    1000 gecs an~           10 745 stick~ album      2020-07-10      
-## # ... with 76,612 more rows, and 18 more variables: album_release_year <dbl>,
-## #   danceability <dbl>, energy <dbl>, key <dbl>, loudness <dbl>, mode <dbl>,
+##    artist~1 album~2 track~3 track~4 album~5 album~6 album~7 dance~8 energy   key
+##    <chr>    <chr>     <dbl> <chr>   <chr>   <chr>     <dbl>   <dbl>  <dbl> <dbl>
+##  1 100 gecs 1000 g~       1 money ~ album   2020-0~    2020   0.344  0.737     6
+##  2 100 gecs 1000 g~       2 ringto~ album   2020-0~    2020   0.849  0.473     8
+##  3 100 gecs 1000 g~       3 745 st~ album   2020-0~    2020   0.48   0.576     5
+##  4 100 gecs 1000 g~       4 gec 2 ~ album   2020-0~    2020   0.411  0.738     0
+##  5 100 gecs 1000 g~       5 hand c~ album   2020-0~    2020   0.473  0.936     1
+##  6 100 gecs 1000 g~       6 800db ~ album   2020-0~    2020   0.434  0.846     8
+##  7 100 gecs 1000 g~       7 stupid~ album   2020-0~    2020   0.736  0.859     8
+##  8 100 gecs 1000 g~       8 ringto~ album   2020-0~    2020   0.449  0.745    10
+##  9 100 gecs 1000 g~       9 xXXi_w~ album   2020-0~    2020   0.379  0.847     1
+## 10 100 gecs 1000 g~      10 745 st~ album   2020-0~    2020   0.445  0.98     10
+## # ... with 76,612 more rows, 14 more variables: loudness <dbl>, mode <dbl>,
 ## #   speechiness <dbl>, acousticness <dbl>, instrumentalness <dbl>,
 ## #   liveness <dbl>, valence <dbl>, tempo <dbl>, time_signature <dbl>,
-## #   explicit <lgl>, type <chr>, key_name <chr>, mode_name <chr>, key_mode <chr>
+## #   explicit <lgl>, type <chr>, key_name <chr>, mode_name <chr>,
+## #   key_mode <chr>, and abbreviated variable names 1: artist_name,
+## #   2: album_name, 3: track_number, 4: track_name, 5: album_type,
+## #   6: album_release_date, 7: album_release_year, 8: danceability
 \end{verbatim}
 
 Funktioner agerar på objekt och ger något utfall. Här beräknas medeltempot med funktionen \texttt{mean()}. Dollartecknet används för att ange en specifik kolumn i dataobjektet. Funktioner styrs av möjliga argument - här används \texttt{na.rm} för att ange att saknade värden inte ska tas med i beräkningen
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{mean}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{tempo, }\AttributeTok{na.rm =}\NormalTok{ T)}
+\FunctionTok{mean}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{tempo, }\AttributeTok{na.rm =}\NormalTok{ T)                       }\CommentTok{\# Beräkna medelvärdet av kolumnen tempo i datan dat}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1445,9 +1456,9 @@ Funktionerna \texttt{filter()} och \texttt{select()} kan användas för att väl
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                                                 \CommentTok{\# ta datan, och sen}
-  \FunctionTok{filter}\NormalTok{(artist\_name }\SpecialCharTok{==} \StringTok{"Tame Impala"}\NormalTok{, tempo }\SpecialCharTok{\textgreater{}} \DecValTok{170}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# ta ut rader där artisten är Tame Impala och tempot är större än 170, och sen}
-  \FunctionTok{select}\NormalTok{(artist\_name, track\_name, tempo)                }\CommentTok{\# ta ut kolumnerna artist\_name, track\_name och tempo}
+\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                                                    \CommentTok{\# Ta datan, och sen}
+  \FunctionTok{filter}\NormalTok{(artist\_name }\SpecialCharTok{==} \StringTok{"Tame Impala"}\NormalTok{, tempo }\SpecialCharTok{\textgreater{}} \DecValTok{170}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}    \CommentTok{\# ta ut rader där artisten är Tame Impala och tempot är större än 170, och sen}
+  \FunctionTok{select}\NormalTok{(artist\_name, track\_name, tempo)                   }\CommentTok{\# ta ut kolumnerna artist\_name, track\_name och tempo}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1469,11 +1480,11 @@ Funktionen \texttt{summarise()} ger ett sammanfattande mått (som \texttt{mean()
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(artist\_name) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{summarise}\NormalTok{(Antal\_spår }\OtherTok{=} \FunctionTok{n}\NormalTok{(),}
-            \AttributeTok{Medeltempo =} \FunctionTok{mean}\NormalTok{(tempo),}
-            \AttributeTok{Maxdansbarhet =} \FunctionTok{max}\NormalTok{(danceability))}
+\NormalTok{dat }\SpecialCharTok{\%\textgreater{}\%}                                                    \CommentTok{\# Ta datan, och sen}
+  \FunctionTok{group\_by}\NormalTok{(artist\_name) }\SpecialCharTok{\%\textgreater{}\%}                                \CommentTok{\# gruppera efter artist, och sen}
+  \FunctionTok{summarise}\NormalTok{(Antal\_spår }\OtherTok{=} \FunctionTok{n}\NormalTok{(),                              }\CommentTok{\# beräkna antal spår,}
+            \AttributeTok{Medeltempo =} \FunctionTok{mean}\NormalTok{(tempo),                      }\CommentTok{\# medeltempo, och}
+            \AttributeTok{Maxdansbarhet =} \FunctionTok{max}\NormalTok{(danceability))             }\CommentTok{\# maximal dansbarhet}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1498,10 +1509,10 @@ Slutligen tittade vi på grafer med ggplot2-paketet. En ggplot byggs upp med tre
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat\_small }\OtherTok{\textless{}{-}}\NormalTok{ dat }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(artist\_name }\SpecialCharTok{==} \StringTok{"The Weeknd"}\NormalTok{)}
+\NormalTok{dat\_small }\OtherTok{\textless{}{-}}\NormalTok{ dat }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(artist\_name }\SpecialCharTok{==} \StringTok{"The Weeknd"}\NormalTok{)                            }\CommentTok{\# Skapa en mindre datamängd genom att filtrera på en artist}
 
-\FunctionTok{ggplot}\NormalTok{(dat\_small, }\FunctionTok{aes}\NormalTok{(tempo, danceability, }\AttributeTok{size =}\NormalTok{ valence, }\AttributeTok{color =}\NormalTok{ mode\_name)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_point}\NormalTok{()}
+\FunctionTok{ggplot}\NormalTok{(dat\_small, }\FunctionTok{aes}\NormalTok{(tempo, danceability, }\AttributeTok{size =}\NormalTok{ valence, }\AttributeTok{color =}\NormalTok{ mode\_name)) }\SpecialCharTok{+}    \CommentTok{\# Koppla grafegenskaper och variabler}
+  \FunctionTok{geom\_point}\NormalTok{()                                                                      }\CommentTok{\# Illustrera med punkter}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1520,14 +1531,14 @@ I R kan man läsa in data från en Excel-fil med funktionen \texttt{read\_excel(
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(readxl) }\CommentTok{\# Ladda readxl}
+\FunctionTok{library}\NormalTok{(readxl)                                                           }\CommentTok{\# Ladda readxl}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{gapminder }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"C:/Users/User\_name/Downloads/Gapminder.xlsx"}\NormalTok{)}
-\NormalTok{gapminder}
+\NormalTok{gapminder }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"C:/Users/User\_name/Downloads/Gapminder.xlsx"}\NormalTok{)    }\CommentTok{\# Läs in från en lokal excelfil}
+\NormalTok{gapminder                                                                 }\CommentTok{\# Skriv ut objektet gapminder}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1539,7 +1550,7 @@ En R-session har alltid en grundmapp, ett \emph{Working directory}. Man kan se v
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{getwd}\NormalTok{()}
+\FunctionTok{getwd}\NormalTok{()                                }\CommentTok{\# Ange working directory}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1547,8 +1558,8 @@ En filsökväg kan anges antingen som en fullständig sökväg, som ovan, eller 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{gapminder }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"Data/Gapminder.xlsx"}\NormalTok{)}
-\NormalTok{gapminder}
+\NormalTok{gapminder }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"Data/Gapminder.xlsx"}\NormalTok{)             }\CommentTok{\# Läs in från en lokal excelfil (relativt wd)}
+\NormalTok{gapminder                                                  }\CommentTok{\# Skriv ut objektet gapminder}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1579,9 +1590,9 @@ Om du inte har tillgång till Canvas kan Gapminder-datan alternativt hämtas fr�
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# install.packages("gapminder")}
-\FunctionTok{library}\NormalTok{(gapminder)}
-\NormalTok{gapminder}
+\CommentTok{\# install.packages("gapminder")        \# Installera paketet gapminder (behövs ej om redan gjort)}
+\FunctionTok{library}\NormalTok{(gapminder)                     }\CommentTok{\# Ladda gapminder}
+\NormalTok{gapminder                              }\CommentTok{\# Skriv ut objektet gapminder}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1592,15 +1603,15 @@ Den importerade datan ger medellivslängd, populationsstorlek och bnp per capita
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(gapminder, }\FunctionTok{aes}\NormalTok{(gdpPercap, lifeExp, }\AttributeTok{size =}\NormalTok{ pop, }\AttributeTok{color =}\NormalTok{ continent)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ year)}
+\FunctionTok{ggplot}\NormalTok{(gapminder, }\FunctionTok{aes}\NormalTok{(gdpPercap, lifeExp, }\AttributeTok{size =}\NormalTok{ pop, }\AttributeTok{color =}\NormalTok{ continent)) }\SpecialCharTok{+}    \CommentTok{\# Koppla grafens egenskaper till kolumner}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}                                                               \CommentTok{\# Illustrera med punkter}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ year)                                                           }\CommentTok{\# Skapa småfönster efter år}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-78-1} \end{center}
 
-En interaktiv version kan vara bra om man vill identifiera någon punkt.
+En interaktiv version kan vara bra om man vill identifiera någon specifik punkt.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1608,8 +1619,9 @@ En interaktiv version kan vara bra om man vill identifiera någon punkt.
   \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ year)}
 
-\FunctionTok{library}\NormalTok{(plotly)}
-\FunctionTok{ggplotly}\NormalTok{(g)}
+\CommentTok{\# install.packages("plotly")}
+\FunctionTok{library}\NormalTok{(plotly)                        }\CommentTok{\# Ladda paketet plotly}
+\FunctionTok{ggplotly}\NormalTok{(g)                            }\CommentTok{\# Ta fram en interaktiv version av grafen g}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1617,8 +1629,8 @@ Under föreläsningen såg vi exempel på två lägesmått: medelvärdet (egentl
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{gdpPercap }\OtherTok{\textless{}{-}}\NormalTok{ gapminder}\SpecialCharTok{$}\NormalTok{gdpPercap}
-\FunctionTok{mean}\NormalTok{(gdpPercap)}
+\NormalTok{gdpPercap }\OtherTok{\textless{}{-}}\NormalTok{ gapminder}\SpecialCharTok{$}\NormalTok{gdpPercap       }\CommentTok{\# Skapa en vektor gdpPercap genom att ta ut kolumnen från gapminder}
+\FunctionTok{mean}\NormalTok{(gdpPercap)                        }\CommentTok{\# Beräkna medelvärdet av gdpPercap}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1628,7 +1640,7 @@ Under föreläsningen såg vi exempel på två lägesmått: medelvärdet (egentl
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{median}\NormalTok{(gdpPercap)}
+\FunctionTok{median}\NormalTok{(gdpPercap)                      }\CommentTok{\# Beräkna medianen av gdpPercap}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1640,9 +1652,9 @@ Samma sak kan göras med en pipe \texttt{\%\textgreater{}\%} och \texttt{summari
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{gapminder }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Mean =} \FunctionTok{mean}\NormalTok{(gdpPercap),}
-            \AttributeTok{Median =} \FunctionTok{median}\NormalTok{(gdpPercap))}
+\NormalTok{gapminder }\SpecialCharTok{\%\textgreater{}\%}                                    \CommentTok{\# Ta datan, och sen}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Mean =} \FunctionTok{mean}\NormalTok{(gdpPercap),              }\CommentTok{\# summera med medelvärdet av gdpPercap och}
+            \AttributeTok{Median =} \FunctionTok{median}\NormalTok{(gdpPercap))          }\CommentTok{\# med medianen av gdpPercap}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1661,10 +1673,10 @@ Den andra lösningen, med en pipe och \texttt{summarise()}, kan enkelt utvecklas
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{gapminder }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(year) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Mean =} \FunctionTok{mean}\NormalTok{(gdpPercap),}
-            \AttributeTok{Median =} \FunctionTok{median}\NormalTok{(gdpPercap))}
+\NormalTok{gapminder }\SpecialCharTok{\%\textgreater{}\%}                                    \CommentTok{\# Ta datan, och sen}
+  \FunctionTok{group\_by}\NormalTok{(year) }\SpecialCharTok{\%\textgreater{}\%}                             \CommentTok{\# gruppera efter år, och sen}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Mean =} \FunctionTok{mean}\NormalTok{(gdpPercap),              }\CommentTok{\# summera med medelvärdet av gdpPercap och}
+            \AttributeTok{Median =} \FunctionTok{median}\NormalTok{(gdpPercap))          }\CommentTok{\# med medianen av gdpPercap}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1698,13 +1710,13 @@ I vetenskapliga publikationer redovisas medelvärden ofta med ett stapeldiagram.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat\_gdp\_2007 }\OtherTok{\textless{}{-}}\NormalTok{ gapminder }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2007}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(continent) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Mean =} \FunctionTok{mean}\NormalTok{(gdpPercap))}
+\NormalTok{dat\_gdp\_2007 }\OtherTok{\textless{}{-}}\NormalTok{ gapminder }\SpecialCharTok{\%\textgreater{}\%}                    \CommentTok{\# Ta datan, och sen}
+  \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2007}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}                       \CommentTok{\# filtrera för 2007, och sen}
+  \FunctionTok{group\_by}\NormalTok{(continent) }\SpecialCharTok{\%\textgreater{}\%}                        \CommentTok{\# gruppera efter kontinent, och sen}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Mean =} \FunctionTok{mean}\NormalTok{(gdpPercap))              }\CommentTok{\# summera med medelvärdet av gdpPercap}
 
-\FunctionTok{ggplot}\NormalTok{(dat\_gdp\_2007, }\FunctionTok{aes}\NormalTok{(continent, Mean)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_col}\NormalTok{()}
+\FunctionTok{ggplot}\NormalTok{(dat\_gdp\_2007, }\FunctionTok{aes}\NormalTok{(continent, Mean)) }\SpecialCharTok{+}     \CommentTok{\# Skapa en ggplot med continent på x{-}axeln och Mean på y{-}axeln}
+  \FunctionTok{geom\_col}\NormalTok{()                                     }\CommentTok{\# Illustrera med kolumner (columns)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1743,9 +1755,9 @@ Under föreläsningarna såg vi några mått på spridning: varians, standardavv
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{gdpPercap }\OtherTok{\textless{}{-}}\NormalTok{ gapminder}\SpecialCharTok{$}\NormalTok{gdpPercap}
+\NormalTok{gdpPercap }\OtherTok{\textless{}{-}}\NormalTok{ gapminder}\SpecialCharTok{$}\NormalTok{gdpPercap                 }\CommentTok{\# Skapa en vektor gdpPercap genom att ta ut kolumnen från gapminder}
 
-\FunctionTok{var}\NormalTok{(gdpPercap)}
+\FunctionTok{var}\NormalTok{(gdpPercap)                                   }\CommentTok{\# Beräkna variansen av gdpPercap}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1755,7 +1767,7 @@ Under föreläsningarna såg vi några mått på spridning: varians, standardavv
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{sd}\NormalTok{(gdpPercap)}
+\FunctionTok{sd}\NormalTok{(gdpPercap)                                    }\CommentTok{\# Beräkna standardavvikelsen av gdpPercap}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1765,7 +1777,7 @@ Under föreläsningarna såg vi några mått på spridning: varians, standardavv
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{IQR}\NormalTok{(gdpPercap)}
+\FunctionTok{IQR}\NormalTok{(gdpPercap)                                   }\CommentTok{\# Beräkna kvartilavståndet av gdpPercap}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1777,10 +1789,10 @@ Alternativt med en pipe och \texttt{summarise()}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{gapminder }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Varians =} \FunctionTok{var}\NormalTok{(gdpPercap),}
-            \AttributeTok{Standardavvikelse =} \FunctionTok{sd}\NormalTok{(gdpPercap),}
-\NormalTok{            Kvartilavstånd }\OtherTok{=} \FunctionTok{IQR}\NormalTok{(gdpPercap))}
+\NormalTok{gapminder }\SpecialCharTok{\%\textgreater{}\%}                                    \CommentTok{\# Ta datan, och sen}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Varians =} \FunctionTok{var}\NormalTok{(gdpPercap),            }\CommentTok{\# summera med varians,}
+            \AttributeTok{Standardavvikelse =} \FunctionTok{sd}\NormalTok{(gdpPercap),   }\CommentTok{\# standardavvikelse,}
+\NormalTok{            Kvartilavstånd }\OtherTok{=} \FunctionTok{IQR}\NormalTok{(gdpPercap))     }\CommentTok{\# och kvartilavstånd}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1795,11 +1807,11 @@ Lösningen med pipe och \texttt{summarise()} kan som tidigare utvecklas med \tex
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{gapminder }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(year) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Varians =} \FunctionTok{var}\NormalTok{(gdpPercap),}
-            \AttributeTok{Standardavvikelse =} \FunctionTok{sd}\NormalTok{(gdpPercap),}
-\NormalTok{            Kvartilavstånd }\OtherTok{=} \FunctionTok{IQR}\NormalTok{(gdpPercap))}
+\NormalTok{gapminder }\SpecialCharTok{\%\textgreater{}\%}                                    \CommentTok{\# Ta datan, och sen}
+  \FunctionTok{group\_by}\NormalTok{(year) }\SpecialCharTok{\%\textgreater{}\%}                             \CommentTok{\# gruppera efter år, och sen}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Varians =} \FunctionTok{var}\NormalTok{(gdpPercap),            }\CommentTok{\# summera med varians,}
+            \AttributeTok{Standardavvikelse =} \FunctionTok{sd}\NormalTok{(gdpPercap),   }\CommentTok{\# standardavvikelse,}
+\NormalTok{            Kvartilavstånd }\OtherTok{=} \FunctionTok{IQR}\NormalTok{(gdpPercap))     }\CommentTok{\# och kvartilavstånd}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1829,10 +1841,10 @@ Vi avslutar med tre vanliga illustrationer av vetenskaplig data - ett linjediagr
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat\_sum }\OtherTok{\textless{}{-}}\NormalTok{ gapminder }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(year, continent) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Mean =} \FunctionTok{mean}\NormalTok{(gdpPercap),}
-            \AttributeTok{SE =} \FunctionTok{sd}\NormalTok{(gdpPercap) }\SpecialCharTok{/} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{n}\NormalTok{()))}
+\NormalTok{dat\_sum }\OtherTok{\textless{}{-}}\NormalTok{ gapminder }\SpecialCharTok{\%\textgreater{}\%}                         \CommentTok{\# Ta datan, och sen}
+  \FunctionTok{group\_by}\NormalTok{(year, continent) }\SpecialCharTok{\%\textgreater{}\%}                  \CommentTok{\# grupper efter år och kontinent, och sen}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Mean =} \FunctionTok{mean}\NormalTok{(gdpPercap),              }\CommentTok{\# summera med medelvärde}
+            \AttributeTok{SE =} \FunctionTok{sd}\NormalTok{(gdpPercap) }\SpecialCharTok{/} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{n}\NormalTok{()))      }\CommentTok{\# och medelfel (standardavvikelsen delat på roten ur n)}
 \NormalTok{dat\_sum}
 \end{Highlighting}
 \end{Shaded}
@@ -1859,9 +1871,9 @@ Med \texttt{ggplot2} kan vi bygga ett linjediagram med \texttt{geom\_line()} och
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(dat\_sum, }\FunctionTok{aes}\NormalTok{(year, Mean, }\AttributeTok{color =}\NormalTok{ continent)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{geom\_errorbar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{ymin =}\NormalTok{ Mean }\SpecialCharTok{{-}}\NormalTok{ SE, }\AttributeTok{ymax =}\NormalTok{ Mean }\SpecialCharTok{+}\NormalTok{ SE))}
+\FunctionTok{ggplot}\NormalTok{(dat\_sum, }\FunctionTok{aes}\NormalTok{(year, Mean, }\AttributeTok{color =}\NormalTok{ continent)) }\SpecialCharTok{+}      \CommentTok{\# Skapa en ggplot från datan dat\_sum med year som x{-}axel, Mean som y{-}axel och färg efter kontinent}
+  \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}                                            \CommentTok{\# Illustrera med linjer}
+  \FunctionTok{geom\_errorbar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{ymin =}\NormalTok{ Mean }\SpecialCharTok{{-}}\NormalTok{ SE, }\AttributeTok{ymax =}\NormalTok{ Mean }\SpecialCharTok{+}\NormalTok{ SE))   }\CommentTok{\# Illustrera med felstaplar}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1875,11 +1887,11 @@ En graf med staplar och felstaplar kan konstrueras på ett likande sätt. Följa
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat\_sum }\OtherTok{\textless{}{-}}\NormalTok{ gapminder }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2007}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(continent) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Mean =} \FunctionTok{mean}\NormalTok{(lifeExp),}
-            \AttributeTok{SD =} \FunctionTok{sd}\NormalTok{(lifeExp))}
+\NormalTok{dat\_sum }\OtherTok{\textless{}{-}}\NormalTok{ gapminder }\SpecialCharTok{\%\textgreater{}\%}                         \CommentTok{\# Ta datan, och sen}
+  \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2007}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}                       \CommentTok{\# filtrera på år, och sen}
+  \FunctionTok{group\_by}\NormalTok{(continent) }\SpecialCharTok{\%\textgreater{}\%}                        \CommentTok{\# gruppera efter kontinent, och sen}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Mean =} \FunctionTok{mean}\NormalTok{(lifeExp),                }\CommentTok{\# summera med medelvärde,}
+            \AttributeTok{SD =} \FunctionTok{sd}\NormalTok{(lifeExp))                    }\CommentTok{\# och standardavvikelse}
 \NormalTok{dat\_sum}
 \end{Highlighting}
 \end{Shaded}
@@ -1899,10 +1911,10 @@ Vi bygger en ggplot med \texttt{geom\_col()} och \texttt{geom\_errorbar()}. Fels
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(dat\_sum, }\FunctionTok{aes}\NormalTok{(continent, Mean, }\AttributeTok{fill =}\NormalTok{ continent)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_col}\NormalTok{()}\SpecialCharTok{+}
-  \FunctionTok{geom\_errorbar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{ymin =}\NormalTok{ Mean }\SpecialCharTok{{-}}\NormalTok{ SD, }\AttributeTok{ymax =}\NormalTok{ Mean }\SpecialCharTok{+}\NormalTok{ SD)) }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Average life expectancy by continent, 2007"}\NormalTok{,}
+\FunctionTok{ggplot}\NormalTok{(dat\_sum, }\FunctionTok{aes}\NormalTok{(continent, Mean, }\AttributeTok{fill =}\NormalTok{ continent)) }\SpecialCharTok{+}          \CommentTok{\# Skapa en ggplot med continent och Mean på axlarna och ifylld färg given av kontinent}
+  \FunctionTok{geom\_col}\NormalTok{()}\SpecialCharTok{+}                                                      \CommentTok{\# Illustrera med kolumner}
+  \FunctionTok{geom\_errorbar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{ymin =}\NormalTok{ Mean }\SpecialCharTok{{-}}\NormalTok{ SD, }\AttributeTok{ymax =}\NormalTok{ Mean }\SpecialCharTok{+}\NormalTok{ SD)) }\SpecialCharTok{+}         \CommentTok{\# Illustrera med felstaplar}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Average life expectancy by continent, 2007"}\NormalTok{,       }\CommentTok{\# Ange titel och förklarande text}
        \AttributeTok{caption =} \StringTok{"Errorbars given by mean +/{-} standard deviation.}
 \StringTok{       Source: Gapminder"}\NormalTok{)}
 \end{Highlighting}
@@ -1918,9 +1930,9 @@ Ett lådagram anger fördelningen av en variabel genom att illustrera minimum, m
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(gapminder, }\FunctionTok{aes}\NormalTok{(year, lifeExp, }\AttributeTok{fill =}\NormalTok{ continent, }\AttributeTok{group =}\NormalTok{ year)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ continent)}
+\FunctionTok{ggplot}\NormalTok{(gapminder, }\FunctionTok{aes}\NormalTok{(year, lifeExp, }\AttributeTok{fill =}\NormalTok{ continent, }\AttributeTok{group =}\NormalTok{ year)) }\SpecialCharTok{+}        \CommentTok{\# Skapa en ggplot med år och lifeExp på axlarna, kontinent som ifylld färg, och gruppera efter år}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}                                                             \CommentTok{\# Illustrera med lådagram}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ continent)                                                      }\CommentTok{\# Småfönster efter kontinent}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1937,11 +1949,11 @@ Efter att ha beräknat någon beskrivande statistik kan det vara bra att titta p
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat\_sum }\OtherTok{\textless{}{-}}\NormalTok{ gapminder }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2007}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(continent) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Mean =} \FunctionTok{mean}\NormalTok{(lifeExp),}
-            \AttributeTok{SD =} \FunctionTok{sd}\NormalTok{(lifeExp))}
+\NormalTok{dat\_sum }\OtherTok{\textless{}{-}}\NormalTok{ gapminder }\SpecialCharTok{\%\textgreater{}\%}                         \CommentTok{\# Ta datan, och sen}
+  \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2007}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}                       \CommentTok{\# filtrera på år, och sen}
+  \FunctionTok{group\_by}\NormalTok{(continent) }\SpecialCharTok{\%\textgreater{}\%}                        \CommentTok{\# gruppera efter kontinent, och sen}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Mean =} \FunctionTok{mean}\NormalTok{(lifeExp),                }\CommentTok{\# summera med medelvärde,}
+            \AttributeTok{SD =} \FunctionTok{sd}\NormalTok{(lifeExp))                    }\CommentTok{\# och standardavvikelse}
 \NormalTok{dat\_sum}
 \end{Highlighting}
 \end{Shaded}
@@ -1962,7 +1974,7 @@ Ett vanligt skrivsätt för medelvärde och standardavvikelse är som \emph{m ±
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{dat\_sum }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{mean\_plus\_minus\_sd =} \FunctionTok{paste}\NormalTok{(Mean, }\StringTok{"±"}\NormalTok{, SD))}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{mean\_plus\_minus\_sd =} \FunctionTok{paste}\NormalTok{(Mean, }\StringTok{"±"}\NormalTok{, SD))        }\CommentTok{\# Skapa en ny kolumn genom att slå ihop Mean och SD}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1982,7 +1994,7 @@ Vi måste avrunda medelvärdet och standardavvikelsen först. Det kan man göra 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{dat\_sum }\OtherTok{\textless{}{-}}\NormalTok{ dat\_sum }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{mean\_plus\_minus\_sd =} \FunctionTok{paste}\NormalTok{(}\FunctionTok{round}\NormalTok{(Mean, }\DecValTok{1}\NormalTok{), }\StringTok{"±"}\NormalTok{, }\FunctionTok{round}\NormalTok{(SD, }\DecValTok{1}\NormalTok{)))}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{mean\_plus\_minus\_sd =} \FunctionTok{paste}\NormalTok{(}\FunctionTok{round}\NormalTok{(Mean, }\DecValTok{1}\NormalTok{), }\StringTok{"±"}\NormalTok{, }\FunctionTok{round}\NormalTok{(SD, }\DecValTok{1}\NormalTok{)))        }\CommentTok{\# Skapa en ny kolumn med avrundade värden}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2000,8 +2012,8 @@ Precis som vid import använda R \emph{working directory} om inget annat anges. 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{getwd}\NormalTok{()}
-\FunctionTok{write\_csv}\NormalTok{(dat\_sum, }\StringTok{"Exporterad data från R.csv"}\NormalTok{)}
+\FunctionTok{getwd}\NormalTok{()                                                    }\CommentTok{\# Se nuvarande working directory}
+\FunctionTok{write\_csv}\NormalTok{(dat\_sum, }\StringTok{"Exporterad data från R.csv"}\NormalTok{)           }\CommentTok{\# Skriv datan till en csv{-}fil.}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2014,7 +2026,7 @@ Det vara nyttigt att göra en stegvis beräkning av varians (och standardavvikel
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Rad =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{), }\AttributeTok{x =} \FunctionTok{c}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{))}
+\NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Rad =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{), }\AttributeTok{x =} \FunctionTok{c}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{))    }\CommentTok{\# Skapa en datamängd med kolumner Rad och x}
 \NormalTok{dat}
 \end{Highlighting}
 \end{Shaded}
@@ -2050,7 +2062,7 @@ Vi har tidigare sett beräkningen av medelvärden med \texttt{mean()}. En skilln
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{dat }\OtherTok{\textless{}{-}}\NormalTok{ dat }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(Medelvärde }\OtherTok{=} \FunctionTok{mean}\NormalTok{(x))}
+  \FunctionTok{mutate}\NormalTok{(Medelvärde }\OtherTok{=} \FunctionTok{mean}\NormalTok{(x))                   }\CommentTok{\# Beräkna medelvärdet av x i en ny kolumn}
 \NormalTok{dat}
 \end{Highlighting}
 \end{Shaded}
@@ -2069,7 +2081,7 @@ Därefter tar vi differensen mellan observationernas värden och medelvärdet.
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{dat }\OtherTok{\textless{}{-}}\NormalTok{ dat }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Differenser =}\NormalTok{ x }\SpecialCharTok{{-}}\NormalTok{ Medelvärde)}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Differenser =}\NormalTok{ x }\SpecialCharTok{{-}}\NormalTok{ Medelvärde)           }\CommentTok{\# Beräkna differenser till medelvärdet}
 \NormalTok{dat}
 \end{Highlighting}
 \end{Shaded}
@@ -2088,7 +2100,7 @@ Därefter tar vi kvadrater av differenserna. För att ange en kvadrat används s
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{dat }\OtherTok{\textless{}{-}}\NormalTok{ dat }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Kvadrater =}\NormalTok{ Differenser}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Kvadrater =}\NormalTok{ Differenser}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)              }\CommentTok{\# Beräkna kvadrerade differenser}
 \NormalTok{dat}
 \end{Highlighting}
 \end{Shaded}
@@ -2107,7 +2119,7 @@ Först i nästa steg summerar vi kvadraterna.
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{dat\_sum }\OtherTok{\textless{}{-}}\NormalTok{ dat }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Kvadratsumma =} \FunctionTok{sum}\NormalTok{(Kvadrater))}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Kvadratsumma =} \FunctionTok{sum}\NormalTok{(Kvadrater))       }\CommentTok{\# Summera kvadraterna}
 \NormalTok{dat\_sum}
 \end{Highlighting}
 \end{Shaded}
@@ -2121,7 +2133,7 @@ Som avslutande steg delar vi kvadratsumman med antalet observationer minus ett. 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat\_sum }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Varians =}\NormalTok{ Kvadratsumma }\SpecialCharTok{/} \DecValTok{4}\NormalTok{)}
+\NormalTok{dat\_sum }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Varians =}\NormalTok{ Kvadratsumma }\SpecialCharTok{/} \DecValTok{4}\NormalTok{)   }\CommentTok{\# Dela summan med fyra (antalet observationer minus 1)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2134,7 +2146,7 @@ Vi kan se om vi fått rätt genom att beräkna variansen med funktionen \texttt{
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{var}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{x)  }\CommentTok{\# Dollartecken för att ta ut kolumnen x i objektet dat}
+\FunctionTok{var}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{x)                                       }\CommentTok{\# Dollartecken för att ta ut kolumnen x i objektet dat}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2151,8 +2163,8 @@ Med de tärningsvärden vi hade innan kan vi beräkna ett kumulativt medelvärde
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat\_dice }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Utfall =} \FunctionTok{c}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Kast =} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{n}\NormalTok{())}
+\NormalTok{dat\_dice }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Utfall =} \FunctionTok{c}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}               \CommentTok{\# Skapa data med kolumnen Utfall, och sen}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Kast =} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{n}\NormalTok{())                                          }\CommentTok{\# skapa en kolumn med antal kast från 1 löpande}
 \NormalTok{dat\_dice}
 \end{Highlighting}
 \end{Shaded}
@@ -2168,9 +2180,9 @@ Med de tärningsvärden vi hade innan kan vi beräkna ett kumulativt medelvärde
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat\_dice }\OtherTok{\textless{}{-}}\NormalTok{ dat\_dice }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Kumulativ summa}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{cumsum}\NormalTok{(Utfall),}
-         \StringTok{\textasciigrave{}}\AttributeTok{Kumulativt medelvärde}\StringTok{\textasciigrave{}} \OtherTok{=} \StringTok{\textasciigrave{}}\AttributeTok{Kumulativ summa}\StringTok{\textasciigrave{}} \SpecialCharTok{/}\NormalTok{ Kast)}
+\NormalTok{dat\_dice }\OtherTok{\textless{}{-}}\NormalTok{ dat\_dice }\SpecialCharTok{\%\textgreater{}\%}                                        \CommentTok{\# Ta datan, och sen}
+  \FunctionTok{mutate}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Kumulativ summa}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{cumsum}\NormalTok{(Utfall),                    }\CommentTok{\# skapa en kolumn som ger den kumulativa summan och}
+         \StringTok{\textasciigrave{}}\AttributeTok{Kumulativt medelvärde}\StringTok{\textasciigrave{}} \OtherTok{=} \StringTok{\textasciigrave{}}\AttributeTok{Kumulativ summa}\StringTok{\textasciigrave{}} \SpecialCharTok{/}\NormalTok{ Kast)    }\CommentTok{\# dela den kumulativa summan med antalet kast}
 \NormalTok{dat\_dice}
 \end{Highlighting}
 \end{Shaded}
@@ -2545,13 +2557,14 @@ I datorövning 2 tittade vi på hur insamlade variabler kan sammanfattas med lä
 
 \begin{verbatim}
 ## # A tibble: 5 x 4
-##   continent `Livslängd, medel` `Befolkning, median` `Bnp per capita, standarda~`
+##   continent `Livslängd, medel` `Befolkning, median` Bnp per capita, standardav~1
 ##   <chr>                  <dbl>                <dbl>                        <dbl>
 ## 1 Africa                  54.8            10093310.                        3618.
 ## 2 Americas                73.6             9319622                         9713.
 ## 3 Asia                    70.7            24821286                        14155.
 ## 4 Europe                  77.6             9493598                        11800.
 ## 5 Oceania                 80.7            12274974.                        6541.
+## # ... with abbreviated variable name 1: `Bnp per capita, standardavvikelse`
 \end{verbatim}
 
 Beskrivande mått sammanfattas ofta i någon enkel vetenskaplig graf. Två vanliga val är lådagrammet, som illustrerar kvartiler och möjliga extremvärden, och stapeldiagrammet med felstaplar. Vi ger först ett exempel på ett lådagram över livslängd per kontinent uppdelat efter år.
@@ -2735,7 +2748,7 @@ R kommer också med en rad funktioner för att simulera data. För kontinuerlig 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 3.5234
+## [1] 3.4999
 \end{verbatim}
 
 \begin{Shaded}
@@ -2745,7 +2758,7 @@ R kommer också med en rad funktioner för att simulera data. För kontinuerlig 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 2.905543
+## [1] 2.889689
 \end{verbatim}
 
 \begin{exercise}[Simulera tärningen]
@@ -3403,8 +3416,7 @@ En intressant aspekt av slumptal är att de kan användas till att utforska icke
 \FunctionTok{library}\NormalTok{(ggforce)}
 \NormalTok{g }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+} 
   \FunctionTok{geom\_circle}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x0 =} \DecValTok{0}\NormalTok{, }\AttributeTok{y0 =} \DecValTok{0}\NormalTok{, }\AttributeTok{r =} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{+} 
-  \FunctionTok{geom\_rect}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{xmin =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{ymin =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{xmax =} \DecValTok{1}\NormalTok{, }\AttributeTok{ymax =} \DecValTok{1}\NormalTok{), }\AttributeTok{fill =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{coord\_equal}\NormalTok{()}
+  \FunctionTok{geom\_rect}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{xmin =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{ymin =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{xmax =} \DecValTok{1}\NormalTok{, }\AttributeTok{ymax =} \DecValTok{1}\NormalTok{), }\AttributeTok{fill =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{)}
 \NormalTok{g}
 \end{Highlighting}
 \end{Shaded}
@@ -3424,7 +3436,7 @@ Funktionen \texttt{runif()} ger ett slumpmässigt värde mellan två gränsvärd
 
 \begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-158-1} \end{center}
 
-Pytagoras sats kan användas för att beräkna avståndet mellan en slumpmässig punkt och origo (nollpunkten). Punkter med ett avstånd under ett ligger inom cirkeln. Cirkelns area ska ges av andelen punkter i kvadraten som också ligger i cirkeln gånger fyra.
+Pytagoras sats kan användas för att beräkna avståndet mellan en slumpmässig punkt och origo (nollpunkten). Punkter med ett avstånd under ett ligger inom cirkeln. Cirkelns area ska ges av andelen punkter i kvadraten som också ligger i cirkeln, gånger fyra.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4128,13 +4140,13 @@ Följande kod simulerar ett dataset om tio observationer från en normalfördeln
 ##  One Sample t-test
 ## 
 ## data:  dat_sim$x
-## t = -0.19134, df = 9, p-value = 0.8525
+## t = -0.7437, df = 9, p-value = 0.476
 ## alternative hypothesis: true mean is not equal to 7
 ## 95 percent confidence interval:
-##   2.254461 11.005373
+##  2.137983 9.456123
 ## sample estimates:
 ## mean of x 
-##  6.629917
+##  5.797053
 \end{verbatim}
 
 \begin{exercise}[Upprepad simulering]
@@ -4179,7 +4191,7 @@ Vidare ska p-värdet vara under fem procent fem procent av gångerna.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.039
+## [1] 0.054
 \end{verbatim}
 
 Även det stämmer någorlunda väl. Det här innebär alltså att om man har en signifikansnivå på fem procent kommer man förkasta nollhypotesen fem procent av gångerna även om nollhypotesen stämmer. Det kallas ett \emph{falskt positivt} utfall.
@@ -5737,7 +5749,7 @@ I en undersökning på potatis används fyra behandlingar (a1b1, a1b2, a2b1 och 
 
 \end{exercise}
 
-::: \{exercise name=``Po-ta-toes-graf''\}
+\begin{exercise}[Po-ta-toes-graf]
 För att göra en graf kan man pivotera datan till lång form.
 
 \begin{Shaded}
@@ -5757,10 +5769,11 @@ Skapa ett stapeldiagram med uppdelade staplar genom att fylla i kodstycket nedan
 \end{Highlighting}
 \end{Shaded}
 
-Finns det några tydliga skillnader mellan behandlingar?
-:::
+Finns det några synbara skillnader mellan behandlingar?
+\end{exercise}
 
-::: \{exercise name=``Po-ta-toes-test''\}
+\begin{exercise}[Po-ta-toes-test]
+
 Beräkna ett chi-två-test på potatisdatan för att se om det finns färgskillnader mellan behandlingarna. Formulera tydliga hypoteser och ge ett tydligt svar.
 
 \begin{Shaded}
@@ -5770,7 +5783,7 @@ Beräkna ett chi-två-test på potatisdatan för att se om det finns färgskilln
 \end{Highlighting}
 \end{Shaded}
 
-:::
+\end{exercise}
 
 \begin{exercise}[Hemmasegrar över årtionden]
 
@@ -5785,19 +5798,20 @@ Vi vill undersöka om andelen hemmasegrar i herrallsvenskan förändrats över t
 
 \begin{verbatim}
 ## # A tibble: 15,236 x 9
-##    Hemmalag     Bortalag Hemmamål Bortamål Publik Domare Arena Datum      Säsong
-##    <chr>        <chr>       <dbl>    <dbl>  <dbl> <chr>  <chr> <date>     <chr> 
-##  1 Örgryte      Hammarby        5        1   4000 Carl ~ <NA>  1924-08-03 1924_~
-##  2 IFK Norrköp~ Landskr~        0        1   1500 Ivar ~ <NA>  1924-08-03 1924_~
-##  3 IFK Malmö    IFK Göt~        1        1   3276 Johan~ <NA>  1924-08-03 1924_~
-##  4 Helsingborg  Gais            1        2   3000 Carl ~ <NA>  1924-08-03 1924_~
-##  5 Eskilstuna   Sleipner        1        3    700 Oscar~ <NA>  1924-08-03 1924_~
-##  6 AIK          Västerå~        5        1   2000 Arne ~ <NA>  1924-08-03 1924_~
-##  7 IFK Göteborg Gais            1        3   3600 Sigfr~ <NA>  1924-08-08 1924_~
-##  8 Västerås IK  Eskilst~        0        1    600 Berti~ <NA>  1924-08-10 1924_~
-##  9 Sleipner     Örgryte         0        1   2280 Ernfr~ <NA>  1924-08-10 1924_~
-## 10 Landskrona   IFK Göt~        0        4   1000 Gusta~ <NA>  1924-08-10 1924_~
-## # ... with 15,226 more rows
+##    Hemmalag       Bortalag Hemma~1 Borta~2 Publik Domare Arena Datum      Säsong
+##    <chr>          <chr>      <dbl>   <dbl>  <dbl> <chr>  <chr> <date>     <chr> 
+##  1 Örgryte        Hammarby       5       1   4000 Carl ~ <NA>  1924-08-03 1924_~
+##  2 IFK Norrköping Landskr~       0       1   1500 Ivar ~ <NA>  1924-08-03 1924_~
+##  3 IFK Malmö      IFK Göt~       1       1   3276 Johan~ <NA>  1924-08-03 1924_~
+##  4 Helsingborg    Gais           1       2   3000 Carl ~ <NA>  1924-08-03 1924_~
+##  5 Eskilstuna     Sleipner       1       3    700 Oscar~ <NA>  1924-08-03 1924_~
+##  6 AIK            Västerå~       5       1   2000 Arne ~ <NA>  1924-08-03 1924_~
+##  7 IFK Göteborg   Gais           1       3   3600 Sigfr~ <NA>  1924-08-08 1924_~
+##  8 Västerås IK    Eskilst~       0       1    600 Berti~ <NA>  1924-08-10 1924_~
+##  9 Sleipner       Örgryte        0       1   2280 Ernfr~ <NA>  1924-08-10 1924_~
+## 10 Landskrona     IFK Göt~       0       4   1000 Gusta~ <NA>  1924-08-10 1924_~
+## # ... with 15,226 more rows, and abbreviated variable names 1: Hemmamål,
+## #   2: Bortamål
 \end{verbatim}
 
 Följande kod skapar en variabel för årtionde, en variabel för hemmaseger, och räknar ut antalen hemmasegrar per årtionde. Detaljer är oviktiga här.
@@ -5829,7 +5843,7 @@ Fyll i koden nedan för att skapa en tidsserie (en linjegraf med tid på x-axeln
 
 \begin{exercise}[1920-talet mot 1960-talet]
 
-Använd ett z-test för att se om proportionen hemmasegrar under 1920-talet (371 av 738) är skild från 1960-talet(590 av 1320).
+Använd ett z-test för att se om proportionen hemmasegrar under 1920-talet (371 av 738) är skild från 1960-talet (590 av 1320).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5837,6 +5851,156 @@ Använd ett z-test för att se om proportionen hemmasegrar under 1920-talet (371
 \end{Highlighting}
 \end{Shaded}
 
+\end{exercise}
+
+\hypertarget{bonus.-bilder-i-r}{%
+\section{Bonus. Bilder i R}\label{bonus.-bilder-i-r}}
+
+Det finns en stor mängd paket som kan hantera bilder. Låt oss ta en titt på ett av dem - \texttt{magick} - vilket bygger på en koppling till ImageMagick (\url{https://imagemagick.org/}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# install.packages("magick")}
+\FunctionTok{library}\NormalTok{(magick)}
+\end{Highlighting}
+\end{Shaded}
+
+Med funktionen \texttt{image\_read()} kan man läsa in en bild, antingen från lokal hårddisk eller från en internetaddress. Här hämtar vi en bild av Nils Dardels \emph{Den döende dandyn} (1918) från Wikipedia.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{url }\OtherTok{\textless{}{-}} \StringTok{"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Nils\_Dardel\_D\%C3\%B6ende\_dandyn.jpg/1920px{-}Nils\_Dardel\_D\%C3\%B6ende\_dandyn.jpg"}
+\NormalTok{img }\OtherTok{\textless{}{-}} \FunctionTok{image\_read}\NormalTok{(url)}
+\NormalTok{img}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{exercise}[Någon annan bild]
+Hitta någon annan bild online, vad som helst. Gör lämplig ändring i stycken ovan för att läsa in bilden med \texttt{image\_read()}.
+\end{exercise}
+
+Låt oss börja med att ändra storleken med \texttt{image\_resize()}. Följande ger en bild där den kortaste av höjd och bredd är 500 pixlar.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{img }\OtherTok{\textless{}{-}}\NormalTok{ img }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{image\_resize}\NormalTok{(}\StringTok{"500"}\NormalTok{)}
+\NormalTok{img}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{exercise}[Storlek]
+Vad kan vara koden för att sätta en bild till halva storleken, alltså 50\% av den ursprungliga bilden?
+\end{exercise}
+
+Man kan också manipulera egenskaper som kontrast, mättnad och färgton.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{img }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{image\_modulate}\NormalTok{(}\AttributeTok{saturation =} \DecValTok{50}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{image\_modulate}\NormalTok{(}\AttributeTok{hue =} \DecValTok{50}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+För mer information av tillgängliga funktioner, titta på paketets hjälpsida med \texttt{?magick} och introduktionen på \url{https://docs.ropensci.org/magick/articles/intro.html}.
+
+En enkel vetenskaplig tillämpning av bildanalys kan baseras på de relativa andelarna av olika färger. Det kan till exempel användas för att beräkna skadegrad på löv (som efter färgning kan ha specifika färger för skadade delar) eller storlek på trädkronor. Funktionen \texttt{image\_quantize()} kan minska antalet färger i en bild till ett mer hanterbart antal.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{img }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{image\_quantize}\NormalTok{(}\AttributeTok{max =} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{exercise}[Antal färger]
+Med 50 enskilda färger blir \emph{Den döende dandyn} något mattare, men karaktärernas klädsel har klara färger. Hur få måste det totala antalet färger bli innan \emph{du} ser en klar försämring av bilden?
+\end{exercise}
+
+Funktionen \texttt{image\_data()} kan användas för att ta ut färgvärdet för varje pixel. Därefter kan man enkelt beräkna andelen för olika färger. Följande stycke förenklar bilden till tio färger, extraherar datan och beräknar antalet pixlar med respektive färg. Den exakta koden är inte så viktig här och kan läsas kursivt.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{img }\OtherTok{\textless{}{-}}\NormalTok{ img }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{image\_quantize}\NormalTok{(}\AttributeTok{max =} \DecValTok{10}\NormalTok{)}
+\NormalTok{info }\OtherTok{\textless{}{-}}\NormalTok{ img }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{image\_info}\NormalTok{()}
+\NormalTok{pixel\_values }\OtherTok{\textless{}{-}}\NormalTok{ img }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{image\_data}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{as.vector}\NormalTok{()}
+
+\NormalTok{dat\_pix }\OtherTok{\textless{}{-}} \FunctionTok{expand\_grid}\NormalTok{(}\AttributeTok{y =}\NormalTok{ info}\SpecialCharTok{$}\NormalTok{height}\SpecialCharTok{:}\DecValTok{1}\NormalTok{, }\AttributeTok{x =} \DecValTok{1}\SpecialCharTok{:}\NormalTok{info}\SpecialCharTok{$}\NormalTok{width, }\AttributeTok{color =} \FunctionTok{c}\NormalTok{(}\StringTok{"R"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"B"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{value =}\NormalTok{ pixel\_values) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{pivot\_wider}\NormalTok{(}\AttributeTok{values\_from =}\NormalTok{ value, }\AttributeTok{names\_from =}\NormalTok{ color) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{hex =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"\#"}\NormalTok{, R, G, B))}
+
+\NormalTok{dat\_pix}
+\end{Highlighting}
+\end{Shaded}
+
+Den konstruerade datan innehåller koordinater med x och y samt färgvärden i tre färgband och en hexkod som anger färgen. Härifrån kan vi göra en grafversion av bilden med \texttt{geom\_raster()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(dat\_pix, }\FunctionTok{aes}\NormalTok{(x, y)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_raster}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ dat\_pix}\SpecialCharTok{$}\NormalTok{hex)}
+\end{Highlighting}
+\end{Shaded}
+
+Notera att vi sätter \texttt{fill} i geom-funktionen, eftersom målet är att sätta färgen till den som anges i kolumnen hex.
+
+\begin{exercise}[Färg som aesthetic]
+Vad händer om man sätter \texttt{fill\ =\ hex} inom \texttt{aes()}-funktionen istället?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(dat\_pix, }\FunctionTok{aes}\NormalTok{(x, y, }\AttributeTok{fill =}\NormalTok{ \_\_\_)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_raster}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+Funktionen \texttt{scale\_fill\_manual()} kan styra färgvalet i det fallet.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(dat\_pix, }\FunctionTok{aes}\NormalTok{(x, y, }\AttributeTok{fill =}\NormalTok{ \_\_\_)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_raster}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}white\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}aliceblue\textquotesingle{}}\NormalTok{, }
+                               \StringTok{\textquotesingle{}antiquewhite\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}antiquewhite1\textquotesingle{}}\NormalTok{, }
+                               \StringTok{\textquotesingle{}antiquewhite2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}antiquewhite3\textquotesingle{}}\NormalTok{, }
+                               \StringTok{\textquotesingle{}antiquewhite4\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}aquamarine\textquotesingle{}}\NormalTok{, }
+                               \StringTok{\textquotesingle{}aquamarine1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}aquamarine2\textquotesingle{}}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_void}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+Tillgängliga färger kan tas fram med \texttt{colors()}.
+\end{exercise}
+
+Slutligen kan vi nu göra en enkel bildanalys genom att räkna antal eller andel pixlar med en viss färg.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat\_pix\_count }\OtherTok{\textless{}{-}}\NormalTok{ dat\_pix }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{count}\NormalTok{(hex) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{hex =} \FunctionTok{reorder}\NormalTok{(hex, n))}
+
+\FunctionTok{ggplot}\NormalTok{(dat\_pix\_count, (}\FunctionTok{aes}\NormalTok{(n, hex))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ dat\_pix\_count}\SpecialCharTok{$}\NormalTok{hex)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{exercise}[Avslutande proportionstest]
+Låt oss ta ett mindre stickprov från bilden. Funktionen \texttt{set.seed()} sätter ett startvärde för slumtalsgeneratorn, vilket är bra om man vill reproducera ett visst utfall.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1573}\NormalTok{)}
+\NormalTok{dat\_sample }\OtherTok{\textless{}{-}}\NormalTok{ dat\_pix }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{slice\_sample}\NormalTok{(}\AttributeTok{n =} \DecValTok{100}\NormalTok{)}
+\NormalTok{dat\_sample }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{count}\NormalTok{(hex)}
+
+\FunctionTok{ggplot}\NormalTok{(dat\_sample, }\FunctionTok{aes}\NormalTok{(x, y)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{color =}\NormalTok{ dat\_sample}\SpecialCharTok{$}\NormalTok{hex, }\AttributeTok{size =} \DecValTok{8}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+I stickprovet är 62 av 100 pixlar en mörkblå färg. Genomför ett test med \texttt{prop.test()} för att se om andelen i populationen (som i detta fall är hela tavlan) är skild från 0.7. Jämför med proportionen i den större datamängden \texttt{dat\_pix}.
 \end{exercise}
 
 \hypertarget{variansanalys}{%
@@ -5895,7 +6059,7 @@ Vi vill här testa om det finns en skillnad mellan arter och om det finns skilln
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-276-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-287-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5905,7 +6069,7 @@ Vi vill här testa om det finns en skillnad mellan arter och om det finns skilln
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-277-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-288-1} \end{center}
 
 För arterna har vi matchad data - varje observation av den ena arten är kopplad till en observation från den andra arten eftersom den kommer från samma båt - och vi kan testa om medelfångsterna av de två arterna är lika med ett t-test. Hypoteserna ges av
 
@@ -6090,7 +6254,7 @@ Datan har 30 observationer av vikt \texttt{weight} och varje observation tillhö
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-283-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-294-1} \end{center}
 
 Behandling 1 verkar vara något lägre än kontrollen medan behandling 2 verkar vara något högre.
 
@@ -6225,9 +6389,9 @@ Parvisa jämförelser presenteras ofta med signifikansbokstäver (en. \emph{comp
 ## Confidence level used: 0.95 
 ## P value adjustment: tukey method for comparing a family of 3 estimates 
 ## significance level used: alpha = 0.05 
-## NOTE: Compact letter displays can be misleading
-##       because they show NON-findings rather than findings.
-##       Consider using 'pairs()', 'pwpp()', or 'pwpm()' instead.
+## NOTE: If two or more means share the same grouping letter,
+##       then we cannot show them to be different.
+##       But we also did not show them to be the same.
 \end{verbatim}
 
 Tolkning av grupperingen till höger är att grupper som delar en bokstav inte är signifikant skilda. I det här fallet är den lägsta nivån skild från de två högsta. I övrigt finns inga signifikanta skillnader. Jämför gärna med p-värdena från tabellen med parvisa jämförelser. Man bör se att parvisa jämförelser med ett p-värde under fem procent motsvaras av att de behandlingarna inte delar någon bokstav i bokstavstabellen.
@@ -6271,26 +6435,26 @@ Anledning till att vi justerar p-värden är att man vid varje test har en sanno
 \begin{verbatim}
 ## $emmeans
 ##  group  emmean    SE df lower.CL upper.CL
-##  a      0.3860 0.307 45   -0.231    1.003
-##  b      0.0933 0.307 45   -0.524    0.711
-##  c     -0.2616 0.307 45   -0.879    0.356
-##  d     -0.1581 0.307 45   -0.776    0.459
-##  e      0.0919 0.307 45   -0.526    0.709
+##  a      0.1606 0.344 45   -0.532    0.853
+##  b     -0.2048 0.344 45   -0.897    0.487
+##  c     -0.2800 0.344 45   -0.972    0.412
+##  d     -0.0123 0.344 45   -0.704    0.680
+##  e      0.2250 0.344 45   -0.467    0.917
 ## 
 ## Confidence level used: 0.95 
 ## 
 ## $contrasts
 ##  contrast estimate    SE df t.ratio p.value
-##  a - b     0.29270 0.434 45   0.675  0.5031
-##  a - c     0.64759 0.434 45   1.494  0.1422
-##  a - d     0.54412 0.434 45   1.255  0.2160
-##  a - e     0.29416 0.434 45   0.678  0.5009
-##  b - c     0.35489 0.434 45   0.819  0.4174
-##  b - d     0.25142 0.434 45   0.580  0.5649
-##  b - e     0.00146 0.434 45   0.003  0.9973
-##  c - d    -0.10347 0.434 45  -0.239  0.8125
-##  c - e    -0.35342 0.434 45  -0.815  0.4193
-##  d - e    -0.24996 0.434 45  -0.577  0.5671
+##  a - b      0.3655 0.486 45   0.752  0.4560
+##  a - c      0.4407 0.486 45   0.907  0.3694
+##  a - d      0.1729 0.486 45   0.356  0.7237
+##  a - e     -0.0644 0.486 45  -0.132  0.8952
+##  b - c      0.0752 0.486 45   0.155  0.8778
+##  b - d     -0.1926 0.486 45  -0.396  0.6938
+##  b - e     -0.4299 0.486 45  -0.884  0.3812
+##  c - d     -0.2678 0.486 45  -0.551  0.5844
+##  c - e     -0.5050 0.486 45  -1.039  0.3043
+##  d - e     -0.2373 0.486 45  -0.488  0.6278
 \end{verbatim}
 
 Kör koden tio gånger. Hur många gånger av de tio ger de parvisa jämförelserna \emph{någon} signifikant skillnad (det vill säga något p-värde under 0.05)?
@@ -6381,7 +6545,7 @@ En vanlig illustration av ett blockförsök är ett punktdiagram kombinerat med 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-297-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-308-1} \end{center}
 
 Färg och linje sammanbinder observationer från samma block. Det finns tecken på en blockeffekt: block I är nästan alltid högst och block V är nästan alltid lägst. Det finns också en tydlig behandlingseffekt i att högre kväve ger högre skörd.
 
@@ -6449,9 +6613,9 @@ Vi kan gå vidare med att titta på parvisa jämförelser mellan kvävenivåer. 
 ## Confidence level used: 0.95 
 ## P value adjustment: tukey method for comparing a family of 4 estimates 
 ## significance level used: alpha = 0.05 
-## NOTE: Compact letter displays can be misleading
-##       because they show NON-findings rather than findings.
-##       Consider using 'pairs()', 'pwpp()', or 'pwpm()' instead.
+## NOTE: If two or more means share the same grouping letter,
+##       then we cannot show them to be different.
+##       But we also did not show them to be the same.
 \end{verbatim}
 
 Signifikansbokstäver anger att den lägsta nivån är skild från övriga och att den näst lägsta är skild från den högsta. Även här kan det vara intressant att jämföra med modellen utan block.
@@ -6472,9 +6636,9 @@ Signifikansbokstäver anger att den lägsta nivån är skild från övriga och a
 ## Confidence level used: 0.95 
 ## P value adjustment: tukey method for comparing a family of 4 estimates 
 ## significance level used: alpha = 0.05 
-## NOTE: Compact letter displays can be misleading
-##       because they show NON-findings rather than findings.
-##       Consider using 'pairs()', 'pwpp()', or 'pwpm()' instead.
+## NOTE: If two or more means share the same grouping letter,
+##       then we cannot show them to be different.
+##       But we also did not show them to be the same.
 \end{verbatim}
 
 Modellen utan block ger samma medelvärden \texttt{emmean} men större medelfel \texttt{SE} och färre signifikanta skillnader.
@@ -6587,7 +6751,7 @@ Exempeldata på havre tar med två förklarande faktorer och ett block. Datan ka
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-308-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-319-1} \end{center}
 
 Grafen visar samma kvävesamband som tidigare. Det finns inga tydliga skillnader mellan sorter, möjligen har sorten Victory givit något lägre skörd än övriga. Det finns fortfarande en tydlig blockeffekt, till exempel har block I höga värden och block V låga värden.
 
@@ -6742,7 +6906,7 @@ Normalfördelning kan undersökas grafiskt med ett histogram eller en QQ-graf.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-315-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-326-1} \end{center}
 
 Punkterna avviker något från normalfördelningen i svansarna, men det är förstås alltid en bedömningsfråga.
 
@@ -6756,7 +6920,7 @@ Lika varians undersöks ofta med ett spridningsdiagram med de skattade värdena 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-316-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-327-1} \end{center}
 
 Om datan är i linje med antaganden ska diagrammet se ut som slumpmässigt placerade punkter med ungefär lika stor spridning kring noll-linjen för samtliga nivåer på x-axeln. För det här exemplet ser det okej ut.
 
@@ -6834,6 +6998,206 @@ Vi använder den skattade modellen för att ta fram skattade värden och residua
 Använd exemplet på residualtester ovan för att undersöka antagandet om normalfördelade residualer.
 \end{exercise}
 
+\hypertarget{bonus.-statistik-fuxf6r-ekologi}{%
+\section{Bonus. Statistik för ekologi}\label{bonus.-statistik-fuxf6r-ekologi}}
+
+Här tittar vi på några statistiska metoder som är vanliga inom ekologin, men går bortom materialet på en statistisk grundkurs. Vi börjar med datastruktur och visualisering för populationsdata, för att sedan titta på diversitetsmått, principalkomponentanalys (PCA) och hierarkisk klustering. Det vanligaste paketet för ekologi är \texttt{vegan}, så vi kan börja med att installera och ladda det. Vi kommer också använda \texttt{factoextra} för en graf.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# install.packages("vegan")}
+\FunctionTok{library}\NormalTok{(vegan)}
+
+\CommentTok{\# install.packages("factoextra")}
+\FunctionTok{library}\NormalTok{(factoextra)}
+\end{Highlighting}
+\end{Shaded}
+
+Data för ekologiska populationer för flera platser eller tillfällen ordnas oftast i en tabell med plats som rad och arter som kolumner. Värdena i tabellen anger antingen antalet observerade individer eller ett binärt utfall (1 för förekomst, 0 för ingen förekomst). Exempeldatan \texttt{dune}, som kan laddas med funktionen \texttt{data()}, ger ett exempel. För att illustrera en typisk jämförelsestudie skapar vi en kolumn för platstyp och lägger till ett plats-id.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(dune)}
+\NormalTok{dune }\OtherTok{\textless{}{-}}\NormalTok{ dune }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Site =} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{n}\NormalTok{(), }
+         \AttributeTok{Type =} \FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"B"}\NormalTok{), }\AttributeTok{each =} \DecValTok{10}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Vi kan illustrera data genom att pivotera till långt format och göra en graf med \texttt{ggplot()}. En heatmap eller ett spridningsdiagram med storlek för antal observationer kan vara lämpliga grafer. Tolkning kräver förstås kod artkännedom och beror på den vetenskapliga frågan.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dune\_long }\OtherTok{\textless{}{-}}\NormalTok{ dune }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pivot\_longer}\NormalTok{(}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(Site, Type), }\AttributeTok{names\_to =} \StringTok{"Species"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"Abundance"}\NormalTok{)}
+
+\FunctionTok{ggplot}\NormalTok{(dune\_long, }\FunctionTok{aes}\NormalTok{(Site, Species, }\AttributeTok{fill =}\NormalTok{ Abundance)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_tile}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_gradient2}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-336-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(dune\_long }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(Abundance }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{), }\FunctionTok{aes}\NormalTok{(Site, Species, }\AttributeTok{size =}\NormalTok{ Abundance, }\AttributeTok{color =}\NormalTok{ Type)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-336-2} \end{center}
+
+Ytterligare alternativ kan vara upprepade lådagram eller staplar med småfönster per art.
+
+\begin{exercise}[Populationsgrafer]
+
+Vad måste läggas till i stycket nedan för göra ett lådagram (med art på y-axeln och abundans på x-axeln) och ett stapeldiagram (med platstyp på x-axeln och abundans på y-axeln)?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dune\_long}
+\FunctionTok{ggplot}\NormalTok{(dune\_long, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ \_\_\_, }\AttributeTok{y =}\NormalTok{ \_\_\_, }\AttributeTok{fill =}\NormalTok{ Type)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}
+
+\FunctionTok{ggplot}\NormalTok{(dune\_long, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ \_\_\_, }\AttributeTok{y =}\NormalTok{ \_\_\_, }\AttributeTok{fill =}\NormalTok{ Type)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ \_\_\_, }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{exercise}
+
+Ekologiska populationer kan analyseras genom \emph{heirarkisk klustring} - metoder där platser (rader) eller arter (kolumner) sorteras efter hur lika de är. Först beräknas ett avstånd mellan samtliga enheter (platser eller arter) och därefter sker klustringen genom att slå ihop enheter som ligger \emph{nära} varandra. Resultatet illustreras med ett träddiagram.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dune\_data }\OtherTok{\textless{}{-}}\NormalTok{ dune }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{Site, }\SpecialCharTok{{-}}\NormalTok{Type)}
+\NormalTok{d }\OtherTok{\textless{}{-}} \FunctionTok{dist}\NormalTok{(dune\_data, }\AttributeTok{method =} \StringTok{"euclidean"}\NormalTok{)}
+\NormalTok{hc }\OtherTok{\textless{}{-}} \FunctionTok{hclust}\NormalTok{(d)}
+\FunctionTok{plot}\NormalTok{(hc, }\AttributeTok{hang =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{labels =}\NormalTok{ dune}\SpecialCharTok{$}\NormalTok{Type, }
+     \AttributeTok{axes =}\NormalTok{ F, }\AttributeTok{xlab =} \StringTok{""}\NormalTok{, }\AttributeTok{ylab =} \StringTok{""}\NormalTok{, }\AttributeTok{ann =}\NormalTok{ F)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-338-1} \end{center}
+
+\begin{exercise}[Avståndsmått]
+Ta upp hjälpsidan till distansfunktionen med \texttt{?dist}. Under \texttt{method} finns flera möjliga avståndsmått. Vad måste ändras i kodstycket ovan för att ange ett Manhattan-avstånd? Har avståndet någon betydande effekt på träddiagrammet?
+\end{exercise}
+
+För att göra en klustring av arter kan man \emph{transponera} data så att rader och kolumner byter plats med varandra. Här kommer artnamn automatisk med eftersom raderna i datan har namn. Det är inte alltid fallet, så det kan vara nödvändigt att sätta etiketter med argumentet \texttt{labels} i \texttt{plot()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dune\_data }\OtherTok{\textless{}{-}} \FunctionTok{t}\NormalTok{(dune\_data)}
+\NormalTok{d }\OtherTok{\textless{}{-}} \FunctionTok{dist}\NormalTok{(dune\_data, }\AttributeTok{method =} \StringTok{"euclidean"}\NormalTok{)}
+\NormalTok{hc }\OtherTok{\textless{}{-}} \FunctionTok{hclust}\NormalTok{(d)}
+\FunctionTok{plot}\NormalTok{(hc, }\AttributeTok{hang =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}
+     \AttributeTok{axes =}\NormalTok{ F, }\AttributeTok{xlab =} \StringTok{""}\NormalTok{, }\AttributeTok{ylab =} \StringTok{""}\NormalTok{, }\AttributeTok{ann =}\NormalTok{ F)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-339-1} \end{center}
+
+Träddiagrammet tolkas så att enheter vars koppling ligger lågt är mer lika varandra - arterna förekommer ofta på samma plats.
+
+En annan vanlig metod för \emph{multivariat} data, vilket populationsdata är ett exempel på, är \emph{principalkomponentsanalys} (PCA, Principal Component Analysis). En PCA är ett försök att sammanfatta den ursprungliga datans 30 variabler (en per art) med ett mindre antal variabler. De nya variablerna - \emph{komponenterna} - skapas genom att väga och addera de ursprungliga variablerna på ett sätt som förklarar så mycket som möjligt av variationen med minsta möjliga antal variabler. Resultatet illustreras vanligen med en \emph{biplot} - ett spridningsdiagram som placerar ut både platser och arter.
+
+I R kan en PCA göras med \texttt{prcomp()} och en biplot kan göras med \texttt{fviz\_pca\_biplot()} från \texttt{factoextra}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dune\_data }\OtherTok{\textless{}{-}}\NormalTok{ dune }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{Site, }\SpecialCharTok{{-}}\NormalTok{Type)}
+\NormalTok{pca }\OtherTok{\textless{}{-}} \FunctionTok{prcomp}\NormalTok{(dune\_data, }\AttributeTok{scale. =}\NormalTok{ F)}
+\FunctionTok{fviz\_pca\_biplot}\NormalTok{(pca, }\AttributeTok{geom.ind =} \StringTok{"point"}\NormalTok{, }\AttributeTok{habillage =}\NormalTok{ dune}\SpecialCharTok{$}\NormalTok{Type, }\AttributeTok{labelsize =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-340-1} \end{center}
+
+Platserna illustreras med punkter och arterna med pilar. Pilar i samma riktning motsvarar arter som är lika (de finns på samma platser), närliggande punkter motsvarar lika platser (de har samma arter), och punkter i samma riktning som en pil har höga värden för den arten.
+
+\begin{exercise}[Skalning i en PCA]
+En PCA kan göras med och utan att skala variablerna. Om variablerna skalas får en variabel som varierar mycket samma vikt som en variabel som varierar lite. Det kan vara bra om man har variabler som är mätta på olika sätt, till exempel om en variabel är i meter och en är i centimeter. Gör lämplig ändring i kodstycket ovan för att skala variablerna i \texttt{prcomp()}. Har det någon effekt på grafen?
+\end{exercise}
+
+Den sista ansatsen vi ska titta på är att sammanfatta en population i ett enskilt tal - ett diversitetsindex. Genom att beräkna ett index kan man reducera datan till en observation på plats. Man kan därifrån tillämpa de metoder vi sett i övriga delar av kursen (t-test och variansanalys). Det finns en stor mängd olika index. Det vanligaste än Shannon-Weaver indexet (eller entropi), vilket beräknas genom att ta andelen per art, multiplicera med logaritmen av andelen, summera över arter, och multiplicera med minus ett. Om man har tre arter med andelarna 0.3, 0.5 och 0.2 ges Shannon-Weaver alltså av
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{{-}}\NormalTok{(}\FloatTok{0.3} \SpecialCharTok{*} \FunctionTok{log}\NormalTok{(}\FloatTok{0.3}\NormalTok{) }\SpecialCharTok{+} \FloatTok{0.5} \SpecialCharTok{*} \FunctionTok{log}\NormalTok{(}\FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+} \FloatTok{0.2} \SpecialCharTok{*} \FunctionTok{log}\NormalTok{(}\FloatTok{0.2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.029653
+\end{verbatim}
+
+Indexet ökar om det finns många arter och om andelen per art är samma. En population med \emph{en} dominant art kommer alltså ha ett lågt index.
+
+För en tabell med data kan index beräknas med \texttt{diversity()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diver }\OtherTok{\textless{}{-}} \FunctionTok{diversity}\NormalTok{(dune\_data, }\AttributeTok{index =} \StringTok{"shannon"}\NormalTok{)}
+\NormalTok{dune }\OtherTok{\textless{}{-}}\NormalTok{ dune }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Diversity =}\NormalTok{ diver)}
+\end{Highlighting}
+\end{Shaded}
+
+Diversitetsindexen kan sedan illustreras och analyseras som vilken numerisk variabel som helst.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(dune, }\FunctionTok{aes}\NormalTok{(Diversity, Type)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-343-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(Diversity }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Type, }\AttributeTok{data =}\NormalTok{ dune)}
+\FunctionTok{Anova}\NormalTok{(mod)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Anova Table (Type II tests)
+## 
+## Response: Diversity
+##            Sum Sq Df F value  Pr(>F)  
+## Type      0.37586  1  6.6647 0.01881 *
+## Residuals 1.01513 18                  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{emmeans}\NormalTok{(mod, }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Type)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  Type emmean     SE df lower.CL upper.CL
+##  A      2.30 0.0751 18     2.14     2.46
+##  B      2.03 0.0751 18     1.87     2.18
+## 
+## Confidence level used: 0.95
+\end{verbatim}
+
+Här finns en signifikant skillnad med platstyper.
+
+\begin{exercise}[Diversitetsindex]
+Ta upp hjälpsidan till funktionen \texttt{diversity()}. Hur anger man att funktionen ska ge Simpsons index?
+\end{exercise}
+
+\begin{exercise}[Test på nytt index]
+Gör om analysen på diversitet (anovamodellen och F-testet) med Simpsons index istället för Shannon-Weaver. Påverkar valet av diversitetsindex utfallet av testet?
+\end{exercise}
+
 \hypertarget{regression-och-korrelation}{%
 \chapter{Regression och korrelation}\label{regression-och-korrelation}}
 
@@ -6875,7 +7239,7 @@ Ta som exempel följande data på tandtillväxt (\texttt{len}) hos marsvin under
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-324-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-345-1} \end{center}
 
 Ett lådagram visar en klar skillnad mellan doser och en svagare skillnad mellan metoder. Det finns också tecken på att metoderna svarar olika på dos i att metoden \emph{VC} ligger lägre än \emph{OJ} vid de låga doserna men över (eller iallafall lika) vid den höga dosen.
 
@@ -6919,7 +7283,7 @@ En anovamodell bygger på antaganden om normalfördelning och lika varianser. No
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-326-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-347-1} \end{center}
 
 Punkterna ligger ungefär på linjen i QQ-grafen och punkterna har ungefär samma spridning för alla nivåer av det skattade värdet.
 
@@ -7009,7 +7373,7 @@ Ta som exempel data på förväntad medellivslängd och bnp per capita. Datan h�
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-329-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-350-1} \end{center}
 
 Datan visar ett positivt samband mellan variablerna - högre bnp per capita är kopplat till högre medellivslängd.
 
@@ -7078,7 +7442,7 @@ Man kan enkelt rita ut regressionlinjen i en graf med \texttt{geom\_smooth()} oc
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-332-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-353-1} \end{center}
 
 Den blå linjen illustrerar regressionlinjen 72.27 + 0.2146x. Det grå bandet kring linjen är ett konfidensintervall för skattningen av y-variabeln.
 
@@ -7106,7 +7470,7 @@ Utskriften från \texttt{summary} ger också tester av parametrarna (den högra 
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 \end{verbatim}
 
-Testerna av en regressionmodell bygger på ett normalfördelningsantagande oh ett antagande om homoskedasticitet (lika varians i y oavsett position på x-axeln). Antagandena kan undersökas genom att titta på skattningens \emph{residualer} - skillnaden mellan det faktiska y-värdet och modellens värde. Residualerna kan undersökas med ett histogram eller en QQ-plot. En annan vanlig diagnosplot är ett spridningsdiagram med skattade värden på x-axeln och residualerna på y-axeln.
+Testerna av en regressionsmodell bygger på ett normalfördelningsantagande och ett antagande om \emph{homoskedasticitet} (lika varians i y oavsett position på x-axeln). Antagandena kan undersökas genom att titta på skattningens \emph{residualer} - skillnaden mellan det faktiska y-värdet och modellens värde. Residualerna kan undersökas med ett histogram eller en QQ-plot. En annan vanlig diagnosplot är ett spridningsdiagram med skattade värden på x-axeln och residualerna på y-axeln.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7118,7 +7482,7 @@ Testerna av en regressionmodell bygger på ett normalfördelningsantagande oh et
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-334-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-355-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7126,7 +7490,7 @@ Testerna av en regressionmodell bygger på ett normalfördelningsantagande oh et
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-334-2} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-355-2} \end{center}
 
 Om data följer en normalfördelning bör histogrammet visa en ungefärlig normalkurva, QQ-plotten bör visa punkter på den diagonala linjen och spridningsdiagrammet bör visa en slumpmässig spridning av punkter. Graferna pekar i det här fallet inte på några tydliga avvikelser från normalfördelningsantagandet, möjligen pekar QQ-plotten på mindre spridning i svansarna än en teoretisk normalfördelning.
 
@@ -7430,6 +7794,121 @@ Vad ska ändras i stycket ovan för att beräkna ett konfidensintervall för bar
 
 \begin{exercise}[Galtons längdstudier. Diagnosgrafer]
 Galtondatan omfattar 928 mätningar. Ta ut residualerna med \texttt{residuals(mod)} och gör ett histogram med \texttt{hist()} eller \texttt{geom\_histogram()}. Följer residualerna en ungefärlig normalfördelning?
+\end{exercise}
+
+\hypertarget{bonus.-skrapa-data-fruxe5n-webbsidor}{%
+\section{Bonus. Skrapa data från webbsidor}\label{bonus.-skrapa-data-fruxe5n-webbsidor}}
+
+Det är väldigt vanligt att hämta in data från externa källor för att bygga ut en statistisk analys, till exempel kan offentlig väderdata vara intressant för ett odlingsförsök. Den typen av data kan vara mer eller mindre lättillgänglig. Här tittar vi på några exempel på hur allmänt tillgänglig data kan hämtas och användas.
+
+Kommunikation mellan datorer sker genom ett API (\emph{Application Programming Interface}). Många organisationer som sprider data har ett öppet tillgängligt API som användare kan koppla upp sig till. Ofta finns R-paket som gör det enkelt att ange vilket data man är ute efter. Några exempel är
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{pxweb} - statistiska centralbyråns web-API, \url{https://cran.r-project.org/web/packages/pxweb/vignettes/pxweb.html},
+\item
+  \texttt{Eurostat} - europeiska statistikbyrån, \url{https://ropengov.github.io/eurostat/articles/eurostat_tutorial.html},
+\item
+  \texttt{Rspotify} - Spotifys API, \url{https://github.com/tiagomendesdantas/Rspotify}.
+\end{itemize}
+
+I följande exempel används paketet \texttt{osmdata} för att hämta data från OpenStreetMap, \url{https://www.openstreetmap.org/}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#install.packages("osmdata")}
+\FunctionTok{library}\NormalTok{(osmdata)}
+\NormalTok{dat\_osm }\OtherTok{\textless{}{-}} \FunctionTok{opq}\NormalTok{(}\AttributeTok{bbox =} \StringTok{\textquotesingle{}Malmö\textquotesingle{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{add\_osm\_feature}\NormalTok{(}\AttributeTok{key =} \StringTok{\textquotesingle{}admin\_level\textquotesingle{}}\NormalTok{, }\AttributeTok{value =} \StringTok{\textquotesingle{}10\textquotesingle{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{osmdata\_sf}\NormalTok{()}
+
+\NormalTok{dat\_osm\_pol }\OtherTok{\textless{}{-}}\NormalTok{ dat\_osm}\SpecialCharTok{$}\NormalTok{osm\_multipolygons}
+
+\FunctionTok{ggplot}\NormalTok{(dat\_osm\_pol, }\FunctionTok{aes}\NormalTok{()) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_sf}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =}\NormalTok{ name), }\AttributeTok{size =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{exercise}[Malmös stadsdelar]
+Vad kan ändras i exemplet ovan för att ta ut Lunds stadsdelar i stället för Malmös?
+\end{exercise}
+
+Ännu ett exempel. Denna gång Malmös restauranger efter typ.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat\_osm }\OtherTok{\textless{}{-}} \FunctionTok{opq}\NormalTok{(}\AttributeTok{bbox =} \StringTok{\textquotesingle{}Malmö\textquotesingle{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{add\_osm\_feature}\NormalTok{(}\AttributeTok{key =} \StringTok{\textquotesingle{}amenity\textquotesingle{}}\NormalTok{, }\AttributeTok{value =} \StringTok{\textquotesingle{}restaurant\textquotesingle{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{osmdata\_sf}\NormalTok{()}
+
+\NormalTok{dat\_osm\_point }\OtherTok{\textless{}{-}}\NormalTok{ dat\_osm}\SpecialCharTok{$}\NormalTok{osm\_points }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(cuisine }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"pizza"}\NormalTok{, }\StringTok{"sushi"}\NormalTok{, }\StringTok{"burger"}\NormalTok{, }\StringTok{"chinese"}\NormalTok{, }\StringTok{"indian"}\NormalTok{, }\StringTok{"vietnamese"}\NormalTok{))}
+
+\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_sf}\NormalTok{(}\AttributeTok{data =}\NormalTok{ dat\_osm\_pol) }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{(}\AttributeTok{data =}\NormalTok{ dat\_osm\_point, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ cuisine), }\AttributeTok{size =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{exercise}[Offentlig konst]
+Offentliga konstverk är ofta registrerade med \texttt{key\ =\ \textquotesingle{}tourism\textquotesingle{}} och \texttt{value\ =\ \textquotesingle{}artwork\textquotesingle{}}. Vad kan ändras i exemplet ovan för att ta ut offentliga konstverk i Malmö?
+\end{exercise}
+
+Det är inte alltid data finns tillgängligt genom en API. Mycket information finns publicerad som text eller tabeller på vanliga hemsidor. I såna fall kan man ofta ta hem data genom webbskrapning - att man med ett skript hämtar hem hemsidan, snarare än att själv läsa genom en webbläsare. I R kan det göras med paketet \texttt{rvest}. Ta som exempel den här tabellen över filmer i criterion-samlingen: \url{https://www.criterion.com/shop/browse/list}. För att läsa in den listan i R kan vi göra följande.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# install.packages("rvest")}
+\FunctionTok{library}\NormalTok{(rvest)}
+
+\NormalTok{url }\OtherTok{\textless{}{-}} \StringTok{"https://www.criterion.com/shop/browse/list"}
+\NormalTok{html }\OtherTok{\textless{}{-}} \FunctionTok{read\_html}\NormalTok{(url)}
+
+\NormalTok{dat\_crit }\OtherTok{\textless{}{-}}\NormalTok{ html }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{html\_table}\NormalTok{()}
+
+\NormalTok{dat\_crit }\OtherTok{\textless{}{-}}\NormalTok{ dat\_crit[[}\DecValTok{1}\NormalTok{]] }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(Director }\SpecialCharTok{!=} \StringTok{""}\NormalTok{)}
+\NormalTok{dat\_crit}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{exercise}[Regissör]
+Vilken regissör har flest filmer i criterion-samlingen? Använd datan från exemplet ovan och räkna antal filmer per regissör, t.ex. med \texttt{count()}.
+\end{exercise}
+
+Det finns flera paket som kan hämta data från Wikipedia, men det kan också göras med \texttt{rvest}. Här hämtas en tabell över mottagare av Nobelpriset i litteratur.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{url }\OtherTok{\textless{}{-}} \StringTok{"https://en.wikipedia.org/wiki/List\_of\_Nobel\_laureates\_in\_Literature"}
+\NormalTok{dat\_nob }\OtherTok{\textless{}{-}}\NormalTok{ url }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{read\_html}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{html\_table}\NormalTok{()}
+\NormalTok{dat\_nob }\OtherTok{\textless{}{-}}\NormalTok{ dat\_nob[[}\DecValTok{1}\NormalTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{exercise}[Skrivspråk]
+
+Skapa ett stapeldiagram över antalet vinnare per språk (kolumnen \texttt{Language(s)}) genom att fylla i stycket nedan.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat\_agg }\OtherTok{\textless{}{-}}\NormalTok{ dat\_nob }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{count}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Language(s)}\StringTok{\textasciigrave{}}\NormalTok{)}
+
+\FunctionTok{ggplot}\NormalTok{(dat\_agg, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ n, }\AttributeTok{y =}\NormalTok{ \_\_\_)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\end{exercise}
+
+\begin{exercise}[Valfri tabell]
+Hitta en wikipedia-artikel med en tabell och försök hämta ner den till R genom att göra lämplig ändring i exemplet ovan.
 \end{exercise}
 
 

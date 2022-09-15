@@ -164,9 +164,9 @@ Vid konstruktionen av vektorn användes också en grundläggande funktion - funk
 Alla R-funktioner har en tillhörande hjälpfil som kan plockas fram genom att skriva frågetecken följt av funktionsnamnet, t.ex. `?sum`. Från hjälpfilen får man att `sum()` tar numeriska vektorer som ingående värde och beräknar summan. Man kan styra funktionens beteende genom att sätta ett argument `na.rm` (vilket här styr hur funktionen hanterar saknade värden). Som illustration kan man titta på
 
 ```{r}
-b <- c(3, 1, 4, 1, 5, 9, NA)  # Lägger till ett saknat värde
-sum(b)                        # na.rm = FALSE är grundinställning
-sum(b, na.rm = TRUE)          # na.rm sätts till TRUE
+b <- c(3, 1, 4, 1, 5, 9, NA)           # Lägger till ett saknat värde
+sum(b)                                 # na.rm = FALSE är grundinställning
+sum(b, na.rm = TRUE)                   # na.rm sätts till TRUE
 ```
 
 Det första försöket `sum(b)` ger utfallet `NA`, men om man sätter `na.rm = TRUE` beräknas summan efter att det saknade värdet plockats bort. Notera också att skript kan kommenteras med `#`.
@@ -177,9 +177,9 @@ Ofta vill man genomföra flera operationer på ett objekt. Man behöver då geno
 Den typen av sekvenser kan genomföras på ett par olika sätt. Ett första sätt är att spara resultatet i varje steg och sedan använda utfallet i nästa steg:
 
 ```{r}
-c <- c(-4, -2, -1, 1, 2, 4)   # Skapa en vektor av värden
-c_absolute <- abs(c)          # Ta absolutvärden. Spara som c_absolut
-sum(c_absolute)               # Summera värden i c_absolut
+c <- c(-4, -2, -1, 1, 2, 4)            # Skapa en vektor av värden
+c_absolute <- abs(c)                   # Ta absolutvärden. Spara som c_absolut
+sum(c_absolute)                        # Summera värden i c_absolut
 ```
 
 Här skapas ett objekt `c` som innehåller en vektor där några tal är negativa. I nästa rad används `abs` för att skapa absolutvärden. Slutligen summeras absolutvärdena med `sum`.
@@ -189,22 +189,22 @@ Notera att det är möjligt att skapa ett objekt med namnet `c` trots att det re
 Fyll i och kör följande rader för att ta varje värde i `new_vector` i kvadrat, *sedan* summera, och sedan ta roten ur.
 
 ```{r, eval = F}
-new_vector_squared <- new_vector^2   # Ta kvadraten av varje värde
-new_vector_squared_sum <- sum(___)   # Summera vektorn med kvadrater
-sqrt(___)                            # Ta kvadratroten ur summan
+new_vector_squared <- new_vector^2     # Ta kvadraten av varje värde
+new_vector_squared_sum <- sum(___)     # Summera vektorn med kvadrater
+sqrt(___)                              # Ta kvadratroten ur summan
 ```
 :::
 
 Ett alternativ till att spara utfallet i varje steg är att skriva en senare funktion *runt* en tidigare funktion. Det fungerar för att R utvärderar funktioner inifrån-ut. Med samma exempel som tidigare får man
 
 ```{r, eval=F}
-sum(abs(c(-4, -2, -1, 1, 2, 4)))   # Ta summan av absolutvärden av vektorn
+sum(abs(c(-4, -2, -1, 1, 2, 4)))       # Ta summan av absolutvärden av vektorn
 ```
 
 medan beräkningen i övningen blir
 
 ```{r, eval=F}
-sqrt(sum(new_vector^2))   # Ta roten ur summan av vektorn i kvadrat
+sqrt(sum(new_vector^2))                # Ta roten ur summan av vektorn i kvadrat
 ```
 
 Den här typen av skrivning kan spara plats men blir snabbt svårläst.
@@ -212,20 +212,20 @@ Den här typen av skrivning kan spara plats men blir snabbt svårläst.
 Ett sista alternativ är att använda en så kallad *pipe* (namnet kommer från att en sekvens funktioner kallas en *pipeline*). En pipe skrivs `%>%` och kan i RStudio tas fram med kortkommandon *Ctrl + Shift + M*. Pipen tar utfallet av en funktion till vänster och sänder till en funktion till höger. Den kan utläsas i dagligt tal som *och sen*. Med samma exempel som tidigare kan vi skriva
 
 ```{r}
-library(tidyverse)          # Ladda tidyverse, ej nödvändigt om redan gjort
+library(tidyverse)                     # Ladda tidyverse, ej nödvändigt om redan gjort
 
-c(-4, -2, -1, 1, 2, 4) %>%  # Skapa en datamängd och sen
-  abs() %>%                 # ta absolutvärden, och sen
-  sum()                     # beräkna summan.
+c(-4, -2, -1, 1, 2, 4) %>%             # Skapa en datamängd och sen
+  abs() %>%                            # ta absolutvärden, och sen
+  sum()                                # beräkna summan.
 ```
 
 ::: {.exercise name="Kvadrat, summa och rot med pipe"}
 Fyll i de saknade funktionerna och kör följande rader för att ta varje värde i `new_vector` i kvadrat, *sedan* summera, och sedan ta roten ur, denna gång genom att länka funktionerna med en pipe `%>%`.
 
 ```{r, eval = F}
-new_vector^2 %>%        # Ta kvadraterna av new_vector, och sen
-  ___() %>%             # beräkna summan, och sen
-  ____()                # Ta kvadratroten med sqrt()
+new_vector^2 %>%                       # Ta kvadraterna av new_vector, och sen
+  ___() %>%                            # beräkna summan, och sen
+  ____()                               # Ta kvadratroten med sqrt()
 ```
 :::
 
@@ -262,8 +262,9 @@ dat_dice
 Inskrivning av värden är ofta tidskrävande och kan lätt leda till misstag. Det är därför mycket vanligare att data läses in från en extern fil. Det finns en mängd funktioner för dataimport och det exakta valet av funktion beror på vilken typ av fil datan är sparad i. Ett vanligt filformat är .csv (*comma separated values*). Här importerar vi en fil med data från Spotify. Filen ligger på Github, en populär sida för lagring av filer och kod.
 
 ```{r}
-dat <- read_csv("https://raw.githubusercontent.com/adamflr/ST0060-2022/main/Data/Spotify_data.csv") # Läs in en csv-fil från Github
-dat   # Skriv ut objektet dat
+dat <- read_csv("https://raw.githubusercontent.com/adamflr/ST0060-2022/main/Data/Spotify_data.csv") 
+                                       # Läs in en csv-fil från Github
+dat                                    # Skriv ut objektet dat
 ```
 
 Om importen fungerat kan man skriva ut tabellens översta rader genom att köra objektets namn.
@@ -271,7 +272,7 @@ Om importen fungerat kan man skriva ut tabellens översta rader genom att köra 
 För att snabbt se vilka artister datan täcker kan man köra
 
 ```{r, eval=F}
-unique(dat$artist_name)   # Skriv ut unika (inga dubletter) värden i kolumnen artist_name i dat
+unique(dat$artist_name)                # Skriv ut unika värden i kolumnen artist_name i dat
 ```
 
 där `unique` är en funktion som tar bort alla dubletter och `dat$artist_name` används för att plocka ut kolumnen `artist_name` ur tabellen `dat`.
@@ -285,8 +286,8 @@ En vanlig operation på en tabell är att göra ett urval - antingen ett urval a
 För att filtrera på ett givet land kan använda pipe-funktionen från datan till en filter-funktion, t.ex.
 
 ```{r}
-dat %>%                            # Ta spotify-datan och sen
-  filter(artist_name == "Robyn")   # filtrera för en specifik artist
+dat %>%                                # Ta spotify-datan och sen
+  filter(artist_name == "Robyn")       # filtrera för en specifik artist
 ```
 
 Inom filterfunktionen anges ett logisk villkor `country == "Sweden"` och utfallet är de rader där villkoret är sant. Notera de dubbla likhetstecknen - de måste användas för ett logisk villkor eftersom enkelt likhetstecken används för att skapa objekt och sätta funktionsargument. 
@@ -295,67 +296,67 @@ Inom filterfunktionen anges ett logisk villkor `country == "Sweden"` och utfalle
 Vad måste ändras i koden för att istället plocka ut rader där artisten är Esperanza Spalding? Hur många rader har det urvalet i datan?
 
 ```{r, eval = F}
-dat %>%                            # Ta spotify-datan och sen
-  filter(artist_name == "Robyn")   # filtrera för en specifik artist
+dat %>%                                # Ta spotify-datan och sen
+  filter(artist_name == "Robyn")       # filtrera för en specifik artist
 ```
 :::
 
 Om man vill välja flera artister kan man använda funktionen `%in%` på ett liknande sätt.
 
 ```{r, eval=F}
-dat %>%                                                       # Ta datan, och sen
-  filter(artist_name %in% c("Robyn", "Esperanza Spalding"))   # filtrera för specifika artister
+dat %>%                                                              # Ta datan, och sen
+  filter(artist_name %in% c("Robyn", "Esperanza Spalding"))          # filtrera för specifika artister
 ```
 
 och om man vill ha mer än ett villkor kan man rada dem i filter-funktionen eller ha flera filter-steg:
 
 ```{r, eval=F}
-dat %>%                                                       # Ta datan, och sen
-  filter(artist_name %in% c("Robyn", "Esperanza Spalding"),   # filtrera för specifika artister
-         key_name == "D#")                                    # och för tonart
+dat %>%                                                              # Ta datan, och sen
+  filter(artist_name %in% c("Robyn", "Esperanza Spalding"),          # filtrera för specifika artister
+         key_name == "D#")                                           # och för tonart
 ```
 
 alternativt
 
 ```{r, eval=F}
-dat %>%                                                          # Ta datan, och sen
-  filter(artist_name %in% c("Robyn", "Esperanza Spalding")) %>%  # filtrera för specifika artister, och sen
-  filter(key_name == "D#")                                       # filtrera för tonart
+dat %>%                                                              # Ta datan, och sen
+  filter(artist_name %in% c("Robyn", "Esperanza Spalding")) %>%      # filtrera för artister, och sen
+  filter(key_name == "D#")                                           # filtrera för tonart
 ```
 
 För att se fler eller färre rader kan man använda en pipe `%>%` till funktionen `print()`. Följande skriver ut fem rader
 
 ```{r}
-dat %>%                                                          # Ta datan, och sen
-  filter(artist_name %in% c("Robyn", "Esperanza Spalding")) %>%  # filtrera för specifika artister, och sen
-  filter(key_name == "D#")  %>%                                  # filtrera för tonart, och sen
-  print(n = 5)                                                   # skriv ut de fem första raderna
+dat %>%                                                              # Ta datan, och sen
+  filter(artist_name %in% c("Robyn", "Esperanza Spalding")) %>%      # filtrera för artister, och sen
+  filter(key_name == "D#")  %>%                                      # filtrera för tonart, och sen
+  print(n = 5)                                                       # skriv ut de fem första raderna
 ```
 
 Om man istället vill göra ett urval av kolumner kan man använda `select()`. Som argument anges de kolumner man vill välja, t.ex.
 
 ```{r}
-dat %>%                             # Ta datan, och sen
-  select(artist_name, album_name)   # väljd kolumnerna artist_name och album_name
+dat %>%                                # Ta datan, och sen
+  select(artist_name, album_name)      # välj kolumnerna artist_name och album_name
 ```
 
 Som avslutning ges ett lite mer komplicerat exempel på ett urval av artist, år och spår för spår med ett tempo över 180 bpm släppta under 2015.
 
 ```{r}
-dat %>%                                               # Ta datan och sen
-  filter(album_release_year == 2015,                  # filtrera för rader där år är 2015, och 
-         tempo > 180) %>%                             # tempot över 160, och sen
-  select(artist_name, album_release_year, track_name) # selektera på artist, år och spår
+dat %>%                                                    # Ta datan och sen
+  filter(album_release_year == 2015,                       # filtrera för rader där år är 2015, och 
+         tempo > 180) %>%                                  # tempot över 160, och sen
+  select(artist_name, album_release_year, track_name)      # selektera på artist, år och spår
 ```
 
 ::: {.exercise name="Snabba spår"}
 Funktionen `arrange` sorterar data efter en angiven kolumn. Följande stycke ger oss Björks snabbaste spår. 
 
 ```{r, eval = F}
-dat %>%                                                   # Ta datan, och sen
-  filter(artist_name == "Björk") %>%                      # filtrera för rader där artist är Björk, och sen
-  select(artist_name, album_name, track_name, tempo) %>%  # välj kolumner med artist, album, spår och tempo, och sen
-  arrange(-tempo)                                         # ordna efter tempo (minus för fallande ordning)
+dat %>%                                                    # Ta datan, och sen
+  filter(artist_name == "Björk") %>%                       # filtrera för rader där artist är Björk, och sen
+  select(artist_name, album_name, track_name, tempo) %>%   # välj kolumner med artist, album, spår och tempo, och sen
+  arrange(-tempo)                                          # ordna efter tempo (minus för fallande ordning)
 ```
 
 Gör lämpliga ändringar för att hitta Kate Bushs snabbaste spår. Gör ytterligare ändringar för att hitta Daft Punks långsammaste spår.
@@ -366,24 +367,24 @@ Gör lämpliga ändringar för att hitta Kate Bushs snabbaste spår. Gör ytterl
 Variabler kan omräknas och nya variabler kan skapas med `mutate`-funktionen. I spotify-datan finns tempo som slag per minut. Om man vill ha slag per sekund kan man skapa en nya kolumn och beräkna den som tempo delat på 60.
 
 ```{r}
-dat <- dat %>% 
-  mutate(beats_per_second = tempo / 60)
+dat <- dat %>%                                             # Ta datan, och sen
+  mutate(beats_per_second = tempo / 60)                    # Beräkna en ny kolumn som tempo delat på 60
 ```
 
 Den inledande delen med `dat <-` gör så att utfallet av beräkningen sparas i objektet `dat`.
 Vi kan skriva ut objektet och se resultatet av beräkningen:
 
 ```{r}
-dat %>% select(tempo, beats_per_second)
+dat %>% select(tempo, beats_per_second)                    # Ta datan och sen välj två kolumner
 ```
 
 ::: {.exercise name="Glädje per dansbarhet"}
-Följande stycke beräknar kvoten av kolumnerna valence och danceability i en ny kolumn `valence_to_danceability`.
+Följande stycke beräknar kvoten av kolumnerna valence och danceability i en ny kolumn `val_to_dan`.
 
 ```{r, eval = F}
-dat %>%                                                        # Ta datan, och sen
-  mutate(valence_to_danceability = valence / danceability) %>% # beräkna valence delat på danceability, och sen
-  select(valence, danceability, valence_to_danceability)       # välj relevanta kolumner.
+dat %>%                                                    # Ta datan, och sen
+  mutate(val_to_dan = valence / danceability) %>%          # beräkna valence delat på danceability, och sen
+  select(valence, danceability, val_to_dan)                # välj relevanta kolumner.
 ```
 
 Gör lämpliga ändringar för att multiplicera `tempo` och `time signature`. Ett passande namn för den nya kolumnen kan vara `tempo_times_time_signature`.
@@ -393,8 +394,8 @@ I exemplet och uppgiften ovan skapades nya kolumn namn med understreck `_` istä
 
 ```{r}
 dat %>% 
-  mutate(`Valence to danceability` = valence / danceability) %>% # Namnet Valence to danceability skrivs inom backticks
-  select(artist_name, `Valence to danceability`)
+  mutate(`Val to dan` = valence / danceability) %>%        # Namnet Val to dan skrivs inom backticks
+  select(artist_name, `Val to dan`)
 ```
 
 ### Summera kolumner med `group_by` och `summarise`
@@ -403,9 +404,9 @@ För att presentera insamlad data på ett tolkningsbart sätt används sammanfat
 Den typen av beräkningar kan göras som ett nytt steg i en pipe med hjälp av funktionen `summarise`. Om man kombinerar `summarise` med funktionen `group_by` kan man dessutom summera efter en indelning given av en annan variabel. En beräkning av genomsnittligt tempo per år kan till exempel ges av
 
 ```{r}
-dat %>%                                       # Ta datan, och sen
-  group_by(album_release_year) %>%            # gruppera efter år, och sen
-  summarise(Medeltempo = mean(tempo))         # beräkna medelvärde av tempo
+dat %>%                                          # Ta datan, och sen
+  group_by(album_release_year) %>%               # gruppera efter år, och sen
+  summarise(Medeltempo = mean(tempo))            # beräkna medelvärde av tempo
 ```
 
 I det sista steget skapas en variabel *Medeltempo* som ges av medelvärde av den ursprungliga variabeln *tempo*. Här använder vi också funktionen `mean` för att beräkna medelvärdet.
@@ -413,12 +414,12 @@ I det sista steget skapas en variabel *Medeltempo* som ges av medelvärde av den
 Om man vill summera flera variabler kan man ange flera beräkning inom `summarise`, t.ex.
 
 ```{r}
-dat %>%                                   # Ta datan, och sen
-  group_by(album_release_year) %>%        # gruppera efter år, och sen
-  summarise(Medeltempo = mean(tempo),     # beräkna medelvärde av tempo
-            Medelvalence = mean(valence), # beräkna medelvärde av valence
-            antal_spår = n()) %>%         # beräkna antalet spår, och sen
-  arrange(-Medelvalence)                  # ordna efter medelvalence i sjunkande ordning
+dat %>%                                          # Ta datan, och sen
+  group_by(album_release_year) %>%               # gruppera efter år, och sen
+  summarise(Medeltempo = mean(tempo),            # beräkna medelvärde av tempo
+            Medelvalence = mean(valence),        # beräkna medelvärde av valence
+            antal_spår = n()) %>%                # beräkna antalet spår, och sen
+  arrange(-Medelvalence)                         # ordna efter medelvalence i sjunkande ordning
 ```
 
 ::: {.exercise name="Gladast artist"}
@@ -494,9 +495,10 @@ dat_mean_over_time <- dat %>%                         # Ta datan, och sen
   group_by(album_release_year, explicit) %>%          # gruppera efter år och explicitet, och sen
   summarise(Mean_danceability = mean(danceability))   # summera genom att ta medelvärdet av dansbarhet
 
-ggplot(dat_mean_over_time, aes(x = album_release_year, y = Mean_danceability, color = explicit)) + # Koppla kolumner till egenskaper
-  geom_line() +   # Illustrera med linjer
-  geom_point()    # Illustrera med punkter
+ggplot(dat_mean_over_time, aes(x = album_release_year, y = Mean_danceability, color = explicit)) + 
+                                                      # Koppla kolumner till egenskaper
+  geom_line() +                                       # Illustrera med linjer
+  geom_point()                                        # Illustrera med punkter
 ```
 
 Här ger färgen uppdelningen i explicit och icke-explicit (`TRUE` för explicit). Det finns också spår som saknat värde för explicit och därför blir `NA` här. Kan vi utifrån grafen säga att barnvänlig musik är mer eller mindre dansbar än icke-barnvänlig?
@@ -555,16 +557,16 @@ ggplot(dat_small, aes(danceability, album_name)) +
 Låt oss ta en titt på `plotly`, ett av flera R-paket som gör det möjligt att skapa interaktiva grafer. Vi börjar med att installera och ladda paketet.
 
 ```{r, eval=F}
-# install.packages("plotly")
-library(plotly)
+# install.packages("plotly")                     # Installera plotly (ej nödvändigt om redan installerat)
+library(plotly)                                  # Ladda plotly
 ```
 
 Paketet innehåller en smidig funktion `ggplotly()` för att göra en interaktiv graf från en `ggplot`. Vi börjar med att filtrera datan för en specifik artist och albumtyp. I samma pipe skapar vi en ny kolumn decade, som beräknar årtiondet utifrån året. Den exakta beräkning är inte så viktig, men ta gärna en titt och se om du förstår vad som delarna gör.
 
 ```{r, eval=F}
-dat_small <- dat %>% 
-  filter(artist_name == "David Bowie", album_type == "album") %>% 
-  mutate(Decade = floor(album_release_year / 10) * 10)
+dat_small <- dat %>%                                                 # Ta datan, och sen
+  filter(artist_name == "David Bowie", album_type == "album") %>%    # filtrera på artist och albumtyp, och sen
+  mutate(Decade = floor(album_release_year / 10) * 10)               # skapa en variable för årtionde.
 ```
 
 (Säg t.ex. att vi har året 1979. Att dela med 10 ger 197.9. Funktionen `floor` avrundar nedåt till 197. Multiplikationen med 10 ger 1970.)
@@ -576,8 +578,8 @@ Notera att vi sparar grafen som ett objekt `g`. För att se grafen kör vi objek
 ```{r, eval=F}
 g <- ggplot(dat_small, aes(danceability, valence, color = album_name, text = track_name)) +
   geom_point() +
-  facet_wrap(~ Decade) +            # Skapar småfönster per årtionde
-  theme(legend.position = "none")   # Tar bort legenden (kopplingen mellan färg och album)
+  facet_wrap(~ Decade) +            # Skapa småfönster per årtionde
+  theme(legend.position = "none")   # Ta bort legenden (kopplingen mellan färg och album)
 g
 ```
 
@@ -596,9 +598,9 @@ dat_small <- dat %>%
   mutate(Decade = floor(album_release_year / 10) * 10)
 
 g <- ggplot(dat_small, aes(danceability, valence, color = album_name, text = track_name)) +
-  geom_point() +
-  facet_wrap(~ Decade) +            # Skapar småfönster per årtionde
-  theme(legend.position = "none")   # Tar bort legenden (kopplingen mellan färg och album)
+  geom_point() +                                 # Skapa punkter
+  facet_wrap(~ Decade) +                         # Skapa småfönster per årtionde
+  theme(legend.position = "none")                # Ta bort legenden (kopplingen mellan färg och album)
 g
 
 ggplotly(g)
@@ -633,6 +635,7 @@ Hemsidan https://plotly.com/r/ innehåller fler exempel för den som är intress
 För att göra en graf behöver vi data över temperaturer. Följande rad hämtar temperaturdata från Stockholm. Källa: https://miljobarometern.stockholm.se/klimat/klimat-och-vaderstatistik/medeltemperatur/
 
 ```{r}
+# Läs in data från fil
 dat_temp <- read_csv("https://raw.githubusercontent.com/adamflr/ST0060-2022/main/Data/Temperatur%2C%20Stockholm.csv")
 ```
 
@@ -640,7 +643,7 @@ Vi skapar nu en graf, som alltså ska ha en x-axeln given av år  (`Year`) och i
 
 ```{r}
 ggplot(dat_temp, aes(x = Year, y = 1, fill = Value)) +
-  geom_col()
+  geom_col() 
 ```
 
 ::: {.exercise name="Staplar utan mellanrum"}
@@ -672,12 +675,12 @@ Slutligen brukar warming stripes presenteras med så lite kringinformation som m
 ```{r, eval = F}
 ggplot(dat_temp, aes(x = Year, y = Value)) +
   geom_line() +
-  theme(axis.title = element_blank(), 
-        legend.position = "none",
-        plot.background = element_blank(),
-        panel.background = element_blank(),
-        axis.text.y = element_blank(),
-        axis.ticks = element_blank())
+  theme(axis.title = element_blank(),            # Sätt titel till blank
+        legend.position = "none",                # Ta bort legenden
+        plot.background = element_blank(),       # Sätt bakgrunden till blank
+        panel.background = element_blank(),      # Sätt graffältets bakgrund till blank
+        axis.text.y = element_blank(),           # Sätt axeltext till blank
+        axis.ticks = element_blank())            # Sätt axelticks till blank
 ```
 
 Använd temat från exemplet för att skapa en enklare version av grafen från föregående uppgift. Ett liknande resultat kan fås med temat `theme_void()`.
