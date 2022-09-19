@@ -121,7 +121,13 @@ Ett lite mer komplicerat exempel på ett objekt ges av
 b <- c(3, 1, 4, 1, 5, 9)
 ```
 
-Här skapas ett objekt `b` som innehåller en *serie* numeriska värden (en *vektor*).
+Här skapas ett objekt `b` som innehåller en *serie* numeriska värden (en *vektor*). Värdena i en vektor är ordnade och man kan plocka ut ett specifikt värde med hakparenteser.
+
+```{r}
+b[3]               # Det tredje värdet i vektorn b
+b[c(3,5)]          # Det tredje och femte värdet i b
+```
+
 
 ::: {.exercise name="Skapa en vektor"}
 Skapa ett objekt med namnet `new_vector` som innehåller värden 5, 7 och 10 genom att fylla i följande rad.
@@ -129,6 +135,10 @@ Skapa ett objekt med namnet `new_vector` som innehåller värden 5, 7 och 10 gen
 ```{r, eval = F}
 new_vector <- c(_, _, _)
 ```
+:::
+
+::: {.exercise name="Ta ut andra värdet"}
+Använd hakparenteser för att plocka ut det andra värdet ur vektorn `new_vector`.
 :::
 
 Objekt kan manipuleras genom att tillämpa *funktioner*. En funktion tar någon ingående data och ger något utgående resultat. Funktioner anges genom att skriva funktionens namn följt av ingående data inom parenteser, och resultatet kan antingen skrivas ut i konsollen eller sparas som ett nytt objekt. En grundinstallation av R innehåller en mängd färdiga funktioner, t.ex.
@@ -257,6 +267,49 @@ dat_dice
 ```
 :::
 
+Objektet `dat` är av typen `data.frame` - en tabell med rader och kolumner. Man kan ange en specifik kolumn i en data.frame med dollartecken följt av kolumnens namn.
+
+```{r}
+dat$Vikt
+```
+
+Man kan också plocka ut rader och kolumner med hakparenteser och ordningstal.
+
+```{r}
+dat[2,3]          # Andra raden och tredje kolumnen
+dat[2, ]           # Tomt värde ger alla värden. Här alla värden i rad 2
+dat[ ,3]           # Alla värden i kolumn 3
+```
+
+::: {.exercise name="Plocka ut en specifik kolumn"}
+I den tidigare övningen skapade du ett objekt `dat_dice`. Använd dollartecken för att plocka ut kolumnen Utfall från det objektet.
+
+```{r, eval = F}
+dat_dice$___
+```
+:::
+
+Genom att plocka ut en kolumn från en data.frame kan man beräkna vanlig beskrivande statistik med funktioner som `mean()` (medelvärde) och `sd()` (standardavvikelsen).
+
+```{r}
+mean(dat$Vikt)
+sd(dat$Vikt)
+```
+
+Funktionen `plot()` ger en enkel graf.
+
+```{r}
+plot(dat$Vecka, dat$Vikt)
+```
+
+::: {.exercise name="Alea iacta est"}
+Använd datan i objektet `dat_dice` och skapa ett diagram med kolumnen kast på x-axeln och kolumnen Utfall på y-axeln.
+
+```{r, eval = F}
+plot(dat_dice$___, dat_dice$___)
+```
+:::
+
 ### Import från en extern fil
 
 Inskrivning av värden är ofta tidskrävande och kan lätt leda till misstag. Det är därför mycket vanligare att data läses in från en extern fil. Det finns en mängd funktioner för dataimport och det exakta valet av funktion beror på vilken typ av fil datan är sparad i. Ett vanligt filformat är .csv (*comma separated values*). Här importerar vi en fil med data från Spotify. Filen ligger på Github, en populär sida för lagring av filer och kod.
@@ -277,9 +330,7 @@ unique(dat$artist_name)                # Skriv ut unika värden i kolumnen artis
 
 där `unique` är en funktion som tar bort alla dubletter och `dat$artist_name` används för att plocka ut kolumnen `artist_name` ur tabellen `dat`.
 
-## Transformera en tabell med `select`, `filter`, `mutate` och `summarise`
-
-### Urval med `select` och `filter`
+## Urval ur en tabell med `select` och `filter`
 
 En vanlig operation på en tabell är att göra ett urval - antingen ett urval av rader (t.ex. en viss artist), vilket kallas *filtrering* eller ett urval av variabler (t.ex. artist och albumnamn), vilket kallas *selektion*. Det finns flera olika sätt att göra ett urval i R. Det traditionella sättet är att använda index inom hakparenteser (t.ex. `dat[4, 2]` för fjärde raden, andra kolumnen) eller dollartecken för specifika kolumner (t.ex. `dat$artist_name` för artistnamn). Här fokuseras dock på hur det kan göras med funktionerna `filter()` och `select()` från paketet `tidyverse`.
 
@@ -362,78 +413,6 @@ dat %>%                                                    # Ta datan, och sen
 Gör lämpliga ändringar för att hitta Kate Bushs snabbaste spår. Gör ytterligare ändringar för att hitta Daft Punks långsammaste spår.
 :::
 
-### Ändra och skapa nya kolumner med `mutate`
-
-Variabler kan omräknas och nya variabler kan skapas med `mutate`-funktionen. I spotify-datan finns tempo som slag per minut. Om man vill ha slag per sekund kan man skapa en nya kolumn och beräkna den som tempo delat på 60.
-
-```{r}
-dat <- dat %>%                                             # Ta datan, och sen
-  mutate(beats_per_second = tempo / 60)                    # Beräkna en ny kolumn som tempo delat på 60
-```
-
-Den inledande delen med `dat <-` gör så att utfallet av beräkningen sparas i objektet `dat`.
-Vi kan skriva ut objektet och se resultatet av beräkningen:
-
-```{r}
-dat %>% select(tempo, beats_per_second)                    # Ta datan och sen välj två kolumner
-```
-
-::: {.exercise name="Glädje per dansbarhet"}
-Följande stycke beräknar kvoten av kolumnerna valence och danceability i en ny kolumn `val_to_dan`.
-
-```{r, eval = F}
-dat %>%                                                    # Ta datan, och sen
-  mutate(val_to_dan = valence / danceability) %>%          # beräkna valence delat på danceability, och sen
-  select(valence, danceability, val_to_dan)                # välj relevanta kolumner.
-```
-
-Gör lämpliga ändringar för att multiplicera `tempo` och `time signature`. Ett passande namn för den nya kolumnen kan vara `tempo_times_time_signature`.
-:::
-
-I exemplet och uppgiften ovan skapades nya kolumn namn med understreck `_` istället för mellanrum. Om man vill ha mellanrum i sina kolumnnamn måste man skriva namnet inom *backticks* `\`` för att ange att namnet ska tolkas som en enhet.
-
-```{r}
-dat %>% 
-  mutate(`Val to dan` = valence / danceability) %>%        # Namnet Val to dan skrivs inom backticks
-  select(artist_name, `Val to dan`)
-```
-
-### Summera kolumner med `group_by` och `summarise`
-
-För att presentera insamlad data på ett tolkningsbart sätt används sammanfattande mått såsom summor, medelvärden, medianer och standardavvikelser. 
-Den typen av beräkningar kan göras som ett nytt steg i en pipe med hjälp av funktionen `summarise`. Om man kombinerar `summarise` med funktionen `group_by` kan man dessutom summera efter en indelning given av en annan variabel. En beräkning av genomsnittligt tempo per år kan till exempel ges av
-
-```{r}
-dat %>%                                          # Ta datan, och sen
-  group_by(album_release_year) %>%               # gruppera efter år, och sen
-  summarise(Medeltempo = mean(tempo))            # beräkna medelvärde av tempo
-```
-
-I det sista steget skapas en variabel *Medeltempo* som ges av medelvärde av den ursprungliga variabeln *tempo*. Här använder vi också funktionen `mean` för att beräkna medelvärdet.
-
-Om man vill summera flera variabler kan man ange flera beräkning inom `summarise`, t.ex.
-
-```{r}
-dat %>%                                          # Ta datan, och sen
-  group_by(album_release_year) %>%               # gruppera efter år, och sen
-  summarise(Medeltempo = mean(tempo),            # beräkna medelvärde av tempo
-            Medelvalence = mean(valence),        # beräkna medelvärde av valence
-            antal_spår = n()) %>%                # beräkna antalet spår, och sen
-  arrange(-Medelvalence)                         # ordna efter medelvalence i sjunkande ordning
-```
-
-::: {.exercise name="Gladast artist"}
-Vad ska ändras i stycket ovan för att beräkna medelvalence per artist istället för per år?
-
-Funktionen `count()` ger antalet rader uppdelat efter valfri kolumn. Den kan användas som en kortform för `group_by()` och `summarise()`. Vad måste ändras i stycket nedan för att se vilka artister som påverkar värdet för 1960?
-
-```{r, eval=F}
-dat %>%                                              # Ta data, och sen
-  filter(album_release_year == 1976) %>%             # ta ut rader där år är 1976, och sen
-  count(artist_name, album_name, album_release_year) # räkna antalet rader per artist, album och år
-```
-:::
-
 ## Grafer med `ggplot2`
 
 Vi kan nu börja titta på grafer. Eftersom datan är ganska stor och grafer lätt blir oöversiktliga, börjar vi med att skapa en lite mindre datamängd.
@@ -447,13 +426,13 @@ dat_small <- dat %>%                                      # Ta data, och sen
 Om du vill titta data på något annan artist, gör lämplig ändring i stycket ovan. Kom ihåg att man skriva ut artister i datan med `unique(dat$artist_name)`.
 :::
 
-R har en mängd grundläggande funktioner för grafer. Ett enkelt spridningsdiagram kan till exempel skapas med
+R har en mängd grundläggande funktioner för grafer. Vi såg tidigare ett exempel på funktionen `plot()`.
 
 ```{r}
-plot(x = dat_small$tempo, y = dat_small$danceability)   # Plotta en graf med tempo och dansbarhet på axlarna
+plot(dat_small$tempo, dat_small$danceability)   # Plotta en graf med tempo och dansbarhet på axlarna
 ```
 
-Tecknet `$` används här för att välja en kolumn i en tabell.
+Tecknet `$` används här för att välja kolumnerna tempo och danceability ur objektet `dat_small`.
 
 För mer avancerade grafer används dock ofta funktioner ur Rs paketbibliotek. Här illustreras det mest populära - `ggplot2`. I `ggplot2` byggs grafer upp med tre grundläggande byggstenar: 
 
@@ -480,7 +459,7 @@ ggplot(dat_small, aes(x = tempo, y = danceability, color = mode_name)) +   # Ta 
 Vad ska ändras i stycket nedan för att skapa en graf med dur/moll (`mode_name`) på x-axeln, valens (`valence`) på y-axeln och skilda småfönster för olika år (`album_release_year`)?
 
 ```{r, eval = F}
-ggplot(dat_small, aes(x = mode_name, y = valence, color = album_name)) + # Ta datan och koppla variabler till egenskaper
+ggplot(dat_small, aes(x = ____, y = ____, color = album_name)) + # Ta datan och koppla variabler till egenskaper
   geom_point() +                                                         # Illustrera med punkter
   facet_wrap(~ album_release_year)                                       # Skapa småfönster efter år
 ```
@@ -488,35 +467,15 @@ ggplot(dat_small, aes(x = mode_name, y = valence, color = album_name)) + # Ta da
 Har spår i dur (*major*) högre valens?
 :::
 
-Andra graftyper kan skapas med andra `geom_`-funktioner. För ett linjediagram används `geom_line`. De observationer som ska ge en specifik linje anges med `group` i `aes`-funktionen. Låt oss beräkna medeldansbarhet över tid, uppdelat efter markeringen för *explicit* (alltså om spåret är barnvänligt eller inte). Exemplet visar också hur man använda flera geometrier genom att lägga till dem efter varandra med `+`.
+Andra graftyper kan skapas med andra `geom_`-funktioner. Stapeldiagram ges av `geom_col` (`col` för *column*). Man kan också använda `geom_bar` om man bara vill räkna antal rader per någon kategori. 
+Följande väljer ut en artist och plottar spårens dansbarhet i ett (liggande) stapeldiagram.
 
 ```{r}
-dat_mean_over_time <- dat %>%                         # Ta datan, och sen
-  group_by(album_release_year, explicit) %>%          # gruppera efter år och explicitet, och sen
-  summarise(Mean_danceability = mean(danceability))   # summera genom att ta medelvärdet av dansbarhet
+dat_small <- dat %>% 
+  filter(artist_name == "HAIM", album_type == "album")
 
-ggplot(dat_mean_over_time, aes(x = album_release_year, y = Mean_danceability, color = explicit)) + 
-                                                      # Koppla kolumner till egenskaper
-  geom_line() +                                       # Illustrera med linjer
-  geom_point()                                        # Illustrera med punkter
-```
-
-Här ger färgen uppdelningen i explicit och icke-explicit (`TRUE` för explicit). Det finns också spår som saknat värde för explicit och därför blir `NA` här. Kan vi utifrån grafen säga att barnvänlig musik är mer eller mindre dansbar än icke-barnvänlig?
-
-::: {.exercise name="Explicit glädje"}
-Vad ska ändras i stycket ovan för att skapa en graf över medelvalens (`valence`) istället för dansbarhet? Är barnvänlig musik gladare eller ledsnare är icke-barnvänlig?
-:::
-
-Stapeldiagram ges av `geom_col` (`col` för *column*). Man kan också använda `geom_bar` om man bara vill räkna antal rader per någon kategori. Följande beräknar valens per artist, ordnar efter valens, väljer ut de tjugo högsta, och plottar i ett (liggande) stapeldiagram.
-
-```{r}
-dat %>%                                                                  # Ta datan, och sen
-  group_by(artist_name) %>%                                              # gruppera efter artist, och sen
-  summarise(Mean_valence = mean(valence)) %>%                            # ta medelvärdet av valence, och sen
-  arrange(-Mean_valence) %>%                                             # ordna efter medelvalens (minustecken för sjunkande ordning), och sen
-  slice(1:20) %>%                                                        # ta ut de tjugo första raderna
-  ggplot(aes(x = Mean_valence, y = artist_name, fill = Mean_valence)) +  # starta en ggplot där x-axeln ges av valens och y-axeln av artist, och sen
-  geom_col(color = "black")                                              # skapa en geometri av kolumner
+ggplot(dat_small, aes(danceability, track_name, fill = album_name)) +
+  geom_col(color = "black")
 ```
 
 Argumentet `fill` styr färgen för ytor (här staplarnas ytor) medan `color` i `geom_col()` styr kanten runt varje stapel.

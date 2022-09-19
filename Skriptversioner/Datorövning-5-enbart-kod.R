@@ -1,4 +1,4 @@
-# install.packages("tidyverse")
+
 library(tidyverse)
 
 dat_pH <- data.frame(pH = c(6.3, 6.55, 6.75, 6.4, 7.25, 6.65, 6.8, 7.3, 7.15, 6.7))
@@ -6,8 +6,8 @@ dat_pH <- data.frame(pH = c(6.3, 6.55, 6.75, 6.4, 7.25, 6.65, 6.8, 7.3, 7.15, 6.
 ggplot(dat_pH, aes(pH, 0)) +
   geom_point(size = 4) +
   geom_vline(xintercept = 7, size = 5, color = "red", alpha = 0.4) +
-  theme(axis.text.y = element_blank(), 
-        axis.title.y = element_blank(), 
+  theme(axis.text.y = element_blank(),
+        axis.title.y = element_blank(),
         axis.ticks = element_blank())
 
 t.test(dat_pH$pH, mu = 7)
@@ -34,7 +34,7 @@ p0 <- 0.33
 z_value <- (p_est - p0) / sqrt(p0 * (1 - p0) / n)
 z_value
 
-dat_norm <- data.frame(x = seq(-4, 4, 0.1)) %>% 
+dat_norm <- data.frame(x = seq(-4, 4, 0.1)) %>%
   mutate(p = dnorm(x))
 
 ggplot(dat_norm) +
@@ -54,7 +54,7 @@ p <- 947 / n
 p - 1.96 * sqrt(p * (1 - p) / n)
 p + 1.96 * sqrt(p * (1 - p) / n)
 
-#install.packages("binom")
+
 library(binom)
 binom.asymp(x = 947, n = 2750)
 
@@ -63,7 +63,7 @@ E <- c(0.33,0.20,0.47) * 2750
 
 chisq_value <- sum((O - E)^2 / E)
 
-dat_chisq <- data.frame(x = seq(0, 10, 0.1)) %>% 
+dat_chisq <- data.frame(x = seq(0, 10, 0.1)) %>%
   mutate(p = dchisq(x, df = 2))
 
 ggplot() +
@@ -86,15 +86,15 @@ test$observed
 mean_goals <- mean(dat_alls$hemmamal + dat_alls$bortamal)
 mean_goals
 
-dat_goals <- dat_alls %>% 
-  count(Mål = bortamal + hemmamal, name = "O") %>% 
+dat_goals <- dat_alls %>%
+  count(Mål = bortamal + hemmamal, name = "O") %>%
   mutate(p = dpois(Mål, lambda = mean_goals),
          E = p * 2750)
 dat_goals
 
-dat_goals_merged <- dat_goals %>% 
-  mutate(Mål = ifelse(Mål > 9, 10, Mål)) %>% 
-  group_by(Mål) %>% 
+dat_goals_merged <- dat_goals %>%
+  mutate(Mål = ifelse(Mål > 9, 10, Mål)) %>%
+  group_by(Mål) %>%
   summarise(O = sum(O),
             p = sum(p),
             E = sum(E))
@@ -108,18 +108,18 @@ m <- leaflet() %>%
   addMarkers(lng = 174.768, lat = -36.852, popup="The birthplace of R")
 m
 
-dat_leaf %>% 
-  leaflet() %>% 
-  addTiles() %>% 
+dat_leaf %>%
+  leaflet() %>%
+  addTiles() %>%
   addProviderTiles(providers$Stamen.Toner)
 
-dat_leaf %>% 
-  leaflet() %>% 
-  addTiles() %>% 
+dat_leaf %>%
+  leaflet() %>%
+  addTiles() %>%
   addCircleMarkers(lng = dat_leaf$lng, lat = dat_leaf$lat, radius = 10)
 
-dat_leaf %>% 
-  leaflet() %>% 
-  addTiles() %>% 
+dat_leaf %>%
+  leaflet() %>%
+  addTiles() %>%
   addCircleMarkers(lng = dat_leaf$lng, lat = dat_leaf$lat, radius = 10, popup = dat_leaf$Rödlistade)
 

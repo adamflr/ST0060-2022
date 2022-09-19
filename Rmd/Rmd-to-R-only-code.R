@@ -33,6 +33,12 @@ for(i in 1:8){
   point_lines <- which(grepl("```", text, fixed = T))
   text[point_lines] <- ""
   
+  # Clear comments
+  text <- map_chr(text, \(x) {
+    l <- length(strsplit(x, "#")[[1]])
+    ifelse(x == "", "", paste0(strsplit(x, "#")[[1]][1:(l - 1)], collapse = "#") %>% trimws("right"))
+    })
+  
   # Write files
   write_lines(text, paste0("Skriptversioner/Datorövning-", id_no, "-enbart-kod.R"))
 }

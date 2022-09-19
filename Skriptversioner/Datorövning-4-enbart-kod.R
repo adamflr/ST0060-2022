@@ -1,4 +1,4 @@
-# install.packages("tidyverse")
+
 library(tidyverse)
 
 dbinom(3, 5, prob = 0.1)
@@ -12,7 +12,7 @@ library(tidyverse)
 dat <- data.frame(x = c(49.8, 58.4, 49.4, 57.1, 52.2, 49.1, 44.6, 55.4))
 dat
 
-ggplot(dat, aes(x, 0)) + 
+ggplot(dat, aes(x, 0)) +
   geom_point() +
   geom_vline(xintercept = 50, color = "red")
 
@@ -21,7 +21,7 @@ sd(dat$x)
 
 t_value <- (52 - 50) / (4.680354 / sqrt(8))
 
-dat_t <- data.frame(x = seq(-4, 4, 0.1)) %>% 
+dat_t <- data.frame(x = seq(-4, 4, 0.1)) %>%
   mutate(p = dt(x, df = 7),
          P = pt(x, df = 7))
 
@@ -36,9 +36,9 @@ ggplot(dat_t) +
   geom_ribbon(aes(x = x, ymin = 0, ymax = p), data = dat_t %>% filter(x > abs(t_value)), fill = "salmon") +
   geom_ribbon(aes(x = x, ymin = 0, ymax = p), data = dat_t %>% filter(x < -abs(t_value)), fill = "salmon")
 
-2 * pt(-abs(t_value), 7) # Tvåsidigt p-värde
+2 * pt(-abs(t_value), 7)
 
-t.test(dat$x, mu = 50) # Tvåsidigt test
+t.test(dat$x, mu = 50)
 
 t.test(dat$x, mu = 50)
 t.test(dat$x, mu = 48)
@@ -65,9 +65,9 @@ ggplot(dat_norm, aes(sample = x)) + geom_qq() + geom_qq_line()
 
 n <- 2
 
-dat_sim_unif <- expand_grid(Observation = 1:n, Upprepning = 1:10000) %>% 
-  mutate(x = runif(n())) %>% 
-  group_by(Upprepning) %>% 
+dat_sim_unif <- expand_grid(Observation = 1:n, Upprepning = 1:10000) %>%
+  mutate(x = runif(n())) %>%
+  group_by(Upprepning) %>%
   summarise(x = mean(x))
 
 ggplot(dat_sim_unif, aes(x)) + geom_histogram(bins = 50)
@@ -75,9 +75,9 @@ ggplot(dat_sim_unif, aes(sample = x)) + geom_qq() + geom_qq_line()
 
 n <- 10
 lambda <- 10
-dat_sim_unif <- expand_grid(Observation = 1:n, Upprepning = 1:10000) %>% 
-  mutate(x = rpois(n(), lambda = lambda)) %>% 
-  group_by(Upprepning) %>% 
+dat_sim_unif <- expand_grid(Observation = 1:n, Upprepning = 1:10000) %>%
+  mutate(x = rpois(n(), lambda = lambda)) %>%
+  group_by(Upprepning) %>%
   summarise(x = mean(x))
 
 ggplot(dat_sim_unif, aes(x)) + geom_histogram(bins = 30)

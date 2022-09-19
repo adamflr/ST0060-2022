@@ -1,4 +1,4 @@
-# install.packages("tidyverse")
+
 library(tidyverse)
 
 dat_fish <- data.frame(Vessel = c("A", "B", "C", "D", "E", "F"),
@@ -6,21 +6,21 @@ dat_fish <- data.frame(Vessel = c("A", "B", "C", "D", "E", "F"),
                        Species1 = c(115.7, 98.5, 82.1, 89.2, 95.7, 99.4),
                        Species2 = c(122.8, 105.3, 99.8, 106.8, 114, 102.7))
 
-dat_long <- dat_fish %>% 
+dat_long <- dat_fish %>%
   pivot_longer(-c(Vessel, Region), names_to = "Species", values_to = "Catch")
-ggplot(dat_long, aes(Species, Catch, group = Vessel)) + 
-  geom_point() + 
+ggplot(dat_long, aes(Species, Catch, group = Vessel)) +
+  geom_point() +
   geom_line() +
   labs(title = "Fångster av två arter", subtitle = "Linje sammanbinder observationer från samma fartyg")
 
-ggplot(dat_fish, aes(Species1, Region)) + 
+ggplot(dat_fish, aes(Species1, Region)) +
   geom_point() +
   labs(title = "Fångster i två regioner")
 
 t.test(dat_fish$Species1, dat_fish$Species2, paired = T)
 
-# Alternativt
-# t.test(dat_fish$Species1 - dat_fish$Species2)
+
+
 
 t.test(Species1 ~ Region, data = dat_fish, var.equal = T)
 
@@ -42,7 +42,7 @@ mod <- lm(weight ~ group, data = PlantGrowth)
 library(car)
 Anova(mod)
 
-# install.packages("emmeans")
+
 library(emmeans)
 emmeans(mod, pairwise ~ group)
 
@@ -85,7 +85,7 @@ emmeans(mod_two_fact, ~ N | V)
 
 cld(emmeans(mod_two_fact, ~ N | V), Letters = letters)
 
-oats <- oats %>% 
+oats <- oats %>%
   mutate(Residualer = residuals(mod_two_fact),
          Skattade = fitted(mod_two_fact))
 
@@ -99,15 +99,15 @@ ggplot(oats, aes(x = Skattade, y = Residualer)) +
   geom_point() +
   geom_hline(yintercept = 0, alpha = 0.3)
 
-# install.packages("vegan")
+
 library(vegan)
 
-# install.packages("factoextra")
+
 library(factoextra)
 
 data(dune)
-dune <- dune %>% 
-  mutate(Site = 1:n(), 
+dune <- dune %>%
+  mutate(Site = 1:n(),
          Type = rep(c("A", "B"), each = 10))
 
 dune_long <- dune %>%
@@ -124,7 +124,7 @@ ggplot(dune_long %>% filter(Abundance > 0), aes(Site, Species, size = Abundance,
 dune_data <- dune %>% select(-Site, -Type)
 d <- dist(dune_data, method = "euclidean")
 hc <- hclust(d)
-plot(hc, hang = -1, labels = dune$Type, 
+plot(hc, hang = -1, labels = dune$Type,
      axes = F, xlab = "", ylab = "", ann = F)
 
 dune_data <- t(dune_data)
