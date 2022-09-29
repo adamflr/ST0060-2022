@@ -140,29 +140,6 @@ gapminder %>%
   mutate(`National GDP` = gdpPercap * pop)
 ```
 
-## Summera kolumner med `group_by` och `summarise`
-
-För att presentera insamlad data på ett tolkningsbart sätt används sammanfattande mått såsom summor, medelvärden, medianer och standardavvikelser. 
-Den typen av beräkningar kan göras som ett nytt steg i en pipe med hjälp av funktionen `summarise`. Om man kombinerar `summarise` med funktionen `group_by` kan man dessutom summera efter en indelning givet av en annan variabel. En beräkning av jordens befolkning per år kan ges av
-
-```{r}
-gapminder %>%                                    # Ta datan, och sen
-  group_by(year) %>%                             # gruppera efter år, och sen
-  summarise(Totalbefolkning = sum(pop))          # beräkna summan av pop
-```
-
-I det sista steget skapas en variabel *Totalbefolkning* som ges av summan av den ursprungliga variabeln *pop*.
-
-Om man vill summera flera variabler kan man ange flera beräkning inom `summarise`, t.ex.
-
-```{r}
-gapminder %>%                                    # Ta datan, och sen
-  group_by(year) %>%                             # gruppera efter år, och sen
-  summarise(Totalbefolkning = sum(pop),          # beräkna summan av pop,
-            BNP = sum(pop * gdpPercap),          # beräkna summan av nationell bnp,
-            `Antal länder` = n())                # beräkna antalet länder.
-```
-
 ## Sammanfattande lägesmått
 
 Den importerade datan ger medellivslängd, populationsstorlek och bnp per capita per land och år. Vi kan börja med att producera en bubbelgraf över datan - en av de presentationer Gapminder ofta använder. En bubbelgraf är ett spridningsdiagram där punktens storlek beror på en tredje variabel.
