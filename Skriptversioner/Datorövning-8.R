@@ -186,11 +186,11 @@ library(car)
 Anova(mod)
 
 #
-# Testerna av en regressionmodell bygger på ett normalfördelningsantagande oh ett antagande om
-# homoskedasticitet (lika varians i y oavsett position på x-axeln). Antagandena kan undersökas genom
-# att titta på skattningens *residualer* - skillnaden mellan det faktiska y-värdet och modellens
-# värde. Residualerna kan undersökas med ett histogram eller en QQ-plot. En annan vanlig diagnosplot
-# är ett spridningsdiagram med skattade värden på x-axeln och residualerna på y-axeln.
+# Testerna av en regressionsmodell bygger på ett normalfördelningsantagande och ett antagande om
+# *homoskedasticitet* (lika varians i y oavsett position på x-axeln). Antagandena kan undersökas
+# genom att titta på skattningens *residualer* - skillnaden mellan det faktiska y-värdet och
+# modellens värde. Residualerna kan undersökas med ett histogram eller en QQ-plot. En annan vanlig
+# diagnosplot är ett spridningsdiagram med skattade värden på x-axeln och residualerna på y-axeln.
 #
 
 dat_eu07 <- dat_eu07 %>% 
@@ -437,3 +437,117 @@ emmeans(mod, ~ parent, at = list(parent = 68))
 # Galtondatan omfattar 928 mätningar. Ta ut residualerna med `residuals(mod)` och gör ett histogram
 # med `hist()` eller `geom_histogram()`. Följer residualerna en ungefärlig normalfördelning?
 # :::
+#
+# ## Bonus. Skrapa data från webbsidor
+#
+# Det är väldigt vanligt att hämta in data från externa källor för att bygga ut en statistisk
+# analys, till exempel kan offentlig väderdata vara intressant för ett odlingsförsök. Den typen av
+# data kan vara mer eller mindre lättillgänglig. Här tittar vi på några exempel på hur allmänt
+# tillgänglig data kan hämtas och användas.
+#
+# Kommunikation mellan datorer sker genom ett API (*Application Programming Interface*). Många
+# organisationer som sprider data har ett öppet tillgängligt API som användare kan koppla upp sig
+# till. Ofta finns R-paket som gör det enkelt att ange vilket data man är ute efter. Några exempel är
+#
+# - `pxweb` - statistiska centralbyråns web-API,
+# https://cran.r-project.org/web/packages/pxweb/vignettes/pxweb.html,
+# - `Eurostat` - europeiska statistikbyrån,
+# https://ropengov.github.io/eurostat/articles/eurostat_tutorial.html,
+# - `Rspotify` - Spotifys API, https://github.com/tiagomendesdantas/Rspotify.
+#
+# I följande exempel används paketet `osmdata` för att hämta data från OpenStreetMap,
+# https://www.openstreetmap.org/.
+#
+
+#install.packages("osmdata")
+library(osmdata)
+dat_osm <- opq(bbox = 'Malmö') %>%
+    add_osm_feature(key = 'admin_level', value = '10') %>%
+    osmdata_sf()
+
+dat_osm_pol <- dat_osm$osm_multipolygons
+
+ggplot(dat_osm_pol, aes()) + 
+  geom_sf() +
+  geom_sf_text(aes(label = name), size = 3)
+
+#
+# Uppgift 10.21. (Malmös stadsdelar)
+# Vad kan ändras i exemplet ovan för att ta ut Lunds stadsdelar i stället för Malmös?
+# :::
+#
+# Ännu ett exempel. Denna gång Malmös restauranger efter typ.
+#
+
+dat_osm <- opq(bbox = 'Malmö') %>%
+    add_osm_feature(key = 'amenity', value = 'restaurant') %>%
+    osmdata_sf()
+
+dat_osm_point <- dat_osm$osm_points %>% 
+  filter(cuisine %in% c("pizza", "sushi", "burger", "chinese", "indian", "vietnamese"))
+
+ggplot() + 
+  geom_sf(data = dat_osm_pol) +
+  geom_sf(data = dat_osm_point, aes(color = cuisine), size = 2)
+
+#
+# Uppgift 10.22. (Offentlig konst)
+# Offentliga konstverk är ofta registrerade med `key = 'tourism'` och `value = 'artwork'`. Vad kan
+# ändras i exemplet ovan för att ta ut offentliga konstverk i Malmö?
+# :::
+#
+# Det är inte alltid data finns tillgängligt genom en API. Mycket information finns publicerad som
+# text eller tabeller på vanliga hemsidor. I såna fall kan man ofta ta hem data genom webbskrapning -
+# att man med ett skript hämtar hem hemsidan, snarare än att själv läsa genom en webbläsare. I R kan
+# det göras med paketet `rvest`. Ta som exempel den här tabellen över filmer i criterion-samlingen:
+# https://www.criterion.com/shop/browse/list. För att läsa in den listan i R kan vi göra följande.
+#
+
+# install.packages("rvest")
+library(rvest)
+
+url <- "https://www.criterion.com/shop/browse/list"
+html <- read_html(url)
+
+dat_crit <- html %>% 
+  html_table()
+
+dat_crit <- dat_crit[[1]] %>% 
+  select(-2) %>% 
+  filter(Director != "")
+dat_crit
+
+#
+# Uppgift 10.23. (Regissör)
+# Vilken regissör har flest filmer i criterion-samlingen? Använd datan från exemplet ovan och räkna
+# antal filmer per regissör, t.ex. med `count()`.
+# :::
+#
+# Det finns flera paket som kan hämta data från Wikipedia, men det kan också göras med `rvest`. Här
+# hämtas en tabell över mottagare av Nobelpriset i litteratur.
+#
+
+url <- "https://en.wikipedia.org/wiki/List_of_Nobel_laureates_in_Literature"
+dat_nob <- url %>% 
+  read_html() %>% 
+  html_table()
+dat_nob <- dat_nob[[1]]
+
+#
+# Uppgift 10.24. (Skrivspråk)
+# Skapa ett stapeldiagram över antalet vinnare per språk (kolumnen `Language(s)`) genom att fylla i
+# stycket nedan.
+#
+
+dat_agg <- dat_nob %>% count(`Language(s)`)
+
+ggplot(dat_agg, aes(x = n, y = ___)) +
+  geom_col()
+
+# :::
+#
+# Uppgift 10.25. (Valfri tabell)
+# Hitta en wikipedia-artikel med en tabell och försök hämta ner den till R genom att göra lämplig
+# ändring i exemplet ovan.
+# :::
+#

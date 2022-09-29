@@ -35,6 +35,24 @@ gapminder
 library(gapminder)
 gapminder
 
+gapminder <- gapminder %>%
+  mutate(gdp = gdpPercap * pop)
+
+gapminder %>% select(gdpPercap, pop, gdp)
+
+gapminder %>%
+  mutate(`National GDP` = gdpPercap * pop)
+
+gapminder %>%
+  group_by(year) %>%
+  summarise(Totalbefolkning = sum(pop))
+
+gapminder %>%
+  group_by(year) %>%
+  summarise(Totalbefolkning = sum(pop),
+            BNP = sum(pop * gdpPercap),
+            `Antal länder` = n())
+
 ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, color = continent)) +
   geom_point() +
   facet_wrap(~ year)

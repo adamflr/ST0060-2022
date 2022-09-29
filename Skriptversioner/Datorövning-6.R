@@ -484,7 +484,7 @@ dat_pot
 
 # :::
 #
-# ::: {exercise name="Po-ta-toes-graf"}
+# Uppgift 8.17. (Po-ta-toes-graf)
 # För att göra en graf kan man pivotera datan till lång form.
 #
 
@@ -501,10 +501,10 @@ ggplot(dat_long, aes(x = ___, y = ___, fill = ___)) +
   scale_fill_brewer(palette = "Reds")
 
 #
-# Finns det några tydliga skillnader mellan behandlingar?
+# Finns det några synbara skillnader mellan behandlingar?
 # :::
 #
-# ::: {exercise name="Po-ta-toes-test"}
+# Uppgift 8.18. (Po-ta-toes-test)
 # Beräkna ett chi-två-test på potatisdatan för att se om det finns färgskillnader mellan
 # behandlingarna. Formulera tydliga hypoteser och ge ett tydligt svar.
 #
@@ -514,7 +514,7 @@ chisq.test(___)
 
 # :::
 #
-# Uppgift 8.17. (Hemmasegrar över årtionden)
+# Uppgift 8.19. (Hemmasegrar över årtionden)
 # Vi vill undersöka om andelen hemmasegrar i herrallsvenskan förändrats över tid. Vi importerar
 # data över matchresultat sedan 1920-talet.
 #
@@ -547,10 +547,157 @@ ggplot(dat_hemma, aes(x = ___, y = ___)) +
 
 # :::
 #
-# Uppgift 8.18. (1920-talet mot 1960-talet)
+# Uppgift 8.20. (1920-talet mot 1960-talet)
 # Använd ett z-test för att se om proportionen hemmasegrar under 1920-talet (371 av 738) är skild
-# från 1960-talet(590 av 1320).
+# från 1960-talet (590 av 1320).
 
 prop.test(c(___, ___), n = c(___, ___), correct = F)
 
+# :::
+#
+# ## Bonus. Bilder i R
+#
+# Det finns en stor mängd paket som kan hantera bilder. Låt oss ta en titt på ett av dem - `magick`
+# - vilket bygger på en koppling till ImageMagick (https://imagemagick.org/).
+#
+
+# install.packages("magick")
+library(magick)
+
+#
+# Med funktionen `image_read()` kan man läsa in en bild, antingen från lokal hårddisk eller från en
+# internetaddress. Här hämtar vi en bild av Nils Dardels *Den döende dandyn* (1918) från Wikipedia.
+#
+
+url <- "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Nils_Dardel_D%C3%B6ende_dandyn.jpg/1920px-Nils_Dardel_D%C3%B6ende_dandyn.jpg"
+img <- image_read(url)
+img
+
+#
+# Uppgift 8.21. (Någon annan bild)
+# Hitta någon annan bild online, vad som helst. Gör lämplig ändring i stycken ovan för att läsa in
+# bilden med `image_read()`.
+# :::
+#
+# Låt oss börja med att ändra storleken med `image_resize()`. Följande ger en bild där den kortaste
+# av höjd och bredd är 500 pixlar.
+#
+
+img <- img %>% 
+  image_resize("500")
+img
+
+#
+# Uppgift 8.22. (Storlek)
+# Vad kan vara koden för att sätta en bild till halva storleken, alltså 50% av den ursprungliga
+# bilden?
+# :::
+#
+# Man kan också manipulera egenskaper som kontrast, mättnad och färgton.
+#
+
+img %>% 
+  image_modulate(saturation = 50) %>% 
+  image_modulate(hue = 50)
+
+#
+# För mer information av tillgängliga funktioner, titta på paketets hjälpsida med `?magick` och
+# introduktionen på https://docs.ropensci.org/magick/articles/intro.html.
+#
+# En enkel vetenskaplig tillämpning av bildanalys kan baseras på de relativa andelarna av olika
+# färger. Det kan till exempel användas för att beräkna skadegrad på löv (som efter färgning kan ha
+# specifika färger för skadade delar) eller storlek på trädkronor. Funktionen `image_quantize()` kan
+# minska antalet färger i en bild till ett mer hanterbart antal.
+#
+
+img %>% image_quantize(max = 10)
+
+#
+# Uppgift 8.23. (Antal färger)
+# Med 50 enskilda färger blir *Den döende dandyn* något mattare, men karaktärernas klädsel har
+# klara färger. Hur få måste det totala antalet färger bli innan *du* ser en klar försämring av
+# bilden?
+# :::
+#
+# Funktionen `image_data()` kan användas för att ta ut färgvärdet för varje pixel. Därefter kan man
+# enkelt beräkna andelen för olika färger. Följande stycke förenklar bilden till tio färger,
+# extraherar datan och beräknar antalet pixlar med respektive färg. Den exakta koden är inte så
+# viktig här och kan läsas kursivt.
+#
+
+img <- img %>% image_quantize(max = 10)
+info <- img %>% image_info()
+pixel_values <- img %>% image_data() %>% as.vector()
+
+dat_pix <- expand_grid(y = info$height:1, x = 1:info$width, color = c("R", "G", "B")) %>% 
+  mutate(value = pixel_values) %>% 
+  pivot_wider(values_from = value, names_from = color) %>% 
+  mutate(hex = paste0("#", R, G, B))
+
+dat_pix
+
+#
+# Den konstruerade datan innehåller koordinater med x och y samt färgvärden i tre färgband och en
+# hexkod som anger färgen. Härifrån kan vi göra en grafversion av bilden med `geom_raster()`.
+#
+
+ggplot(dat_pix, aes(x, y)) +
+  geom_raster(fill = dat_pix$hex)
+
+#
+# Notera att vi sätter `fill` i geom-funktionen, eftersom målet är att sätta färgen till den som
+# anges i kolumnen hex.
+#
+# Uppgift 8.24. (Färg som aesthetic)
+# Vad händer om man sätter `fill = hex` inom `aes()`-funktionen istället?
+#
+
+ggplot(dat_pix, aes(x, y, fill = ___)) +
+  geom_raster()
+
+#
+# Funktionen `scale_fill_manual()` kan styra färgvalet i det fallet.
+#
+
+ggplot(dat_pix, aes(x, y, fill = ___)) +
+  geom_raster() +
+  scale_fill_manual(values = c('white', 'aliceblue', 
+                               'antiquewhite', 'antiquewhite1', 
+                               'antiquewhite2', 'antiquewhite3', 
+                               'antiquewhite4', 'aquamarine', 
+                               'aquamarine1', 'aquamarine2')) +
+  theme_void()
+
+#
+# Tillgängliga färger kan tas fram med `colors()`.
+# :::
+#
+# Slutligen kan vi nu göra en enkel bildanalys genom att räkna antal eller andel pixlar med en viss
+# färg.
+#
+
+dat_pix_count <- dat_pix %>% 
+  count(hex) %>% 
+  mutate(hex = reorder(hex, n))
+
+ggplot(dat_pix_count, (aes(n, hex))) +
+  geom_col(fill = dat_pix_count$hex)
+
+#
+# Uppgift 8.25. (Avslutande proportionstest)
+# Låt oss ta ett mindre stickprov från bilden. Funktionen `set.seed()` sätter ett startvärde för
+# slumtalsgeneratorn, vilket är bra om man vill reproducera ett visst utfall.
+#
+
+set.seed(1573)
+dat_sample <- dat_pix %>% slice_sample(n = 100)
+dat_sample %>% count(hex)
+
+ggplot(dat_sample, aes(x, y)) +
+  geom_point(color = dat_sample$hex, size = 8)
+
+#
+# I stickprovet är 62 av 100 pixlar en mörkblå färg. Genomför ett test med `prop.test()` för att se
+# om andelen i populationen (som i detta fall är hela tavlan) är skild från 0.7. Jämför med
+# proportionen i den större datamängden `dat_pix`.
 # :::

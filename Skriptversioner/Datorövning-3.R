@@ -719,8 +719,7 @@ ggplot(dat_dice_sum, aes(x, p)) +
 library(ggforce)
 g <- ggplot() + 
   geom_circle(aes(x0 = 0, y0 = 0, r = 1)) + 
-  geom_rect(aes(xmin = -1, ymin = -1, xmax = 1, ymax = 1), fill = NA, color = "black") +
-  coord_equal()
+  geom_rect(aes(xmin = -1, ymin = -1, xmax = 1, ymax = 1), fill = NA, color = "black")
 g
 
 #
@@ -737,7 +736,7 @@ g + geom_point(aes(x, y), data = dat_random)
 #
 # Pytagoras sats kan användas för att beräkna avståndet mellan en slumpmässig punkt och origo
 # (nollpunkten). Punkter med ett avstånd under ett ligger inom cirkeln. Cirkelns area ska ges av
-# andelen punkter i kvadraten som också ligger i cirkeln gånger fyra.
+# andelen punkter i kvadraten som också ligger i cirkeln, gånger fyra.
 #
 
 dat_random <- data.frame(x = runif(100, min = -1, max = 1),

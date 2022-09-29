@@ -27,9 +27,7 @@ tab_funs <- tibble(Datorövning = 1:8,
        file = paste0("Rmd/Datorövning-", Datorövning, ".Rmd")) %>% 
   mutate(text = map(file, extract_funs)) %>% 
   unnest(cols = text) %>% 
-  select(text) %>% 
-  distinct(text) %>% 
-  arrange(text)
+  distinct(Datorövning, text)
 
 
 # Allsvenskan. Poisson ----
