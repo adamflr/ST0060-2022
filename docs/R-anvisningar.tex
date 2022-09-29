@@ -130,7 +130,7 @@
 
 \title{R-anvisningar till \emph{Grundläggande statistik}}
 \author{}
-\date{\vspace{-2.5em}2022-09-19}
+\date{\vspace{-2.5em}2022-09-29}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Sats}[chapter]
@@ -274,7 +274,7 @@ Datorövning 1 handlar om grunderna till R. Efter övningen ska vi kunna
 \item
   Starta RStudio och orientera oss i gränssnittet,
 \item
-  Installera och ladda tilläggspaket (\emph{Packages})
+  Installera och ladda tilläggspaket (\emph{Packages}),
 \item
   Definera objekt och tillämpa funktioner i R,
 \item
@@ -785,7 +785,7 @@ Inskrivning av värden är ofta tidskrävande och kan lätt leda till misstag. D
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 76,622 x 24
+## # A tibble: 89,105 x 24
 ##    artist~1 album~2 track~3 track~4 album~5 album~6 album~7 dance~8 energy   key
 ##    <chr>    <chr>     <dbl> <chr>   <chr>   <chr>     <dbl>   <dbl>  <dbl> <dbl>
 ##  1 100 gecs 1000 g~       1 money ~ album   2020-0~    2020   0.344  0.737     6
@@ -798,7 +798,7 @@ Inskrivning av värden är ofta tidskrävande och kan lätt leda till misstag. D
 ##  8 100 gecs 1000 g~       8 ringto~ album   2020-0~    2020   0.449  0.745    10
 ##  9 100 gecs 1000 g~       9 xXXi_w~ album   2020-0~    2020   0.379  0.847     1
 ## 10 100 gecs 1000 g~      10 745 st~ album   2020-0~    2020   0.445  0.98     10
-## # ... with 76,612 more rows, 14 more variables: loudness <dbl>, mode <dbl>,
+## # ... with 89,095 more rows, 14 more variables: loudness <dbl>, mode <dbl>,
 ## #   speechiness <dbl>, acousticness <dbl>, instrumentalness <dbl>,
 ## #   liveness <dbl>, valence <dbl>, tempo <dbl>, time_signature <dbl>,
 ## #   explicit <lgl>, type <chr>, key_name <chr>, mode_name <chr>,
@@ -834,7 +834,7 @@ För att filtrera på ett givet land kan använda pipe-funktionen från datan ti
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 1,142 x 24
+## # A tibble: 1,141 x 24
 ##    artist~1 album~2 track~3 track~4 album~5 album~6 album~7 dance~8 energy   key
 ##    <chr>    <chr>     <dbl> <chr>   <chr>   <chr>     <dbl>   <dbl>  <dbl> <dbl>
 ##  1 Robyn    Honey         1 Missin~ album   2018-1~    2018   0.702  0.666     5
@@ -847,7 +847,7 @@ För att filtrera på ett givet land kan använda pipe-funktionen från datan ti
 ##  8 Robyn    Honey         8 Beach2~ album   2018-1~    2018   0.824  0.512    11
 ##  9 Robyn    Honey         9 Ever A~ album   2018-1~    2018   0.942  0.539     4
 ## 10 Robyn    Honey         1 Missin~ album   2018-1~    2018   0.702  0.666     5
-## # ... with 1,132 more rows, 14 more variables: loudness <dbl>, mode <dbl>,
+## # ... with 1,131 more rows, 14 more variables: loudness <dbl>, mode <dbl>,
 ## #   speechiness <dbl>, acousticness <dbl>, instrumentalness <dbl>,
 ## #   liveness <dbl>, valence <dbl>, tempo <dbl>, time_signature <dbl>,
 ## #   explicit <lgl>, type <chr>, key_name <chr>, mode_name <chr>,
@@ -939,7 +939,7 @@ Om man istället vill göra ett urval av kolumner kan man använda \texttt{selec
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 76,622 x 2
+## # A tibble: 89,105 x 2
 ##    artist_name album_name                     
 ##    <chr>       <chr>                          
 ##  1 100 gecs    1000 gecs and The Tree of Clues
@@ -952,7 +952,7 @@ Om man istället vill göra ett urval av kolumner kan man använda \texttt{selec
 ##  8 100 gecs    1000 gecs and The Tree of Clues
 ##  9 100 gecs    1000 gecs and The Tree of Clues
 ## 10 100 gecs    1000 gecs and The Tree of Clues
-## # ... with 76,612 more rows
+## # ... with 89,095 more rows
 \end{verbatim}
 
 Som avslutning ges ett lite mer komplicerat exempel på ett urval av artist, år och spår för spår med ett tempo över 180 bpm släppta under 2015.
@@ -967,20 +967,20 @@ Som avslutning ges ett lite mer komplicerat exempel på ett urval av artist, år
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 122 x 3
+## # A tibble: 129 x 3
 ##    artist_name            album_release_year track_name                         
 ##    <chr>                               <dbl> <chr>                              
 ##  1 A Sunny Day In Glasgow               2015 The Strange Presents of Idols (Mer~
 ##  2 A$AP Rocky                           2015 Lord Pretty Flacko Jodye 2 (LPFJ2) 
 ##  3 A$AP Rocky                           2015 Lord Pretty Flacko Jodye 2 (LPFJ2) 
 ##  4 Anderson .Paak                       2015 Off the Ground                     
-##  5 Björk                                2015 Notget - Live                      
-##  6 Björk                                2015 Notget                             
-##  7 Björk                                2015 Notget                             
-##  8 Björk                                2015 Notget                             
-##  9 Blood Orange                         2015 Sandra’s Smile                     
-## 10 Burna Boy                            2015 Soke                               
-## # ... with 112 more rows
+##  5 Arcangel                             2015 50 Sombras De Austin               
+##  6 Arcangel                             2015 50 Sombras de Austin               
+##  7 Arcangel                             2015 50 Sombras de Austin               
+##  8 Arcangel                             2015 50 Sombras de Austin               
+##  9 Björk                                2015 Notget - Live                      
+## 10 Björk                                2015 Notget                             
+## # ... with 119 more rows
 \end{verbatim}
 
 \begin{exercise}[Snabba spår]
@@ -1358,7 +1358,7 @@ Data läses in med import-funktioner där valet av funktion beror på typen av f
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 76,622 x 24
+## # A tibble: 89,105 x 24
 ##    artist~1 album~2 track~3 track~4 album~5 album~6 album~7 dance~8 energy   key
 ##    <chr>    <chr>     <dbl> <chr>   <chr>   <chr>     <dbl>   <dbl>  <dbl> <dbl>
 ##  1 100 gecs 1000 g~       1 money ~ album   2020-0~    2020   0.344  0.737     6
@@ -1371,7 +1371,7 @@ Data läses in med import-funktioner där valet av funktion beror på typen av f
 ##  8 100 gecs 1000 g~       8 ringto~ album   2020-0~    2020   0.449  0.745    10
 ##  9 100 gecs 1000 g~       9 xXXi_w~ album   2020-0~    2020   0.379  0.847     1
 ## 10 100 gecs 1000 g~      10 745 st~ album   2020-0~    2020   0.445  0.98     10
-## # ... with 76,612 more rows, 14 more variables: loudness <dbl>, mode <dbl>,
+## # ... with 89,095 more rows, 14 more variables: loudness <dbl>, mode <dbl>,
 ## #   speechiness <dbl>, acousticness <dbl>, instrumentalness <dbl>,
 ## #   liveness <dbl>, valence <dbl>, tempo <dbl>, time_signature <dbl>,
 ## #   explicit <lgl>, type <chr>, key_name <chr>, mode_name <chr>,
@@ -1389,7 +1389,7 @@ Funktioner agerar på objekt och ger något utfall. Här beräknas medeltempot m
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 119.0361
+## [1] 119.0461
 \end{verbatim}
 
 Funktionerna \texttt{filter()} och \texttt{select()} kan användas för att välja kolumner och rader. Funktioner kan länkas samman med en pipe \texttt{\%\textgreater{}\%} för att skapa sekvenser av funktioner. Man kan tänka på pipen som \emph{och sen}.
@@ -1403,17 +1403,19 @@ Funktionerna \texttt{filter()} och \texttt{select()} kan användas för att väl
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 8 x 3
-##   artist_name track_name                                         tempo
-##   <chr>       <chr>                                              <dbl>
-## 1 Tame Impala Lost In Yesterday                                   183.
-## 2 Tame Impala Yes I'm Changing                                    180.
-## 3 Tame Impala Led Zeppelin                                        184.
-## 4 Tame Impala Borderline - Blood Orange Remix                     174.
-## 5 Tame Impala Guilty Conscience - Tame Impala Remix Extended      192.
-## 6 Tame Impala Guilty Conscience - Tame Impala Remix               192.
-## 7 Tame Impala Guilty Conscience - Tame Impala Remix Instrumental  192.
-## 8 Tame Impala Guilty Conscience - Tame Impala Remix               192.
+## # A tibble: 10 x 3
+##    artist_name track_name                                         tempo
+##    <chr>       <chr>                                              <dbl>
+##  1 Tame Impala Lost In Yesterday                                   183.
+##  2 Tame Impala Yes I'm Changing                                    180.
+##  3 Tame Impala Led Zeppelin                                        184.
+##  4 Tame Impala No Choice                                           180.
+##  5 Tame Impala Borderline - Blood Orange Remix                     174.
+##  6 Tame Impala Borderline - Blood Orange Remix                     174.
+##  7 Tame Impala Guilty Conscience - Tame Impala Remix Extended      192.
+##  8 Tame Impala Guilty Conscience - Tame Impala Remix               192.
+##  9 Tame Impala Guilty Conscience - Tame Impala Remix Instrumental  192.
+## 10 Tame Impala Guilty Conscience - Tame Impala Remix               192.
 \end{verbatim}
 
 Funktionen \texttt{summarise()} ger ett sammanfattande mått (som \texttt{mean()} för medelvärde eller \texttt{sum()} för summa) för någon eller några variabler. Funktionen \texttt{group\_by()} kan användas för att göra beräkningen efter någon gruppering.
@@ -1429,20 +1431,20 @@ Funktionen \texttt{summarise()} ger ett sammanfattande mått (som \texttt{mean()
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 363 x 4
+## # A tibble: 415 x 4
 ##    artist_name            Antal_spår Medeltempo Maxdansbarhet
 ##    <chr>                       <int>      <dbl>         <dbl>
-##  1 100 gecs                       50       135.         0.92 
-##  2 A Sunny Day In Glasgow        106       121.         0.63 
-##  3 A Tribe Called Quest          139       101.         0.954
-##  4 A$AP Rocky                    162       122.         0.945
-##  5 Abe Vigoda                     68       136.         0.57 
-##  6 Actress                       206       118.         0.939
-##  7 Adrianne Lenker                61       125.         0.758
-##  8 Against All Logic              26       118.         0.92 
-##  9 Aldous Harding                 80       111.         0.914
-## 10 Alex G                        179       122.         0.807
-## # ... with 353 more rows
+##  1 100 gecs                       52       136.         0.92 
+##  2 21 Savage                     292       128.         0.966
+##  3 A Sunny Day In Glasgow        106       121.         0.63 
+##  4 A Tribe Called Quest          139       101.         0.954
+##  5 A$AP Rocky                    192       123.         0.958
+##  6 Abe Vigoda                     68       136.         0.57 
+##  7 Actress                       207       118.         0.939
+##  8 Adele                         193       118.         0.842
+##  9 Adrianne Lenker                61       125.         0.758
+## 10 Against All Logic              26       122.         0.92 
+## # ... with 405 more rows
 \end{verbatim}
 
 Slutligen tittade vi på grafer med ggplot2-paketet. En ggplot byggs upp med tre grundelar: data, geometrier (grafens objekt och former), och \emph{aesthetics} (utseende och placering av geometrierna). I ett enkelt spridningsdiagram är data två numeriska variabler, geometrierna är punkter, och punkternas placering ges av en x-koordinat och en y-koordinat. Ytterligare \emph{aesthetics} kan vara punkternas färger (\texttt{color}) och storlek (\texttt{size}).
@@ -2816,7 +2818,7 @@ R kommer också med en rad funktioner för att simulera data. För kontinuerlig 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 3.5243
+## [1] 3.5089
 \end{verbatim}
 
 \begin{Shaded}
@@ -2826,7 +2828,7 @@ R kommer också med en rad funktioner för att simulera data. För kontinuerlig 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 2.951305
+## [1] 2.940415
 \end{verbatim}
 
 \begin{exercise}[Simulera tärningen]
@@ -3517,7 +3519,7 @@ Pytagoras sats kan användas för att beräkna avståndet mellan en slumpmässig
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 3.24
+## [1] 3.2
 \end{verbatim}
 
 \begin{Shaded}
@@ -4208,13 +4210,13 @@ Följande kod simulerar ett dataset om tio observationer från en normalfördeln
 ##  One Sample t-test
 ## 
 ## data:  dat_sim$x
-## t = 0.54966, df = 9, p-value = 0.5959
+## t = 0.58784, df = 9, p-value = 0.5711
 ## alternative hypothesis: true mean is not equal to 7
 ## 95 percent confidence interval:
-##   4.720197 10.743286
+##   4.372569 11.472356
 ## sample estimates:
 ## mean of x 
-##  7.731741
+##  7.922462
 \end{verbatim}
 
 \begin{exercise}[Upprepad simulering]
@@ -4259,7 +4261,7 @@ Vidare ska p-värdet vara under fem procent fem procent av gångerna.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.038
+## [1] 0.063
 \end{verbatim}
 
 Även det stämmer någorlunda väl. Det här innebär alltså att om man har en signifikansnivå på fem procent kommer man förkasta nollhypotesen fem procent av gångerna även om nollhypotesen stämmer. Det kallas ett \emph{falskt positivt} utfall.
@@ -6502,27 +6504,27 @@ Anledning till att vi justerar p-värden är att man vid varje test har en sanno
 
 \begin{verbatim}
 ## $emmeans
-##  group    emmean    SE df lower.CL upper.CL
-##  a     -1.00e-07 0.357 45   -0.719    0.719
-##  b      3.75e-01 0.357 45   -0.344    1.093
-##  c      2.88e-01 0.357 45   -0.431    1.007
-##  d      2.50e-01 0.357 45   -0.468    0.969
-##  e     -1.95e-01 0.357 45   -0.914    0.524
+##  group emmean    SE df lower.CL upper.CL
+##  a     -0.245 0.269 45   -0.786    0.296
+##  b     -0.218 0.269 45   -0.759    0.323
+##  c      0.128 0.269 45   -0.414    0.669
+##  d      0.156 0.269 45   -0.385    0.698
+##  e     -0.249 0.269 45   -0.790    0.292
 ## 
 ## Confidence level used: 0.95 
 ## 
 ## $contrasts
-##  contrast estimate    SE df t.ratio p.value
-##  a - b     -0.3747 0.505 45  -0.743  0.4616
-##  a - c     -0.2881 0.505 45  -0.571  0.5708
-##  a - d     -0.2503 0.505 45  -0.496  0.6223
-##  a - e      0.1951 0.505 45   0.387  0.7008
-##  b - c      0.0866 0.505 45   0.172  0.8645
-##  b - d      0.1244 0.505 45   0.247  0.8064
-##  b - e      0.5698 0.505 45   1.129  0.2647
-##  c - d      0.0378 0.505 45   0.075  0.9406
-##  c - e      0.4832 0.505 45   0.958  0.3433
-##  d - e      0.4454 0.505 45   0.883  0.3821
+##  contrast estimate   SE df t.ratio p.value
+##  a - b    -0.02646 0.38 45  -0.070  0.9448
+##  a - c    -0.37225 0.38 45  -0.980  0.3324
+##  a - d    -0.40120 0.38 45  -1.056  0.2966
+##  a - e     0.00401 0.38 45   0.011  0.9916
+##  b - c    -0.34580 0.38 45  -0.910  0.3676
+##  b - d    -0.37474 0.38 45  -0.986  0.3292
+##  b - e     0.03047 0.38 45   0.080  0.9364
+##  c - d    -0.02894 0.38 45  -0.076  0.9396
+##  c - e     0.37626 0.38 45   0.990  0.3273
+##  d - e     0.40521 0.38 45   1.067  0.2919
 \end{verbatim}
 
 Kör koden tio gånger. Hur många gånger av de tio ger de parvisa jämförelserna \emph{någon} signifikant skillnad (det vill säga något p-värde under 0.05)?

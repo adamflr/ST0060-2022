@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2022-09-19" />
+<meta name="date" content="2022-09-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -270,7 +270,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Data läses in med import-funktioner där valet av funktion beror på typen av fil. Importerad data sparas som ett objekt i R genom <em>assign</em>-pilen <code>&lt;-</code>.</p>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="beskrivande-statistik.html#cb90-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/adamflr/ST0060-2022/main/Data/Spotify_data.csv&quot;</span>)</span>
 <span id="cb90-2"><a href="beskrivande-statistik.html#cb90-2" aria-hidden="true" tabindex="-1"></a>dat                                              <span class="co"># Skriv ut objektet dat</span></span></code></pre></div>
-<pre><code>## # A tibble: 76,622 × 24
+<pre><code>## # A tibble: 89,105 × 24
 ##    artist…¹ album…² track…³ track…⁴ album…⁵ album…⁶ album…⁷ dance…⁸ energy   key
 ##    &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
 ##  1 100 gecs 1000 g…       1 money … album   2020-0…    2020   0.344  0.737     6
@@ -283,7 +283,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  8 100 gecs 1000 g…       8 ringto… album   2020-0…    2020   0.449  0.745    10
 ##  9 100 gecs 1000 g…       9 xXXi_w… album   2020-0…    2020   0.379  0.847     1
 ## 10 100 gecs 1000 g…      10 745 st… album   2020-0…    2020   0.445  0.98     10
-## # … with 76,612 more rows, 14 more variables: loudness &lt;dbl&gt;, mode &lt;dbl&gt;,
+## # … with 89,095 more rows, 14 more variables: loudness &lt;dbl&gt;, mode &lt;dbl&gt;,
 ## #   speechiness &lt;dbl&gt;, acousticness &lt;dbl&gt;, instrumentalness &lt;dbl&gt;,
 ## #   liveness &lt;dbl&gt;, valence &lt;dbl&gt;, tempo &lt;dbl&gt;, time_signature &lt;dbl&gt;,
 ## #   explicit &lt;lgl&gt;, type &lt;chr&gt;, key_name &lt;chr&gt;, mode_name &lt;chr&gt;,
@@ -292,42 +292,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## #   ⁷​album_release_year, ⁸​danceability</code></pre>
 <p>Funktioner agerar på objekt och ger något utfall. Här beräknas medeltempot med funktionen <code>mean()</code>. Dollartecknet används för att ange en specifik kolumn i dataobjektet. Funktioner styrs av möjliga argument - här används <code>na.rm</code> för att ange att saknade värden inte ska tas med i beräkningen</p>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="beskrivande-statistik.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(dat<span class="sc">$</span>tempo, <span class="at">na.rm =</span> T)                       <span class="co"># Beräkna medelvärdet av kolumnen tempo i datan dat</span></span></code></pre></div>
-<pre><code>## [1] 119.0361</code></pre>
+<pre><code>## [1] 119.0461</code></pre>
 <p>Funktionerna <code>filter()</code> och <code>select()</code> kan användas för att välja kolumner och rader. Funktioner kan länkas samman med en pipe <code>%&gt;%</code> för att skapa sekvenser av funktioner. Man kan tänka på pipen som <em>och sen</em>.</p>
 <div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="beskrivande-statistik.html#cb94-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                                    <span class="co"># Ta datan, och sen</span></span>
 <span id="cb94-2"><a href="beskrivande-statistik.html#cb94-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(artist_name <span class="sc">==</span> <span class="st">&quot;Tame Impala&quot;</span>, tempo <span class="sc">&gt;</span> <span class="dv">170</span>) <span class="sc">%&gt;%</span>    <span class="co"># ta ut rader där artisten är Tame Impala och tempot är större än 170, och sen</span></span>
 <span id="cb94-3"><a href="beskrivande-statistik.html#cb94-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(artist_name, track_name, tempo)                   <span class="co"># ta ut kolumnerna artist_name, track_name och tempo</span></span></code></pre></div>
-<pre><code>## # A tibble: 8 × 3
-##   artist_name track_name                                         tempo
-##   &lt;chr&gt;       &lt;chr&gt;                                              &lt;dbl&gt;
-## 1 Tame Impala Lost In Yesterday                                   183.
-## 2 Tame Impala Yes I&#39;m Changing                                    180.
-## 3 Tame Impala Led Zeppelin                                        184.
-## 4 Tame Impala Borderline - Blood Orange Remix                     174.
-## 5 Tame Impala Guilty Conscience - Tame Impala Remix Extended      192.
-## 6 Tame Impala Guilty Conscience - Tame Impala Remix               192.
-## 7 Tame Impala Guilty Conscience - Tame Impala Remix Instrumental  192.
-## 8 Tame Impala Guilty Conscience - Tame Impala Remix               192.</code></pre>
+<pre><code>## # A tibble: 10 × 3
+##    artist_name track_name                                         tempo
+##    &lt;chr&gt;       &lt;chr&gt;                                              &lt;dbl&gt;
+##  1 Tame Impala Lost In Yesterday                                   183.
+##  2 Tame Impala Yes I&#39;m Changing                                    180.
+##  3 Tame Impala Led Zeppelin                                        184.
+##  4 Tame Impala No Choice                                           180.
+##  5 Tame Impala Borderline - Blood Orange Remix                     174.
+##  6 Tame Impala Borderline - Blood Orange Remix                     174.
+##  7 Tame Impala Guilty Conscience - Tame Impala Remix Extended      192.
+##  8 Tame Impala Guilty Conscience - Tame Impala Remix               192.
+##  9 Tame Impala Guilty Conscience - Tame Impala Remix Instrumental  192.
+## 10 Tame Impala Guilty Conscience - Tame Impala Remix               192.</code></pre>
 <p>Funktionen <code>summarise()</code> ger ett sammanfattande mått (som <code>mean()</code> för medelvärde eller <code>sum()</code> för summa) för någon eller några variabler. Funktionen <code>group_by()</code> kan användas för att göra beräkningen efter någon gruppering.</p>
 <div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="beskrivande-statistik.html#cb96-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                                    <span class="co"># Ta datan, och sen</span></span>
 <span id="cb96-2"><a href="beskrivande-statistik.html#cb96-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(artist_name) <span class="sc">%&gt;%</span>                                <span class="co"># gruppera efter artist, och sen</span></span>
 <span id="cb96-3"><a href="beskrivande-statistik.html#cb96-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(Antal_spår <span class="ot">=</span> <span class="fu">n</span>(),                              <span class="co"># beräkna antal spår,</span></span>
 <span id="cb96-4"><a href="beskrivande-statistik.html#cb96-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Medeltempo =</span> <span class="fu">mean</span>(tempo),                      <span class="co"># medeltempo, och</span></span>
 <span id="cb96-5"><a href="beskrivande-statistik.html#cb96-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">Maxdansbarhet =</span> <span class="fu">max</span>(danceability))             <span class="co"># maximal dansbarhet</span></span></code></pre></div>
-<pre><code>## # A tibble: 363 × 4
+<pre><code>## # A tibble: 415 × 4
 ##    artist_name            Antal_spår Medeltempo Maxdansbarhet
 ##    &lt;chr&gt;                       &lt;int&gt;      &lt;dbl&gt;         &lt;dbl&gt;
-##  1 100 gecs                       50       135.         0.92 
-##  2 A Sunny Day In Glasgow        106       121.         0.63 
-##  3 A Tribe Called Quest          139       101.         0.954
-##  4 A$AP Rocky                    162       122.         0.945
-##  5 Abe Vigoda                     68       136.         0.57 
-##  6 Actress                       206       118.         0.939
-##  7 Adrianne Lenker                61       125.         0.758
-##  8 Against All Logic              26       118.         0.92 
-##  9 Aldous Harding                 80       111.         0.914
-## 10 Alex G                        179       122.         0.807
-## # … with 353 more rows</code></pre>
+##  1 100 gecs                       52       136.         0.92 
+##  2 21 Savage                     292       128.         0.966
+##  3 A Sunny Day In Glasgow        106       121.         0.63 
+##  4 A Tribe Called Quest          139       101.         0.954
+##  5 A$AP Rocky                    192       123.         0.958
+##  6 Abe Vigoda                     68       136.         0.57 
+##  7 Actress                       207       118.         0.939
+##  8 Adele                         193       118.         0.842
+##  9 Adrianne Lenker                61       125.         0.758
+## 10 Against All Logic              26       122.         0.92 
+## # … with 405 more rows</code></pre>
 <p>Slutligen tittade vi på grafer med ggplot2-paketet. En ggplot byggs upp med tre grundelar: data, geometrier (grafens objekt och former), och <em>aesthetics</em> (utseende och placering av geometrierna). I ett enkelt spridningsdiagram är data två numeriska variabler, geometrierna är punkter, och punkternas placering ges av en x-koordinat och en y-koordinat. Ytterligare <em>aesthetics</em> kan vara punkternas färger (<code>color</code>) och storlek (<code>size</code>).</p>
 <div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="beskrivande-statistik.html#cb98-1" aria-hidden="true" tabindex="-1"></a>dat_small <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> <span class="fu">filter</span>(artist_name <span class="sc">==</span> <span class="st">&quot;The Weeknd&quot;</span>)                            <span class="co"># Skapa en mindre datamängd genom att filtrera på en artist</span></span>
 <span id="cb98-2"><a href="beskrivande-statistik.html#cb98-2" aria-hidden="true" tabindex="-1"></a></span>

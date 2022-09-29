@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2022-09-19" />
+<meta name="date" content="2022-09-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -257,7 +257,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Datorövning 1 handlar om grunderna till R. Efter övningen ska vi kunna</p>
 <ul>
 <li><p>Starta RStudio och orientera oss i gränssnittet,</p></li>
-<li><p>Installera och ladda tilläggspaket (<em>Packages</em>)</p></li>
+<li><p>Installera och ladda tilläggspaket (<em>Packages</em>),</p></li>
 <li><p>Definera objekt och tillämpa funktioner i R,</p></li>
 <li><p>Importera data från en online-källa,</p></li>
 <li><p>Transformera en tabell med data genom att välja kolumner, filtrera rader och summera per grupp,</p></li>
@@ -456,7 +456,7 @@ Notera att det är möjligt att skapa ett objekt med namnet <code>c</code> trots
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="datahantering-och-grafer.html#cb54-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/adamflr/ST0060-2022/main/Data/Spotify_data.csv&quot;</span>) </span>
 <span id="cb54-2"><a href="datahantering-och-grafer.html#cb54-2" aria-hidden="true" tabindex="-1"></a>                                       <span class="co"># Läs in en csv-fil från Github</span></span>
 <span id="cb54-3"><a href="datahantering-och-grafer.html#cb54-3" aria-hidden="true" tabindex="-1"></a>dat                                    <span class="co"># Skriv ut objektet dat</span></span></code></pre></div>
-<pre><code>## # A tibble: 76,622 × 24
+<pre><code>## # A tibble: 89,105 × 24
 ##    artist…¹ album…² track…³ track…⁴ album…⁵ album…⁶ album…⁷ dance…⁸ energy   key
 ##    &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
 ##  1 100 gecs 1000 g…       1 money … album   2020-0…    2020   0.344  0.737     6
@@ -469,7 +469,7 @@ Notera att det är möjligt att skapa ett objekt med namnet <code>c</code> trots
 ##  8 100 gecs 1000 g…       8 ringto… album   2020-0…    2020   0.449  0.745    10
 ##  9 100 gecs 1000 g…       9 xXXi_w… album   2020-0…    2020   0.379  0.847     1
 ## 10 100 gecs 1000 g…      10 745 st… album   2020-0…    2020   0.445  0.98     10
-## # … with 76,612 more rows, 14 more variables: loudness &lt;dbl&gt;, mode &lt;dbl&gt;,
+## # … with 89,095 more rows, 14 more variables: loudness &lt;dbl&gt;, mode &lt;dbl&gt;,
 ## #   speechiness &lt;dbl&gt;, acousticness &lt;dbl&gt;, instrumentalness &lt;dbl&gt;,
 ## #   liveness &lt;dbl&gt;, valence &lt;dbl&gt;, tempo &lt;dbl&gt;, time_signature &lt;dbl&gt;,
 ## #   explicit &lt;lgl&gt;, type &lt;chr&gt;, key_name &lt;chr&gt;, mode_name &lt;chr&gt;,
@@ -488,7 +488,7 @@ Notera att det är möjligt att skapa ett objekt med namnet <code>c</code> trots
 <p>För att filtrera på ett givet land kan använda pipe-funktionen från datan till en filter-funktion, t.ex.</p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="datahantering-och-grafer.html#cb57-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                <span class="co"># Ta spotify-datan och sen</span></span>
 <span id="cb57-2"><a href="datahantering-och-grafer.html#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(artist_name <span class="sc">==</span> <span class="st">&quot;Robyn&quot;</span>)       <span class="co"># filtrera för en specifik artist</span></span></code></pre></div>
-<pre><code>## # A tibble: 1,142 × 24
+<pre><code>## # A tibble: 1,141 × 24
 ##    artist…¹ album…² track…³ track…⁴ album…⁵ album…⁶ album…⁷ dance…⁸ energy   key
 ##    &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
 ##  1 Robyn    Honey         1 Missin… album   2018-1…    2018   0.702  0.666     5
@@ -501,7 +501,7 @@ Notera att det är möjligt att skapa ett objekt med namnet <code>c</code> trots
 ##  8 Robyn    Honey         8 Beach2… album   2018-1…    2018   0.824  0.512    11
 ##  9 Robyn    Honey         9 Ever A… album   2018-1…    2018   0.942  0.539     4
 ## 10 Robyn    Honey         1 Missin… album   2018-1…    2018   0.702  0.666     5
-## # … with 1,132 more rows, 14 more variables: loudness &lt;dbl&gt;, mode &lt;dbl&gt;,
+## # … with 1,131 more rows, 14 more variables: loudness &lt;dbl&gt;, mode &lt;dbl&gt;,
 ## #   speechiness &lt;dbl&gt;, acousticness &lt;dbl&gt;, instrumentalness &lt;dbl&gt;,
 ## #   liveness &lt;dbl&gt;, valence &lt;dbl&gt;, tempo &lt;dbl&gt;, time_signature &lt;dbl&gt;,
 ## #   explicit &lt;lgl&gt;, type &lt;chr&gt;, key_name &lt;chr&gt;, mode_name &lt;chr&gt;,
@@ -548,7 +548,7 @@ Notera att det är möjligt att skapa ett objekt med namnet <code>c</code> trots
 <p>Om man istället vill göra ett urval av kolumner kan man använda <code>select()</code>. Som argument anges de kolumner man vill välja, t.ex.</p>
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="datahantering-och-grafer.html#cb65-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                <span class="co"># Ta datan, och sen</span></span>
 <span id="cb65-2"><a href="datahantering-och-grafer.html#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(artist_name, album_name)      <span class="co"># välj kolumnerna artist_name och album_name</span></span></code></pre></div>
-<pre><code>## # A tibble: 76,622 × 2
+<pre><code>## # A tibble: 89,105 × 2
 ##    artist_name album_name                     
 ##    &lt;chr&gt;       &lt;chr&gt;                          
 ##  1 100 gecs    1000 gecs and The Tree of Clues
@@ -561,26 +561,26 @@ Notera att det är möjligt att skapa ett objekt med namnet <code>c</code> trots
 ##  8 100 gecs    1000 gecs and The Tree of Clues
 ##  9 100 gecs    1000 gecs and The Tree of Clues
 ## 10 100 gecs    1000 gecs and The Tree of Clues
-## # … with 76,612 more rows</code></pre>
+## # … with 89,095 more rows</code></pre>
 <p>Som avslutning ges ett lite mer komplicerat exempel på ett urval av artist, år och spår för spår med ett tempo över 180 bpm släppta under 2015.</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="datahantering-och-grafer.html#cb67-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                                    <span class="co"># Ta datan och sen</span></span>
 <span id="cb67-2"><a href="datahantering-och-grafer.html#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(album_release_year <span class="sc">==</span> <span class="dv">2015</span>,                       <span class="co"># filtrera för rader där år är 2015, och </span></span>
 <span id="cb67-3"><a href="datahantering-och-grafer.html#cb67-3" aria-hidden="true" tabindex="-1"></a>         tempo <span class="sc">&gt;</span> <span class="dv">180</span>) <span class="sc">%&gt;%</span>                                  <span class="co"># tempot över 160, och sen</span></span>
 <span id="cb67-4"><a href="datahantering-och-grafer.html#cb67-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(artist_name, album_release_year, track_name)      <span class="co"># selektera på artist, år och spår</span></span></code></pre></div>
-<pre><code>## # A tibble: 122 × 3
+<pre><code>## # A tibble: 129 × 3
 ##    artist_name            album_release_year track_name                         
 ##    &lt;chr&gt;                               &lt;dbl&gt; &lt;chr&gt;                              
 ##  1 A Sunny Day In Glasgow               2015 The Strange Presents of Idols (Mer…
 ##  2 A$AP Rocky                           2015 Lord Pretty Flacko Jodye 2 (LPFJ2) 
 ##  3 A$AP Rocky                           2015 Lord Pretty Flacko Jodye 2 (LPFJ2) 
 ##  4 Anderson .Paak                       2015 Off the Ground                     
-##  5 Björk                                2015 Notget - Live                      
-##  6 Björk                                2015 Notget                             
-##  7 Björk                                2015 Notget                             
-##  8 Björk                                2015 Notget                             
-##  9 Blood Orange                         2015 Sandra’s Smile                     
-## 10 Burna Boy                            2015 Soke                               
-## # … with 112 more rows</code></pre>
+##  5 Arcangel                             2015 50 Sombras De Austin               
+##  6 Arcangel                             2015 50 Sombras de Austin               
+##  7 Arcangel                             2015 50 Sombras de Austin               
+##  8 Arcangel                             2015 50 Sombras de Austin               
+##  9 Björk                                2015 Notget - Live                      
+## 10 Björk                                2015 Notget                             
+## # … with 119 more rows</code></pre>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-16" class="exercise"><strong>Uppgift 1.16  (Snabba spår) </strong></span>Funktionen <code>arrange</code> sorterar data efter en angiven kolumn. Följande stycke ger oss Björks snabbaste spår.</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="datahantering-och-grafer.html#cb69-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>                                                    <span class="co"># Ta datan, och sen</span></span>
