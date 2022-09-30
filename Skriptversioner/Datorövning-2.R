@@ -50,18 +50,6 @@ dat %>%                                                    # Ta datan, och sen
   select(artist_name, track_name, tempo)                   # ta ut kolumnerna artist_name, track_name och tempo
 
 #
-# Funktionen `summarise()` ger ett sammanfattande mått (som `mean()` för medelvärde eller `sum()`
-# för summa) för någon eller några variabler. Funktionen `group_by()` kan användas för att göra
-# beräkningen efter någon gruppering.
-#
-
-dat %>%                                                    # Ta datan, och sen
-  group_by(artist_name) %>%                                # gruppera efter artist, och sen
-  summarise(Antal_spår = n(),                              # beräkna antal spår,
-            Medeltempo = mean(tempo),                      # medeltempo, och
-            Maxdansbarhet = max(danceability))             # maximal dansbarhet
-
-#
 # Slutligen tittade vi på grafer med ggplot2-paketet. En ggplot byggs upp med tre grundelar: data,
 # geometrier (grafens objekt och former), och *aesthetics* (utseende och placering av geometrierna).
 # I ett enkelt spridningsdiagram är data två numeriska variabler, geometrierna är punkter, och
@@ -166,33 +154,6 @@ gapminder %>% select(gdpPercap, pop, gdp)        # Ta datan och sen välj tre ko
 
 gapminder %>% 
   mutate(`National GDP` = gdpPercap * pop)
-
-#
-# ## Summera kolumner med `group_by` och `summarise`
-#
-# För att presentera insamlad data på ett tolkningsbart sätt används sammanfattande mått såsom
-# summor, medelvärden, medianer och standardavvikelser.
-# Den typen av beräkningar kan göras som ett nytt steg i en pipe med hjälp av funktionen
-# `summarise`. Om man kombinerar `summarise` med funktionen `group_by` kan man dessutom summera efter
-# en indelning givet av en annan variabel. En beräkning av jordens befolkning per år kan ges av
-#
-
-gapminder %>%                                    # Ta datan, och sen
-  group_by(year) %>%                             # gruppera efter år, och sen
-  summarise(Totalbefolkning = sum(pop))          # beräkna summan av pop
-
-#
-# I det sista steget skapas en variabel *Totalbefolkning* som ges av summan av den ursprungliga
-# variabeln *pop*.
-#
-# Om man vill summera flera variabler kan man ange flera beräkning inom `summarise`, t.ex.
-#
-
-gapminder %>%                                    # Ta datan, och sen
-  group_by(year) %>%                             # gruppera efter år, och sen
-  summarise(Totalbefolkning = sum(pop),          # beräkna summan av pop,
-            BNP = sum(pop * gdpPercap),          # beräkna summan av nationell bnp,
-            `Antal länder` = n())                # beräkna antalet länder.
 
 #
 # ## Sammanfattande lägesmått
@@ -799,7 +760,7 @@ plot_ly(dat_small, x = ~___, y = ~___, z = ~___, size = ~___, text = ~___) %>%
 #
 # Uppgift 4.28. (More or Less: Behind the Stats)
 # BBC Radio har ett program om statistik, se https://www.bbc.co.uk/programmes/p02nrss1. Lyssna på
-# ett avsnitt. Sammanfatta det i haiku-form.
+# ett avsnitt. Sammanfatta det i tre meningar.
 # :::
 #
 # Uppgift 4.29. (gganimate)

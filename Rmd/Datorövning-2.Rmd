@@ -47,16 +47,6 @@ dat %>%                                                    # Ta datan, och sen
   select(artist_name, track_name, tempo)                   # ta ut kolumnerna artist_name, track_name och tempo
 ```
 
-Funktionen `summarise()` ger ett sammanfattande mått (som `mean()` för medelvärde eller `sum()` för summa) för någon eller några variabler. Funktionen `group_by()` kan användas för att göra beräkningen efter någon gruppering.
-
-```{r}
-dat %>%                                                    # Ta datan, och sen
-  group_by(artist_name) %>%                                # gruppera efter artist, och sen
-  summarise(Antal_spår = n(),                              # beräkna antal spår,
-            Medeltempo = mean(tempo),                      # medeltempo, och
-            Maxdansbarhet = max(danceability))             # maximal dansbarhet
-```
-
 Slutligen tittade vi på grafer med ggplot2-paketet. En ggplot byggs upp med tre grundelar: data, geometrier (grafens objekt och former), och *aesthetics* (utseende och placering av geometrierna). I ett enkelt spridningsdiagram är data två numeriska variabler, geometrierna är punkter, och punkternas placering ges av en x-koordinat och en y-koordinat. Ytterligare *aesthetics* kan vara punkternas färger (`color`) och storlek (`size`).
 
 ```{r}
@@ -649,7 +639,7 @@ Gå till reddit-sidan *dataisbeautiful*. Välj en graf som verkar tydlig eller v
 :::
 
 ::: {.exercise name="More or Less: Behind the Stats"}
-BBC Radio har ett program om statistik, se https://www.bbc.co.uk/programmes/p02nrss1. Lyssna på ett avsnitt. Sammanfatta det i haiku-form.
+BBC Radio har ett program om statistik, se https://www.bbc.co.uk/programmes/p02nrss1. Lyssna på ett avsnitt. Sammanfatta det i tre meningar.
 :::
 
 ::: {.exercise name="gganimate"}

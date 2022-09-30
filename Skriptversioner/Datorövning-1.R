@@ -4,7 +4,7 @@
 #
 # - Starta RStudio och orientera oss i gränssnittet,
 #
-# - Installera och ladda tilläggspaket (*Packages*)
+# - Installera och ladda tilläggspaket (*Packages*),
 #
 # - Definera objekt och tillämpa funktioner i R,
 #
