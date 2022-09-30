@@ -492,8 +492,8 @@ Vi såg tidigare hur en excelfil kan läsas in med `read_excel()`. Ett argument 
 ::: {.exercise name="Läs in Darwin-datan"}
 Gör lämpliga ändringar i koden nedan för att läsa in fliken *Darwin*.
 
-```{r}
-dat_darwin <- read_excel("Data/Uppgiftsdata.xlsx", sheet = "Darwin")      # Läs in data från fliken Darwin
+```{r, eval = F}
+dat_darwin <- read_excel("Data/Uppgiftsdata.xlsx", sheet = "___")         # Läs in data från fliken Darwin
 dat_darwin %>% print(n = 30)                                              # Skriv ut datan (högst 30 rader)
 ```
 :::
@@ -540,7 +540,7 @@ ggplot(dat_darwin, aes(x = ___, y = ___)) +
 
 Funktionen `quantile()` kan användas för att beräkna kvartiler. Notera att man första måste dela per grupp.
 
-```{r}
+```{r, eval=F}
 dat_darwin_kors <- dat_darwin %>% filter(Metod == "Korsbefruktade")
 quantile(dat_darwin_kors$Utfall)
 

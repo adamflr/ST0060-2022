@@ -2241,46 +2241,10 @@ Gör lämpliga ändringar i koden nedan för att läsa in fliken \emph{Darwin}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat\_darwin }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"Data/Uppgiftsdata.xlsx"}\NormalTok{, }\AttributeTok{sheet =} \StringTok{"Darwin"}\NormalTok{)      }\CommentTok{\# Läs in data från fliken Darwin}
+\NormalTok{dat\_darwin }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"Data/Uppgiftsdata.xlsx"}\NormalTok{, }\AttributeTok{sheet =} \StringTok{"\_\_\_"}\NormalTok{)         }\CommentTok{\# Läs in data från fliken Darwin}
 \NormalTok{dat\_darwin }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{print}\NormalTok{(}\AttributeTok{n =} \DecValTok{30}\NormalTok{)                                              }\CommentTok{\# Skriv ut datan (högst 30 rader)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 30 x 3
-##       ID Metod           Utfall
-##    <dbl> <chr>            <dbl>
-##  1     1 Självbefruktade   17.4
-##  2     2 Självbefruktade   20.4
-##  3     3 Självbefruktade   20  
-##  4     4 Självbefruktade   20  
-##  5     5 Självbefruktade   18.4
-##  6     6 Självbefruktade   18.6
-##  7     7 Självbefruktade   18.6
-##  8     8 Självbefruktade   15.3
-##  9     9 Självbefruktade   16.5
-## 10    10 Självbefruktade   18  
-## 11    11 Självbefruktade   16.3
-## 12    12 Självbefruktade   18  
-## 13    13 Självbefruktade   12.8
-## 14    14 Självbefruktade   15.5
-## 15    15 Självbefruktade   18  
-## 16    16 Korsbefruktade    23.5
-## 17    17 Korsbefruktade    12  
-## 18    18 Korsbefruktade    21  
-## 19    19 Korsbefruktade    22  
-## 20    20 Korsbefruktade    19.1
-## 21    21 Korsbefruktade    21.5
-## 22    22 Korsbefruktade    22.1
-## 23    23 Korsbefruktade    20.4
-## 24    24 Korsbefruktade    18.3
-## 25    25 Korsbefruktade    21.6
-## 26    26 Korsbefruktade    23.3
-## 27    27 Korsbefruktade    21  
-## 28    28 Korsbefruktade    22.1
-## 29    29 Korsbefruktade    23  
-## 30    30 Korsbefruktade    12
-\end{verbatim}
 
 \end{exercise}
 
@@ -2340,25 +2304,11 @@ Funktionen \texttt{quantile()} kan användas för att beräkna kvartiler. Notera
 \begin{Highlighting}[]
 \NormalTok{dat\_darwin\_kors }\OtherTok{\textless{}{-}}\NormalTok{ dat\_darwin }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(Metod }\SpecialCharTok{==} \StringTok{"Korsbefruktade"}\NormalTok{)}
 \FunctionTok{quantile}\NormalTok{(dat\_darwin\_kors}\SpecialCharTok{$}\NormalTok{Utfall)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-##    0%   25%   50%   75%  100% 
-## 12.00 19.75 21.50 22.10 23.50
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{dat\_darwin\_själv }\OtherTok{\textless{}{-}}\NormalTok{ dat\_darwin }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(Metod }\SpecialCharTok{==} \StringTok{"Självbefruktade"}\NormalTok{)}
 \FunctionTok{quantile}\NormalTok{(dat\_darwin\_själv}\SpecialCharTok{$}\NormalTok{Utfall)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-##   0%  25%  50%  75% 100% 
-## 12.8 16.4 18.0 18.6 20.4
-\end{verbatim}
 
 Vad är kopplingen mellan kvantilerna och lådagrammet?
 \end{exercise}
@@ -2725,7 +2675,7 @@ R kommer också med en rad funktioner för att simulera data. För kontinuerlig 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 3.4906
+## [1] 3.5026
 \end{verbatim}
 
 \begin{Shaded}
@@ -2735,7 +2685,7 @@ R kommer också med en rad funktioner för att simulera data. För kontinuerlig 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 2.935405
+## [1] 2.923086
 \end{verbatim}
 
 \begin{exercise}[Simulera tärningen]
@@ -3426,7 +3376,7 @@ Pytagoras sats kan användas för att beräkna avståndet mellan en slumpmässig
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 3.4
+## [1] 3.16
 \end{verbatim}
 
 \begin{Shaded}
@@ -4117,13 +4067,13 @@ Följande kod simulerar ett dataset om tio observationer från en normalfördeln
 ##  One Sample t-test
 ## 
 ## data:  dat_sim$x
-## t = 1.5106, df = 9, p-value = 0.1652
+## t = 0.12184, df = 9, p-value = 0.9057
 ## alternative hypothesis: true mean is not equal to 7
 ## 95 percent confidence interval:
-##   5.584845 14.104175
+##  4.560760 9.716941
 ## sample estimates:
 ## mean of x 
-##   9.84451
+##  7.138851
 \end{verbatim}
 
 \begin{exercise}[Upprepad simulering]
@@ -4168,7 +4118,7 @@ Vidare ska p-värdet vara under fem procent fem procent av gångerna.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.054
+## [1] 0.042
 \end{verbatim}
 
 Även det stämmer någorlunda väl. Det här innebär alltså att om man har en signifikansnivå på fem procent kommer man förkasta nollhypotesen fem procent av gångerna även om nollhypotesen stämmer. Det kallas ett \emph{falskt positivt} utfall.
@@ -6411,27 +6361,27 @@ Anledning till att vi justerar p-värden är att man vid varje test har en sanno
 
 \begin{verbatim}
 ## $emmeans
-##  group  emmean    SE df lower.CL upper.CL
-##  a     -0.0661 0.355 45   -0.782    0.649
-##  b      0.2965 0.355 45   -0.419    1.012
-##  c      0.2303 0.355 45   -0.485    0.946
-##  d     -0.6076 0.355 45   -1.323    0.108
-##  e     -0.5355 0.355 45   -1.251    0.180
+##  group  emmean  SE df lower.CL upper.CL
+##  a      0.6515 0.3 45   0.0463    1.257
+##  b      0.7363 0.3 45   0.1311    1.342
+##  c     -0.3021 0.3 45  -0.9073    0.303
+##  d      0.0713 0.3 45  -0.5339    0.677
+##  e     -0.2976 0.3 45  -0.9028    0.308
 ## 
 ## Confidence level used: 0.95 
 ## 
 ## $contrasts
 ##  contrast estimate    SE df t.ratio p.value
-##  a - b     -0.3626 0.502 45  -0.722  0.4741
-##  a - c     -0.2964 0.502 45  -0.590  0.5581
-##  a - d      0.5415 0.502 45   1.078  0.2868
-##  a - e      0.4694 0.502 45   0.934  0.3551
-##  b - c      0.0662 0.502 45   0.132  0.8957
-##  b - d      0.9041 0.502 45   1.800  0.0786
-##  b - e      0.8321 0.502 45   1.656  0.1046
-##  c - d      0.8379 0.502 45   1.668  0.1023
-##  c - e      0.7659 0.502 45   1.525  0.1344
-##  d - e     -0.0721 0.502 45  -0.143  0.8866
+##  a - b    -0.08480 0.425 45  -0.200  0.8427
+##  a - c     0.95368 0.425 45   2.244  0.0298
+##  a - d     0.58022 0.425 45   1.365  0.1789
+##  a - e     0.94913 0.425 45   2.233  0.0305
+##  b - c     1.03847 0.425 45   2.444  0.0185
+##  b - d     0.66502 0.425 45   1.565  0.1246
+##  b - e     1.03393 0.425 45   2.433  0.0190
+##  c - d    -0.37345 0.425 45  -0.879  0.3842
+##  c - e    -0.00454 0.425 45  -0.011  0.9915
+##  d - e     0.36891 0.425 45   0.868  0.3899
 \end{verbatim}
 
 Kör koden tio gånger. Hur många gånger av de tio ger de parvisa jämförelserna \emph{någon} signifikant skillnad (det vill säga något p-värde under 0.05)?

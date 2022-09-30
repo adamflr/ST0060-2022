@@ -577,7 +577,7 @@ ggplot(dat_dice, aes(x = Kast, y = `Kumulativ frekvens`)) +
 # Gör lämpliga ändringar i koden nedan för att läsa in fliken *Darwin*.
 #
 
-dat_darwin <- read_excel("Data/Uppgiftsdata.xlsx", sheet = "Darwin")      # Läs in data från fliken Darwin
+dat_darwin <- read_excel("Data/Uppgiftsdata.xlsx", sheet = "___")         # Läs in data från fliken Darwin
 dat_darwin %>% print(n = 30)                                              # Skriv ut datan (högst 30 rader)
 
 # :::
