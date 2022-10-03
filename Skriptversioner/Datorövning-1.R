@@ -30,7 +30,7 @@
 # - *Plots* där man ser skapade grafer, och
 # - *Help* där man ser hjälpsidor för funktioner.
 #
-# Uppgift 3.1. (Help-fliken)
+# Uppgift 1.1. (Help-fliken)
 # Hitta fliken *Help*, klicka på husikonen under fliken. Finns det en länk med *RStudio Cheat
 # Sheets*? Följ den länken för att hitta guider till R som kan bli nyttiga längre fram. För nu, gå
 # tillbaka till RStudio.
@@ -43,7 +43,7 @@
 # då i det övre vänstra delfönstret. Om du läser det här i RStudio, genom att ha laddat ner .R-filen,
 # läser du just nu ett skript.
 #
-# Uppgift 3.2. (Ett första skript)
+# Uppgift 1.2. (Ett första skript)
 # Öppna ett nytt skript genom File-menyn eller genom *Ctrl + Shift + N*.
 # Skriv
 #
@@ -75,12 +75,12 @@ install.packages("tidyverse")
 #
 # I RStudio kan man också installera paket från *Packages*-fliken.
 #
-# Uppgift 3.3. (Installera tidyverse-paketet)
+# Uppgift 1.3. (Installera tidyverse-paketet)
 # Kör raden ovan för att installera `tidyverse`. Du kan antingen köra raden genom att skriva den i
 # *Console* eller genom att skriva i ett skript och köra därifrån genom *Ctrl + Enter*.
 # :::
 #
-# Uppgift 3.4. (Installera gapminder-paketet)
+# Uppgift 1.4. (Installera gapminder-paketet)
 # Paketet `gapminder` innehåller lite intressant data vi kommer använda senare. Installera paketet
 # `gapminder` genom att fylla i och köra raden nedan.
 #
@@ -96,7 +96,7 @@ install.packages("___")
 library(tidyverse)
 
 #
-# Uppgift 3.5. (Ladda gapminder-paketet)
+# Uppgift 1.5. (Ladda gapminder-paketet)
 # Ladda paketet `gapminder` genom att fylla i och köra raden nedan.
 #
 
@@ -104,7 +104,7 @@ library(___)
 
 # :::
 #
-# Uppgift 3.6. (Paket som inte finns)
+# Uppgift 1.6. (Paket som inte finns)
 # Vad händer om man försöker installera ett paket som inte finns på *CRAN*? Testa till exempel
 #
 
@@ -149,7 +149,7 @@ b[c(3,5)]          # Det tredje och femte värdet i b
 
 #
 #
-# Uppgift 3.7. (Skapa en vektor)
+# Uppgift 1.7. (Skapa en vektor)
 # Skapa ett objekt med namnet `new_vector` som innehåller värden 5, 7 och 10 genom att fylla i
 # följande rad.
 #
@@ -158,7 +158,7 @@ new_vector <- c(_, _, _)
 
 # :::
 #
-# Uppgift 3.8. (Ta ut andra värdet)
+# Uppgift 1.8. (Ta ut andra värdet)
 # Använd hakparenteser för att plocka ut det andra värdet ur vektorn `new_vector`.
 # :::
 #
@@ -185,7 +185,7 @@ sqrt(b)
 #
 # som beräknar kvadratroten för varje element i vektorn.
 #
-# Uppgift 3.9. (Summera vektorn)
+# Uppgift 1.9. (Summera vektorn)
 # Fyll i och kör följande rad för att beräkna summan av vektorn `new_vector`
 #
 
@@ -232,7 +232,7 @@ sum(c_absolute)                        # Summera värden i c_absolut
 # lite oklart för en läsare, så försök som regel att undvika att skapa objekt med vanliga
 # funktionsnamn som `sum` och `mean`.
 #
-# Uppgift 3.10. (Kvadrat, summa och roten ur)
+# Uppgift 1.10. (Kvadrat, summa och roten ur)
 # Fyll i och kör följande rader för att ta varje värde i `new_vector` i kvadrat, *sedan* summera,
 # och sedan ta roten ur.
 #
@@ -272,7 +272,7 @@ c(-4, -2, -1, 1, 2, 4) %>%             # Skapa en datamängd och sen
   sum()                                # beräkna summan.
 
 #
-# Uppgift 3.11. (Kvadrat, summa och rot med pipe)
+# Uppgift 1.11. (Kvadrat, summa och rot med pipe)
 # Fyll i de saknade funktionerna och kör följande rader för att ta varje värde i `new_vector` i
 # kvadrat, *sedan* summera, och sedan ta roten ur, denna gång genom att länka funktionerna med en
 # pipe `%>%`.
@@ -310,7 +310,7 @@ dat
 # men att värden inom en kolumn måste vara det. Här är *Behandling* text medan övriga kolumner är
 # numeriska.
 #
-# Uppgift 3.12. (Alea iacta est)
+# Uppgift 1.12. (Alea iacta est)
 # Kasta din tärning tio gånger och skriv in resultatet i en datatabell i R med hjälp av grundkoden
 # nedan. Om du saknar en tärning, fråga lämplig person om du kan få en. Behåll tärningen, den behövs
 # till nästa datorövning (och närhelst man står inför ett avgörande livsbeslut).
@@ -337,7 +337,7 @@ dat[2, ]           # Tomt värde ger alla värden. Här alla värden i rad 2
 dat[ ,3]           # Alla värden i kolumn 3
 
 #
-# Uppgift 3.13. (Plocka ut en specifik kolumn)
+# Uppgift 1.13. (Plocka ut en specifik kolumn)
 # I den tidigare övningen skapade du ett objekt `dat_dice`. Använd dollartecken för att plocka ut
 # kolumnen Utfall från det objektet.
 #
@@ -360,7 +360,7 @@ sd(dat$Vikt)
 plot(dat$Vecka, dat$Vikt)
 
 #
-# Uppgift 3.14. (Alea iacta est)
+# Uppgift 1.14. (Alea iacta est)
 # Använd datan i objektet `dat_dice` och skapa ett diagram med kolumnen kast på x-axeln och
 # kolumnen Utfall på y-axeln.
 #
@@ -415,7 +415,7 @@ dat %>%                                # Ta spotify-datan och sen
 # villkoret är sant. Notera de dubbla likhetstecknen - de måste användas för ett logisk villkor
 # eftersom enkelt likhetstecken används för att skapa objekt och sätta funktionsargument.
 #
-# Uppgift 3.15. (Filtrera för artist)
+# Uppgift 1.15. (Filtrera för artist)
 # Vad måste ändras i koden för att istället plocka ut rader där artisten är Esperanza Spalding? Hur
 # många rader har det urvalet i datan?
 #
@@ -477,7 +477,7 @@ dat %>%                                                    # Ta datan och sen
   select(artist_name, album_release_year, track_name)      # selektera på artist, år och spår
 
 #
-# Uppgift 3.16. (Snabba spår)
+# Uppgift 1.16. (Snabba spår)
 # Funktionen `arrange` sorterar data efter en angiven kolumn. Följande stycke ger oss Björks
 # snabbaste spår.
 #
@@ -502,7 +502,7 @@ dat_small <- dat %>%                                      # Ta data, och sen
   filter(artist_name == "Robyn", album_type == "album")   # filtrera på artist och albumtyp
 
 #
-# Uppgift 3.17. (Valfritt artistbyte)
+# Uppgift 1.17. (Valfritt artistbyte)
 # Om du vill titta data på något annan artist, gör lämplig ändring i stycket ovan. Kom ihåg att man
 # skriva ut artister i datan med `unique(dat$artist_name)`.
 # :::
@@ -543,7 +543,7 @@ ggplot(dat_small, aes(x = tempo, y = danceability, color = mode_name)) +   # Ta 
   facet_wrap(~ album_name)                                                 # Skapa småfönster efter album
 
 #
-# Uppgift 3.18. (Dur och moll)
+# Uppgift 1.18. (Dur och moll)
 # Vad ska ändras i stycket nedan för att skapa en graf med dur/moll (`mode_name`) på x-axeln,
 # valens (`valence`) på y-axeln och skilda småfönster för olika år (`album_release_year`)?
 #
@@ -601,13 +601,13 @@ ggplot(dat_small, aes(danceability, album_name)) +
         panel.grid.major.y = element_blank())                                # Sätt rutnätet till blankt
 
 #
-# Uppgift 3.19. (Temaval 1)
+# Uppgift 1.19. (Temaval 1)
 # Ändra färgvalen i grafen ovan för att skapa snyggast möjliga graf. Funktionen `colors()` ger de
 # färger som finns tillängliga i R. Man kan också använda hex-koden för färger, t.ex. `fill =
 # "#ffdd00"`.
 # :::
 #
-# Uppgift 3.20. (Temaval 2)
+# Uppgift 1.20. (Temaval 2)
 # Ändra färgvalen i grafen ovan för att skapa fulast möjliga graf. Visa de två graferna för någon
 # annan och se om de kan säga vilken som är vilken.
 # :::
@@ -657,7 +657,7 @@ g
 ggplotly(g)
 
 #
-# Uppgift 3.21. (Interaktiv graf med annan artist)
+# Uppgift 1.21. (Interaktiv graf med annan artist)
 # Gör lämpliga ändringar i stycket nedan för att skapa en interaktiv graf med en annan artist och
 # med tempo på x-axeln och dansbarhet på y-axeln. Kom ihåg att du kan se tillgängliga artister med
 # raden `unique(dat$artist_name)`.
@@ -677,7 +677,7 @@ ggplotly(g)
 
 # :::
 #
-# Uppgift 3.22. (Interaktiv graf med andra axlar)
+# Uppgift 1.22. (Interaktiv graf med andra axlar)
 # Vi fortsätter med ett nytt exempel, nu med ett spridningsdiagram med album på y-axeln och valens
 # på x-axeln. Funktionen `reorder()` ordnar en kolumn efter en annan. Här ordnas album efter
 # release-år.
@@ -726,7 +726,7 @@ ggplot(dat_temp, aes(x = Year, y = 1, fill = Value)) +
   geom_col() 
 
 #
-# Uppgift 3.23. (Staplar utan mellanrum)
+# Uppgift 1.23. (Staplar utan mellanrum)
 # Ett första problem är att staplarna inte fyller ytan. Man kan styra staplars bredd med argumentet
 # `width`, t.ex.
 #
@@ -738,7 +738,7 @@ ggplot(dat_temp, aes(x = Year, y = 1, fill = Value)) +
 # Hitta ett värde för `width` som ger staplar utan mellanrum.
 # :::
 #
-# Uppgift 3.24. (Färgval)
+# Uppgift 1.24. (Färgval)
 # Ett andra problem är att ggplots grundval för färger är från svart till blått. För klassiska
 # warming stripes vill vi ha en skala från blått till rött. Färgerna i en skala ändras med särskilda
 # `scale_()`-funktioner. En färgskala för ifylld färg kan sättas med `scale_fill_gradientn()`, till
@@ -755,7 +755,7 @@ ggplot(dat_temp, aes(x = Year, y = 1, fill = Value)) +
 # `steelblue` och `skyblue`.
 # :::
 #
-# Uppgift 3.25. (Enkel graf)
+# Uppgift 1.25. (Enkel graf)
 # Slutligen brukar warming stripes presenteras med så lite kringinformation som möjligt. I ggplot
 # kan grafelement tas bort med `theme()`. Här är som exempel en graf utan y-axel, tickmärken och
 # legend.
@@ -777,22 +777,22 @@ ggplot(dat_temp, aes(x = Year, y = Value)) +
 #
 # ## Valfria hemuppgifter
 #
-# Uppgift 3.26. (Installera R)
+# Uppgift 1.26. (Installera R)
 # Gå till https://www.r-project.org/ och installera R på ditt hemma-system. Instruktioner finns i
 # R-anvisningarnas kapitel *Installation*.
 # :::
 #
-# Uppgift 3.27. (Installera RStudio)
+# Uppgift 1.27. (Installera RStudio)
 # Gå till https://www.rstudio.com/ och installera RStudio på ditt hemma-system. Instruktioner finns
 # i R-anvisningarnas kapitel *Installation*.
 # :::
 #
-# Uppgift 3.28. (Öppna RStudio)
+# Uppgift 1.28. (Öppna RStudio)
 # Öppna skriptet till datorövning 1 i RStudio. Notera om något ser annorlunda ut mot hur det såg ut
 # i datorsal.
 # :::
 #
-# Uppgift 3.29. (Cheat sheets)
+# Uppgift 1.29. (Cheat sheets)
 # I början av datorövning 1 plockade vi upp en hemsida med *cheat sheets* - korta instruktioner och
 # guider till specifika R-paket. Vi kan hitta några av dem på
 # https://www.rstudio.com/resources/cheatsheets/.
@@ -800,7 +800,7 @@ ggplot(dat_temp, aes(x = Year, y = Value)) +
 # beskrivs i guiden? Vad gör en `theme_`-funktion?
 # :::
 #
-# Uppgift 3.30. (Timothée Chalamet)
+# Uppgift 1.30. (Timothée Chalamet)
 # Hitta klippet där skådespelaren Timothée Chalamet sjunger en sång om statistik. Uppskatta spårets
 # dansbarhet och valens på en skala från noll till ett. Fundera på om det är rimligt att sätta en
 # siffra på dansbarhet och valens.

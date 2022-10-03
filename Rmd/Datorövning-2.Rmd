@@ -316,6 +316,33 @@ ggplot(gapminder, aes(year, lifeExp, fill = continent, group = year)) +        #
 I lådagrammet används argumentet `group`. Vad gör det? Vad händer om man tar bort det?
 :::
 
+Om man vill ha med både data på observationsnivån och summerad data i en graf kan man ange olika data till olika geom. Vi kan t.ex. lägga till en markör för medelvärdet i en boxplot.
+
+```{r}
+gapminder_2007 <- gapminder %>% filter(year == 2007)
+gapminder_agg <- gapminder_2007 %>% 
+  group_by(continent) %>% 
+  summarise(lifeExp = mean(lifeExp))
+gapminder_agg
+
+ggplot() +
+  geom_boxplot(aes(lifeExp, continent), data = gapminder_2007) +
+  geom_point(aes(lifeExp, continent), data = gapminder_agg, color = "red", shape = "X", size = 6)
+```
+
+Här byggs boxarna med datan gapminder och punkterna med den aggregerade datan. Beräkningen av medelvärde och median ger att en datamängd ofta har en längre svans åt det håll som medelvärdet ligger relativt medianen - ett medelvärde under medianen skulle tyda på att det finns några särskilt låga observationer. Kan den effekten ses i grafen?
+
+Möjligheten att sätta data inom en `geom_()`-funktion kan blandas med `filter()` för att visa olika data i olika geom. Här ges ett spridningsdiagram över bnp och medellivslängd per land, och linjeserier (`geom_path()`) över tid för två specifika länder. Geom `geom_point()` är alltså på flera länder vid en tid, medan `geom_path()` är över tid för ett land.
+
+```{r}
+gapminder_eu <- gapminder %>% filter(continent == "Europe")
+
+ggplot(gapminder_eu, aes(gdpPercap, lifeExp, group = country, label = country)) +
+  geom_text(data = gapminder_eu %>% filter(year == 2007)) +
+  geom_path(color = "blue", size = 3, data = gapminder_eu %>% filter(country == "Sweden"), alpha = 0.3) +
+  geom_path(color = "red", size = 3, data = gapminder_eu %>% filter(country == "Poland"), alpha = 0.3)
+```
+
 ## Ordna upp beskrivande statistik och exportera
 
 Efter att ha beräknat någon beskrivande statistik kan det vara bra att titta på hur resultaten kan snyggas upp och exporteras i något lämpligt format. Ta den tabell med medelvärden vi producerade i ett tidigare exempel.
@@ -647,5 +674,5 @@ Med paketet `gganimate` (https://gganimate.com/) kan man göra animationer av gg
 :::
 
 ::: {.exercise name="Skumma ett paper"}
-Hitta en *vetenskaplig* artikel i valfri tidskrift. Vilka läges- och spridningsmått kan du hitta? Vilka grafer?
+Hitta en *vetenskaplig* artikel i valfri tidskrift. Vilka läges- och spridningsmått kan du hitta? Vilka grafer? Finns det några grafer med den karaktäristiska grå bakgrunden som är basutseendet i en ggplot?
 :::

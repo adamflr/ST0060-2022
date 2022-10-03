@@ -88,7 +88,7 @@ dat_dice6
 ggplot(dat_dice6, aes(x, p)) + geom_col()
 
 #
-# Uppgift 5.1. (En annan tärning)
+# Uppgift 3.1. (En annan tärning)
 # Ta fram en tärning som *inte* har sex sidor. Om du saknar en sådan tärning, fråga lämplig person
 # om du kan få en. Behåll tärningen, då den kan återkomma vid en senare datorövning. Följ exemplet
 # ovan för att kodifiera din tärning som en slumpvariabel. Utfallen `x` är de möjliga resultaten av
@@ -115,7 +115,7 @@ dat_dice6 %>%
 #
 # Notera att medelvärdet inte behöver vara ett möjligt utfall.
 #
-# Uppgift 5.2. (Medelvärde för din tärning)
+# Uppgift 3.2. (Medelvärde för din tärning)
 # Upprepa beräkningen ovan, denna gång med den slumpvariabel du kodifierade i den tidigare
 # uppgiften.
 # :::
@@ -141,7 +141,7 @@ dat_dice6 %>%
             standardavvikelse = sqrt(varians))
 
 #
-# Uppgift 5.3. (Varians för din tärning)
+# Uppgift 3.3. (Varians för din tärning)
 # Upprepa beräkningen ovan, denna gång med den slumpvariabel du kodifierade i den tidigare
 # uppgiften.
 # :::
@@ -149,7 +149,7 @@ dat_dice6 %>%
 # Vår modell för tärningskastet säger att en serie tärningskast ska ha ett visst medelvärde och
 # varians. Låt oss nu testa det genom att kasta tärning.
 #
-# Uppgift 5.4. (Kasta tärningen)
+# Uppgift 3.4. (Kasta tärningen)
 # Kasta din tärning 20 gånger. Gärna på en mjuk yta. Skriv in utfallen i koden nedan och beräkna
 # medelvärde och varians.
 #
@@ -174,7 +174,7 @@ mean(slumputfall)
 var(slumputfall)
 
 #
-# Uppgift 5.5. (Simulera tärningen)
+# Uppgift 3.5. (Simulera tärningen)
 # Använd `sample()` för att dra tiotusen observationer från din egen tärning. Beräkna medelvärde
 # och varians från det stickprovet. Är utfallen nära de teoretiska beräkningarna av
 # populationsmedelvärde och -varians?
@@ -216,7 +216,7 @@ dat_bin <- data.frame(x = 0:10) %>%
 ggplot(dat_bin, aes(x, p)) + geom_col()
 
 #
-# Uppgift 5.6. (Binomialfördelning för tärningen)
+# Uppgift 3.6. (Binomialfördelning för tärningen)
 # Ta tärningen från tidigare uppgift och välj ett av utfallen. Om man kastar tärningen tjugo
 # gånger, vad är fördelningen för antalet gånger man får det utfallet? Fyll i stycket nedan för att
 # beräkna sannolikheterna i den fördelningen och illustrera med ett stapeldiagram.
@@ -229,7 +229,7 @@ ggplot(dat_bin, aes(x, p)) + geom_col()
 
 # :::
 #
-# Uppgift 5.7. (Sannolikheter i binomialen)
+# Uppgift 3.7. (Sannolikheter i binomialen)
 # I den fördelning du beräknade i uppgiften ovan. Vad är sannolikheten att få exakt tre positiva
 # utfall?
 # :::
@@ -250,7 +250,7 @@ dat_bin
 #
 # Fördelningsfunktionen ges av att summera sannolikhetsfunktionen uppifrån.
 #
-# Uppgift 5.8. (Fördelningsfunktion i binomialen)
+# Uppgift 3.8. (Fördelningsfunktion i binomialen)
 # Använd binomialfördelningen från den tidigare uppgiften till att beräkna sannolikheten att få
 # *tre eller färre* positiva utfall.
 # :::
@@ -273,7 +273,7 @@ ggplot(dat_bin, aes(x, p, fill = x <= 7)) +
 # Den blå ytan motsvarar sannolikheten att få sju eller färre krona. Den sannolikheten kan beräknas
 # till 0.945.
 #
-# Uppgift 5.9. (Illustration av sannolikheten)
+# Uppgift 3.9. (Illustration av sannolikheten)
 # För en sexsidig tärning illustrerar följande sannolikheten att få tre eller färre sexor vid tjugo
 # kast.
 #
@@ -290,7 +290,7 @@ ggplot(dat_bin, aes(x, p, fill = x <= 3)) +
 # positiva utfall i exemplet med tärningskastet.
 # :::
 #
-# Uppgift 5.10. (Teori och verklighet)
+# Uppgift 3.10. (Teori och verklighet)
 # I en tidigare uppgift kastade du tärningen tjugo gånger. Hur många gånger fick du det lägsta
 # möjliga utfallet på tärningen (t.ex. en etta på en vanlig sex-sidig tärning). Vad är sannolikheten
 # att få så många positiva utfall i binomialexemplet på tärningen?
@@ -303,7 +303,7 @@ ggplot(dat_bin, aes(x, p, fill = x <= 3)) +
 # ett-minus-sannolikheten (n gånger p gånger (1 - p)). För myntkastet (n = 10 och p = 0.5) ges
 # medelvärdet av 5 och variansen av 2.5.
 #
-# Uppgift 5.11. (Medelvärde och varians i binomialen)
+# Uppgift 3.11. (Medelvärde och varians i binomialen)
 # Beräkna medelvärde och varians för antalet ettor om man kastar en sex-sidig tärning tjugo gånger.
 # :::
 #
@@ -338,7 +338,7 @@ ggplot(dat_two_bin) +
 # Punkterna ligger nästan perfekt på linjen. De två fördelningarna har alltså nästan samma
 # sannolikheter, trots att de har helt olika värden för n och p.
 #
-# Uppgift 5.12. (Skilda sannolikheter)
+# Uppgift 3.12. (Skilda sannolikheter)
 # Följande kod gör samma sak som exemplet ovan, men nu med n1 och n2 som egna objekt.
 #
 
@@ -393,7 +393,7 @@ ggplot(dat_two_dist) +
 # och p = 0.0075. Fördelningarna är nästan identiska. Notera att fördelningarna har samma medelvärde
 # (då 400 gånger 0.0075 ger 3).
 #
-# Uppgift 5.13. (Skilda sannolikheter)
+# Uppgift 3.13. (Skilda sannolikheter)
 # Följande kod gör samma sak som exemplet ovan, men nu med n i binomial som eget objekt.
 #
 
@@ -419,7 +419,7 @@ ggplot(dat_two_dist) +
 #
 # I R kan man beräkna sannolikheter för en poissonfördelning med `dpois()` och `ppois()`.
 #
-# Uppgift 5.14. (Sannolikhetsfunktionen för en poisson)
+# Uppgift 3.14. (Sannolikhetsfunktionen för en poisson)
 # Följande ger sannolikheten att få utfall 2 i en poissonfördelning med lambda satt till 4.
 #
 
@@ -430,7 +430,7 @@ dpois(2, lambda = 4)
 # till 3.
 # :::
 #
-# Uppgift 5.15. (Fördelningsfunktionen för en poisson)
+# Uppgift 3.15. (Fördelningsfunktionen för en poisson)
 # Följande ger sannolikheten att få mindre än eller lika med 2 i en poissonfördelning med lambda
 # satt till 4.
 #
@@ -476,7 +476,7 @@ ggplot() +
 # Den gröna och röda kurvan har samma medelvärde mu men skilda standardavvikelser sigma. Den blå
 # och gröna kurvan har skilda medelvärden mu men samma standardavvikelse sigma.
 #
-# Uppgift 5.16. (Normalfördelningar)
+# Uppgift 3.16. (Normalfördelningar)
 # Gör lämpliga ändringar i stycken ovan för att illustrera två normalfördelningar: en med
 # medelvärde 0 och standardavvikelse 1 och en med medelvärde 1 och standardavvikelse 2. Kan du
 # utifrån kurvorna säga vilken av de två fördelningarna som ger störst sannolikhet att få ett utfall
@@ -529,7 +529,7 @@ g1 / g2
 # Sannolikheten att ligga under ett värde på x ges av kurvan för fördelningsfunktionen vid det
 # x-värdet. Det motsvarar den fyllda ytan under täthetsfunktionen till vänster om x-värdet.
 #
-# Uppgift 5.17. (Sannolikhet från normalfördelningen)
+# Uppgift 3.17. (Sannolikhet från normalfördelningen)
 # Fyll i kodstycket nedan för att beräkna sannolikheten att få ett värde under minus två i en
 # normalfördelning med medelvärde 0 och standardavvikelse 1, och i en normalfördelning med medelvärde
 # 1 och standardavvikelse 2.
@@ -567,7 +567,7 @@ ggplot(dat_norm, aes(x, p)) +
   labs(title = "Täthetsfunktion")
 
 #
-# Uppgift 5.18. (Sannolikhet mellan två värden)
+# Uppgift 3.18. (Sannolikhet mellan två värden)
 # Fyll i kodstycket nedan för att beräkna sannolikheten att få ett värde mellan *minus två* och tre
 # i en normalfördelning med medelvärde 1 och standardavvikelse 2.
 #
@@ -584,7 +584,7 @@ pnorm(___, mean = ___, sd = ___) - pnorm(___, mean = ___, sd = ___)
 1 - pnorm(1.96)
 
 #
-# Uppgift 5.19. (Sannolikhet över x)
+# Uppgift 3.19. (Sannolikhet över x)
 # Fyll i kodstycket nedan för att beräkna sannolikheten att få ett värde över sju i en
 # normalfördelning med medelvärde 3 och standardavvikelse 5.
 #
@@ -611,7 +611,7 @@ pnorm(7, mean = 8, sd = 4)
 pnorm(-0.25, mean = 0, sd = 1)
 
 #
-# Uppgift 5.20. (Standardisering)
+# Uppgift 3.20. (Standardisering)
 # Fyll i kodstycket nedan för att beräkna sannolikheten att få ett värde under sju i en
 # normalfördelning med medelvärde 3 och standardavvikelse 5. Genomför beräkningen genom att
 # standardiserade och beräkna sannolikheten från den standardiserade normalen.
@@ -652,7 +652,7 @@ ggplot(dat_pois, aes(x, p)) +
 # Punkterna ligger nära linjen, vilket är helt efter förväntan. Notera dock att det kommer finnas
 # vissa naturliga avvikelser när man arbetar med slumptal.
 #
-# Uppgift 5.21. (Poisson från slumptal)
+# Uppgift 3.21. (Poisson från slumptal)
 # Gör lämpliga ändringar i kodstycket ovan för att göra motsvarande beräkning för en
 # poissonfördelning med lambda lika med 2. Ligger slumptalen nära den teoretiska fördelningen?
 # :::
@@ -696,12 +696,12 @@ ggplot(dat_dice_sum, aes(x, p)) +
 # Summan av två tärningskast har en triangelformad fördelning där 7 är det vanligaste utfallet och
 # 2 och 12 är de ovanligaste.
 #
-# Uppgift 5.22. (Summan av tärningskast med annan tärning)
+# Uppgift 3.22. (Summan av tärningskast med annan tärning)
 # Gör lämpliga ändringar i stycket ovan för att beräkna summan av två utfall för en åtta-sidig
 # tärning.
 # :::
 #
-# Uppgift 5.23. (Summan av tre tärningskast)
+# Uppgift 3.23. (Summan av tre tärningskast)
 # Gör lämpliga tillägg i stycket ovan för att beräkna summan av tre utfall för en sex-sidig
 # tärning.
 # :::
@@ -749,7 +749,7 @@ pi
 #
 # Den beräknade arean ligger inte så långt från konstanten pi.
 #
-# Uppgift 5.24. (Summan av tre tärningskast)
+# Uppgift 3.24. (Summan av tre tärningskast)
 # Beräkningens precision ökar med antalet slumptal. Vad i kodstycket ovan ska ändras för att
 # generera fler slumptal? Blir utfallet närmre det väntade värdet om antalet slumptal ökar?
 # :::
@@ -793,7 +793,7 @@ ggplot(dat_tri, aes(x, y)) +
   geom_point()
 
 #
-# Uppgift 5.25. (Sierpinski-triangeln)
+# Uppgift 3.25. (Sierpinski-triangeln)
 # Vad måste ändras i stycket ovan för att generera fler punkter? Tiotusen kan vara ett lämpligt
 # antal för en tydligare illustration. Vad händer om man ändrar värdena i `x_original` och
 # `y_original`?
@@ -801,7 +801,7 @@ ggplot(dat_tri, aes(x, y)) +
 #
 # ## Valfria hemuppgifter
 #
-# Uppgift 5.26. (Sierpinski-pyramiden)
+# Uppgift 3.26. (Sierpinski-pyramiden)
 # Fyll i de saknade delarna i stycket nedan för att skapa en tredimensionell version av
 # Sierpinski-triangeln.
 #

@@ -122,7 +122,7 @@ ggplot(dat_eu07, aes(gdpPercap, lifeExp)) +
 # Datan visar ett positivt samband mellan variablerna - högre bnp per capita är kopplat till högre
 # medellivslängd.
 #
-# Uppgift 10.1. (Data för 1957)
+# Uppgift 8.1. (Data för 1957)
 # Vad måste ändras i stycket nedan för att plocka ut data och göra en graf för Europa 1957?
 #
 
@@ -153,7 +153,7 @@ summary(mod)
 # ökningen i y-variabeln när x-variabeln ökar med 1. I det här fallet ger 0.2146 att ett lands
 # medellivslängd ökar med ungefär 0.2146 år (eller 78 dagar) när bnp per capita ökar med 1000 dollar.
 #
-# Uppgift 10.2. (Modell för 1957)
+# Uppgift 8.2. (Modell för 1957)
 # Skatta samma modell som ovan, denna gång med data från 1957. Tolka lutningsparametern i ord. Är
 # effekten av ökad bnp större 2007 än den var 1957?
 # :::
@@ -171,7 +171,7 @@ ggplot(dat_eu07, aes(gdpPercap, lifeExp)) +
 # Den blå linjen illustrerar regressionlinjen 72.27 + 0.2146x. Det grå bandet kring linjen är ett
 # konfidensintervall för skattningen av y-variabeln.
 #
-# Uppgift 10.3. (Graf för 1957)
+# Uppgift 8.3. (Graf för 1957)
 # Använd `geom_smooth(method = lm)` för att lägga till en regressionslinje för data för 1957. Hur
 # mycket påverkar de två avvikande länderna?
 # :::
@@ -207,12 +207,12 @@ ggplot(dat_eu07, aes(Skattade, Residualer)) + geom_point()
 # normalfördelningsantagandet, möjligen pekar QQ-plotten på mindre spridning i svansarna än en
 # teoretisk normalfördelning.
 #
-# Uppgift 10.4. (Diagnos för 1957)
+# Uppgift 8.4. (Diagnos för 1957)
 # Gör lämpliga ändringar i data ovan för diagnosgrafer för data från 1957. Finns det några tydliga
 # avvikande värden?
 # :::
 #
-# Uppgift 10.5. (Icke-linjära samband)
+# Uppgift 8.5. (Icke-linjära samband)
 # Låt oss titta på hela gapminder-datan för 2007.
 #
 
@@ -226,7 +226,7 @@ ggplot(dat_2007, aes(gdpPercap, lifeExp)) + geom_point()
 # logaritmerad `gdpPercap` istället för den ursprungliga variabeln? Är det sambandet mer linjärt?
 # :::
 #
-# Uppgift 10.6. (Log-transformerad data)
+# Uppgift 8.6. (Log-transformerad data)
 # Vad ska ändras i koden nedan för att använda logaritmerad `gdpPercap` istället för den
 # ursprungliga variabeln? Är det sambandet mer linjärt?
 #
@@ -236,7 +236,7 @@ ggplot(dat_2007, aes(gdpPercap, lifeExp)) + geom_point()
 
 # :::
 #
-# Uppgift 10.7. (Blodtrycksdata)
+# Uppgift 8.7. (Blodtrycksdata)
 # Gör lämplig ändring i stycket nedan för att läsa in fliken *Blodtrycksdata* från filen
 # *Uppgiftsdata.xlsx*.
 #
@@ -246,7 +246,7 @@ dat_blod <- read_excel("___", sheet = "Blodtryck")
 
 # :::
 #
-# Uppgift 10.8. (Blodtrycksgraf)
+# Uppgift 8.8. (Blodtrycksgraf)
 # Gör ett spridningsdiagram med ålder på x-axeln och blodtryck på y-axeln. Lägg till en
 # regressionslinje med `geom_smooth(method = lm)`.
 #
@@ -257,7 +257,7 @@ ggplot(___, aes(x = ___, y = ___)) +
 
 # :::
 #
-# Uppgift 10.9. (Blodtrycksmodell)
+# Uppgift 8.9. (Blodtrycksmodell)
 # Skatta och tolka en regressionmodell med ålder som förklarande variabel och blodtryck som
 # förklarad variabel.
 #
@@ -266,12 +266,12 @@ mod <- lm(___ ~ ___, data = dat_blod)
 
 # :::
 #
-# Uppgift 10.10. (Blodtryckstest)
+# Uppgift 8.10. (Blodtryckstest)
 # Använd `Anova()` för att testa om det finns ett signifikant samband mellan ålder och blodtryck.
 # Vad är testets nollhypotes och alternativhypotes?
 # :::
 #
-# Uppgift 10.11. (Blodtrycksdiagnos)
+# Uppgift 8.11. (Blodtrycksdiagnos)
 # Ta fram diagnosgrafer för blodtrycksmodell och avgör om det finns några tydliga avvikelser från
 # normalfördelning eller några extrema värden.
 #
@@ -303,7 +303,7 @@ cor.test(dat_eu07$lifeExp, dat_eu07$gdpPercap)
 # signifikant skild från noll (p < 0.001). Notera att p-värdet är detsamma som för lutningsparametern
 # i regressionen.
 #
-# Uppgift 10.12. (Korrelationsmatris)
+# Uppgift 8.12. (Korrelationsmatris)
 # Om man har fler än två variabler sammanfattas korrelationer ofta med en korrelationsmatris.
 #
 
@@ -314,7 +314,7 @@ cor(dat_eu07[, 4:6])
 # Vad är korrelationen mellan befolkningsstorlek och bnp per capita?
 # :::
 #
-# Uppgift 10.13. (Anscombes data)
+# Uppgift 8.13. (Anscombes data)
 # Den raka regressionslinjen eller det enkla korrelationsmåttet säger lite om hur data egentligen
 # ser ut. En vanlig illustration av detta är *Anscombes kvartett*, fyra exempel konstruerade av den
 # brittiske statistikern Francis Anscombe 1973. Datan finns tillgänglig i R som datasetet `anscombe`.
@@ -332,7 +332,7 @@ cor(anscombe$x1, anscombe$y1)
 
 # :::
 #
-# Uppgift 10.14. (Datasaurus Dozen. Beskrivande mått)
+# Uppgift 8.14. (Datasaurus Dozen. Beskrivande mått)
 # Datasaurus-datan är en konstruerad datamängd som illustrerar hur skilda mönster i data kan ge
 # samma punktskattningar (medelvärden, standardavvikelser och korrelationer). Datan finns tillgänglig
 # som en del av TidyTuesday-projektet och kan hämtas med följande rad.
@@ -353,7 +353,7 @@ dat_saurus %>%
 # Kommentera utfallet.
 # :::
 #
-# Uppgift 10.15. (Datasaurus Dozen. Grafer)
+# Uppgift 8.15. (Datasaurus Dozen. Grafer)
 # Illustrera datasaurus datan med spridningsdiagram. Använd `facet_wrap()` för småfönster per
 # `dataset`.
 #
@@ -364,7 +364,7 @@ ggplot(dat_saurus, aes(x, y)) +
 
 # :::
 #
-# Uppgift 10.16. (Galtons längdstudier. Installation av paket)
+# Uppgift 8.16. (Galtons längdstudier. Installation av paket)
 # En modern förståelse av regression införs under slutet av 1800-talet av Francis Galton (1822 -
 # 1911). I en studie från 1886 samlade Galton in data på längder hos föräldrar och barn. En av
 # Galtons slutsatser från den datan var att barn till långa föräldrar ofta blev kortade än
@@ -388,7 +388,7 @@ Galton <- 2.54 * Galton
 #
 # :::
 #
-# Uppgift 10.17. (Galtons längdstudier. Graf)
+# Uppgift 8.17. (Galtons längdstudier. Graf)
 # Gör en graf med föräldrars medellängd (`parent`) och barnets längd (`child`). Eftersom det finns
 # överlappande punkter kan man använda `geom_count()` eller `geom_jitter()` istället för
 # `geom_point()`.
@@ -399,7 +399,7 @@ ggplot(Galton, aes(parent, child)) + geom_jitter()
 
 # :::
 #
-# Uppgift 10.18. (Galtons längdstudier. Modell)
+# Uppgift 8.18. (Galtons längdstudier. Modell)
 # Skatta en regressionmodell med barnets längd som förklarad variabel och förälderns längd som
 # förklarande variabeln. Skriv ut resultaten och tolka lutningsparametern. Gör ett F-test med
 # `Anova()`.
@@ -411,7 +411,7 @@ Anova(___)
 
 # :::
 #
-# Uppgift 10.19. (Galtons längdstudier. Konfidensintervall)
+# Uppgift 8.19. (Galtons längdstudier. Konfidensintervall)
 # Paketet `emmeans()`, som vi tidigare använt för att ta fram effekter i anovamodeller, har också
 # en funktion för lutningsparametrar `emtrends()`. Vi kan använda den funktionen för att beräkna
 # konfidensintervall för lutningen.
@@ -433,7 +433,7 @@ emmeans(mod, ~ parent, at = list(parent = 68))
 # föräldrarnas medellängd är 190 cm?
 # :::
 #
-# Uppgift 10.20. (Galtons längdstudier. Diagnosgrafer)
+# Uppgift 8.20. (Galtons längdstudier. Diagnosgrafer)
 # Galtondatan omfattar 928 mätningar. Ta ut residualerna med `residuals(mod)` och gör ett histogram
 # med `hist()` eller `geom_histogram()`. Följer residualerna en ungefärlig normalfördelning?
 # :::
@@ -472,7 +472,7 @@ ggplot(dat_osm_pol, aes()) +
   geom_sf_text(aes(label = name), size = 3)
 
 #
-# Uppgift 10.21. (Malmös stadsdelar)
+# Uppgift 8.21. (Malmös stadsdelar)
 # Vad kan ändras i exemplet ovan för att ta ut Lunds stadsdelar i stället för Malmös?
 # :::
 #
@@ -491,7 +491,7 @@ ggplot() +
   geom_sf(data = dat_osm_point, aes(color = cuisine), size = 2)
 
 #
-# Uppgift 10.22. (Offentlig konst)
+# Uppgift 8.22. (Offentlig konst)
 # Offentliga konstverk är ofta registrerade med `key = 'tourism'` och `value = 'artwork'`. Vad kan
 # ändras i exemplet ovan för att ta ut offentliga konstverk i Malmö?
 # :::
@@ -518,7 +518,7 @@ dat_crit <- dat_crit[[1]] %>%
 dat_crit
 
 #
-# Uppgift 10.23. (Regissör)
+# Uppgift 8.23. (Regissör)
 # Vilken regissör har flest filmer i criterion-samlingen? Använd datan från exemplet ovan och räkna
 # antal filmer per regissör, t.ex. med `count()`.
 # :::
@@ -534,7 +534,7 @@ dat_nob <- url %>%
 dat_nob <- dat_nob[[1]]
 
 #
-# Uppgift 10.24. (Skrivspråk)
+# Uppgift 8.24. (Skrivspråk)
 # Skapa ett stapeldiagram över antalet vinnare per språk (kolumnen `Language(s)`) genom att fylla i
 # stycket nedan.
 #
@@ -546,7 +546,7 @@ ggplot(dat_agg, aes(x = n, y = ___)) +
 
 # :::
 #
-# Uppgift 10.25. (Valfri tabell)
+# Uppgift 8.25. (Valfri tabell)
 # Hitta en wikipedia-artikel med en tabell och försök hämta ner den till R genom att göra lämplig
 # ändring i exemplet ovan.
 # :::

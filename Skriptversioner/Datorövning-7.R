@@ -181,12 +181,12 @@ Anova(mod)
 # Det låga p-värdet tyder på att nollhypotesen bör förkastas, vilket alltså pekar på att det finns
 # någon eller några skillnader i medelvärde.
 #
-# Uppgift 9.1. (Anova för hand)
+# Uppgift 7.1. (Anova för hand)
 # Anovatabell från `Anova()` ger kvadratsummor och frihetsgrader. Använd den informationen för att,
 # för hand, beräkna medelkvadratsummor och F-värdet.
 # :::
 #
-# Uppgift 9.2. (Tabellvärde för F-fördelningen)
+# Uppgift 7.2. (Tabellvärde för F-fördelningen)
 # Anova-tabellen ger ett p-värde från vilket vi kan dra en direkt slutsats. Om man istället löser
 # uppgiften för hand ställer man det beräknade F-värdet mot ett kritiskt värde från en tabell över
 # F-fördelningen. Se efter om man kan hitta ett lämpligt tabellvärde för det aktuella testet (med 2
@@ -237,7 +237,7 @@ cld(em, Letters = letters)
 # se att parvisa jämförelser med ett p-värde under fem procent motsvaras av att de behandlingarna
 # inte delar någon bokstav i bokstavstabellen.
 #
-# Uppgift 9.3. (Anova med två behandlingar)
+# Uppgift 7.3. (Anova med två behandlingar)
 # Följande kod skapar en datamängd med två behandlingar.
 #
 
@@ -257,7 +257,7 @@ Anova(mod)
 
 # :::
 #
-# Uppgift 9.4. (Mass-signifikans)
+# Uppgift 7.4. (Mass-signifikans)
 # Anledning till att vi justerar p-värden är att man vid varje test har en sannolikhet att
 # förkasta. Om man gör ett stort antal tester är man nästan garanterad att få något (falskt)
 # signifikant resultat. Justering höjer p-värdena för att minska den risken. Följande kod simulerar
@@ -276,7 +276,7 @@ emmeans(mod, pairwise ~ group, adjust = "none")
 # En passande xkcd-serie: https://xkcd.com/882/
 # :::
 #
-# Uppgift 9.5. (Äppelinfektionsimport)
+# Uppgift 7.5. (Äppelinfektionsimport)
 # En studie har givit ett mått på infektion hos äppelträd. Fyra sorter jämförs med tre replikat per
 # sort. Data finns i fliken *Äppelangrepp* i excelfilen *Uppgiftsdata.xslx* på canvassidan. Fyll i
 # kodstycket nedan för att importera datan.
@@ -292,7 +292,7 @@ dat_apple
 
 # :::
 #
-# Uppgift 9.6. (Äppelinfektionsgraf)
+# Uppgift 7.6. (Äppelinfektionsgraf)
 # Fyll i kodstycket nedan för att skapa en graf av äppeldatan.
 #
 
@@ -301,7 +301,7 @@ ggplot(___, aes(x = ___, y = ___)) +
 
 # :::
 #
-# Uppgift 9.7. (Äppelinfektionsmodell)
+# Uppgift 7.7. (Äppelinfektionsmodell)
 # Fyll i kodstycket nedan för att skatta en anovamodell och ta fram anovatabellen. Vad är F-testets
 # noll- och alternativhypotes? Vilken slutsats kan man dra från testet?
 #
@@ -386,7 +386,7 @@ cld(emmeans(mod_wo_block, ~ N), Letters = letters)
 # Modellen utan block ger samma medelvärden `emmean` men större medelfel `SE` och färre
 # signifikanta skillnader.
 #
-# Uppgift 9.8. (Block med två behandlingar. Graf)
+# Uppgift 7.8. (Block med två behandlingar. Graf)
 # Det minsta möjliga blocket är det med två behandlingar. Vi filtrerar havredatan för att den
 # situationen.
 #
@@ -405,7 +405,7 @@ ggplot(dat_small_block, aes(x = ___, y = ___, group = ___)) +
 
 # :::
 #
-# Uppgift 9.9. (Block med två behandlingar. Test)
+# Uppgift 7.9. (Block med två behandlingar. Test)
 # Eftersom det är ett försök med en förklarande faktor och block kan man modellera det med den
 # tidigare blockmodellen. Men eftersom man bara har två observationer per block kan man också se det
 # som matchade stickprov, vilket kan lösas med ett t-test. Fyll i stycket nedan för att göra de två
@@ -420,7 +420,7 @@ t.test(___ ~ ___, data = dat_small_block, paired = ___)
 
 # :::
 #
-# Uppgift 9.10. (Majshybridimport)
+# Uppgift 7.10. (Majshybridimport)
 # I fliken *Majshybrider* i excelfilen *Uppgiftsdata.xlsx* finns data på fyra majssorter, vardera
 # sorterad på fem platser (som agerar som block). Importera datan med funktionen `read_excel()` genom
 # att fylla i kodstycket nedan.
@@ -431,12 +431,12 @@ dat_corn <- read_excel("", sheet = ___)
 #
 # :::
 #
-# Uppgift 9.11. (Majshybridgraf)
+# Uppgift 7.11. (Majshybridgraf)
 # Skapa en lämplig graf av datan på majshybrider. Grafen ska illustrera både jämförelsen mellan
 # hybrider och jämförelsen mellan platser. Se exemplet ovan som guide.
 # :::
 #
-# Uppgift 9.12. (Majshybridmodell)
+# Uppgift 7.12. (Majshybridmodell)
 # Fyll i koden nedan för att skatta en anova-modell med block för datan på majshybrider. Ta fram
 # anovatabellen med `Anova()`. Vilka slutsatser kan man dra från anovatabellen?
 #
@@ -446,7 +446,7 @@ Anova(mod)
 
 # :::
 #
-# Uppgift 9.13. (Majshybridjämförelser)
+# Uppgift 7.13. (Majshybridjämförelser)
 # Gör lämplig ändring i koden nedan för att jämföra hybrider, istället för platser.
 #
 
@@ -508,12 +508,12 @@ emmeans(mod_two_fact, ~ N | V)
 cld(emmeans(mod_two_fact, ~ N | V), Letters = letters)
 
 #
-# Uppgift 9.14. (Sort uppdelat efter kvävenivå)
+# Uppgift 7.14. (Sort uppdelat efter kvävenivå)
 # Gör lämplig ändring i koden ovan för att jämföra sorter *inom* kvävenivå. Finns det några
 # signifikanta skillnader?
 # :::
 #
-# Uppgift 9.15. (Interaktion med ett block)
+# Uppgift 7.15. (Interaktion med ett block)
 # I modellen ovan är block en *additiv* faktor - den ingår inte i någon interaktionseffekt. Vad
 # händer med testerna om man skattar modellen där samtliga interaktioner tas med? Varför?
 #
@@ -563,7 +563,7 @@ ggplot(oats, aes(x = Skattade, y = Residualer)) +
 # ungefär lika stor spridning kring noll-linjen för samtliga nivåer på x-axeln. För det här exemplet
 # ser det okej ut.
 #
-# Uppgift 9.16. (Bakterieimport)
+# Uppgift 7.16. (Bakterieimport)
 # Fliken *Bakterier* i filen *Uppgiftsdata.xlsx* innehåller data om tillväxt hos gräs efter
 # inokulering av bakterier. Ladda ner filen och importera datan genom att fylla i koden nedan.
 #
@@ -572,7 +572,7 @@ dat_bact <- read_excel("___", sheet = "Bakterier")
 
 # :::
 #
-# Uppgift 9.17. (Bakterieimport)
+# Uppgift 7.17. (Bakterieimport)
 # Illustrera datan med en lämplig graf, till exempel ett spridningsdiagram med `Inoculation` på
 # x-axeln, `Dry weight` på y-axeln, småfönster efter `Cultivar` och färg efter `Block`.
 #
@@ -592,7 +592,7 @@ dat_bact <- dat_bact %>%
 
 # :::
 #
-# Uppgift 9.18. (Bakteriemodell)
+# Uppgift 7.18. (Bakteriemodell)
 # Bakteriedatan har två faktorer och en blockfaktor. Skatta en anova-modell med interaktion och
 # block genom att fylla i stycket nedan. Ta fram anovatabell och dra en slutsats från F-testen.
 # Ligger slutsatsen i linje med grafen?
@@ -603,7 +603,7 @@ Anova(mod)
 
 # :::
 #
-# Uppgift 9.19. (Bakteriejämförelser)
+# Uppgift 7.19. (Bakteriejämförelser)
 # Använd `emmeans()` för parvisa jämförelser mellan inokuleringsmetoder. Vilka par är signifikant
 # åtskilda?
 #
@@ -612,7 +612,7 @@ emmeans(mod, pairwise ~ ___)
 
 # :::
 #
-# Uppgift 9.20. (Bakterieresidualer)
+# Uppgift 7.20. (Bakterieresidualer)
 # Vi använder den skattade modellen för att ta fram skattade värden och residualer.
 #
 
@@ -673,7 +673,7 @@ ggplot(dune_long %>% filter(Abundance > 0), aes(Site, Species, size = Abundance,
 #
 # Ytterligare alternativ kan vara upprepade lådagram eller staplar med småfönster per art.
 #
-# Uppgift 9.21. (Populationsgrafer)
+# Uppgift 7.21. (Populationsgrafer)
 # Vad måste läggas till i stycket nedan för göra ett lådagram (med art på y-axeln och abundans på
 # x-axeln) och ett stapeldiagram (med platstyp på x-axeln och abundans på y-axeln)?
 #
@@ -701,7 +701,7 @@ plot(hc, hang = -1, labels = dune$Type,
      axes = F, xlab = "", ylab = "", ann = F)
 
 #
-# Uppgift 9.22. (Avståndsmått)
+# Uppgift 7.22. (Avståndsmått)
 # Ta upp hjälpsidan till distansfunktionen med `?dist`. Under `method` finns flera möjliga
 # avståndsmått. Vad måste ändras i kodstycket ovan för att ange ett Manhattan-avstånd? Har avståndet
 # någon betydande effekt på träddiagrammet?
@@ -744,7 +744,7 @@ fviz_pca_biplot(pca, geom.ind = "point", habillage = dune$Type, labelsize = 3)
 # som är lika (de finns på samma platser), närliggande punkter motsvarar lika platser (de har samma
 # arter), och punkter i samma riktning som en pil har höga värden för den arten.
 #
-# Uppgift 9.23. (Skalning i en PCA)
+# Uppgift 7.23. (Skalning i en PCA)
 # En PCA kan göras med och utan att skala variablerna. Om variablerna skalas får en variabel som
 # varierar mycket samma vikt som en variabel som varierar lite. Det kan vara bra om man har variabler
 # som är mätta på olika sätt, till exempel om en variabel är i meter och en är i centimeter. Gör
@@ -786,12 +786,12 @@ emmeans(mod, ~ Type)
 #
 # Här finns en signifikant skillnad med platstyper.
 #
-# Uppgift 9.24. (Diversitetsindex)
+# Uppgift 7.24. (Diversitetsindex)
 # Ta upp hjälpsidan till funktionen `diversity()`. Hur anger man att funktionen ska ge Simpsons
 # index?
 # :::
 #
-# Uppgift 9.25. (Test på nytt index)
+# Uppgift 7.25. (Test på nytt index)
 # Gör om analysen på diversitet (anovamodellen och F-testet) med Simpsons index istället för
 # Shannon-Weaver. Påverkar valet av diversitetsindex utfallet av testet?
 # :::

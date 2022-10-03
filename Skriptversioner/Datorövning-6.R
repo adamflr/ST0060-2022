@@ -104,7 +104,7 @@ dat_long <- dat_apple %>% pivot_longer(-Tree, names_to = "Time", values_to = "He
 dat_long
 
 #
-# Uppgift 8.1. (Äppelgraf)
+# Uppgift 6.1. (Äppelgraf)
 # Fyll i kodstycket nedan för en graf av äppeldatan. Axlarna ges av `Time` och `Height`. Två
 # observationer kan kopplas genom att sätta `Tree` som grupp.
 
@@ -138,7 +138,7 @@ t.test(dat_apple$Before, dat_apple$After, paired = T)
 # $0.0987$ ger att man inte förkastar vid en signifikansnivå på fem procent. Vi drar därmed
 # slutsatsen att det inte finns någon signifikant skillnad före och efter behandling.
 #
-# Uppgift 8.2. (Ensidigt test)
+# Uppgift 6.2. (Ensidigt test)
 # Gör ett tillägg till ett av kodstyckena med `t.test()` för att beräkna ett ensidigt test med
 # mothypotesen att träden ökar i höjd efter behandling. Hjälpsidan för `t.test()` kan tas fram genom
 # att köra `?t.test()`.
@@ -148,7 +148,7 @@ t.test(dat_apple$Before, dat_apple$After, paired = T)
 # normalfördelad data. Tolkningen liknar den för ett stickprov: med 95 procents konfidens ligger den
 # sanna skillnaden i medelvärden i intervallet.
 #
-# Uppgift 8.3. (Lökimport)
+# Uppgift 6.3. (Lökimport)
 # Åtta monoglukosidmätningar på lök samlas in från fyra konventionella och fyra ekologiska ordlare.
 # Resultatet finns i fliken *Lökfärg* i excelfilen *Uppgiftsdata.xlsx* på canvassidan. Ladda ner
 # filen och importera datan genom att fylla i raden nedan.
@@ -162,7 +162,7 @@ dat_onion <- read_excel("____", sheet = "Lökfärg")
 
 # :::
 #
-# Uppgift 8.4. (Lökgraf)
+# Uppgift 6.4. (Lökgraf)
 # Fyll i stycket nedan för en graf av lökdatan från föregående uppgift.
 #
 
@@ -178,7 +178,7 @@ ggplot(dat_long, aes(___, ___, group = Odlare)) +
 # Tyder grafen på någon skillnad mellan odlingstyper?
 # :::
 #
-# Uppgift 8.5. (Löktest)
+# Uppgift 6.5. (Löktest)
 # Använd lökdatan i föregående uppgift för att testa om det finns en signifikant skillnad mellan
 # konventionell och ekologisk.
 # Formulera hypoteser och genomför testet med `t.test()`. Lös gärna uppgiften med miniräknare
@@ -241,7 +241,7 @@ t.test(Vikt_A, Vikt_B, var.equal = T)
 # lika. Grundinställningen är testet där varianser inte antas vara lika, så `t.test(Vikt ~
 # Behandling, data = dat)` ger ett lite annat resultat.
 #
-# Uppgift 8.6. (Ej lika varianser)
+# Uppgift 6.6. (Ej lika varianser)
 # Vilka resultatvärden ändras i utskriften om man sätter `var.equal = F`?
 # :::
 #
@@ -251,7 +251,7 @@ t.test(Vikt_A, Vikt_B, var.equal = T)
 # mellan populationsmedelvärden ligger i intervallet med 95 procents konfidens. Notera att värdet
 # noll inte ligger i intervallet.
 #
-# Uppgift 8.7. (Ensidigt test)
+# Uppgift 6.7. (Ensidigt test)
 # Gör lämpliga tillägg till kodstycket nedan för att göra ett ensidigt test (om B ger högre vikt än
 # A).
 #
@@ -273,7 +273,7 @@ pairwise.t.test(dat_berry$Vikt, dat_berry$Behandling, p.adjust.method = "none", 
 # Funktionen `pairwise.t.test()` för *parvisa jämförelse* mellan behandlingar, men testerna är t-test
 # för oberoende stickprov.
 #
-# Uppgift 8.8. (Ekorrdata)
+# Uppgift 6.8. (Ekorrdata)
 # I en undersökning av hur den europeiska ekorren (Sciurus vulgaris) förändras i vikt under
 # övervintring mäts 7 slumpmässigt valda ekorrar före och 5 slumpmässigt valda ekorrar efter
 # övervintring. Datan finns tillgänglig i excelfilen *Uppgiftsdata.xlsx* på canvassidan, i fliken
@@ -289,7 +289,7 @@ dat_sq
 
 # :::
 #
-# Uppgift 8.9. (Ekorrgraf)
+# Uppgift 6.9. (Ekorrgraf)
 # Fyll i följande stycke för en lämplig graf för att jämföra mätningarna före och mätningarna
 # efter.
 #
@@ -301,7 +301,7 @@ ggplot(dat_sq, aes(x = ___, y = ___)) +
 # Finns det någon synlig viktskillnad?
 # :::
 #
-# Uppgift 8.10. (Ekorrtest)
+# Uppgift 6.10. (Ekorrtest)
 # Genomför ett t-test för två oberoende stickprov på ekorrdatan genom att fylla i kodstycket nedan.
 # Formulera tydliga hypoteser och dra en klar slutsats.
 #
@@ -310,7 +310,7 @@ t.test(___ ~ ___, data = dat_sq, var.equal = ___)
 
 # :::
 #
-# Uppgift 8.11. (Ekorrdesign)
+# Uppgift 6.11. (Ekorrdesign)
 # Ett problem med att mäta skilda individer före och efter övervintring är att det kan finnas en
 # stor skillnad i vikt mellan individuella ekorrar. Kan man lägga upp försöket på ett sätt som
 # reducerar det problemet?
@@ -346,13 +346,13 @@ prop.test(c(17, 26), c(50, 60), correct = F)
 # skillnaden i proportioner mellan populationerna ligger i intervallet med 95 procents konfidens.
 # Notera att nollan ingår i intervallet.
 #
-# Uppgift 8.12. (Lämplig approximation?)
+# Uppgift 6.12. (Lämplig approximation?)
 # Z-test bygger på en normalapproximation. Som tumregel för när approximationen är rimlig används
 # ofta att n * p * (1 - p) ska vara större än 10 för bägge stickproven. Gör beräkningen för datan i
 # exemplet (17 av 50 respektive 26 av 60).
 # :::
 #
-# Uppgift 8.13. (Burfågel)
+# Uppgift 6.13. (Burfågel)
 # Det finns en förvånansvärt stor mängd studier på kopplingen mellan innehav av burfågel och
 # lungcancer. En sådan studie (Kohlmeier et al 1992) ger följande antal för burfågelägande och
 # lungcancer.
@@ -438,7 +438,7 @@ test_result$expected # Samtliga förväntade värden över 5
 #
 # Om detta krav inte är uppfyllt skriver funktionen ut en varning.
 #
-# Uppgift 8.14. (Ogiltig approximation)
+# Uppgift 6.14. (Ogiltig approximation)
 # Ta följande lilla korstabell och kör `chisq.test()` för att få ett felmeddelande.
 
 dat <- matrix(c(4,2,5,1), 2)
@@ -446,7 +446,7 @@ dat
 
 # :::
 #
-# Uppgift 8.15. (Burfågeln återvänder)
+# Uppgift 6.15. (Burfågeln återvänder)
 # En svensk studie på koppling mellan burfågel och lungcancer (Modigh et al, 1996) ger följande
 # antal (för män).
 #
@@ -469,7 +469,7 @@ chisq.test(___, correct = F)
 #
 # Chi-två-testet kan tillämpas på korstabeller med godtyckligt antal rader och kolumner.
 #
-# Uppgift 8.16. (Po-ta-toes-import)
+# Uppgift 6.16. (Po-ta-toes-import)
 # I en undersökning på potatis används fyra behandlingar (a1b1, a1b2, a2b1 och a2b2). 125 potatisar
 # från varje behandling sorteras in i fyra olika färggrupper (A, B, C och D). Datan finns i fliken
 # *Po-ta-toes* i excelfilen *Uppgiftsdata.xlsx* på canvassidan. Ladda ned filen och läs in datan
@@ -484,7 +484,7 @@ dat_pot
 
 # :::
 #
-# Uppgift 8.17. (Po-ta-toes-graf)
+# Uppgift 6.17. (Po-ta-toes-graf)
 # För att göra en graf kan man pivotera datan till lång form.
 #
 
@@ -504,7 +504,7 @@ ggplot(dat_long, aes(x = ___, y = ___, fill = ___)) +
 # Finns det några synbara skillnader mellan behandlingar?
 # :::
 #
-# Uppgift 8.18. (Po-ta-toes-test)
+# Uppgift 6.18. (Po-ta-toes-test)
 # Beräkna ett chi-två-test på potatisdatan för att se om det finns färgskillnader mellan
 # behandlingarna. Formulera tydliga hypoteser och ge ett tydligt svar.
 #
@@ -514,7 +514,7 @@ chisq.test(___)
 
 # :::
 #
-# Uppgift 8.19. (Hemmasegrar över årtionden)
+# Uppgift 6.19. (Hemmasegrar över årtionden)
 # Vi vill undersöka om andelen hemmasegrar i herrallsvenskan förändrats över tid. Vi importerar
 # data över matchresultat sedan 1920-talet.
 #
@@ -547,7 +547,7 @@ ggplot(dat_hemma, aes(x = ___, y = ___)) +
 
 # :::
 #
-# Uppgift 8.20. (1920-talet mot 1960-talet)
+# Uppgift 6.20. (1920-talet mot 1960-talet)
 # Använd ett z-test för att se om proportionen hemmasegrar under 1920-talet (371 av 738) är skild
 # från 1960-talet (590 av 1320).
 
@@ -574,7 +574,7 @@ img <- image_read(url)
 img
 
 #
-# Uppgift 8.21. (Någon annan bild)
+# Uppgift 6.21. (Någon annan bild)
 # Hitta någon annan bild online, vad som helst. Gör lämplig ändring i stycken ovan för att läsa in
 # bilden med `image_read()`.
 # :::
@@ -588,7 +588,7 @@ img <- img %>%
 img
 
 #
-# Uppgift 8.22. (Storlek)
+# Uppgift 6.22. (Storlek)
 # Vad kan vara koden för att sätta en bild till halva storleken, alltså 50% av den ursprungliga
 # bilden?
 # :::
@@ -613,7 +613,7 @@ img %>%
 img %>% image_quantize(max = 10)
 
 #
-# Uppgift 8.23. (Antal färger)
+# Uppgift 6.23. (Antal färger)
 # Med 50 enskilda färger blir *Den döende dandyn* något mattare, men karaktärernas klädsel har
 # klara färger. Hur få måste det totala antalet färger bli innan *du* ser en klar försämring av
 # bilden?
@@ -648,7 +648,7 @@ ggplot(dat_pix, aes(x, y)) +
 # Notera att vi sätter `fill` i geom-funktionen, eftersom målet är att sätta färgen till den som
 # anges i kolumnen hex.
 #
-# Uppgift 8.24. (Färg som aesthetic)
+# Uppgift 6.24. (Färg som aesthetic)
 # Vad händer om man sätter `fill = hex` inom `aes()`-funktionen istället?
 #
 
@@ -684,7 +684,7 @@ ggplot(dat_pix_count, (aes(n, hex))) +
   geom_col(fill = dat_pix_count$hex)
 
 #
-# Uppgift 8.25. (Avslutande proportionstest)
+# Uppgift 6.25. (Avslutande proportionstest)
 # Låt oss ta ett mindre stickprov från bilden. Funktionen `set.seed()` sätter ett startvärde för
 # slumtalsgeneratorn, vilket är bra om man vill reproducera ett visst utfall.
 #

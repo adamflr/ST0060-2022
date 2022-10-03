@@ -69,7 +69,7 @@ ggplot(dat_small, aes(tempo, danceability, size = valence, color = mode_name)) +
 # Till den här delen ska vi arbeta med data från *Gapminder*, en stiftelse som sprider information om
 # socio-ekonomisk utveckling och global hälsa.
 #
-# Uppgift 4.1. (Excelfil från Canvas)
+# Uppgift 2.1. (Excelfil från Canvas)
 # Hitta excelfilen *Gapminder.xlsx* på Canvas och ladda ner den. Hitta mappen som filen laddats ned
 # till.
 # :::
@@ -89,7 +89,7 @@ gapminder <- read_excel("C:/Users/User_name/Downloads/Gapminder.xlsx")    # Läs
 gapminder                                                                 # Skriv ut objektet gapminder
 
 #
-# Uppgift 4.2. (Importera från excelfil)
+# Uppgift 2.2. (Importera från excelfil)
 # Var ligger den nedladdade filen *Gapminder.xlsx*? Gör lämplig ändring i koden ovan för att läsa
 # in data från den filen. Notera att R använder högerlutande snedstreck `/`, så om en kopierad sökväg
 # har vänster-snedstreck måste de ändras. Kontrollera att datan blivit korrekt inläst genom att köra
@@ -112,7 +112,7 @@ gapminder <- read_excel("Data/Gapminder.xlsx")             # Läs in från en lo
 gapminder                                                  # Skriv ut objektet gapminder
 
 #
-# Uppgift 4.3. (Working directory)
+# Uppgift 2.3. (Working directory)
 # Identifiera *working directory* för din nuvarande Rs-session genom att köra `getwd()`.
 # :::
 #
@@ -198,7 +198,7 @@ gapminder %>%                                    # Ta datan, och sen
             Median = median(gdpPercap))          # med medianen av gdpPercap
 
 #
-# Uppgift 4.4. (Lägesmått av livslängd)
+# Uppgift 2.4. (Lägesmått av livslängd)
 # Gör lämpliga ändringar i exemplet ovan för att beräkna lägesmått för medellivslängd (`lifeExp`).
 # :::
 #
@@ -212,12 +212,12 @@ gapminder %>%                                    # Ta datan, och sen
             Median = median(gdpPercap))          # med medianen av gdpPercap
 
 #
-# Uppgift 4.5. (Lägesmått per kontinent)
+# Uppgift 2.5. (Lägesmått per kontinent)
 # Gör lämpliga ändringar i exemplet ovan för att beräkna lägesmått per kontinent. Vad måste läggas
 # till för att också beräkna maximum och minimum per kontinent (funktionerna `max()` och `min()`)?
 # :::
 #
-# Uppgift 4.6. (Upprepade mätningar)
+# Uppgift 2.6. (Upprepade mätningar)
 # Finns det några problem med att beräkna medelvärde per kontinent på den här datan? (Jag kan se
 # minst två.)
 # :::
@@ -254,7 +254,7 @@ ggplot(dat_gdp_2007, aes(continent, Mean)) +
   geom_text(aes(continent, gdpPercap, label = country), data = gapminder %>% filter(year == 2007), size = 2)
 
 #
-# Uppgift 4.7. (Graf för livslängd)
+# Uppgift 2.7. (Graf för livslängd)
 # Gör om stapeldiagrammet. Denna gång med livslängd (`lifeExp`) istället för bnp per capita
 # (`gdpPercap`).
 # :::
@@ -292,7 +292,7 @@ gapminder %>%                                    # Ta datan, och sen
             Kvartilavstånd = IQR(gdpPercap))     # och kvartilavstånd
 
 #
-# Uppgift 4.8. (Graf för livslängd)
+# Uppgift 2.8. (Graf för livslängd)
 # Gör lämpliga ändringar i det sista exempel för att istället beräkna spridningsmått för livslängd.
 # :::
 #
@@ -319,7 +319,7 @@ ggplot(dat_sum, aes(year, Mean, color = continent)) +      # Skapa en ggplot fr�
   geom_errorbar(aes(ymin = Mean - SE, ymax = Mean + SE))   # Illustrera med felstaplar
 
 #
-# Uppgift 4.9. (Bredd)
+# Uppgift 2.9. (Bredd)
 # Felstaplarna från `geom_errorbar()` har väldigt breda ändar. Använd hjälpsidan för geomet
 # `?geom_errorbar`, i synnerhet exemplen längst ned, och se om det går att ändra bredden.
 # :::
@@ -348,7 +348,7 @@ ggplot(dat_sum, aes(continent, Mean, fill = continent)) +          # Skapa en gg
        Source: Gapminder")
 
 #
-# Uppgift 4.10. (Staplar för 1982)
+# Uppgift 2.10. (Staplar för 1982)
 # Gör lämpliga ändringar i exempel ovan för att konstruera ett stapeldiagram med felstaplar för
 # året 1982 och variabeln gdpPercap.
 # :::
@@ -364,9 +364,43 @@ ggplot(gapminder, aes(year, lifeExp, fill = continent, group = year)) +        #
   facet_wrap(~ continent)                                                      # Småfönster efter kontinent
 
 #
-# Uppgift 4.11. (Group-argumentet)
+# Uppgift 2.11. (Group-argumentet)
 # I lådagrammet används argumentet `group`. Vad gör det? Vad händer om man tar bort det?
 # :::
+#
+# Om man vill ha med både data på observationsnivån och summerad data i en graf kan man ange olika
+# data till olika geom. Vi kan t.ex. lägga till en markör för medelvärdet i en boxplot.
+#
+
+gapminder_2007 <- gapminder %>% filter(year == 2007)
+gapminder_agg <- gapminder_2007 %>% 
+  group_by(continent) %>% 
+  summarise(lifeExp = mean(lifeExp))
+gapminder_agg
+
+ggplot() +
+  geom_boxplot(aes(lifeExp, continent), data = gapminder_2007) +
+  geom_point(aes(lifeExp, continent), data = gapminder_agg, color = "red", shape = "X", size = 6)
+
+#
+# Här byggs boxarna med datan gapminder och punkterna med den aggregerade datan. Beräkningen av
+# medelvärde och median ger att en datamängd ofta har en längre svans åt det håll som medelvärdet
+# ligger relativt medianen - ett medelvärde under medianen skulle tyda på att det finns några
+# särskilt låga observationer. Kan den effekten ses i grafen?
+#
+# Möjligheten att sätta data inom en `geom_()`-funktion kan blandas med `filter()` för att visa
+# olika data i olika geom. Här ges ett spridningsdiagram över bnp och medellivslängd per land, och
+# linjeserier (`geom_path()`) över tid för två specifika länder. Geom `geom_point()` är alltså på
+# flera länder vid en tid, medan `geom_path()` är över tid för ett land.
+#
+
+gapminder_eu <- gapminder %>% filter(continent == "Europe")
+
+ggplot(gapminder_eu, aes(gdpPercap, lifeExp, group = country, label = country)) +
+  geom_text(data = gapminder_eu %>% filter(year == 2007)) +
+  geom_path(color = "blue", size = 3, data = gapminder_eu %>% filter(country == "Sweden"), alpha = 0.3) +
+  geom_path(color = "red", size = 3, data = gapminder_eu %>% filter(country == "Poland"), alpha = 0.3)
+
 #
 # ## Ordna upp beskrivande statistik och exportera
 #
@@ -399,7 +433,7 @@ dat_sum <- dat_sum %>%
   mutate(mean_plus_minus_sd = paste(round(Mean, 1), "±", round(SD, 1)))        # Skapa en ny kolumn med avrundade värden
 
 #
-# Uppgift 4.12. (Tappade nollor)
+# Uppgift 2.12. (Tappade nollor)
 # Utfallet ovan är nära men inte heller riktigt vad som behövs. I de fall där funktionen avrundat
 # till en nolla har decimal tappats. Hur kan man visa en avslutande nolla? Följande tråd på
 # StackOverflow besvarar samma fråga.
@@ -517,7 +551,7 @@ dat_dice
 #
 # Om beräkning inte är uppenbar här, ta någon minut för att förstå den.
 #
-# Uppgift 4.13. (Kumulativt medelvärde)
+# Uppgift 2.13. (Kumulativt medelvärde)
 # Vad ska läggas till för att stycket nedan ska ge en linjegraf över medelvärdet?
 #
 
@@ -526,7 +560,7 @@ ggplot(dat_dice, aes(x = Kast, y = ___)) +
 
 # :::
 #
-# Uppgift 4.14. (Fler tärningskast)
+# Uppgift 2.14. (Fler tärningskast)
 # Kasta din tärning ytterligare några gånger, gärna på en mjuk yta. Fyll i dina utfall och gör
 # grafen från föregående uppgift. Kan man se en tendens för medelvärdet att minska i varians vid fler
 # kast?
@@ -540,7 +574,7 @@ dat_dice
 
 # :::
 #
-# Uppgift 4.15. (Kumulativ frekvens)
+# Uppgift 2.15. (Kumulativ frekvens)
 # Om man vill titta på andelen gånger ett visst utfall inträffat talar man om *kumulativ frekvens*
 # snarare än *kumulativt medelvärde*. Använd stycket nedan för att titta på andelen gånger utfallet
 # varit en etta (ett *positivt* utfall, i begreppets kliniska mening). Om ett inte är ett möjligt
@@ -565,7 +599,7 @@ ggplot(dat_dice, aes(x = Kast, y = `Kumulativ frekvens`)) +
 # räkneupgifter på kursen. I den här delen ska vi titta på datan i fliken *Darwin* som innehåller en
 # jämförelse i planthöjd mellan kors- och självbefruktade plantor.
 #
-# Uppgift 4.16. (Ladda ner uppgiftsdata)
+# Uppgift 2.16. (Ladda ner uppgiftsdata)
 # Ladda ner filen med uppgiftsdata till din lokala hårddisk.
 # :::
 #
@@ -573,7 +607,7 @@ ggplot(dat_dice, aes(x = Kast, y = `Kumulativ frekvens`)) +
 # ta är `sheet`, som styr vilken flik som ska läsas in. Som tidigare måste man ange var på datorn
 # excel-filen ligger.
 #
-# Uppgift 4.17. (Läs in Darwin-datan)
+# Uppgift 2.17. (Läs in Darwin-datan)
 # Gör lämpliga ändringar i koden nedan för att läsa in fliken *Darwin*.
 #
 
@@ -585,7 +619,7 @@ dat_darwin %>% print(n = 30)                                              # Skri
 # När data är inläst kan man sammanfatta den med medelvärde, standardavvikelse och medelfel (där
 # medelfelet ges av standardavvikelsen delad på roten ur antalet observationer).
 #
-# Uppgift 4.18. (Sammanfatta Darwin-datan)
+# Uppgift 2.18. (Sammanfatta Darwin-datan)
 # Fyll i koden nedan för att beräkna medelvärde, standardavvikelse, antal observationer och
 # medelfel. Gör beräkningen per grupp (`Metod`)
 #
@@ -603,7 +637,7 @@ dat_sum
 # Slutligen kan vi presentera de sammanfattande måtten med en lämplig graf. Ett vanligt val är ett
 # stapeldiagram med felstaplar för medelfelen.
 #
-# Uppgift 4.19. (Illustrera Darwin-datan)
+# Uppgift 2.19. (Illustrera Darwin-datan)
 # Fyll i koden nedan för att skapa ett stapeldiagram med felstaplar av de sammanfattande måtten i
 # objektet som skapades i uppgiften ovan. Felstaplarna styrs med argumenten `ymin` och `ymax`. Dess
 # ska sättas till medelvärdet minus ett medelfel respektive medelvärdet plus ett medelfel. Välj
@@ -622,7 +656,7 @@ ggplot(dat_sum, aes(Metod, Medelvärde)) +
 # Ett annat alternativ för en graf ett lådagram per grupp. Här används den ursprungliga datan,
 # snarare än beräknad beskrivande statistik.
 #
-# Uppgift 4.20. (Illustrera Darwin-datan)
+# Uppgift 2.20. (Illustrera Darwin-datan)
 # Fyll i koden nedan för att skapa ett lådagram för de två metoderna. Låt x-axeln ange planthöjden
 # (`Utfall`) och y-axeln metoden (`Metod`). Även här kan man styra färger och bredd med `color`,
 # `fill` och `width`.
@@ -673,7 +707,7 @@ plot_ly(dat_ex, x = ~Var1, y = ~Var2, z = ~Var3, color = ~Type) %>%
 # `color`. Efter det lägger man till punkter (här *markers*) med en pipe in i `add_markers()`. Vi
 # vill göra en liknande graf med gapminder-datan, men får börja med att filtrera på ett visst år.
 #
-# Uppgift 4.21. (Filtrera för år)
+# Uppgift 2.21. (Filtrera för år)
 # Vad måste läggas till i funktionen nedan för att filtrera för data där året är 2007?
 #
 
@@ -684,7 +718,7 @@ dat_2007 <- gapminder %>%
 #
 # Vi kan nu konstruera en 3d-graf med datan.
 #
-# Uppgift 4.22. (Gapminder i 3d)
+# Uppgift 2.22. (Gapminder i 3d)
 # Vad måste läggas till i funktionen nedan för en 3d-graf med befolkningsmängd (`pop`) på x-axeln,
 # livslängd (`lifeExp`) på y-axeln, bnp per capita (`gdpPercap`) på z-axeln, och färg efter kontinent
 # (`continent`)? För att kunna identifiera specifika länder kan man också sätta argumentet `text`.
@@ -695,7 +729,7 @@ plot_ly(___, x = ~___, y = ~___, z = ~___, color = ~___, text = ~country) %>%
 
 # :::
 #
-# Uppgift 4.23. (Log-transformationer)
+# Uppgift 2.23. (Log-transformationer)
 # Inom statistiken är det vanligt att transformera variabler för att ta bort extremeffekter och
 # visa på specifika dataegenskaper. En vanlig transform är att *logaritmera* ett värde, vilket
 # innebär att man istället för att använda det ursprungliga värdet använder exponenten i någon bas
@@ -713,7 +747,7 @@ plot_ly(___, x = ~log10(___), y = ~log10(___), z = ~___, color = ~___, text = ~c
 
 # :::
 #
-# Uppgift 4.24. (Följa ett land)
+# Uppgift 2.24. (Följa ett land)
 # Likt en ggplot kan man lägga till graf-element. Här använder man dock en pipe för lägga till ett
 # nytt element. Fyll i kodstycket nedan. Vad, om något, har lagts till i grafen?
 #
@@ -724,7 +758,7 @@ plot_ly(___, x = ~log10(___), y = ~log10(___), z = ~___, color = ~___, text = ~c
 
 # :::
 #
-# Uppgift 4.25. (Spotify 3d)
+# Uppgift 2.25. (Spotify 3d)
 # Som avslutning återvänder vi till spotify-datan från datorövning 1. Fyll i stycket nedan för att
 # skapa en graf med tempo, dansbarhet och valens (`tempo`, `danceability`, `valence`) på axlarna,
 # storlek efter energi (`energy`) och text efter spårnamn (`track_name`). Filtrera på valfri artist.
@@ -741,7 +775,7 @@ plot_ly(dat_small, x = ~___, y = ~___, z = ~___, size = ~___, text = ~___) %>%
 #
 # ## Valfria hemuppgifter
 #
-# Uppgift 4.26. (TidyTuesday)
+# Uppgift 2.26. (TidyTuesday)
 # *TidyTuesday* är ett R-kopplat pedagogiskt projekt som varje vecka publicerar ett nytt dataset
 # och utmanar allmänheten att skapa bästa möjliga visualisering av data. Resultaten publiceras
 # vanligen på Twitter med *#TidyTuesday*. På sidan
@@ -751,25 +785,26 @@ plot_ly(dat_small, x = ~___, y = ~___, z = ~___, size = ~___, text = ~___) %>%
 # av datan?
 # :::
 #
-# Uppgift 4.27. (r/dataisbeautiful)
+# Uppgift 2.27. (r/dataisbeautiful)
 # Gå till reddit-sidan *dataisbeautiful*. Välj en graf som verkar tydlig eller vacker eller
 # intressant. Försök förstå den i termer av data (vilken information ligger bakom grafen), geometrier
 # (vilka geometriska former är synliga i grafen, punkter, linjer, staplar), och estetik (vilka
 # datavariabler styr hur geometrin ser ut och var den är placerad).
 # :::
 #
-# Uppgift 4.28. (More or Less: Behind the Stats)
+# Uppgift 2.28. (More or Less: Behind the Stats)
 # BBC Radio har ett program om statistik, se https://www.bbc.co.uk/programmes/p02nrss1. Lyssna på
 # ett avsnitt. Sammanfatta det i tre meningar.
 # :::
 #
-# Uppgift 4.29. (gganimate)
+# Uppgift 2.29. (gganimate)
 # Med paketet `gganimate` (https://gganimate.com/) kan man göra animationer av ggplot-grafer.
 # Installera paketet med `install.packages("gganimate")` och försök köra de exempel som ges på
 # hemsidan.
 # :::
 #
-# Uppgift 4.30. (Skumma ett paper)
+# Uppgift 2.30. (Skumma ett paper)
 # Hitta en *vetenskaplig* artikel i valfri tidskrift. Vilka läges- och spridningsmått kan du hitta?
-# Vilka grafer?
+# Vilka grafer? Finns det några grafer med den karaktäristiska grå bakgrunden som är basutseendet i
+# en ggplot?
 # :::

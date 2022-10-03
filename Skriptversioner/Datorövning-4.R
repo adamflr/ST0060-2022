@@ -100,7 +100,7 @@ ggplot(dat, aes(x, 0)) +
 # Alternativhypotesen är tvåsidig - vi tittar både på möjligheten att populationsmedelvärdet är
 # större och 50 på möjligheten att det är mindre.
 #
-# Uppgift 6.1. (Ensidig mothypotes)
+# Uppgift 4.1. (Ensidig mothypotes)
 # Hur hade hypoteserna sett ut om vi ville testa om medelvärdet är större än 50?
 # :::
 #
@@ -117,12 +117,12 @@ sd(dat$x)
 t_value <- (52 - 50) / (4.680354 / sqrt(8))
 
 #
-# Uppgift 6.2. (Operationsordning)
+# Uppgift 4.2. (Operationsordning)
 # Räkna ut samma sak på miniräknare eller telefon. Vad händer om man missar parenteser runt
 # `4.680354 / sqrt(8)`?
 # :::
 #
-# Uppgift 6.3. (t-värdets delar)
+# Uppgift 4.3. (t-värdets delar)
 # Vad händer med t-värdet om något av följande händer, givet att övriga delar är desamma? Det
 # observerade medelvärdet (här 52) ökar. Nollhypotesens värde (här 50) minskar. Standardavvikelsen
 # (här 4.680354) minskar. Antalet observationer (här 8) ökar.
@@ -175,7 +175,7 @@ ggplot(dat_t) +
 # p-värdet över den nivån, så vi kan inte förkasta nollhyptesen. Slutsatsen är att det *inte* finns
 # någon signifikant skillnad från 50 i havreskörd.
 #
-# Uppgift 6.4. (Kritiskt värde)
+# Uppgift 4.4. (Kritiskt värde)
 # Om man gör ett t-test för hand kan man inte enkelt ta fram ett p-värde, men kan se om p-värdet är
 # större eller mindre än fem procent genom att ställa testvärdet mot ett kritiskt värde. Använd en
 # tabell för t-fördelning för att hitta det kritiska värdet.
@@ -198,17 +198,17 @@ t.test(dat$x, mu = 50) # Tvåsidigt test
 #
 # Funktionen skriver ut det beräkna t-värdet, antal frihetsgrader och p-värdet.
 #
-# Uppgift 6.5. (Ensigt test)
+# Uppgift 4.5. (Ensigt test)
 # Använd `?t.test` för att ta fram funktionens hjälpsida. Försök att utifrån hjälpsidan beräkna ett
 # ensidigt test för att se om medelskörden är *större* än 50.
 # :::
 #
-# Uppgift 6.6. (Ny nollhypotes)
+# Uppgift 4.6. (Ny nollhypotes)
 # Upprepa det tvåsidiga testet från exemplet ovan. Testa denna gång om medelskörden är skild från
 # 48. Dra en tydlig slutsats.
 # :::
 #
-# Uppgift 6.7. (Importera smältpunkt-data)
+# Uppgift 4.7. (Importera smältpunkt-data)
 # På canvassidan finns en excelfil med data för kursens uppgifter *Uppgiftsdata.xlsx*. Fliken
 # *Smältdata* innehåller data för en legerings smältpunkt.
 #
@@ -220,7 +220,7 @@ dat_smält <- read_excel("___", sheet = "Smältpunkt")
 
 # :::
 #
-# Uppgift 6.8. (Plotta smältpunkt-data)
+# Uppgift 4.8. (Plotta smältpunkt-data)
 # Illustrera smältpunktsdatan på samma sätt som exempeldatan genom att fylla i följande kod. Vårt
 # mål är att testa om medelvärde är skilt från 1050, vilket här kan noteras med ett vertikalt streck
 # vid 1050.
@@ -235,7 +235,7 @@ ggplot(___, aes(x = Smältpunkt, y = 0)) +
 # stickprov vi observerar?
 # :::
 #
-# Uppgift 6.9. (Hypotestest för hand)
+# Uppgift 4.9. (Hypotestest för hand)
 # Genomför ett t-test för hand för att se om medelsmältpunkten är skild från 1050. Skriv ut tydliga
 # hypoteser. Medelvärde och standardavvikelse ges av följande.
 #
@@ -251,7 +251,7 @@ qt(0.975, df = 9)
 
 # :::
 #
-# Uppgift 6.10. (Hypotestest i R)
+# Uppgift 4.10. (Hypotestest i R)
 # Genomför ett t-test med funktionen `t.test()` för att se om medelsmältpunkten är skild från 1050.
 # :::
 #
@@ -289,7 +289,7 @@ qt(0.975, 7)
 #
 # 52 ± 2.365 * 4.680 / sqrt(8)
 #
-# Uppgift 6.11. (Konfidensintervall för hand)
+# Uppgift 4.11. (Konfidensintervall för hand)
 # Ta fram medelvärde, standardavvikelse och kritiskt värde för smältpunktsdata, med hjälp av R
 # (eller en tabell för det kritiska värdet). Beräkna konfidensintervallet för smältpunktsdatan för
 # hand.
@@ -299,7 +299,7 @@ qt(0.975, 7)
 # Notera att konfidensintervallet inte beror på nollhypotesen. Konfidensintervall kan beräknas med
 # skilda konfidensnivåer, oftast 95 procent, vilket sätts med argumentet `conf.level`.
 #
-# Uppgift 6.12. (Konfidensnivå)
+# Uppgift 4.12. (Konfidensnivå)
 # Gör lämplig ändring i koden nedan för att beräkna ett 99-procentigt konfidensintervall, istället
 # för ett 95-procentigt.
 #
@@ -310,12 +310,12 @@ t.test(dat$x, conf.level = 0.95)
 # Är ett 99-procentigt konfidensintervall bredare eller smalare än ett 99-procentigt?
 # :::
 #
-# Uppgift 6.13. (Ensidiga konfidensintervall)
+# Uppgift 4.13. (Ensidiga konfidensintervall)
 # I en tidigare uppgift användes argumentet `alternative` för att göra ett ensidigt test med
 # `t.test()`. Vad händer med konfidensintervallet om man anger ett ensidigt test?
 # :::
 #
-# Uppgift 6.14. (Konfidensintervall för smältdata)
+# Uppgift 4.14. (Konfidensintervall för smältdata)
 # Ta datan över smältpunkter och beräkna ett konfidensintervall med `t.test()`. Tolka intervallet.
 # :::
 #
@@ -329,7 +329,7 @@ ggplot(dat, aes(x, 0)) +
   annotate("errorbar", xmin = interval[1], xmax = interval[2], y = -1, width = 0.1)
 
 #
-# Uppgift 6.15. (Illustration av smältdata)
+# Uppgift 4.15. (Illustration av smältdata)
 # Använd exempelillustrationen för havredata till en liknande illustration av smältpunktsdatan.
 # :::
 #
@@ -351,7 +351,7 @@ n <- 10
 ggplot() + geom_histogram(aes(x = rnorm(n)), bins = 30)
 
 #
-# Uppgift 6.16. (Histogram för normalfördelning)
+# Uppgift 4.16. (Histogram för normalfördelning)
 # Testa koden ovan för lite olika värden på `n`. Det kan vara nyttigt att sätta antalet staplar
 # `bins` för att få ett bättre histogram. Hur stort måste n vara för att ge en karaktäristisk
 # klockform för histogrammet?
@@ -376,7 +376,7 @@ dat_norm <- data.frame(x = rnorm(n))
 ggplot(dat_norm, aes(sample = x)) + geom_qq() + geom_qq_line()
 
 #
-# Uppgift 6.17. (Histogram för normalfördelning)
+# Uppgift 4.17. (Histogram för normalfördelning)
 # Funktionen `runif()` ger slumpmässiga värden mellan 0 och 1. Testa att ändra i kodstycket ovan så
 # att slumptal genereras med `runif()` istället för `rnorm()`. Hur påverkar det QQ-grafen?
 # :::
@@ -402,7 +402,7 @@ ggplot(dat_sim_unif, aes(sample = x)) + geom_qq() + geom_qq_line()
 # Fördelningen för summan är inte likformig, men inte heller särskilt normalfördelad. Vad händer om
 # vi ökar antal termer i summan?
 #
-# Uppgift 6.18. (Antalet observationer för normalfördelning)
+# Uppgift 4.18. (Antalet observationer för normalfördelning)
 # Vad måste ändras i koden ovan för beräkna medelvärdet av tio observationer? Följer de
 # medelvärdena en ungefärlig normalfördelning? Vad är det lägsta antalet observationer som ger
 # ungefärligen normalfördelade medelvärden?
@@ -429,7 +429,7 @@ ggplot(dat_sim_unif, aes(sample = x)) + geom_qq() + geom_qq_line()
 # trappeffekt är typisk för diskret data. Det här tyder alltså på att t-testet är ett acceptabelt
 # alternativ om man har en poissonfördelning med lambda runt tio och gör tio upprepningar.
 #
-# Uppgift 6.19. (Svag normalapproximation)
+# Uppgift 4.19. (Svag normalapproximation)
 # Testa att minska värdena på n och lambda. Vad är de lägsta värdena som ger ett histogram med en
 # symmetrisk fördelning och punkter nära linjen i QQ-grafen?
 # :::
@@ -460,7 +460,7 @@ g1 + g3 + g5 + g2 + g4 + g6
 # två första fallen påverkas kraftigt av extremvärden och är klart icke-normala medan den
 # log-transformerade variabeln ger en ungefärlig normalkurva och följer diagonalen väl i QQ-grafen.
 #
-# Uppgift 6.20. (Transformera medellivslängd)
+# Uppgift 4.20. (Transformera medellivslängd)
 # Använd kodstycket ovan som mall och ta fram grafer för medellivslängd (`lifeExp`) istället för
 # befolkningsstorlek (`pop`). Visar grafen samma mönster som för befolkningsdatan?
 # :::
@@ -476,7 +476,7 @@ dat_sim <- data.frame(x = rnorm(10, mean = 7, sd = 5))
 t.test(dat_sim$x, mu = 7)
 
 #
-# Uppgift 6.21. (Upprepad simulering)
+# Uppgift 4.21. (Upprepad simulering)
 # Kör de två raderna i stycket ovan ett tiotal gånger. Du bör se att man ibland förkastar
 # nollhypotesen trots att den ska stämma. Kan du få en känsla för hur stor andel av gångerna man
 # felaktigt förkastar?
@@ -517,11 +517,11 @@ mean(dat_sim$p_value < 0.05)
 # procent kommer man förkasta nollhypotesen fem procent av gångerna även om nollhypotesen stämmer.
 # Det kallas ett *falskt positivt* utfall.
 #
-# Uppgift 6.22. (Simulerade konfidensintervall)
+# Uppgift 4.22. (Simulerade konfidensintervall)
 # Hur många av de simulerade konfidensintervallen täcker värdet 7?
 # :::
 #
-# Uppgift 6.23. (Signifikant skillnad)
+# Uppgift 4.23. (Signifikant skillnad)
 # Stycket nedan simulerar data när populationsmedelvärdet är 9 och t-test har nollhypotesen att
 # populationsmedelvärdet är 7. Här vill vi alltså förkasta nollhypotesen.
 #
@@ -541,7 +541,7 @@ for(i in 1:1000){
 # signifikansnivån 5 procent.
 # :::
 #
-# Uppgift 6.24. (50/50)
+# Uppgift 4.24. (50/50)
 # Stycket nedan simulerar data när populationsmedelvärdet är 9 och t-test har nollhypotesen att
 # populationsmedelvärdet är 7. Ändra värdet för n och se hur det påverkar andelen gånger man
 # förkastar nollhypotesen.
@@ -565,7 +565,7 @@ mean(dat_sim$p_value < 0.05)
 # nollhypotesen?
 # :::
 #
-# Uppgift 6.25. (Konfidensintervallets bredd)
+# Uppgift 4.25. (Konfidensintervallets bredd)
 # Ett konfidensintervall blir smalare och smalare ju större stickprovet är. Koden nedan ger
 # medelvärdet för stickprovsbredden i simulerad data med standardavvikelsen 1.
 #

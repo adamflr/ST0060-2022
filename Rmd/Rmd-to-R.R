@@ -11,7 +11,7 @@ for(i in 1:8){
   tab_ex <- tibble(text = text[ex_lines]) %>% 
     mutate(Inner = substring(text, 22, nchar(text) - 2),
            id = 1:n(),
-           New = paste0("Uppgift ", id_no + 2, ".", id, ". (", Inner, ")"))
+           New = paste0("Uppgift ", id_no, ".", id, ". (", Inner, ")"))
   
   text[ex_lines] <- tab_ex$New
   

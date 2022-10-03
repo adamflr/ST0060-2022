@@ -90,7 +90,7 @@ ggplot(dat_alls, aes(hemmamal, bortamal)) +
   geom_jitter(size = 0.1)
 
 #
-# Uppgift 7.1. (En interaktiv målgraf)
+# Uppgift 5.1. (En interaktiv målgraf)
 # Kör stycket nedan för en interaktiv målgraf. Vilken match gav det högsta antalet insläppta mål på
 # hemmaplan?
 
@@ -183,12 +183,12 @@ prop.test(x = 947, n = 2750, p = 0.33, correct = F)
 z_value^2
 
 #
-# Uppgift 7.2. (Ensidigt test)
+# Uppgift 5.2. (Ensidigt test)
 # Titta på hjälpsidan med `?prop.test`. Hur genomför man ett ensidigt test? Gör lämpligt tillägg
 # för att testa om andelen bortasegrar är större än 0.33.
 # :::
 #
-# Uppgift 7.3. (Test för proportionen oavgjorda)
+# Uppgift 5.3. (Test för proportionen oavgjorda)
 # Samma gamla bollkunskap säger att 20 procent av matcher blir oavgjorda. I datan är 518 av 2750
 # matcher oavgjorda. Ställ upp hypoteser och fyll i koden nedan för att testa om bollkunskapen
 # stämmer.
@@ -198,7 +198,7 @@ prop.test(x = ___, n = ___, p = ___, correct = F)
 
 # :::
 #
-# Uppgift 7.4. (Test för proportionen hemmasegrar)
+# Uppgift 5.4. (Test för proportionen hemmasegrar)
 # Slutligen är då resten av matcherna, 1285 av 2750, hemmasegrar. Bollkunskap säger: *47 procent av
 # alla matcher är hemmasegrar*. Genomför ett z-test för att testa det påstående.
 #
@@ -207,7 +207,7 @@ prop.test(x = ___, n = ___, p = ___, correct = F)
 
 # :::
 #
-# Uppgift 7.5. (Population och stickprov)
+# Uppgift 5.5. (Population och stickprov)
 # Ett hypotestest bygger på en underliggande tanke med en population (med någon för oss okänd
 # proportion positiva utfall) och ett stickprov (i vilket vi kan observera andelen positiva utfall).
 # Testet säger oss om någon hypotes om populationens proportion är rimlig i ljus av den proportion vi
@@ -220,14 +220,14 @@ prop.test(x = ___, n = ___, p = ___, correct = F)
 # datan?
 # :::
 #
-# Uppgift 7.6. (Guldfiskgenetik)
+# Uppgift 5.6. (Guldfiskgenetik)
 # (Fråga från Olsson, *Biometri*) En teori inom genetik förutsäger att tre fjärdedelar i en grupp
 # guldfiskar ska ha genomskinliga fjäll. Observationer ger att nittio av hundra har genomskinliga
 # fjäll. Genomför ett test med `prop.test()` för att se om den faktiska proportionen skiljer sig från
 # 0.75. Lös gärna först uppgiften för hand eller med miniräknare.
 # :::
 #
-# Uppgift 7.7. (Mer guldfiskgenetik)
+# Uppgift 5.7. (Mer guldfiskgenetik)
 # (Fråga från Olsson, *Biometri*) En konkurrerande teori inom genetik förutsäger att femton
 # sextondelar (proportionen 0.9375) ska ha genomskinliga fjäll. Observationer ger att nittio av
 # hundra har genomskinliga fjäll. Genomför ett test med `prop.test()` för att se om proportionen
@@ -240,19 +240,19 @@ prop.test(x = ___, n = ___, p = ___, correct = F)
 # att n gånger p0 gånger (1 - p0) ska vara större än 10. För fotbollsdatan över oavgjorda matcher ger
 # det 2750 * 0.2 * 0.8 vilket är klart större än 10.
 #
-# Uppgift 7.8. (Giltig approximation)
+# Uppgift 5.8. (Giltig approximation)
 # I det andra guldfiskexemplet är antalet observationer 100 och nollhypotesens värde 0.9375. Är
 # normalapproximationen *giltig* i det fallet?
 # :::
 #
-# Uppgift 7.9. (Fågelproportioner)
+# Uppgift 5.9. (Fågelproportioner)
 # I ett naturreservat tror man fördelningen av tre fåglar (tärnmås, fiskmås och fisktärna) är 50,
 # 30 respektive 20 procent. En studie ger antalen 115, 54 respektive 31. Genomför tre z-test för att
 # testa den antagna andelarna. För tärnmås får man till exempel `prop.test(115, 200, p = 0.5, correct
 # = F)`.
 # :::
 #
-# Uppgift 7.10. (Förbestämd signifikans)
+# Uppgift 5.10. (Förbestämd signifikans)
 # En intressant egenskap hos proportionstest är att man redan i förväg kan beräkna vilka utfall som
 # ger signifikanta resulat. Säg att man har möjlighet att göra 100 replikat. Ändra i stycket nedan
 # för att hitta det högsta värde på x som ger ett *icke*-signifikant utfall.
@@ -293,7 +293,7 @@ library(binom)
 binom.asymp(x = 947, n = 2750)
 
 #
-# Uppgift 7.11. (99-procentigt konfidensintervall)
+# Uppgift 5.11. (99-procentigt konfidensintervall)
 # Gör lämplig ändring i koden nedan för att beräkna ett 99-procentigt konfidensintervall för
 # andelen bortasegrar.
 #
@@ -302,12 +302,12 @@ binom.asymp(x = 947, n = 2750, conf.level = 0.95)
 
 # :::
 #
-# Uppgift 7.12. (Perfekta utfall)
+# Uppgift 5.12. (Perfekta utfall)
 # Vad händer om man försöker räkna ut ett konfidensintervall för ett perfekt utfall - t.ex. om man
 # får 100 av 100 positiva utfall?
 # :::
 #
-# Uppgift 7.13. (Konfidensintervall för guldfiskar)
+# Uppgift 5.13. (Konfidensintervall för guldfiskar)
 # Använd funktionen `binom.asymp()` för att ta fram konfidensintervallet för andelen guldfiskar
 # från den tidigare uppgiften. Hur förhåller sig resultatet till nollhypotesernas värden (0.75
 # respektive 0.9375)? Gör motsvarande beräkning med miniräknare.
@@ -336,7 +336,7 @@ O <- c(947, 518, 1285)
 E <- c(0.33,0.20,0.47) * 2750
 
 #
-# Uppgift 7.14. (Granska E)
+# Uppgift 5.14. (Granska E)
 # Skriv ut objektet `E` och jämför med de observerade värdena. Notera att de förväntade värdena
 # inte måste vara heltal, trots att de observerade värdena förstås alltid kommer vara det.
 # :::
@@ -387,7 +387,7 @@ chisq.test(O, p = c(0.33, 0.2, 0.47))
 #
 # Testet ger samma chi-två-värde och p-värde som beräknats stegvis.
 #
-# Uppgift 7.15. (Chi-två med två klasser)
+# Uppgift 5.15. (Chi-två med två klasser)
 # Situationen med flera klasser kan som sagt ses som en generalisering av fallet med två klasser.
 # Det är alltså logiskt att chi-två-test kan användas även när man har två klasser. Följande exempel
 # ger samma test som vi sett tidigare av andelen bortasegrar.
@@ -411,7 +411,7 @@ chisq.test(x = c(947, 1803), p = c(0.33, 0.67), correct = F)
 chisq.test(c(6,4), p = c(0.51, 0.49))
 
 #
-# Uppgift 7.16. (Chi-två med lika sannolikheter)
+# Uppgift 5.16. (Chi-två med lika sannolikheter)
 # En vanlig tillämpning av goodness-of-fit-testet är för att testa om alla klasser är lika
 # sannolika. En jämn fördelning är grundinställning i `chisq.test()` så i det fallet behöver man bara
 # ange de observerade värdena. En datainsamling om M&M-godis gav följande antal.
@@ -444,19 +444,19 @@ test$observed
 # Antalet hemmavinster (det tredje värdet) ligger när den teoretiska sannolikheten medan de övriga
 # två utfallen ligger längre från.
 #
-# Uppgift 7.17. (Udda färger)
+# Uppgift 5.17. (Udda färger)
 # Spara testobjektet från testet på M&M-färger för att se vilka färger som avviker mest från det
 # väntade utfallet.
 # :::
 #
-# Uppgift 7.18. (Fågelproportioner som chi-två)
+# Uppgift 5.18. (Fågelproportioner som chi-två)
 # I naturreservatet från en tidigare uppgift tror man fördelningen av tre fåglar (tärnmås, fiskmås
 # och fisktärna) är 50, 30 respektive 20 procent. En studie ger antalen 115, 54 respektive 31.
 # Genomför ett chi-två-test för att testa de antagna andelarna. Är resultatet i linje med de separata
 # testen från den tidigare uppgiften?
 # :::
 #
-# Uppgift 7.19. (Udda fåglar)
+# Uppgift 5.19. (Udda fåglar)
 # Spara testobjektet från chi-två-testet för fåglarna för att se vilka fågelarter som avviker mest
 # från det väntade utfallet.
 # :::
@@ -487,7 +487,7 @@ dat_goals
 # En graf kan illustrera faktiska antal (som punkter) och den skattade poissonfördelningen (som
 # linje).
 #
-# Uppgift 7.20. (Målgraf)
+# Uppgift 5.20. (Målgraf)
 # Fyll i de saknade delarna i koden nedan för en graf med faktiska antal `O` som punkter och
 # förväntade antal `E` som en linje.
 #
@@ -534,7 +534,7 @@ chisq_value <- sum((dat_goals_merged$O - dat_goals_merged$E)^2 / dat_goals_merge
 # Paketet `leaflet` (https://rstudio.github.io/leaflet/) kopplar R till leaflet - ett verktyg för
 # interaktiva kartor som ofta använd för kartor online.
 #
-# Uppgift 7.21. (Installera leaflet)
+# Uppgift 5.21. (Installera leaflet)
 # Installera och ladda `leaflet genom att fylla i och köra raden nedan.
 #
 
@@ -555,7 +555,7 @@ m
 # På canvassidan finns en excelfil med data tillgänglig på Artportalen - *Artportalen, SLU
 # feromoninventering, 2011-2013.xlsx*. Datan kommer från från ett inventeringsprojekt vid SLU.
 #
-# Uppgift 7.22. (Importera datan)
+# Uppgift 5.22. (Importera datan)
 # Ladda ner excelfilen och läs in datan med `read_excel()` från paketet `readxl`.
 #
 
@@ -574,7 +574,7 @@ dat_leaf %>%
   addProviderTiles(providers$Stamen.Toner)
 
 #
-# Uppgift 7.23. (Baskarta)
+# Uppgift 5.23. (Baskarta)
 # Skriv ut tillgängliga baskartor med `providers`. Välj ett alternativ slumpmässigt och ändra koden
 # ovan för att se hur det ser ut.
 # :::
@@ -588,7 +588,7 @@ dat_leaf %>%
   addCircleMarkers(lng = dat_leaf$lng, lat = dat_leaf$lat, radius = 10)
 
 #
-# Uppgift 7.24. (Cirkelstorlek)
+# Uppgift 5.24. (Cirkelstorlek)
 # Ändra storleken på cirklarna från `addCircleMarkers()` genom argumentet `radius`
 # :::
 #
@@ -602,7 +602,7 @@ dat_leaf %>%
   addCircleMarkers(lng = dat_leaf$lng, lat = dat_leaf$lat, radius = 10, popup = dat_leaf$Rödlistade)
 
 #
-# Uppgift 7.25. (Artnamn)
+# Uppgift 5.25. (Artnamn)
 # Ändra i koden ovan för att ange artnamn som popup-text istället för rödlistestatus. Funktionen
 # `paste()` kan också vara intressant för att ta med mer information i texten:
 # `paste(dat_leaf$Rödlistade, dat_leaf$Antal)` skulle exempelvis ge både status och antal individer
