@@ -1,9 +1,7 @@
-# Paket
 install.packages("tidyverse")
 
 library(tidyverse)
 
-# Objekt och funktioner ----
 a <- 5
 
 b <- c(3, 1, 4, 1, 5, 9)
@@ -21,7 +19,6 @@ b <- c(3, 1, 4, 1, 5, 9, NA)
 sum(b)
 sum(b, na.rm = TRUE)
 
-# Pipelines - sekvenser av funktioner ----
 c <- c(-4, -2, -1, 1, 2, 4)
 c_absolute <- abs(c)
 sum(c_absolute)
@@ -36,7 +33,6 @@ c(-4, -2, -1, 1, 2, 4) %>%
   abs() %>%
   sum()
 
-# Dataframes ----
 dat <- data.frame(Vecka = c(7,7,7,7,7,7,11,11,11,11,11,11),
                   Behandling = c("A","A","A","B","B","B","A","A","A","B","B","B"),
                   Vikt = c(232,161,148,368,218,257,1633,2213,972,2560,2430,855),
@@ -54,14 +50,12 @@ sd(dat$Vikt)
 
 plot(dat$Vecka, dat$Vikt)
 
-# Dataimport ----
 dat <- read_csv("https://raw.githubusercontent.com/adamflr/ST0060-2022/main/Data/Spotify_data.csv")
 
 dat
 
 unique(dat$artist_name)
 
-# Filter och select ----
 dat %>%
   filter(artist_name == "Robyn")
 
@@ -92,7 +86,6 @@ dat %>%
 dat_small <- dat %>%
   filter(artist_name == "Robyn", album_type == "album")
 
-# ggplot ----
 plot(dat_small$tempo, dat_small$danceability)
 
 ggplot(dat_small, aes(x = tempo, y = danceability)) +
@@ -114,6 +107,7 @@ dat_small <- dat %>%
 ggplot(dat_small, aes(x = danceability, y = album_name)) +
   geom_boxplot()
 
+
 ggplot(dat_small, aes(danceability, album_name)) +
   geom_boxplot(fill = "lightblue") +
   theme(panel.background = element_rect(fill = "red3"),
@@ -121,3 +115,25 @@ ggplot(dat_small, aes(danceability, album_name)) +
         axis.text = element_text(color = "white"),
         plot.background = element_rect(fill = "grey30", color = "black"),
         panel.grid.major.y = element_blank())
+
+# install.packages("plotly")
+library(plotly)
+
+dat_small <- dat %>%
+  filter(artist_name == "David Bowie", album_type == "album") %>%
+  mutate(Decade = floor(album_release_year / 10) * 10)
+
+g <- ggplot(dat_small, aes(danceability, valence, color = album_name, text = track_name)) +
+  geom_point() +
+  facet_wrap(~ Decade) +
+  theme(legend.position = "none")
+g
+
+ggplotly(g)
+
+
+dat_temp <- read_csv("https://raw.githubusercontent.com/adamflr/ST0060-2022/main/Data/Temperatur%2C%20Stockholm.csv")
+
+ggplot(dat_temp, aes(x = Year, y = 1, fill = Value)) +
+  geom_col()
+

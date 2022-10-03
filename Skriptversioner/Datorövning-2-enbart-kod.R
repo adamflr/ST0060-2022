@@ -10,12 +10,6 @@ dat %>%
   filter(artist_name == "Tame Impala", tempo > 170) %>%
   select(artist_name, track_name, tempo)
 
-dat %>%
-  group_by(artist_name) %>%
-  summarise(Antal_spår = n(),
-            Medeltempo = mean(tempo),
-            Maxdansbarhet = max(danceability))
-
 dat_small <- dat %>% filter(artist_name == "The Weeknd")
 
 ggplot(dat_small, aes(tempo, danceability, size = valence, color = mode_name)) +
@@ -42,16 +36,6 @@ gapminder %>% select(gdpPercap, pop, gdp)
 
 gapminder %>%
   mutate(`National GDP` = gdpPercap * pop)
-
-gapminder %>%
-  group_by(year) %>%
-  summarise(Totalbefolkning = sum(pop))
-
-gapminder %>%
-  group_by(year) %>%
-  summarise(Totalbefolkning = sum(pop),
-            BNP = sum(pop * gdpPercap),
-            `Antal länder` = n())
 
 ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, color = continent)) +
   geom_point() +
@@ -138,6 +122,23 @@ ggplot(dat_sum, aes(continent, Mean, fill = continent)) +
 ggplot(gapminder, aes(year, lifeExp, fill = continent, group = year)) +
   geom_boxplot() +
   facet_wrap(~ continent)
+
+gapminder_2007 <- gapminder %>% filter(year == 2007)
+gapminder_agg <- gapminder_2007 %>%
+  group_by(continent) %>%
+  summarise(lifeExp = mean(lifeExp))
+gapminder_agg
+
+ggplot() +
+  geom_boxplot(aes(lifeExp, continent), data = gapminder_2007) +
+  geom_point(aes(lifeExp, continent), data = gapminder_agg, color = "red", shape = "X", size = 6)
+
+gapminder_eu <- gapminder %>% filter(continent == "Europe")
+
+ggplot(gapminder_eu, aes(gdpPercap, lifeExp, group = country, label = country)) +
+  geom_text(data = gapminder_eu %>% filter(year == 2007)) +
+  geom_path(color = "blue", size = 3, data = gapminder_eu %>% filter(country == "Sweden"), alpha = 0.3) +
+  geom_path(color = "red", size = 3, data = gapminder_eu %>% filter(country == "Poland"), alpha = 0.3)
 
 dat_sum <- gapminder %>%
   filter(year == 2007) %>%
