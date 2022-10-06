@@ -42,9 +42,9 @@ for(i in 1:8){
     unnest(cols = Wrapped) %>% 
     mutate(Starts_w_hastag = substring(Wrapped, 1, 1) == "#") %>% 
     mutate(New = ifelse(Comment & !Starts_w_hastag, paste("#", Wrapped), Wrapped))
-  tab_text %>% print(n = 45)
+  # tab_text %>% print(n = 45)
   
-  cat(paste(tab_text$New, collapse = "\n"))
+  # cat(paste(tab_text$New, collapse = "\n"))
   
   text <- tab_text$New
   

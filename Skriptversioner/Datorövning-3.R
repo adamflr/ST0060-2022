@@ -217,9 +217,10 @@ ggplot(dat_bin, aes(x, p)) + geom_col()
 
 #
 # Uppgift 3.6. (Binomialfördelning för tärningen)
-# Ta tärningen från tidigare uppgift och välj ett av utfallen. Om man kastar tärningen tjugo
-# gånger, vad är fördelningen för antalet gånger man får det utfallet? Fyll i stycket nedan för att
-# beräkna sannolikheterna i den fördelningen och illustrera med ett stapeldiagram.
+# Ta tärningen från tidigare uppgift. Om man kastar tärningen tjugo gånger, vad är fördelningen för
+# antalet gånger man får tärningens lägsta utfall? (Till exempel, vad är fördelningen för antalet
+# ettor vid tjugo kast med en sexsidig tärning?) Fyll i stycket nedan för att beräkna sannolikheterna
+# i den fördelningen och illustrera med ett stapeldiagram.
 #
 
 dat_bin <- data.frame(x = 0:20) %>% 
@@ -231,7 +232,7 @@ ggplot(dat_bin, aes(x, p)) + geom_col()
 #
 # Uppgift 3.7. (Sannolikheter i binomialen)
 # I den fördelning du beräknade i uppgiften ovan. Vad är sannolikheten att få exakt tre positiva
-# utfall?
+# utfall? (Ledning: för en sexsidig tärning skulle det ges av `dbinom(3, size = 20, prob = 1/6))`.)
 # :::
 #
 # Utöver sannolikhetsfunktionen (som ger sannolikheten för varje utfall) används ofta också
@@ -292,8 +293,7 @@ ggplot(dat_bin, aes(x, p, fill = x <= 3)) +
 #
 # Uppgift 3.10. (Teori och verklighet)
 # I en tidigare uppgift kastade du tärningen tjugo gånger. Hur många gånger fick du det lägsta
-# möjliga utfallet på tärningen (t.ex. en etta på en vanlig sex-sidig tärning). Vad är sannolikheten
-# att få så många positiva utfall i binomialexemplet på tärningen?
+# möjliga utfallet på tärningen (t.ex. en etta på en vanlig sex-sidig tärning).
 # :::
 #
 # I det första exemplet med tärningen kunde vi beräkna väntevärde och varians med de allmäna
@@ -611,13 +611,15 @@ pnorm(-0.25, mean = 0, sd = 1)
 
 #
 # Uppgift 3.20. (Standardisering)
-# Fyll i kodstycket nedan för att beräkna sannolikheten att få ett värde under sju i en
-# normalfördelning med medelvärde 3 och standardavvikelse 5. Genomför beräkningen genom att
-# standardiserade och beräkna sannolikheten från den standardiserade normalen.
+# En slumpvariabel Y följer en normalfördelning med medelvärde 2 och varians 9. Vad är
+# sannolikheten att få
 #
-
-pnorm(___, mean = 0, sd = 1)
-
+# - P(Y > 2.75),
+# - P(Y < 2.75),
+# - P(2.30 < Y < 2.45)?
+#
+# Beräkna först sannolikheten för hand och sedan med `pnorm()`.
+# Notera att denna fråga finns bland instuderingsuppgifterna.
 # :::
 #
 # ## Bonus. Summan av två slumpvariabler med slumptal
@@ -838,7 +840,7 @@ plot_ly(dat_tri, x = ~x, y = ~y, z = ~z) %>%
 # en webläsare genom att trycka på kanppen som ser ut som ett fönster med en pil i viewer-fönstret.)
 # :::
 #
-# Uppgift 3.27. (Sierpinski-pyramiden)
+# Uppgift 3.27. (Pyramidens bas)
 # Vad händer om man ändrar värdena i `x_original`?
 # :::
 #
