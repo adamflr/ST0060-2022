@@ -137,7 +137,7 @@ gapminder                              # Skriv ut objektet gapminder
 #
 
 gapminder <- gapminder %>%             # Ta datan, och sen
-  mutate(gdp = gdpPercap * pop)        # Beräkna en ny kolumn som tempo delat på 60
+  mutate(gdp = gdpPercap * pop)        # Beräkna en ny kolumn som bnp per capita (bnpPercap) gånger befolkningen (pop)
 
 #
 # Den inledande delen med `gapminder <-` gör så att utfallet av beräkningen sparas i objektet

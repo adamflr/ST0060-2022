@@ -130,7 +130,7 @@
 
 \title{R-anvisningar till \emph{Grundläggande statistik}}
 \author{}
-\date{\vspace{-2.5em}2022-10-03}
+\date{\vspace{-2.5em}2022-10-06}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Sats}[chapter]
@@ -1517,7 +1517,7 @@ Variabler kan omräknas och nya variabler kan skapas med \texttt{mutate}-funktio
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{gapminder }\OtherTok{\textless{}{-}}\NormalTok{ gapminder }\SpecialCharTok{\%\textgreater{}\%}             \CommentTok{\# Ta datan, och sen}
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{gdp =}\NormalTok{ gdpPercap }\SpecialCharTok{*}\NormalTok{ pop)        }\CommentTok{\# Beräkna en ny kolumn som tempo delat på 60}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{gdp =}\NormalTok{ gdpPercap }\SpecialCharTok{*}\NormalTok{ pop)        }\CommentTok{\# Beräkna en ny kolumn som bnp per capita (bnpPercap) gånger befolkningen (pop)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2554,7 +2554,7 @@ Beskrivande mått sammanfattas ofta i någon enkel vetenskaplig graf. Två vanli
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-124-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/fig3_gm_boxplot-1} \end{center}
 
 Därefter ett exempel på ett stapeldiagram med felstaplar för samma data. Felstapeln ges av standardavvikelsen.
 
@@ -2595,7 +2595,7 @@ Därefter ett exempel på ett stapeldiagram med felstaplar för samma data. Fels
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-125-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/fig3_gm_bar-1} \end{center}
 
 \hypertarget{diskreta-fuxf6rdelningar-i-allmuxe4nhet}{%
 \section{Diskreta fördelningar i allmänhet}\label{diskreta-fuxf6rdelningar-i-allmuxe4nhet}}
@@ -2630,7 +2630,7 @@ En diskret slumpvariabel illustreras ofta med ett stapeldiagram.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-127-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-125-1} \end{center}
 
 \begin{exercise}[En annan tärning]
 Ta fram en tärning som \emph{inte} har sex sidor. Om du saknar en sådan tärning, fråga lämplig person om du kan få en. Behåll tärningen, då den kan återkomma vid en senare datorövning. Följ exemplet ovan för att kodifiera din tärning som en slumpvariabel. Utfallen \texttt{x} är de möjliga resultaten av att kasta tärningen och sannolikheten \texttt{p} är sannolikheten för varje utfall. Antag att tärningen är balanserad och att alla utfall därför är lika troliga. Ett bra namn på det nya objektet kan vara \texttt{dat\_diceN} där N anger antalet sidor på tärningen, t.ex. \texttt{dat\_dice20} för en 20-sidig tärning.
@@ -2725,7 +2725,7 @@ R kommer också med en rad funktioner för att simulera data. För kontinuerlig 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 3.4839
+## [1] 3.4998
 \end{verbatim}
 
 \begin{Shaded}
@@ -2735,7 +2735,7 @@ R kommer också med en rad funktioner för att simulera data. För kontinuerlig 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 2.902831
+## [1] 2.952295
 \end{verbatim}
 
 \begin{exercise}[Simulera tärningen]
@@ -2749,7 +2749,7 @@ Vi såg i tärningsexemplet hur en slumpvariabel kan beskrivas med dess sannolik
 
 Ett vanligt exempel på en sådan \emph{parametriserad} fördelning är en binomialfördelning. En binomialfördelning uppstår när man har upprepningar av en binär händelse (en händelse som antingen inträffar eller inte inträffar) och räknar antalet \emph{positiva} utfall (positiva i klinisk mening som något utfall man är intresserad av). I en binomialfördelning ges antalet upprepningar av en parameter \emph{n} och sannolikheten för ett positivt utfall i en händelse av en parameter \emph{p}.
 
-Som exempel kan vi ett myntkast. Om man singlar ett balanserat mynt tio gånger kommer antalet krona (vårt positiva utfall) följa en binomialfördelning där n ges av 10 och p av 0.5. I R kan sannolikheter från en binomialfördelning tas fram med \texttt{dbinom()}. Sannolikheten för tre krona ges till exempel av
+Som exempel kan vi ta ett myntkast. Om man singlar ett balanserat mynt tio gånger kommer antalet krona (vårt positiva utfall) följa en binomialfördelning där n ges av 10 och p av 0.5. I R kan sannolikheter från en binomialfördelning tas fram med \texttt{dbinom()}. Sannolikheten för tre krona ges till exempel av
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2772,7 +2772,7 @@ Om vi vill illustrera en binomalfördelning kan vi ta fram sannolikheterna för 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-133-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-131-1} \end{center}
 
 \begin{exercise}[Binomialfördelning för tärningen]
 
@@ -2850,7 +2850,7 @@ Vi kan använda ett logiskt uttryck för att illustrera sannolikheter i stapeldi
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-136-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-134-1} \end{center}
 
 Den blå ytan motsvarar sannolikheten att få sju eller färre krona. Den sannolikheten kan beräknas till 0.945.
 
@@ -2877,9 +2877,9 @@ För en sexsidig tärning illustrerar följande sannolikheten att få tre eller 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-137-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-135-1} \end{center}
 
-Gör lämpliga ändringar i kodstycket ovan för att illustrera sannolikheten att få tre eller färre positiva utfall i exemplet med tärningskastet.
+Gör lämpliga ändringar i kodstycket ovan för att illustrera sannolikheten att få exakt tre positiva utfall i exemplet med tärningskastet.
 \end{exercise}
 
 \begin{exercise}[Teori och verklighet]
@@ -2953,9 +2953,9 @@ Vi kan illustrera de två fördelningarna i en graf. Den ena fördelningen illus
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-139-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-137-1} \end{center}
 
-Punkterna ligger nästan perfekt på linjen. De två fördelningarna har alltså nästan samma sannolikheter, trots att de har helt olika värden för n och p.
+Punkterna ligger nästan perfekt på linjen. De två binomialfördelningarna har alltså nästan samma sannolikheter, trots att de har helt olika värden för n och p.
 
 \begin{exercise}[Skilda sannolikheter]
 Följande kod gör samma sak som exemplet ovan, men nu med n1 och n2 som egna objekt.
@@ -3039,7 +3039,7 @@ Vi gör om jämförelse mellan två fördelning, men nu jämför vi med en poiss
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-141-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-139-1} \end{center}
 
 Den röda linjen är poissonfördelningen och de blå punkterna är en binomialfördelning med n = 400 och p = 0.0075. Fördelningarna är nästan identiska. Notera att fördelningarna har samma medelvärde (då 400 gånger 0.0075 ger 3).
 
@@ -3103,7 +3103,7 @@ Hur kan man beräkna sannolikheten att få mer än 5 i en fördelning med lambda
 \hypertarget{kontinuerliga-fuxf6rdelningar-i-allmuxe4nhet}{%
 \section{Kontinuerliga fördelningar i allmänhet}\label{kontinuerliga-fuxf6rdelningar-i-allmuxe4nhet}}
 
-En kontinuerlig fördelning kan anta vilka värden som helst på hela tallinjen eller i något intervall på tallinjen. Ett enkelt exempel på en kontinuerlig slumpvariabel kan vara att stoppa ett stoppur slumpmässigt och titta på decimaldelen. Det kommer ge något värde mellan 0 och 1. (Stoppuret kommer naturligtvis avrunda värdet, så man får tänka sig ett magiskt stoppur med oändligt antal decimaler.) Till skillnad från en diskret slumpvariabel, som kan beskrivas med utfallen och dess sannolikheter, måste en kontinuerlig variabel förklaras med en matematisk funktion, en så kallad \emph{täthetsfunktion}. Detta beror på att enskilda utfall alltid har sannolikhet noll för en kontinuerlig fördelning: om man har oändligt antal decimaler är det som exempel sannolikhet noll att få exakt 0.345000 som decimaler på ett stoppur.
+En kontinuerlig fördelning kan anta vilka värden som helst på hela tallinjen eller i något intervall på tallinjen. Ett enkelt exempel på en kontinuerlig slumpvariabel kan vara att stoppa ett stoppur slumpmässigt och titta på decimaldelen. Det kommer ge något värde mellan 0 och 1. (Stoppuret kommer naturligtvis avrunda värdet, så man får tänka sig ett magiskt stoppur med oändligt antal decimaler.) Till skillnad från en diskret slumpvariabel, som kan beskrivas med utfallen och dess sannolikheter, måste en kontinuerlig variabel förklaras med en matematisk funktion, en så kallad \emph{täthetsfunktion}. Detta beror på att enskilda utfall alltid har sannolikhet noll för en kontinuerlig fördelning: om man har oändligt antal decimaler är det som exempel sannolikhet noll att få exakt 0.345000\ldots{} som decimaler på ett stoppur.
 
 Den absolut vanligaste kontinuerliga fördelningen är en \emph{normalfördelning}.
 
@@ -3123,7 +3123,7 @@ En normalfördelning har en karaktäristisk \emph{klockform}. Vi illustreras tv�
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-145-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-143-1} \end{center}
 
 Den gröna och röda kurvan har samma medelvärde mu men skilda standardavvikelser sigma. Den blå och gröna kurvan har skilda medelvärden mu men samma standardavvikelse sigma.
 
@@ -3183,21 +3183,21 @@ Vi kan ta fram en illustration med följande kod. Detaljer spelar mindre roll h�
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-147-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-145-1} \end{center}
 
 Sannolikheten att ligga under ett värde på x ges av kurvan för fördelningsfunktionen vid det x-värdet. Det motsvarar den fyllda ytan under täthetsfunktionen till vänster om x-värdet.
 
 \begin{exercise}[Sannolikhet från normalfördelningen]
+
 Fyll i kodstycket nedan för att beräkna sannolikheten att få ett värde under minus två i en normalfördelning med medelvärde 0 och standardavvikelse 1, och i en normalfördelning med medelvärde 1 och standardavvikelse 2.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{pnorm}\NormalTok{(}\DecValTok{1}\NormalTok{, }\AttributeTok{mean =}\NormalTok{ \_\_\_, }\AttributeTok{sd =}\NormalTok{ \_\_\_)}
-\FunctionTok{pnorm}\NormalTok{(}\DecValTok{1}\NormalTok{, }\AttributeTok{mean =}\NormalTok{ \_\_\_, }\AttributeTok{sd =}\NormalTok{ \_\_\_)}
+\FunctionTok{pnorm}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, }\AttributeTok{mean =}\NormalTok{ \_\_\_, }\AttributeTok{sd =}\NormalTok{ \_\_\_)}
+\FunctionTok{pnorm}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, }\AttributeTok{mean =}\NormalTok{ \_\_\_, }\AttributeTok{sd =}\NormalTok{ \_\_\_)}
 \end{Highlighting}
 \end{Shaded}
 
-Ändra kodstycket från \emph{exemplet} ovan för att illustrera sannolikheterna i uppgiften.
 \end{exercise}
 
 Om man vill ta fram en sannolikhet att ligga i ett visst intervall kan man ta skillnaden mellan två värden från fördelningsfunktionen. Sannolikheten att ligga mellan 1 och minus 1 i en normalfördelning med medelvärde 0 och standardavvikelse 1 ges till exempel av
@@ -3230,7 +3230,7 @@ Den normalfördelningen (medelvärde 0 och standardavvikelse 1) kallas den \emph
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-150-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-148-1} \end{center}
 
 \begin{exercise}[Sannolikhet mellan två värden]
 
@@ -3326,7 +3326,7 @@ Vi börjar med att dra slumptal för en poissonfördelning med lambda lika med 3
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-157-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-155-1} \end{center}
 
 Linjen ger den teoretiska poissonfördelningen och punkterna ger fördelningen för slumptalen. Punkterna ligger nära linjen, vilket är helt efter förväntan. Notera dock att det kommer finnas vissa naturliga avvikelser när man arbetar med slumptal.
 
@@ -3351,7 +3351,7 @@ Vi kan nu ta från två serier av slumptal, beräkna dess summa och jämföra me
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-158-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-156-1} \end{center}
 
 Summans värden ligger när den teoretiska fördelningen. Det stödjer tanken att summan av två poissonfördelningar är poissonfördelad.
 
@@ -3370,7 +3370,7 @@ Vi såg tidigare hur utfallet av en tärning kan ses som en slumpvariabel (n sty
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-159-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-157-1} \end{center}
 
 Summan av två tärningskast har en triangelformad fördelning där 7 är det vanligaste utfallet och 2 och 12 är de ovanligaste.
 
@@ -3398,7 +3398,7 @@ En intressant aspekt av slumptal är att de kan användas till att utforska icke
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-160-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/fig3_pi1-1} \end{center}
 
 Funktionen \texttt{runif()} ger ett slumpmässigt värde mellan två gränsvärden (som sätts med argumenten \texttt{min} och \texttt{max}). Slumpmässiga punkter inom kvadraten kan dras genom att dra en x- och en y-koordinat. En fördelning där alla värden är lika sannolika kallas \emph{uniform} (eller \emph{likformig}).
 
@@ -3411,7 +3411,7 @@ Funktionen \texttt{runif()} ger ett slumpmässigt värde mellan två gränsvärd
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-161-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/fig3_pi2-1} \end{center}
 
 Pytagoras sats kan användas för att beräkna avståndet mellan en slumpmässig punkt och origo (nollpunkten). Punkter med ett avstånd under ett ligger inom cirkeln. Cirkelns area ska ges av andelen punkter i kvadraten som också ligger i cirkeln, gånger fyra.
 
@@ -3426,7 +3426,7 @@ Pytagoras sats kan användas för att beräkna avståndet mellan en slumpmässig
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 3.24
+## [1] 3.16
 \end{verbatim}
 
 \begin{Shaded}
@@ -3454,13 +3454,13 @@ Slumpmässiga processer kan ge intressanta mönster. Ett exempel är följande p
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Ta tre punkter i planet så att de bildar en triangel.
+  Ta tre \emph{rampunkter} i planet så att de bildar en triangel.
 \item
-  Ta en startpunkt inom triangeln. Kalla den x0.
+  Ta en \emph{startpunkt} inom triangeln.
 \item
-  Välj slumpmässigt en av de tre ursprungliga punkterna och beräkna punkten mellan x0 och den valda punkten. Detta ger en ny punkt, x1.
+  Välj slumpmässigt en av de tre rampunkterna och beräkna punkten mellan startpunkten och den valda rampunkten. Detta ger en ny punkt.
 \item
-  Välj slumpmässigt en av de tre ursprungliga punkterna och beräkna punkten mellan x1 och den valda punkten. Detta ger en ny punkt, x2.
+  Välj slumpmässigt en av de tre rampunkterna och beräkna punkten mellan den nya punkten från föregående steg och rampunkten. Detta ger en ny punkt.
 \item
   Upprepa steg 4 ett godtyckligt antal gånger.
 \end{enumerate}
@@ -3501,15 +3501,69 @@ Vad måste ändras i stycket ovan för att generera fler punkter? Tiotusen kan v
 \section{Valfria hemuppgifter}\label{valfria-hemuppgifter-2}}
 
 \begin{exercise}[Sierpinski-pyramiden]
-
-Fyll i de saknade delarna i stycket nedan för att skapa en tredimensionell version av Sierpinski-triangeln.
+Stycket nedan skapar en tredimensionell variant av Sierpinski-triangeln.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{KOD SAKNAS}
+\NormalTok{x\_original }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)}
+\NormalTok{y\_original }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{z\_original }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+
+\NormalTok{x\_new }\OtherTok{\textless{}{-}} \FloatTok{0.4}
+\NormalTok{y\_new }\OtherTok{\textless{}{-}} \FloatTok{0.2}
+\NormalTok{z\_new }\OtherTok{\textless{}{-}} \FloatTok{0.5}
+\NormalTok{dat\_tri }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x\_new, }\AttributeTok{y =}\NormalTok{ y\_new, }\AttributeTok{z =}\NormalTok{ z\_new)}
+
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{100} \CommentTok{\# Antal skapade punkter}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n)\{}
+\NormalTok{  new\_point }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{), }\DecValTok{1}\NormalTok{)}
+\NormalTok{  x\_new }\OtherTok{\textless{}{-}}\NormalTok{ (x\_new }\SpecialCharTok{+}\NormalTok{ x\_original[new\_point]) }\SpecialCharTok{/} \DecValTok{2}
+\NormalTok{  y\_new }\OtherTok{\textless{}{-}}\NormalTok{ (y\_new }\SpecialCharTok{+}\NormalTok{ y\_original[new\_point]) }\SpecialCharTok{/} \DecValTok{2}
+\NormalTok{  z\_new }\OtherTok{\textless{}{-}}\NormalTok{ (z\_new }\SpecialCharTok{+}\NormalTok{ z\_original[new\_point]) }\SpecialCharTok{/} \DecValTok{2}
+  
+\NormalTok{  dat\_tri }\OtherTok{\textless{}{-}} \FunctionTok{bind\_rows}\NormalTok{(dat\_tri, }\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x\_new, }\AttributeTok{y =}\NormalTok{ y\_new, }\AttributeTok{z =}\NormalTok{ z\_new))}
+\NormalTok{\}}
+
+\FunctionTok{ggplot}\NormalTok{(dat\_tri, }\FunctionTok{aes}\NormalTok{(x, y)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+
+\FunctionTok{library}\NormalTok{(plotly)}
+\FunctionTok{plot\_ly}\NormalTok{(dat\_tri, }\AttributeTok{x =} \SpecialCharTok{\textasciitilde{}}\NormalTok{x, }\AttributeTok{y =} \SpecialCharTok{\textasciitilde{}}\NormalTok{y, }\AttributeTok{z =} \SpecialCharTok{\textasciitilde{}}\NormalTok{z) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{add\_markers}\NormalTok{(}\AttributeTok{size =} \FloatTok{0.1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
+Vad måste ändras för att få fler punkter (\texttt{n})?
+
+(Om grafen inte laddas i \emph{Viewer} utan ger felet \emph{WebGL is not supported}, testa att öppna den i en webläsare genom att trycka på kanppen som ser ut som ett fönster med en pil i viewer-fönstret.)
+\end{exercise}
+
+\begin{exercise}[Sierpinski-pyramiden]
+Vad händer om man ändrar värdena i \texttt{x\_original}?
+\end{exercise}
+
+\begin{exercise}[Mandelbrot]
+
+Sierpinski-triangeln är ett exempel på en fraktal - en mängd som ser likadan ut oavsett inzoomning. Det mest kända exemplet på en fraktal är Mandelbrot-mängden. R-paketet \emph{mandelbrot} kan producera och visualisera.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"mandelbrot"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(mandelbrot)}
+\NormalTok{mb }\OtherTok{\textless{}{-}} \FunctionTok{mandelbrot}\NormalTok{()}
+\FunctionTok{plot}\NormalTok{(mb)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{exercise}
+
+\begin{exercise}[Ändrade färger]
+Titta på hjälpsidan till \texttt{mandelbrot\_palette} genom att köra \texttt{?mandelbrot\_palette}. Använd exemplet längst ned för att skapa en färglagd graf.
+\end{exercise}
+
+\begin{exercise}[Ändrade färger]
+Barnsleys ormbunke är ett exempel på en fraktal som efterliknar en naturlig växt. Se wikipediasidan \url{https://en.wikipedia.org/wiki/Barnsley_fern} för en beskrivning. Kör R-koden från wikipediasidan för ett exempel i R. Vad måste ändras för att få fler punkter i grafen?
 \end{exercise}
 
 \hypertarget{ett-stickprov-av-normalfuxf6rdelad-data}{%
@@ -3616,7 +3670,7 @@ Om man har en normalfördelad variabel och vill testa om populationens medelvär
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-169-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-166-1} \end{center}
 
 I grafen ser vi att värdena ligger jämt spridda kring 50, så 50 är nog ganska rimligt som medelvärde, men låt oss göra ett formellt test. Ett t-test bygger, som alla hypotestest, på en serie steg:
 
@@ -3702,7 +3756,7 @@ Nästa steg är att identifiera testfördelning, det vill säga den slumpfördel
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-171-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-168-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3711,7 +3765,7 @@ Nästa steg är att identifiera testfördelning, det vill säga den slumpfördel
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-171-2} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-168-2} \end{center}
 
 Nästa steg i ett hypotestest är att ta fram ett p-värdet. P-värdet kan illustreras som ytan under t-fördelning \emph{bortom} test-värdet. I ett tvåsidigt test tar vi med bägge svansarna.
 
@@ -3724,7 +3778,7 @@ Nästa steg i ett hypotestest är att ta fram ett p-värdet. P-värdet kan illus
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-172-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-169-1} \end{center}
 
 De röda ytorna i \emph{svansarna} motsvarar p-värdet. De anger sannolikheten att få ett större t-värde än det vi fått, under antagandet att nollhypotesen stämmer. Vi kan beräkna p-värdet med \texttt{pt()}. För ett tvåsidigt test multipliceras värdet med 2.
 
@@ -3951,7 +4005,7 @@ Ett konfidensintervall illustreras ofta med en felstapel. Vi kan lägga till en 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-183-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-180-1} \end{center}
 
 \begin{exercise}[Illustration av smältdata]
 Använd exempelillustrationen för havredata till en liknande illustration av smältpunktsdatan.
@@ -3968,7 +4022,7 @@ Eftersom t-testet bygger på att data är normalfördelad är det förstås bra 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-184-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-181-1} \end{center}
 
 Uppenbarligen helt meningslöst. Låt oss titta på histogram över genererad normalfördelad data.
 
@@ -3979,7 +4033,7 @@ Uppenbarligen helt meningslöst. Låt oss titta på histogram över genererad no
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-185-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-182-1} \end{center}
 
 \begin{exercise}[Histogram för normalfördelning]
 Testa koden ovan för lite olika värden på \texttt{n}. Det kan vara nyttigt att sätta antalet staplar \texttt{bins} för att få ett bättre histogram. Hur stort måste n vara för att ge en karaktäristisk klockform för histogrammet?
@@ -3993,7 +4047,7 @@ Ett annat vanligt alternativ för att grafisk undersöka om data följer en unge
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-186-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-183-1} \end{center}
 
 Punkterna ligger nära linjen. Vi kan återigen demonstrera med lite genererad data.
 
@@ -4005,7 +4059,7 @@ Punkterna ligger nära linjen. Vi kan återigen demonstrera med lite genererad d
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-187-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-184-1} \end{center}
 
 \begin{exercise}[Histogram för normalfördelning]
 Funktionen \texttt{runif()} ger slumpmässiga värden mellan 0 och 1. Testa att ändra i kodstycket ovan så att slumptal genereras med \texttt{runif()} istället för \texttt{rnorm()}. Hur påverkar det QQ-grafen?
@@ -4026,7 +4080,7 @@ Funktionen \texttt{runif()} ger slumpmässiga värden mellan 0 och 1. Testa att 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-188-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-185-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4034,7 +4088,7 @@ Funktionen \texttt{runif()} ger slumpmässiga värden mellan 0 och 1. Testa att 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-188-2} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-185-2} \end{center}
 
 Fördelningen för summan är inte likformig, men inte heller särskilt normalfördelad. Vad händer om vi ökar antal termer i summan?
 
@@ -4057,7 +4111,7 @@ Under en tidigare datorövning såg vi exempel på diskreta fördelningar: binom
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-189-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-186-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4065,7 +4119,7 @@ Under en tidigare datorövning såg vi exempel på diskreta fördelningar: binom
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-189-2} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-186-2} \end{center}
 
 Histogrammet visar på en typisk klockform och punkterna följer linjen \emph{ungefärligt}. QQ-grafens trappeffekt är typisk för diskret data. Det här tyder alltså på att t-testet är ett acceptabelt alternativ om man har en poissonfördelning med lambda runt tio och gör tio upprepningar.
 
@@ -4092,7 +4146,7 @@ Det kan också finnas situationer där någon matematisk transformation kan gör
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-190-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-187-1} \end{center}
 
 I grafen har vi den ursprungliga variabeln (befolkning per land 2007), den kvadratrot-transformerade variabeln (\texttt{sqrt()}) och den log-transformerade variabeln (\texttt{log10()}). De två första fallen påverkas kraftigt av extremvärden och är klart icke-normala medan den log-transformerade variabeln ger en ungefärlig normalkurva och följer diagonalen väl i QQ-grafen.
 
@@ -4117,13 +4171,13 @@ Följande kod simulerar ett dataset om tio observationer från en normalfördeln
 ##  One Sample t-test
 ## 
 ## data:  dat_sim$x
-## t = 0.043953, df = 9, p-value = 0.9659
+## t = 0.6961, df = 9, p-value = 0.5039
 ## alternative hypothesis: true mean is not equal to 7
 ## 95 percent confidence interval:
-##  5.628311 8.426048
+##   4.174241 12.337815
 ## sample estimates:
 ## mean of x 
-##   7.02718
+##  8.256028
 \end{verbatim}
 
 \begin{exercise}[Upprepad simulering]
@@ -4155,7 +4209,7 @@ Enligt statistisk teori ska t-värdet följa en t-fördelning med nio frihetsgra
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-193-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-190-1} \end{center}
 
 Den teoretiska t-fördelning passar histogrammet nästan perfekt.
 
@@ -4168,7 +4222,7 @@ Vidare ska p-värdet vara under fem procent fem procent av gångerna.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.045
+## [1] 0.038
 \end{verbatim}
 
 Även det stämmer någorlunda väl. Det här innebär alltså att om man har en signifikansnivå på fem procent kommer man förkasta nollhypotesen fem procent av gångerna även om nollhypotesen stämmer. Det kallas ett \emph{falskt positivt} utfall.
@@ -4289,7 +4343,7 @@ Ta som exempel följande data på jord-pH och låt oss anta att det är relevant
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-199-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-196-1} \end{center}
 
 Hypoteser ges av
 
@@ -4335,7 +4389,7 @@ En QQ-graf kan visa om det finns några avvikelser från normalantagandet. Med s
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-201-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-198-1} \end{center}
 
 \hypertarget{proportioner-fruxe5n-binuxe4r-data}{%
 \section{Proportioner från binär data}\label{proportioner-fruxe5n-binuxe4r-data}}
@@ -4354,7 +4408,7 @@ Låt oss importera lite exempeldata och beräkna ett exempel. Följande rad impo
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-202-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-199-1} \end{center}
 
 \begin{exercise}[En interaktiv målgraf]
 
@@ -4447,7 +4501,7 @@ Därefter kan p-värdet räknas ut som arean under en standardiserad normalförd
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-207-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-204-1} \end{center}
 
 Areans yta kan tas fram med normalfördelningens fördelningsfunktion \texttt{pnorm()}.
 
@@ -4670,7 +4724,7 @@ P-värdet beräknas från en chi-två-fördelning. Antalet frihetsgrader ges av 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-219-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-216-1} \end{center}
 
 Man kan också beräkna ytan i svansen med \texttt{pchisq()}. Ett minus det resultatet ger den övre delen.
 
@@ -4768,7 +4822,7 @@ En vanlig tillämpning av goodness-of-fit-testet är för att testa om alla klas
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-225-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-222-1} \end{center}
 
 Använd de observerade värdena i kolumnen \texttt{Count} för att testa om alla godisfärger är lika vanliga.
 \end{exercise}
@@ -5326,7 +5380,7 @@ Datan kan illustreras med ett enkelt punktdiagram.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-249-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-246-1} \end{center}
 
 Ett t-test för två oberoende stickprov har nollhypotesen att grupperna har samma populationsmedelvärde och alternativhypotesen att populationsmedelvärdena är skilda (för det tvåsidiga fallet):
 
@@ -5603,7 +5657,7 @@ Datan tyder på att överlevnad är beroende av klass. Datan kan illustreras med
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-263-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-260-1} \end{center}
 
 Argumentet \texttt{position} i \texttt{geom\_bar} används för att skapa proportionella staplar.
 
@@ -6036,7 +6090,7 @@ Vi vill här testa om det finns en skillnad mellan arter och om det finns skilln
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-290-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-287-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6046,7 +6100,7 @@ Vi vill här testa om det finns en skillnad mellan arter och om det finns skilln
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-291-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-288-1} \end{center}
 
 För arterna har vi matchad data - varje observation av den ena arten är kopplad till en observation från den andra arten eftersom den kommer från samma båt - och vi kan testa om medelfångsterna av de två arterna är lika med ett t-test. Hypoteserna ges av
 
@@ -6231,7 +6285,7 @@ Datan har 30 observationer av vikt \texttt{weight} och varje observation tillhö
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-297-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-294-1} \end{center}
 
 Behandling 1 verkar vara något lägre än kontrollen medan behandling 2 verkar vara något högre.
 
@@ -6412,26 +6466,26 @@ Anledning till att vi justerar p-värden är att man vid varje test har en sanno
 \begin{verbatim}
 ## $emmeans
 ##  group  emmean    SE df lower.CL upper.CL
-##  a     -0.3399 0.363 45    -1.07    0.391
-##  b      0.0909 0.363 45    -0.64    0.822
-##  c      0.2617 0.363 45    -0.47    0.993
-##  d     -0.3662 0.363 45    -1.10    0.365
-##  e     -0.1191 0.363 45    -0.85    0.612
+##  a     -0.1851 0.317 45   -0.824    0.453
+##  b      0.1749 0.317 45   -0.464    0.813
+##  c     -0.3506 0.317 45   -0.989    0.288
+##  d     -0.0245 0.317 45   -0.663    0.614
+##  e      0.0559 0.317 45   -0.583    0.694
 ## 
 ## Confidence level used: 0.95 
 ## 
 ## $contrasts
 ##  contrast estimate    SE df t.ratio p.value
-##  a - b     -0.4308 0.514 45  -0.839  0.4060
-##  a - c     -0.6016 0.514 45  -1.172  0.2476
-##  a - d      0.0263 0.514 45   0.051  0.9594
-##  a - e     -0.2208 0.514 45  -0.430  0.6692
-##  b - c     -0.1708 0.514 45  -0.333  0.7409
-##  b - d      0.4571 0.514 45   0.890  0.3782
-##  b - e      0.2099 0.514 45   0.409  0.6846
-##  c - d      0.6279 0.514 45   1.223  0.2278
-##  c - e      0.3808 0.514 45   0.741  0.4623
-##  d - e     -0.2471 0.514 45  -0.481  0.6327
+##  a - b     -0.3600 0.448 45  -0.803  0.4262
+##  a - c      0.1655 0.448 45   0.369  0.7137
+##  a - d     -0.1606 0.448 45  -0.358  0.7219
+##  a - e     -0.2410 0.448 45  -0.538  0.5936
+##  b - c      0.5255 0.448 45   1.172  0.2472
+##  b - d      0.1994 0.448 45   0.445  0.6586
+##  b - e      0.1190 0.448 45   0.266  0.7918
+##  c - d     -0.3261 0.448 45  -0.727  0.4707
+##  c - e     -0.4065 0.448 45  -0.907  0.3694
+##  d - e     -0.0804 0.448 45  -0.179  0.8585
 \end{verbatim}
 
 Kör koden tio gånger. Hur många gånger av de tio ger de parvisa jämförelserna \emph{någon} signifikant skillnad (det vill säga något p-värde under 0.05)?
@@ -6522,7 +6576,7 @@ En vanlig illustration av ett blockförsök är ett punktdiagram kombinerat med 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-311-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-308-1} \end{center}
 
 Färg och linje sammanbinder observationer från samma block. Det finns tecken på en blockeffekt: block I är nästan alltid högst och block V är nästan alltid lägst. Det finns också en tydlig behandlingseffekt i att högre kväve ger högre skörd.
 
@@ -6728,7 +6782,7 @@ Exempeldata på havre tar med två förklarande faktorer och ett block. Datan ka
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-322-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-319-1} \end{center}
 
 Grafen visar samma kvävesamband som tidigare. Det finns inga tydliga skillnader mellan sorter, möjligen har sorten Victory givit något lägre skörd än övriga. Det finns fortfarande en tydlig blockeffekt, till exempel har block I höga värden och block V låga värden.
 
@@ -6883,7 +6937,7 @@ Normalfördelning kan undersökas grafiskt med ett histogram eller en QQ-graf.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-329-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-326-1} \end{center}
 
 Punkterna avviker något från normalfördelningen i svansarna, men det är förstås alltid en bedömningsfråga.
 
@@ -6897,7 +6951,7 @@ Lika varians undersöks ofta med ett spridningsdiagram med de skattade värdena 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-330-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-327-1} \end{center}
 
 Om datan är i linje med antaganden ska diagrammet se ut som slumpmässigt placerade punkter med ungefär lika stor spridning kring noll-linjen för samtliga nivåer på x-axeln. För det här exemplet ser det okej ut.
 
@@ -7015,7 +7069,7 @@ Vi kan illustrera data genom att pivotera till långt format och göra en graf m
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-339-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-336-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7024,7 +7078,7 @@ Vi kan illustrera data genom att pivotera till långt format och göra en graf m
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-339-2} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-336-2} \end{center}
 
 Ytterligare alternativ kan vara upprepade lådagram eller staplar med småfönster per art.
 
@@ -7058,7 +7112,7 @@ Ekologiska populationer kan analyseras genom \emph{heirarkisk klustring} - metod
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-341-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-338-1} \end{center}
 
 \begin{exercise}[Avståndsmått]
 Ta upp hjälpsidan till distansfunktionen med \texttt{?dist}. Under \texttt{method} finns flera möjliga avståndsmått. Vad måste ändras i kodstycket ovan för att ange ett Manhattan-avstånd? Har avståndet någon betydande effekt på träddiagrammet?
@@ -7076,7 +7130,7 @@ För att göra en klustring av arter kan man \emph{transponera} data så att rad
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-342-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-339-1} \end{center}
 
 Träddiagrammet tolkas så att enheter vars koppling ligger lågt är mer lika varandra - arterna förekommer ofta på samma plats.
 
@@ -7092,7 +7146,7 @@ I R kan en PCA göras med \texttt{prcomp()} och en biplot kan göras med \texttt
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-343-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-340-1} \end{center}
 
 Platserna illustreras med punkter och arterna med pilar. Pilar i samma riktning motsvarar arter som är lika (de finns på samma platser), närliggande punkter motsvarar lika platser (de har samma arter), och punkter i samma riktning som en pil har höga värden för den arten.
 
@@ -7131,7 +7185,7 @@ Diversitetsindexen kan sedan illustreras och analyseras som vilken numerisk vari
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-346-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-343-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7216,7 +7270,7 @@ Ta som exempel följande data på tandtillväxt (\texttt{len}) hos marsvin under
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-348-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-345-1} \end{center}
 
 Ett lådagram visar en klar skillnad mellan doser och en svagare skillnad mellan metoder. Det finns också tecken på att metoderna svarar olika på dos i att metoden \emph{VC} ligger lägre än \emph{OJ} vid de låga doserna men över (eller iallafall lika) vid den höga dosen.
 
@@ -7260,7 +7314,7 @@ En anovamodell bygger på antaganden om normalfördelning och lika varianser. No
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-350-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-347-1} \end{center}
 
 Punkterna ligger ungefär på linjen i QQ-grafen och punkterna har ungefär samma spridning för alla nivåer av det skattade värdet.
 
@@ -7350,7 +7404,7 @@ Ta som exempel data på förväntad medellivslängd och bnp per capita. Datan h�
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-353-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-350-1} \end{center}
 
 Datan visar ett positivt samband mellan variablerna - högre bnp per capita är kopplat till högre medellivslängd.
 
@@ -7419,7 +7473,7 @@ Man kan enkelt rita ut regressionlinjen i en graf med \texttt{geom\_smooth()} oc
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-356-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-353-1} \end{center}
 
 Den blå linjen illustrerar regressionlinjen 72.27 + 0.2146x. Det grå bandet kring linjen är ett konfidensintervall för skattningen av y-variabeln.
 
@@ -7459,7 +7513,7 @@ Testerna av en regressionsmodell bygger på ett normalfördelningsantagande och 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-358-1} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-355-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7467,7 +7521,7 @@ Testerna av en regressionsmodell bygger på ett normalfördelningsantagande och 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-358-2} \end{center}
+\begin{center}\includegraphics{R-anvisningar_files/figure-latex/unnamed-chunk-355-2} \end{center}
 
 Om data följer en normalfördelning bör histogrammet visa en ungefärlig normalkurva, QQ-plotten bör visa punkter på den diagonala linjen och spridningsdiagrammet bör visa en slumpmässig spridning av punkter. Graferna pekar i det här fallet inte på några tydliga avvikelser från normalfördelningsantagandet, möjligen pekar QQ-plotten på mindre spridning i svansarna än en teoretisk normalfördelning.
 

@@ -40,7 +40,7 @@ gapminder %>%
 
 Beskrivande mått sammanfattas ofta i någon enkel vetenskaplig graf. Två vanliga val är lådagrammet, som illustrerar kvartiler och möjliga extremvärden, och stapeldiagrammet med felstaplar. Vi ger först ett exempel på ett lådagram över livslängd per kontinent uppdelat efter år.
 
-```{r}
+```{r fig3_gm_boxplot, fig.height=6}
 ggplot(gapminder, aes(lifeExp, continent, fill = continent)) +
   geom_boxplot() +
   facet_wrap(~ year)
@@ -48,7 +48,7 @@ ggplot(gapminder, aes(lifeExp, continent, fill = continent)) +
 
 Därefter ett exempel på ett stapeldiagram med felstaplar för samma data. Felstapeln ges av standardavvikelsen.
 
-```{r}
+```{r fig3_gm_bar, fig.height=6}
 dat_sum <- gapminder %>% 
   group_by(continent, year) %>% 
   summarise(Mean = mean(lifeExp),
@@ -156,7 +156,7 @@ Vi såg i tärningsexemplet hur en slumpvariabel kan beskrivas med dess sannolik
 
 Ett vanligt exempel på en sådan *parametriserad* fördelning är en binomialfördelning. En binomialfördelning uppstår när man har upprepningar av en binär händelse (en händelse som antingen inträffar eller inte inträffar) och räknar antalet *positiva* utfall (positiva i klinisk mening som något utfall man är intresserad av). I en binomialfördelning ges antalet upprepningar av en parameter *n* och sannolikheten för ett positivt utfall i en händelse av en parameter *p*.
 
-Som exempel kan vi ett myntkast. Om man singlar ett balanserat mynt tio gånger kommer antalet krona (vårt positiva utfall) följa en binomialfördelning där n ges av 10 och p av 0.5. I R kan sannolikheter från en binomialfördelning tas fram med `dbinom()`. Sannolikheten för tre krona ges till exempel av 
+Som exempel kan vi ta ett myntkast. Om man singlar ett balanserat mynt tio gånger kommer antalet krona (vårt positiva utfall) följa en binomialfördelning där n ges av 10 och p av 0.5. I R kan sannolikheter från en binomialfördelning tas fram med `dbinom()`. Sannolikheten för tre krona ges till exempel av 
 
 ```{r}
 dbinom(3, size = 10, prob = 0.5)
@@ -230,7 +230,7 @@ ggplot(dat_bin, aes(x, p, fill = x <= 3)) +
   geom_col()
 ```
 
-Gör lämpliga ändringar i kodstycket ovan för att illustrera sannolikheten att få tre eller färre positiva utfall i exemplet med tärningskastet. 
+Gör lämpliga ändringar i kodstycket ovan för att illustrera sannolikheten att få exakt tre positiva utfall i exemplet med tärningskastet. 
 :::
 
 ::: {.exercise name="Teori och verklighet"}
@@ -264,7 +264,7 @@ ggplot(dat_two_bin) +
   geom_point(aes(x, binom2), color = "blue")
 ```
 
-Punkterna ligger nästan perfekt på linjen. De två fördelningarna har alltså nästan samma sannolikheter, trots att de har helt olika värden för n och p.
+Punkterna ligger nästan perfekt på linjen. De två binomialfördelningarna har alltså nästan samma sannolikheter, trots att de har helt olika värden för n och p.
 
 ::: {.exercise name="Skilda sannolikheter"}
 Följande kod gör samma sak som exemplet ovan, men nu med n1 och n2 som egna objekt.
@@ -352,7 +352,7 @@ Hur kan man beräkna sannolikheten att få mer än 5 i en fördelning med lambda
 
 ## Kontinuerliga fördelningar i allmänhet
 
-En kontinuerlig fördelning kan anta vilka värden som helst på hela tallinjen eller i något intervall på tallinjen. Ett enkelt exempel på en kontinuerlig slumpvariabel kan vara att stoppa ett stoppur slumpmässigt och titta på decimaldelen. Det kommer ge något värde mellan 0 och 1. (Stoppuret kommer naturligtvis avrunda värdet, så man får tänka sig ett magiskt stoppur med oändligt antal decimaler.) Till skillnad från en diskret slumpvariabel, som kan beskrivas med utfallen och dess sannolikheter, måste en kontinuerlig variabel förklaras med en matematisk funktion, en så kallad *täthetsfunktion*. Detta beror på att enskilda utfall alltid har sannolikhet noll för en kontinuerlig fördelning: om man har oändligt antal decimaler är det som exempel sannolikhet noll att få exakt 0.345000 som decimaler på ett stoppur.
+En kontinuerlig fördelning kan anta vilka värden som helst på hela tallinjen eller i något intervall på tallinjen. Ett enkelt exempel på en kontinuerlig slumpvariabel kan vara att stoppa ett stoppur slumpmässigt och titta på decimaldelen. Det kommer ge något värde mellan 0 och 1. (Stoppuret kommer naturligtvis avrunda värdet, så man får tänka sig ett magiskt stoppur med oändligt antal decimaler.) Till skillnad från en diskret slumpvariabel, som kan beskrivas med utfallen och dess sannolikheter, måste en kontinuerlig variabel förklaras med en matematisk funktion, en så kallad *täthetsfunktion*. Detta beror på att enskilda utfall alltid har sannolikhet noll för en kontinuerlig fördelning: om man har oändligt antal decimaler är det som exempel sannolikhet noll att få exakt 0.345000... som decimaler på ett stoppur.
 
 Den absolut vanligaste kontinuerliga fördelningen är en *normalfördelning*.
 
@@ -417,11 +417,10 @@ Sannolikheten att ligga under ett värde på x ges av kurvan för fördelningsfu
 Fyll i kodstycket nedan för att beräkna sannolikheten att få ett värde under minus två i en normalfördelning med medelvärde 0 och standardavvikelse 1, och i en normalfördelning med medelvärde 1 och standardavvikelse 2.
 
 ```{r, eval = F}
-pnorm(1, mean = ___, sd = ___)
-pnorm(1, mean = ___, sd = ___)
+pnorm(-2, mean = ___, sd = ___)
+pnorm(-2, mean = ___, sd = ___)
 ```
 
-Ändra kodstycket från *exemplet* ovan för att illustrera sannolikheterna i uppgiften.
 :::
 
 Om man vill ta fram en sannolikhet att ligga i ett visst intervall kan man ta skillnaden mellan två värden från fördelningsfunktionen. Sannolikheten att ligga mellan 1 och minus 1 i en normalfördelning med medelvärde 0 och standardavvikelse 1 ges till exempel av
@@ -557,7 +556,7 @@ Gör lämpliga tillägg i stycket ovan för att beräkna summan av tre utfall f�
 
 En intressant aspekt av slumptal är att de kan användas till att utforska icke-slumpmässiga problem. Som exempel tar vi cirkelns area. I figuren nedan är en cirkel inskriven i en kvadrat. Kvadraten har sidor med längden två, så dess totala yta är fyra (två i kvadrat). Om man vet hur stor andel av ytan upptas av cirkeln kan man beräkna cirkelns area genom att ta den andelen gånger fyra. Från rent matematiska resultat vet vi att arean ska vara lika med pi, alltså runt 3.14.
 
-```{r, fig.height=4, fig.width=4}
+```{r fig3_pi1, fig.height=4, fig.width=4}
 # install.packages("ggforce")
 library(ggforce)
 g <- ggplot() + 
@@ -568,7 +567,7 @@ g
 
 Funktionen `runif()` ger ett slumpmässigt värde mellan två gränsvärden (som sätts med argumenten `min` och `max`). Slumpmässiga punkter inom kvadraten kan dras genom att dra en x- och en y-koordinat. En fördelning där alla värden är lika sannolika kallas *uniform* (eller *likformig*).
 
-```{r, fig.height=4, fig.width=4}
+```{r fig3_pi2, fig.height=4, fig.width=4}
 dat_random <- data.frame(x = runif(100, min = -1, max = 1),
                          y = runif(100, min = -1, max = 1))
 
@@ -596,10 +595,10 @@ Beräkningens precision ökar med antalet slumptal. Vad i kodstycket ovan ska ä
 
 Slumpmässiga processer kan ge intressanta mönster. Ett exempel är följande procedur.
 
-1. Ta tre punkter i planet så att de bildar en triangel.
-2. Ta en startpunkt inom triangeln. Kalla den x0.
-3. Välj slumpmässigt en av de tre ursprungliga punkterna och beräkna punkten mellan x0 och den valda punkten. Detta ger en ny punkt, x1.
-4. Välj slumpmässigt en av de tre ursprungliga punkterna och beräkna punkten mellan x1 och den valda punkten. Detta ger en ny punkt, x2.
+1. Ta tre *rampunkter* i planet så att de bildar en triangel.
+2. Ta en *startpunkt* inom triangeln.
+3. Välj slumpmässigt en av de tre rampunkterna och beräkna punkten mellan startpunkten och den valda rampunkten. Detta ger en ny punkt.
+4. Välj slumpmässigt en av de tre rampunkterna och beräkna punkten mellan den nya punkten från föregående steg och rampunkten. Detta ger en ny punkt.
 5. Upprepa steg 4 ett godtyckligt antal gånger.
 
 I R kan proceduren programmeras med en `for`-loop. Här ges ett exempel där 100 punkter genereras. Koden är viss överkurs och innehåller funktioner vi inte behöver till den övriga kursen.
@@ -635,10 +634,61 @@ Vad måste ändras i stycket ovan för att generera fler punkter? Tiotusen kan v
 ## Valfria hemuppgifter
 
 ::: {.exercise name="Sierpinski-pyramiden"}
-Fyll i de saknade delarna i stycket nedan för att skapa en tredimensionell version av Sierpinski-triangeln.
+Stycket nedan skapar en tredimensionell variant av Sierpinski-triangeln.
 
 ```{r, eval = F}
-KOD SAKNAS
+x_original <- c(0,1,1,2)
+y_original <- c(0,2,1,0)
+z_original <- c(0,0,2,0)
+
+x_new <- 0.4
+y_new <- 0.2
+z_new <- 0.5
+dat_tri <- data.frame(x = x_new, y = y_new, z = z_new)
+
+n <- 100 # Antal skapade punkter
+
+for(i in 1:n){
+  new_point <- sample(c(1,2,3,4), 1)
+  x_new <- (x_new + x_original[new_point]) / 2
+  y_new <- (y_new + y_original[new_point]) / 2
+  z_new <- (z_new + z_original[new_point]) / 2
+  
+  dat_tri <- bind_rows(dat_tri, data.frame(x = x_new, y = y_new, z = z_new))
+}
+
+ggplot(dat_tri, aes(x, y)) +
+  geom_point()
+
+library(plotly)
+plot_ly(dat_tri, x = ~x, y = ~y, z = ~z) %>% 
+  add_markers(size = 0.1)
+```
+
+Vad måste ändras för att få fler punkter (`n`)?
+
+(Om grafen inte laddas i *Viewer* utan ger felet *WebGL is not supported*, testa att öppna den i en webläsare genom att trycka på kanppen som ser ut som ett fönster med en pil i viewer-fönstret.)
+:::
+
+::: {.exercise name="Sierpinski-pyramiden"}
+Vad händer om man ändrar värdena i `x_original`?
+:::
+
+::: {.exercise name="Mandelbrot"}
+Sierpinski-triangeln är ett exempel på en fraktal - en mängd som ser likadan ut oavsett inzoomning. Det mest kända exemplet på en fraktal är Mandelbrot-mängden. R-paketet *mandelbrot* kan producera och visualisera.
+
+```{r, eval=F}
+install.packages("mandelbrot")
+library(mandelbrot)
+mb <- mandelbrot()
+plot(mb)
 ```
 :::
 
+::: {.exercise name="Ändrade färger"}
+Titta på hjälpsidan till `mandelbrot_palette` genom att köra `?mandelbrot_palette`. Använd exemplet längst ned för att skapa en färglagd graf.
+:::
+
+::: {.exercise name="Barnsley Fern"}
+Barnsleys ormbunke är ett exempel på en fraktal som efterliknar en naturlig växt. Se wikipediasidan https://en.wikipedia.org/wiki/Barnsley_fern för en beskrivning. Kör R-koden från wikipediasidan för ett exempel i R. Vad måste ändras för att få fler punkter i grafen?
+:::

@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2022-10-03" />
+<meta name="date" content="2022-10-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -361,7 +361,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.3</span> Ändra och skapa nya kolumner med <code>mutate</code><a href="beskrivande-statistik.html#ändra-och-skapa-nya-kolumner-med-mutate" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Variabler kan omräknas och nya variabler kan skapas med <code>mutate</code>-funktionen. I gapminder-datan finns bnp per capita. Om man vill ha nationell BNP kan man skapa en ny kolumn och beräkna den som bnp per capita gånger populationen.</p>
 <div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="beskrivande-statistik.html#cb103-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span>             <span class="co"># Ta datan, och sen</span></span>
-<span id="cb103-2"><a href="beskrivande-statistik.html#cb103-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gdp =</span> gdpPercap <span class="sc">*</span> pop)        <span class="co"># Beräkna en ny kolumn som tempo delat på 60</span></span></code></pre></div>
+<span id="cb103-2"><a href="beskrivande-statistik.html#cb103-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gdp =</span> gdpPercap <span class="sc">*</span> pop)        <span class="co"># Beräkna en ny kolumn som bnp per capita (bnpPercap) gånger befolkningen (pop)</span></span></code></pre></div>
 <p>Den inledande delen med <code>gapminder &lt;-</code> gör så att utfallet av beräkningen sparas i objektet <code>gapminder</code>.
 Vi kan skriva ut objektet och se resultatet av beräkningen:</p>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="beskrivande-statistik.html#cb104-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span> <span class="fu">select</span>(gdpPercap, pop, gdp)        <span class="co"># Ta datan och sen välj tre kolumner</span></span></code></pre></div>
