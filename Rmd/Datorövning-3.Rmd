@@ -343,7 +343,7 @@ Gör lämpliga ändringar för att beräkna sannolikheten för exakt 5 i en för
 Följande ger sannolikheten att få mindre än eller lika med 2 i en poissonfördelning med lambda satt till 4.
 
 ```{r}
-dpois(2, lambda = 4)
+ppois(2, lambda = 4)
 ```
 
 Gör lämpliga ändringar för att beräkna sannolikheten för *mindre än eller lika med 5* i en fördelning med lambda satt till 3.

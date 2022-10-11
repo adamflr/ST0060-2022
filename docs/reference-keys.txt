@@ -213,6 +213,11 @@ exr:unlabeled-div-212
 exr:unlabeled-div-213
 exr:unlabeled-div-214
 exr:unlabeled-div-215
+exr:unlabeled-div-216
+exr:unlabeled-div-217
+exr:unlabeled-div-218
+exr:unlabeled-div-219
+exr:unlabeled-div-220
 inledning
 installation-av-r
 installation-av-rstudio
@@ -260,6 +265,7 @@ test-av-medelvärde-för-normalfördelad-data
 konfidensintervall-för-normalfördelad-data
 normalfördelad-data-och-centrala-gränsvärdesatsen
 bonus.-simuleringar-för-t-test-och-konfidensintervall
+valfria-hemuppgifter-3
 ett-stickprov-av-icke-normalfördelad-data
 repetition-av-datorövning-4
 proportioner-från-binär-data

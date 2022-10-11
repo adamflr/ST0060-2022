@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Slumpvariabler | R-anvisningar till Grundläggande statistik</title>
   <meta name="description" content="3 Slumpvariabler | R-anvisningar till Grundläggande statistik" />
-  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Slumpvariabler | R-anvisningar till Grundläggande statistik" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2022-10-06" />
+<meta name="date" content="2022-10-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -195,6 +195,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="ett-stickprov-av-normalfördelad-data.html"><a href="ett-stickprov-av-normalfördelad-data.html#konfidensintervall-för-normalfördelad-data"><i class="fa fa-check"></i><b>4.3</b> Konfidensintervall för normalfördelad data</a></li>
 <li class="chapter" data-level="4.4" data-path="ett-stickprov-av-normalfördelad-data.html"><a href="ett-stickprov-av-normalfördelad-data.html#normalfördelad-data-och-centrala-gränsvärdesatsen"><i class="fa fa-check"></i><b>4.4</b> Normalfördelad data och centrala gränsvärdesatsen</a></li>
 <li class="chapter" data-level="4.5" data-path="ett-stickprov-av-normalfördelad-data.html"><a href="ett-stickprov-av-normalfördelad-data.html#bonus.-simuleringar-för-t-test-och-konfidensintervall"><i class="fa fa-check"></i><b>4.5</b> Bonus. Simuleringar för t-test och konfidensintervall</a></li>
+<li class="chapter" data-level="4.6" data-path="ett-stickprov-av-normalfördelad-data.html"><a href="ett-stickprov-av-normalfördelad-data.html#valfria-hemuppgifter-3"><i class="fa fa-check"></i><b>4.6</b> Valfria hemuppgifter</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="ett-stickprov-av-icke-normalfördelad-data.html"><a href="ett-stickprov-av-icke-normalfördelad-data.html"><i class="fa fa-check"></i><b>5</b> Ett stickprov av icke-normalfördelad data</a>
 <ul>
@@ -380,9 +381,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="slumpvariabler.html#cb196-1" aria-hidden="true" tabindex="-1"></a>slumputfall <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> dat_dice6<span class="sc">$</span>x, <span class="at">size =</span> <span class="dv">10000</span>, <span class="at">replace =</span> T)</span>
 <span id="cb196-2"><a href="slumpvariabler.html#cb196-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb196-3"><a href="slumpvariabler.html#cb196-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(slumputfall)</span></code></pre></div>
-<pre><code>## [1] 3.514</code></pre>
+<pre><code>## [1] 3.4937</code></pre>
 <div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="slumpvariabler.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(slumputfall)</span></code></pre></div>
-<pre><code>## [1] 2.930497</code></pre>
+<pre><code>## [1] 2.938454</code></pre>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-65" class="exercise"><strong>Uppgift 3.5  (Simulera tärningen) </strong></span>Använd <code>sample()</code> för att dra tiotusen observationer från din egen tärning. Beräkna medelvärde och varians från det stickprovet. Är utfallen nära de teoretiska beräkningarna av populationsmedelvärde och -varians?</p>
 </div>
@@ -595,8 +596,8 @@ Om man tittar på binomialfördelningar med stort antal upprepningar och en låg
 </div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-75" class="exercise"><strong>Uppgift 3.15  (Fördelningsfunktionen för en poisson) </strong></span>Följande ger sannolikheten att få mindre än eller lika med 2 i en poissonfördelning med lambda satt till 4.</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="slumpvariabler.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dpois</span>(<span class="dv">2</span>, <span class="at">lambda =</span> <span class="dv">4</span>)</span></code></pre></div>
-<pre><code>## [1] 0.1465251</code></pre>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="slumpvariabler.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ppois</span>(<span class="dv">2</span>, <span class="at">lambda =</span> <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 0.2381033</code></pre>
 <p>Gör lämpliga ändringar för att beräkna sannolikheten för <em>mindre än eller lika med 5</em> i en fördelning med lambda satt till 3.
 Hur kan man beräkna sannolikheten att få mer än 5 i en fördelning med lambda satt till 3?</p>
 </div>
@@ -771,7 +772,7 @@ Notera att denna fråga finns bland instuderingsuppgifterna.</p>
 <span id="cb247-3"><a href="slumpvariabler.html#cb247-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">inner =</span> x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> y<span class="sc">^</span><span class="dv">2</span> <span class="sc">&lt;</span> <span class="dv">1</span>)</span>
 <span id="cb247-4"><a href="slumpvariabler.html#cb247-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb247-5"><a href="slumpvariabler.html#cb247-5" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="sc">*</span> <span class="fu">mean</span>(dat_random<span class="sc">$</span>inner)</span></code></pre></div>
-<pre><code>## [1] 3.32</code></pre>
+<pre><code>## [1] 2.96</code></pre>
 <div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="slumpvariabler.html#cb249-1" aria-hidden="true" tabindex="-1"></a>pi</span></code></pre></div>
 <pre><code>## [1] 3.141593</code></pre>
 <p>Den beräknade arean ligger inte så långt från konstanten pi.</p>
