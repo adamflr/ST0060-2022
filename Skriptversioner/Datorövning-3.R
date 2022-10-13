@@ -1,29 +1,29 @@
 # # Slumpvariabler
 #
-# Datorövning 3 handlar om sannolikhetslära i R. Efter övningen ska vi kunna
+# DatorÃ¶vning 3 handlar om sannolikhetslÃ¤ra i R. Efter Ã¶vningen ska vi kunna
 #
-# - Identifiera en passande slumpfördelning för verkliga fenomen,
+# - Identifiera en passande slumpfÃ¶rdelning fÃ¶r verkliga fenomen,
 #
-# - Beräkna sannolikheter från en antagen fördelning,
+# - BerÃ¤kna sannolikheter frÃ¥n en antagen fÃ¶rdelning,
 #
-# - Simulera fenomen med en antagen fördelning,
+# - Simulera fenomen med en antagen fÃ¶rdelning,
 #
-# - Använda slumptal för att utforska teoretiska resultat från sannolikhetsläran.
+# - AnvÃ¤nda slumptal fÃ¶r att utforska teoretiska resultat frÃ¥n sannolikhetslÃ¤ran.
 #
-# ## Repetition från datorövning 2
+# ## Repetition frÃ¥n datorÃ¶vning 2
 #
-# När man startar en ny R-session bör man ladda de paket man vet kommer behövas med `library()`. Om
-# paket inte finns installerade måste man först köra `install.packages()`.
+# NÃ¤r man startar en ny R-session bÃ¶r man ladda de paket man vet kommer behÃ¶vas med `library()`. Om
+# paket inte finns installerade mÃ¥ste man fÃ¶rst kÃ¶ra `install.packages()`.
 #
 
 # install.packages("tidyverse")
 library(tidyverse)
 
 #
-# I datorövning 2 tittade vi på hur insamlade variabler kan sammanfattas med lägesmått och
-# spridningsmått. Ett enkelt sätt att ta fram dem är att använda `summarise()` och ange de mått och
-# variabler man vill använda. Vi hade uppe ett exempel på data från Gapminder som vi importerade från
-# en excel-fil. För nu kan vi dock hämta datan från paketet `gapminder`.
+# I datorÃ¶vning 2 tittade vi pÃ¥ hur insamlade variabler kan sammanfattas med lÃ¤gesmÃ¥tt och
+# spridningsmÃ¥tt. Ett enkelt sÃ¤tt att ta fram dem Ã¤r att anvÃ¤nda `summarise()` och ange de mÃ¥tt och
+# variabler man vill anvÃ¤nda. Vi hade uppe ett exempel pÃ¥ data frÃ¥n Gapminder som vi importerade frÃ¥n
+# en excel-fil. FÃ¶r nu kan vi dock hÃ¤mta datan frÃ¥n paketet `gapminder`.
 #
 
 # install.packages("gapminder")
@@ -32,15 +32,15 @@ library(gapminder)
 gapminder %>% 
   filter(year == 2007) %>% 
   group_by(continent) %>% 
-  summarise(`Livslängd, medel` = mean(lifeExp),
+  summarise(`LivslÃ¤ngd, medel` = mean(lifeExp),
             `Befolkning, median` = median(pop),
             `Bnp per capita, standardavvikelse` = sd(gdpPercap))
 
 #
-# Beskrivande mått sammanfattas ofta i någon enkel vetenskaplig graf. Två vanliga val är
-# lådagrammet, som illustrerar kvartiler och möjliga extremvärden, och stapeldiagrammet med
-# felstaplar. Vi ger först ett exempel på ett lådagram över livslängd per kontinent uppdelat efter
-# år.
+# Beskrivande mÃ¥tt sammanfattas ofta i nÃ¥gon enkel vetenskaplig graf. TvÃ¥ vanliga val Ã¤r
+# lÃ¥dagrammet, som illustrerar kvartiler och mÃ¶jliga extremvÃ¤rden, och stapeldiagrammet med
+# felstaplar. Vi ger fÃ¶rst ett exempel pÃ¥ ett lÃ¥dagram Ã¶ver livslÃ¤ngd per kontinent uppdelat efter
+# Ã¥r.
 #
 
 ggplot(gapminder, aes(lifeExp, continent, fill = continent)) +
@@ -48,7 +48,7 @@ ggplot(gapminder, aes(lifeExp, continent, fill = continent)) +
   facet_wrap(~ year)
 
 #
-# Därefter ett exempel på ett stapeldiagram med felstaplar för samma data. Felstapeln ges av
+# DÃ¤refter ett exempel pÃ¥ ett stapeldiagram med felstaplar fÃ¶r samma data. Felstapeln ges av
 # standardavvikelsen.
 #
 
@@ -64,16 +64,16 @@ ggplot(dat_sum, aes(continent, Mean, fill = continent)) +
   facet_wrap(~ year)
 
 #
-# ## Diskreta fördelningar i allmänhet
+# ## Diskreta fÃ¶rdelningar i allmÃ¤nhet
 #
-# En diskret slumpvariabel kan bara anta specifika värden på tallinjen. Det absolut vanligaste
-# fallet är när utfallen är heltal. Tärningskastet med en sex-sidig tärning är ett exempel på en
-# diskret variabel: utfallet är något av 1, 2, 3, 4, 5 och 6. Låt oss börja med att definera en
-# diskret slumpvariabel med tärningskastet som exempel.
+# En diskret slumpvariabel kan bara anta specifika vÃ¤rden pÃ¥ tallinjen. Det absolut vanligaste
+# fallet Ã¤r nÃ¤r utfallen Ã¤r heltal. TÃ¤rningskastet med en sex-sidig tÃ¤rning Ã¤r ett exempel pÃ¥ en
+# diskret variabel: utfallet Ã¤r nÃ¥got av 1, 2, 3, 4, 5 och 6. LÃ¥t oss bÃ¶rja med att definera en
+# diskret slumpvariabel med tÃ¤rningskastet som exempel.
 #
-# Ett kast med en 6-sidig tärning har sex möjliga utfall och (för en balanserad tärning) samma
-# sannolikhet för varje utfall. Eftersom summan av sannolikheter ska bli ett måste sannolikheten för
-# ett specifik utfall vara en sjättedel. Vi kan kodifiera slumpvariabeln i en tabell över utfall och
+# Ett kast med en 6-sidig tÃ¤rning har sex mÃ¶jliga utfall och (fÃ¶r en balanserad tÃ¤rning) samma
+# sannolikhet fÃ¶r varje utfall. Eftersom summan av sannolikheter ska bli ett mÃ¥ste sannolikheten fÃ¶r
+# ett specifik utfall vara en sjÃ¤ttedel. Vi kan kodifiera slumpvariabeln i en tabell Ã¶ver utfall och
 # sannolikhet.
 #
 
@@ -88,23 +88,23 @@ dat_dice6
 ggplot(dat_dice6, aes(x, p)) + geom_col()
 
 #
-# Uppgift 3.1. (En annan tärning)
-# Ta fram en tärning som *inte* har sex sidor. Om du saknar en sådan tärning, fråga lämplig person
-# om du kan få en. Behåll tärningen, då den kan återkomma vid en senare datorövning. Följ exemplet
-# ovan för att kodifiera din tärning som en slumpvariabel. Utfallen `x` är de möjliga resultaten av
-# att kasta tärningen och sannolikheten `p` är sannolikheten för varje utfall. Antag att tärningen är
-# balanserad och att alla utfall därför är lika troliga. Ett bra namn på det nya objektet kan vara
-# `dat_diceN` där N anger antalet sidor på tärningen, t.ex. `dat_dice20` för en 20-sidig tärning.
+# Uppgift 3.1. (En annan tÃ¤rning)
+# Ta fram en tÃ¤rning som *inte* har sex sidor. Om du saknar en sÃ¥dan tÃ¤rning, frÃ¥ga lÃ¤mplig person
+# om du kan fÃ¥ en. BehÃ¥ll tÃ¤rningen, dÃ¥ den kan Ã¥terkomma vid en senare datorÃ¶vning. FÃ¶lj exemplet
+# ovan fÃ¶r att kodifiera din tÃ¤rning som en slumpvariabel. Utfallen `x` Ã¤r de mÃ¶jliga resultaten av
+# att kasta tÃ¤rningen och sannolikheten `p` Ã¤r sannolikheten fÃ¶r varje utfall. Antag att tÃ¤rningen Ã¤r
+# balanserad och att alla utfall dÃ¤rfÃ¶r Ã¤r lika troliga. Ett bra namn pÃ¥ det nya objektet kan vara
+# `dat_diceN` dÃ¤r N anger antalet sidor pÃ¥ tÃ¤rningen, t.ex. `dat_dice20` fÃ¶r en 20-sidig tÃ¤rning.
 # :::
 #
-# Under tidigare datorövningar såg vi hur man kan beräkna medelvärde och varians från ett
-# stickprov. De måtten kan också beräknas på en teoretisk slumpvariabel. Den här kopplingen mellan
-# beräkningar på ett stickprov och teoretiska egenskaper hos en slumpvariabel är väldigt central inom
-# statistiken, eftersom vårt mål är att koppla verklig data till teoretiska modeller.
+# Under tidigare datorÃ¶vningar sÃ¥g vi hur man kan berÃ¤kna medelvÃ¤rde och varians frÃ¥n ett
+# stickprov. De mÃ¥tten kan ocksÃ¥ berÃ¤knas pÃ¥ en teoretisk slumpvariabel. Den hÃ¤r kopplingen mellan
+# berÃ¤kningar pÃ¥ ett stickprov och teoretiska egenskaper hos en slumpvariabel Ã¤r vÃ¤ldigt central inom
+# statistiken, eftersom vÃ¥rt mÃ¥l Ã¤r att koppla verklig data till teoretiska modeller.
 #
-# För en diskret slumpvariabel ges medelvärdet (som då också kallas *populationsmedelvärde*, eller
-# vanligare *väntevärde*) av summan av utfallen gånger sannolikheterna. Vi säger att utfallen vägs
-# med sannolikheterna. För vår tärning kan vi räkna ut det genom att multiplicera utfall och
+# FÃ¶r en diskret slumpvariabel ges medelvÃ¤rdet (som dÃ¥ ocksÃ¥ kallas *populationsmedelvÃ¤rde*, eller
+# vanligare *vÃ¤ntevÃ¤rde*) av summan av utfallen gÃ¥nger sannolikheterna. Vi sÃ¤ger att utfallen vÃ¤gs
+# med sannolikheterna. FÃ¶r vÃ¥r tÃ¤rning kan vi rÃ¤kna ut det genom att multiplicera utfall och
 # sannolikhet i ett `mutate()` steg och sedan summera.
 #
 
@@ -113,22 +113,22 @@ dat_dice6 %>%
   summarise(Expected_value = sum(x_times_p))
 
 #
-# Notera att medelvärdet inte behöver vara ett möjligt utfall.
+# Notera att medelvÃ¤rdet inte behÃ¶ver vara ett mÃ¶jligt utfall.
 #
-# Uppgift 3.2. (Medelvärde för din tärning)
-# Upprepa beräkningen ovan, denna gång med den slumpvariabel du kodifierade i den tidigare
+# Uppgift 3.2. (MedelvÃ¤rde fÃ¶r din tÃ¤rning)
+# Upprepa berÃ¤kningen ovan, denna gÃ¥ng med den slumpvariabel du kodifierade i den tidigare
 # uppgiften.
 # :::
 #
-# Beräkningen av en teoretisk varians (som vi kan kalla *populationsvarians*) är lite komplicerad.
+# BerÃ¤kningen av en teoretisk varians (som vi kan kalla *populationsvarians*) Ã¤r lite komplicerad.
 # Stegen ges av
 #
-# 1. dra ifrån medelvärdet från utfallen,
+# 1. dra ifrÃ¥n medelvÃ¤rdet frÃ¥n utfallen,
 # 2. kvadrera differenserna,
 # 3. multiplicera kvadraterna med sannolikheterna,
 # 4. summera produkterna.
 #
-# För den 6-sidiga tärningen får vi beräkningen nedan. Precis som i fallet med faktiskt data ges
+# FÃ¶r den 6-sidiga tÃ¤rningen fÃ¥r vi berÃ¤kningen nedan. Precis som i fallet med faktiskt data ges
 # standardavvikelsen av roten ur variansen.
 #
 
@@ -141,17 +141,17 @@ dat_dice6 %>%
             standardavvikelse = sqrt(varians))
 
 #
-# Uppgift 3.3. (Varians för din tärning)
-# Upprepa beräkningen ovan, denna gång med den slumpvariabel du kodifierade i den tidigare
+# Uppgift 3.3. (Varians fÃ¶r din tÃ¤rning)
+# Upprepa berÃ¤kningen ovan, denna gÃ¥ng med den slumpvariabel du kodifierade i den tidigare
 # uppgiften.
 # :::
 #
-# Vår modell för tärningskastet säger att en serie tärningskast ska ha ett visst medelvärde och
-# varians. Låt oss nu testa det genom att kasta tärning.
+# VÃ¥r modell fÃ¶r tÃ¤rningskastet sÃ¤ger att en serie tÃ¤rningskast ska ha ett visst medelvÃ¤rde och
+# varians. LÃ¥t oss nu testa det genom att kasta tÃ¤rning.
 #
-# Uppgift 3.4. (Kasta tärningen)
-# Kasta din tärning 20 gånger. Gärna på en mjuk yta. Skriv in utfallen i koden nedan och beräkna
-# medelvärde och varians.
+# Uppgift 3.4. (Kasta tÃ¤rningen)
+# Kasta din tÃ¤rning 20 gÃ¥nger. GÃ¤rna pÃ¥ en mjuk yta. Skriv in utfallen i koden nedan och berÃ¤kna
+# medelvÃ¤rde och varians.
 #
 
 utfall <- c(_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_)
@@ -160,12 +160,12 @@ var(utfall)
 sd(utfall)
 
 #
-# Ligger medelvärde och varians från stickprovet nära de teoretiska beräkningarna?
+# Ligger medelvÃ¤rde och varians frÃ¥n stickprovet nÃ¤ra de teoretiska berÃ¤kningarna?
 # :::
 #
-# R kommer också med en rad funktioner för att simulera data. För kontinuerlig data kan man använda
-# funktioner `sample()` som drar ett valfritt stort urval ur en serie möjlig utfall. Följande kod
-# drar tiotusen slumputfall från en 6-sidig tärning, och beräknar medelvärde och varians.
+# R kommer ocksÃ¥ med en rad funktioner fÃ¶r att simulera data. FÃ¶r kontinuerlig data kan man anvÃ¤nda
+# funktioner `sample()` som drar ett valfritt stort urval ur en serie mÃ¶jlig utfall. FÃ¶ljande kod
+# drar tiotusen slumputfall frÃ¥n en 6-sidig tÃ¤rning, och berÃ¤knar medelvÃ¤rde och varians.
 #
 
 slumputfall <- sample(x = dat_dice6$x, size = 10000, replace = T)
@@ -174,40 +174,40 @@ mean(slumputfall)
 var(slumputfall)
 
 #
-# Uppgift 3.5. (Simulera tärningen)
-# Använd `sample()` för att dra tiotusen observationer från din egen tärning. Beräkna medelvärde
-# och varians från det stickprovet. Är utfallen nära de teoretiska beräkningarna av
-# populationsmedelvärde och -varians?
+# Uppgift 3.5. (Simulera tÃ¤rningen)
+# AnvÃ¤nd `sample()` fÃ¶r att dra tiotusen observationer frÃ¥n din egen tÃ¤rning. BerÃ¤kna medelvÃ¤rde
+# och varians frÃ¥n det stickprovet. Ã„r utfallen nÃ¤ra de teoretiska berÃ¤kningarna av
+# populationsmedelvÃ¤rde och -varians?
 # :::
 #
-# ## Särskilda diskreta fördelningar: binomialfördelning
+# ## SÃ¤rskilda diskreta fÃ¶rdelningar: binomialfÃ¶rdelning
 #
-# Vi såg i tärningsexemplet hur en slumpvariabel kan beskrivas med dess sannolikhetsfördelning -
-# variabeln förklaras helt av de möjliga utfallen och sannolikheten för varje utfall. Man kan dock
-# ofta beskriva en slumpvariabel i mindre direkta termer. Ett tärningskast med en 6-sidig tärning kan
-# beskrivas som *utfall från 1 till 6 med varje utfall lika sannolikt* och ett tärningskast med en
-# 20-sidig tärning kan beskrivas som *utfall från 1 till 20 med varje utfall lika sannolikt*.
-# Slumpvariablerna kan alltså beskrivas på ett tydligt sätt utifrån den bakomliggande processen. Den
-# här typen av variabler är ofta *parametriserade* - det finns någon aspekt av processen som beskrivs
-# med en bestämd siffra (6 respektive 20 för de bägge tärningskasten).
+# Vi sÃ¥g i tÃ¤rningsexemplet hur en slumpvariabel kan beskrivas med dess sannolikhetsfÃ¶rdelning -
+# variabeln fÃ¶rklaras helt av de mÃ¶jliga utfallen och sannolikheten fÃ¶r varje utfall. Man kan dock
+# ofta beskriva en slumpvariabel i mindre direkta termer. Ett tÃ¤rningskast med en 6-sidig tÃ¤rning kan
+# beskrivas som *utfall frÃ¥n 1 till 6 med varje utfall lika sannolikt* och ett tÃ¤rningskast med en
+# 20-sidig tÃ¤rning kan beskrivas som *utfall frÃ¥n 1 till 20 med varje utfall lika sannolikt*.
+# Slumpvariablerna kan alltsÃ¥ beskrivas pÃ¥ ett tydligt sÃ¤tt utifrÃ¥n den bakomliggande processen. Den
+# hÃ¤r typen av variabler Ã¤r ofta *parametriserade* - det finns nÃ¥gon aspekt av processen som beskrivs
+# med en bestÃ¤md siffra (6 respektive 20 fÃ¶r de bÃ¤gge tÃ¤rningskasten).
 #
-# Ett vanligt exempel på en sådan *parametriserad* fördelning är en binomialfördelning. En
-# binomialfördelning uppstår när man har upprepningar av en binär händelse (en händelse som antingen
-# inträffar eller inte inträffar) och räknar antalet *positiva* utfall (positiva i klinisk mening som
-# något utfall man är intresserad av). I en binomialfördelning ges antalet upprepningar av en
-# parameter *n* och sannolikheten för ett positivt utfall i en händelse av en parameter *p*.
+# Ett vanligt exempel pÃ¥ en sÃ¥dan *parametriserad* fÃ¶rdelning Ã¤r en binomialfÃ¶rdelning. En
+# binomialfÃ¶rdelning uppstÃ¥r nÃ¤r man har upprepningar av en binÃ¤r hÃ¤ndelse (en hÃ¤ndelse som antingen
+# intrÃ¤ffar eller inte intrÃ¤ffar) och rÃ¤knar antalet *positiva* utfall (positiva i klinisk mening som
+# nÃ¥got utfall man Ã¤r intresserad av). I en binomialfÃ¶rdelning ges antalet upprepningar av en
+# parameter *n* och sannolikheten fÃ¶r ett positivt utfall i en hÃ¤ndelse av en parameter *p*.
 #
-# Som exempel kan vi ta ett myntkast. Om man singlar ett balanserat mynt tio gånger kommer antalet
-# krona (vårt positiva utfall) följa en binomialfördelning där n ges av 10 och p av 0.5. I R kan
-# sannolikheter från en binomialfördelning tas fram med `dbinom()`. Sannolikheten för tre krona ges
+# Som exempel kan vi ta ett myntkast. Om man singlar ett balanserat mynt tio gÃ¥nger kommer antalet
+# krona (vÃ¥rt positiva utfall) fÃ¶lja en binomialfÃ¶rdelning dÃ¤r n ges av 10 och p av 0.5. I R kan
+# sannolikheter frÃ¥n en binomialfÃ¶rdelning tas fram med `dbinom()`. Sannolikheten fÃ¶r tre krona ges
 # till exempel av
 #
 
 dbinom(3, size = 10, prob = 0.5)
 
 #
-# Om vi vill illustrera en binomalfördelning kan vi ta fram sannolikheterna för varje utfall och
-# göra ett stapeldiagram.
+# Om vi vill illustrera en binomalfÃ¶rdelning kan vi ta fram sannolikheterna fÃ¶r varje utfall och
+# gÃ¶ra ett stapeldiagram.
 #
 
 dat_bin <- data.frame(x = 0:10) %>% 
@@ -216,11 +216,11 @@ dat_bin <- data.frame(x = 0:10) %>%
 ggplot(dat_bin, aes(x, p)) + geom_col()
 
 #
-# Uppgift 3.6. (Binomialfördelning för tärningen)
-# Ta tärningen från tidigare uppgift. Om man kastar tärningen tjugo gånger, vad är fördelningen för
-# antalet gånger man får tärningens lägsta utfall? (Till exempel, vad är fördelningen för antalet
-# ettor vid tjugo kast med en sexsidig tärning?) Fyll i stycket nedan för att beräkna sannolikheterna
-# i den fördelningen och illustrera med ett stapeldiagram.
+# Uppgift 3.6. (BinomialfÃ¶rdelning fÃ¶r tÃ¤rningen)
+# Ta tÃ¤rningen frÃ¥n tidigare uppgift. Om man kastar tÃ¤rningen tjugo gÃ¥nger, vad Ã¤r fÃ¶rdelningen fÃ¶r
+# antalet gÃ¥nger man fÃ¥r tÃ¤rningens lÃ¤gsta utfall? (Till exempel, vad Ã¤r fÃ¶rdelningen fÃ¶r antalet
+# ettor vid tjugo kast med en sexsidig tÃ¤rning?) Fyll i stycket nedan fÃ¶r att berÃ¤kna sannolikheterna
+# i den fÃ¶rdelningen och illustrera med ett stapeldiagram.
 #
 
 dat_bin <- data.frame(x = 0:20) %>% 
@@ -231,16 +231,16 @@ ggplot(dat_bin, aes(x, p)) + geom_col()
 # :::
 #
 # Uppgift 3.7. (Sannolikheter i binomialen)
-# I den fördelning du beräknade i uppgiften ovan. Vad är sannolikheten att få exakt tre positiva
-# utfall? (Ledning: för en sexsidig tärning skulle det ges av `dbinom(3, size = 20, prob = 1/6))`.)
+# I den fÃ¶rdelning du berÃ¤knade i uppgiften ovan. Vad Ã¤r sannolikheten att fÃ¥ exakt tre positiva
+# utfall? (Ledning: fÃ¶r en sexsidig tÃ¤rning skulle det ges av `dbinom(3, size = 20, prob = 1/6))`.)
 # :::
 #
-# Utöver sannolikhetsfunktionen (som ger sannolikheten för varje utfall) används ofta också
-# fördelningsfunktionen (som för varje utfall ger sannolikheten att ligga exakt på eller under ett
-# specifikt värde). Fördelningsfunktionen används vid sannolikhetsberäkningar, t.ex. är de tabeller
-# för fördelningar man ofta ser i slutet av statistikböcker på fördelningsformen.
+# UtÃ¶ver sannolikhetsfunktionen (som ger sannolikheten fÃ¶r varje utfall) anvÃ¤nds ofta ocksÃ¥
+# fÃ¶rdelningsfunktionen (som fÃ¶r varje utfall ger sannolikheten att ligga exakt pÃ¥ eller under ett
+# specifikt vÃ¤rde). FÃ¶rdelningsfunktionen anvÃ¤nds vid sannolikhetsberÃ¤kningar, t.ex. Ã¤r de tabeller
+# fÃ¶r fÃ¶rdelningar man ofta ser i slutet av statistikbÃ¶cker pÃ¥ fÃ¶rdelningsformen.
 #
-# I R beräknas fördelningsfunktionen med `pbinom()`. För fallet med tio slantsinglingar kan man ta
+# I R berÃ¤knas fÃ¶rdelningsfunktionen med `pbinom()`. FÃ¶r fallet med tio slantsinglingar kan man ta
 #
 
 dat_bin <- data.frame(x = 0:10) %>% 
@@ -249,16 +249,16 @@ dat_bin <- data.frame(x = 0:10) %>%
 dat_bin
 
 #
-# Fördelningsfunktionen ges av att summera sannolikhetsfunktionen uppifrån.
+# FÃ¶rdelningsfunktionen ges av att summera sannolikhetsfunktionen uppifrÃ¥n.
 #
-# Uppgift 3.8. (Fördelningsfunktion i binomialen)
-# Använd binomialfördelningen från den tidigare uppgiften till att beräkna sannolikheten att få
-# *tre eller färre* positiva utfall.
+# Uppgift 3.8. (FÃ¶rdelningsfunktion i binomialen)
+# AnvÃ¤nd binomialfÃ¶rdelningen frÃ¥n den tidigare uppgiften till att berÃ¤kna sannolikheten att fÃ¥
+# *tre eller fÃ¤rre* positiva utfall.
 # :::
 #
-# Vi kan använda ett logiskt uttryck för att illustrera sannolikheter i stapeldiagrammet. Om vi
-# vill beräkna och illustrera sannolikheten för sju eller färre positiva utfall i exemplet med mynten
-# kan vi använda följande.
+# Vi kan anvÃ¤nda ett logiskt uttryck fÃ¶r att illustrera sannolikheter i stapeldiagrammet. Om vi
+# vill berÃ¤kna och illustrera sannolikheten fÃ¶r sju eller fÃ¤rre positiva utfall i exemplet med mynten
+# kan vi anvÃ¤nda fÃ¶ljande.
 #
 
 pbinom(7, size = 10, prob = 0.5)
@@ -271,11 +271,11 @@ ggplot(dat_bin, aes(x, p, fill = x <= 7)) +
   geom_col()
 
 #
-# Den blå ytan motsvarar sannolikheten att få sju eller färre krona. Den sannolikheten kan beräknas
+# Den blÃ¥ ytan motsvarar sannolikheten att fÃ¥ sju eller fÃ¤rre krona. Den sannolikheten kan berÃ¤knas
 # till 0.945.
 #
 # Uppgift 3.9. (Illustration av sannolikheten)
-# För en sexsidig tärning illustrerar följande sannolikheten att få tre eller färre sexor vid tjugo
+# FÃ¶r en sexsidig tÃ¤rning illustrerar fÃ¶ljande sannolikheten att fÃ¥ tre eller fÃ¤rre sexor vid tjugo
 # kast.
 #
 
@@ -287,36 +287,36 @@ ggplot(dat_bin, aes(x, p, fill = x <= 3)) +
   geom_col()
 
 #
-# Gör lämpliga ändringar i kodstycket ovan för att illustrera sannolikheten att få exakt tre
-# positiva utfall i exemplet med tärningskastet.
+# GÃ¶r lÃ¤mpliga Ã¤ndringar i kodstycket ovan fÃ¶r att illustrera sannolikheten att fÃ¥ exakt tre
+# positiva utfall i exemplet med tÃ¤rningskastet.
 # :::
 #
 # Uppgift 3.10. (Teori och verklighet)
-# I en tidigare uppgift kastade du tärningen tjugo gånger. Hur många gånger fick du det lägsta
-# möjliga utfallet på tärningen (t.ex. en etta på en vanlig sex-sidig tärning).
+# I en tidigare uppgift kastade du tÃ¤rningen tjugo gÃ¥nger. Hur mÃ¥nga gÃ¥nger fick du det lÃ¤gsta
+# mÃ¶jliga utfallet pÃ¥ tÃ¤rningen (t.ex. en etta pÃ¥ en vanlig sex-sidig tÃ¤rning).
 # :::
 #
-# I det första exemplet med tärningen kunde vi beräkna väntevärde och varians med de allmäna
-# formlerna. För parametriserade fördelningar som binomialfördelningen finns ofta enklare formler som
-# helt beror på parametrarna. I en binomial ges populationsmedelvärdet av antalet upprepningar gånger
-# sannolikheten (n gånger p) och variansen av antalet upprepningar gånger sannolikheten gånger
-# ett-minus-sannolikheten (n gånger p gånger (1 - p)). För myntkastet (n = 10 och p = 0.5) ges
-# medelvärdet av 5 och variansen av 2.5.
+# I det fÃ¶rsta exemplet med tÃ¤rningen kunde vi berÃ¤kna vÃ¤ntevÃ¤rde och varians med de allmÃ¤na
+# formlerna. FÃ¶r parametriserade fÃ¶rdelningar som binomialfÃ¶rdelningen finns ofta enklare formler som
+# helt beror pÃ¥ parametrarna. I en binomial ges populationsmedelvÃ¤rdet av antalet upprepningar gÃ¥nger
+# sannolikheten (n gÃ¥nger p) och variansen av antalet upprepningar gÃ¥nger sannolikheten gÃ¥nger
+# ett-minus-sannolikheten (n gÃ¥nger p gÃ¥nger (1 - p)). FÃ¶r myntkastet (n = 10 och p = 0.5) ges
+# medelvÃ¤rdet av 5 och variansen av 2.5.
 #
-# Uppgift 3.11. (Medelvärde och varians i binomialen)
-# Beräkna medelvärde och varians för antalet ettor om man kastar en sex-sidig tärning tjugo gånger.
+# Uppgift 3.11. (MedelvÃ¤rde och varians i binomialen)
+# BerÃ¤kna medelvÃ¤rde och varians fÃ¶r antalet ettor om man kastar en sex-sidig tÃ¤rning tjugo gÃ¥nger.
 # :::
 #
-# ## Särskilda diskreta fördelningar: poissonfördelning
+# ## SÃ¤rskilda diskreta fÃ¶rdelningar: poissonfÃ¶rdelning
 #
-# En poissonfördelning är en vanlig sannolikhetsfördelning för antalsdata (alltså data som antar
-# positiva heltal som 0, 1, 2, 3 och så vidare). Poissonfördelningen har en nära koppling till
-# binomialfördelningen.
-# Om man tittar på binomialfördelningar med stort antal upprepningar och en låg sannolikhet för ett
-# positivt utfall kan man observera att intressant fenomen: binomialfördelningar med samma medelvärde
-# är *väldigt* lika. Ta som exempel en binomial med n = 5000 och p = 0.0006 och en annan
-# binomialfördelning med n = 400 och p = 0.0075. Bägge fördelningarna har medelvärde 3 (ta n gånger p
-# för att bekräfta det). Vi kan beräkna sannolikhetsfördelningen med `dbinom()`.
+# En poissonfÃ¶rdelning Ã¤r en vanlig sannolikhetsfÃ¶rdelning fÃ¶r antalsdata (alltsÃ¥ data som antar
+# positiva heltal som 0, 1, 2, 3 och sÃ¥ vidare). PoissonfÃ¶rdelningen har en nÃ¤ra koppling till
+# binomialfÃ¶rdelningen.
+# Om man tittar pÃ¥ binomialfÃ¶rdelningar med stort antal upprepningar och en lÃ¥g sannolikhet fÃ¶r ett
+# positivt utfall kan man observera att intressant fenomen: binomialfÃ¶rdelningar med samma medelvÃ¤rde
+# Ã¤r *vÃ¤ldigt* lika. Ta som exempel en binomial med n = 5000 och p = 0.0006 och en annan
+# binomialfÃ¶rdelning med n = 400 och p = 0.0075. BÃ¤gge fÃ¶rdelningarna har medelvÃ¤rde 3 (ta n gÃ¥nger p
+# fÃ¶r att bekrÃ¤fta det). Vi kan berÃ¤kna sannolikhetsfÃ¶rdelningen med `dbinom()`.
 #
 
 dat_two_bin <- data.frame(x = 0:30) %>% 
@@ -326,8 +326,8 @@ dat_two_bin <- data.frame(x = 0:30) %>%
 dat_two_bin
 
 #
-# Vi kan illustrera de två fördelningarna i en graf. Den ena fördelningen illustreras med en linje
-# och den andra som punkter, för att kunna se bägge fördelningarna i en bild.
+# Vi kan illustrera de tvÃ¥ fÃ¶rdelningarna i en graf. Den ena fÃ¶rdelningen illustreras med en linje
+# och den andra som punkter, fÃ¶r att kunna se bÃ¤gge fÃ¶rdelningarna i en bild.
 #
 
 ggplot(dat_two_bin) +
@@ -335,11 +335,11 @@ ggplot(dat_two_bin) +
   geom_point(aes(x, binom2), color = "blue")
 
 #
-# Punkterna ligger nästan perfekt på linjen. De två binomialfördelningarna har alltså nästan samma
-# sannolikheter, trots att de har helt olika värden för n och p.
+# Punkterna ligger nÃ¤stan perfekt pÃ¥ linjen. De tvÃ¥ binomialfÃ¶rdelningarna har alltsÃ¥ nÃ¤stan samma
+# sannolikheter, trots att de har helt olika vÃ¤rden fÃ¶r n och p.
 #
 # Uppgift 3.12. (Skilda sannolikheter)
-# Följande kod gör samma sak som exemplet ovan, men nu med n1 och n2 som egna objekt.
+# FÃ¶ljande kod gÃ¶r samma sak som exemplet ovan, men nu med n1 och n2 som egna objekt.
 #
 
 n1 <- 5000
@@ -356,25 +356,25 @@ ggplot(dat_two_bin) +
   geom_point(aes(x, binom2), color = "blue")
 
 #
-# Ändra värdena för `n1` och `n2` och gör om grafen. Vad händer när antalet upprepningar blir
-# lägre, t.ex 50 och 20 - ligger punkterna fortfarande över linjen?
+# Ã„ndra vÃ¤rdena fÃ¶r `n1` och `n2` och gÃ¶r om grafen. Vad hÃ¤nder nÃ¤r antalet upprepningar blir
+# lÃ¤gre, t.ex 50 och 20 - ligger punkterna fortfarande Ã¶ver linjen?
 # :::
 #
-# Det här fenomenet - att binomialfördelningar med samma medelvärde, högt n och lågt p ger liknande
-# sannolikheter - är ett uttryck för ett teoretiskt resultat som säger att en binomalfördelning går
-# mot en *poissonfördelning* när n ökar och p minskar. Det innebär att en poissonfördelning är en
-# lämplig fördelning för händelser som har många upprepningar men låg sannolikhet att inträffa i det
-# enskilda försöket. Typexempel är olika typer av olyckor. Ett av de första historiska exemplet på
-# beräkningar med en poissonfördelning kommer från Preussen under 1800-talet och handlar om soldater
-# som dött i höstoyckor. Där är antalet försök stort (soldater var ofta nära hästar) men
-# sannolikheten låg i varje enskild interaktion.
+# Det hÃ¤r fenomenet - att binomialfÃ¶rdelningar med samma medelvÃ¤rde, hÃ¶gt n och lÃ¥gt p ger liknande
+# sannolikheter - Ã¤r ett uttryck fÃ¶r ett teoretiskt resultat som sÃ¤ger att en binomalfÃ¶rdelning gÃ¥r
+# mot en *poissonfÃ¶rdelning* nÃ¤r n Ã¶kar och p minskar. Det innebÃ¤r att en poissonfÃ¶rdelning Ã¤r en
+# lÃ¤mplig fÃ¶rdelning fÃ¶r hÃ¤ndelser som har mÃ¥nga upprepningar men lÃ¥g sannolikhet att intrÃ¤ffa i det
+# enskilda fÃ¶rsÃ¶ket. Typexempel Ã¤r olika typer av olyckor. Ett av de fÃ¶rsta historiska exemplet pÃ¥
+# berÃ¤kningar med en poissonfÃ¶rdelning kommer frÃ¥n Preussen under 1800-talet och handlar om soldater
+# som dÃ¶tt i hÃ¶stoyckor. DÃ¤r Ã¤r antalet fÃ¶rsÃ¶k stort (soldater var ofta nÃ¤ra hÃ¤star) men
+# sannolikheten lÃ¥g i varje enskild interaktion.
 #
-# Poissonfördelningen styrs av en enda parameter, lambda. Parametern lambda är lika med
-# fördelningens medelvärde och varians. Till skillnad från en binomialfördelning, där det högsta
-# möjliga utfall ges av n, har en poissonfördelning inget maxvärde. Man kan i teorin få vilket
+# PoissonfÃ¶rdelningen styrs av en enda parameter, lambda. Parametern lambda Ã¤r lika med
+# fÃ¶rdelningens medelvÃ¤rde och varians. Till skillnad frÃ¥n en binomialfÃ¶rdelning, dÃ¤r det hÃ¶gsta
+# mÃ¶jliga utfall ges av n, har en poissonfÃ¶rdelning inget maxvÃ¤rde. Man kan i teorin fÃ¥ vilket
 # positivt heltalsutfall som helst.
 #
-# Vi gör om jämförelse mellan två fördelning, men nu jämför vi med en poissonfördelning med lambda
+# Vi gÃ¶r om jÃ¤mfÃ¶relse mellan tvÃ¥ fÃ¶rdelning, men nu jÃ¤mfÃ¶r vi med en poissonfÃ¶rdelning med lambda
 # lika med 3.
 #
 
@@ -389,12 +389,12 @@ ggplot(dat_two_dist) +
   geom_point(aes(x, binom), color = "blue")
 
 #
-# Den röda linjen är poissonfördelningen och de blå punkterna är en binomialfördelning med n = 400
-# och p = 0.0075. Fördelningarna är nästan identiska. Notera att fördelningarna har samma medelvärde
-# (då 400 gånger 0.0075 ger 3).
+# Den rÃ¶da linjen Ã¤r poissonfÃ¶rdelningen och de blÃ¥ punkterna Ã¤r en binomialfÃ¶rdelning med n = 400
+# och p = 0.0075. FÃ¶rdelningarna Ã¤r nÃ¤stan identiska. Notera att fÃ¶rdelningarna har samma medelvÃ¤rde
+# (dÃ¥ 400 gÃ¥nger 0.0075 ger 3).
 #
 # Uppgift 3.13. (Skilda sannolikheter)
-# Följande kod gör samma sak som exemplet ovan, men nu med n i binomial som eget objekt.
+# FÃ¶ljande kod gÃ¶r samma sak som exemplet ovan, men nu med n i binomial som eget objekt.
 #
 
 n <- 400
@@ -410,60 +410,60 @@ ggplot(dat_two_dist) +
   geom_point(aes(x, binom), color = "blue")
 
 #
-# Från statistisk teori tror vi att skillnaden mellan poissonfördelninen och binomialen växer när
-# antalet upprepningar är litet. Vad händer när antalet upprepningar blir lägre, t.ex 50 eller 20 -
-# ligger punkterna fortfarande över linjen? Vad händer om man ändrar medelvärdet (vilket här är tre).
-# Notera att man då måste ändra i poissonfördelning och binomialfördelning eftersom vi vill jämföra
-# fördelningar med samma medelvärde.
+# FrÃ¥n statistisk teori tror vi att skillnaden mellan poissonfÃ¶rdelninen och binomialen vÃ¤xer nÃ¤r
+# antalet upprepningar Ã¤r litet. Vad hÃ¤nder nÃ¤r antalet upprepningar blir lÃ¤gre, t.ex 50 eller 20 -
+# ligger punkterna fortfarande Ã¶ver linjen? Vad hÃ¤nder om man Ã¤ndrar medelvÃ¤rdet (vilket hÃ¤r Ã¤r tre).
+# Notera att man dÃ¥ mÃ¥ste Ã¤ndra i poissonfÃ¶rdelning och binomialfÃ¶rdelning eftersom vi vill jÃ¤mfÃ¶ra
+# fÃ¶rdelningar med samma medelvÃ¤rde.
 # :::
 #
-# I R kan man beräkna sannolikheter för en poissonfördelning med `dpois()` och `ppois()`.
+# I R kan man berÃ¤kna sannolikheter fÃ¶r en poissonfÃ¶rdelning med `dpois()` och `ppois()`.
 #
-# Uppgift 3.14. (Sannolikhetsfunktionen för en poisson)
-# Följande ger sannolikheten att få utfall 2 i en poissonfördelning med lambda satt till 4.
+# Uppgift 3.14. (Sannolikhetsfunktionen fÃ¶r en poisson)
+# FÃ¶ljande ger sannolikheten att fÃ¥ utfall 2 i en poissonfÃ¶rdelning med lambda satt till 4.
 #
 
 dpois(2, lambda = 4)
 
 #
-# Gör lämpliga ändringar för att beräkna sannolikheten för exakt 5 i en fördelning med lambda satt
+# GÃ¶r lÃ¤mpliga Ã¤ndringar fÃ¶r att berÃ¤kna sannolikheten fÃ¶r exakt 5 i en fÃ¶rdelning med lambda satt
 # till 3.
 # :::
 #
-# Uppgift 3.15. (Fördelningsfunktionen för en poisson)
-# Följande ger sannolikheten att få mindre än eller lika med 2 i en poissonfördelning med lambda
+# Uppgift 3.15. (FÃ¶rdelningsfunktionen fÃ¶r en poisson)
+# FÃ¶ljande ger sannolikheten att fÃ¥ mindre Ã¤n eller lika med 2 i en poissonfÃ¶rdelning med lambda
 # satt till 4.
 #
 
-dpois(2, lambda = 4)
+ppois(2, lambda = 4)
 
 #
-# Gör lämpliga ändringar för att beräkna sannolikheten för *mindre än eller lika med 5* i en
-# fördelning med lambda satt till 3.
-# Hur kan man beräkna sannolikheten att få mer än 5 i en fördelning med lambda satt till 3?
+# GÃ¶r lÃ¤mpliga Ã¤ndringar fÃ¶r att berÃ¤kna sannolikheten fÃ¶r *mindre Ã¤n eller lika med 5* i en
+# fÃ¶rdelning med lambda satt till 3.
+# Hur kan man berÃ¤kna sannolikheten att fÃ¥ mer Ã¤n 5 i en fÃ¶rdelning med lambda satt till 3?
 # :::
 #
-# ## Kontinuerliga fördelningar i allmänhet
+# ## Kontinuerliga fÃ¶rdelningar i allmÃ¤nhet
 #
-# En kontinuerlig fördelning kan anta vilka värden som helst på hela tallinjen eller i något
-# intervall på tallinjen. Ett enkelt exempel på en kontinuerlig slumpvariabel kan vara att stoppa ett
-# stoppur slumpmässigt och titta på decimaldelen. Det kommer ge något värde mellan 0 och 1.
-# (Stoppuret kommer naturligtvis avrunda värdet, så man får tänka sig ett magiskt stoppur med
-# oändligt antal decimaler.) Till skillnad från en diskret slumpvariabel, som kan beskrivas med
-# utfallen och dess sannolikheter, måste en kontinuerlig variabel förklaras med en matematisk
-# funktion, en så kallad *täthetsfunktion*. Detta beror på att enskilda utfall alltid har sannolikhet
-# noll för en kontinuerlig fördelning: om man har oändligt antal decimaler är det som exempel
-# sannolikhet noll att få exakt 0.345000... som decimaler på ett stoppur.
+# En kontinuerlig fÃ¶rdelning kan anta vilka vÃ¤rden som helst pÃ¥ hela tallinjen eller i nÃ¥got
+# intervall pÃ¥ tallinjen. Ett enkelt exempel pÃ¥ en kontinuerlig slumpvariabel kan vara att stoppa ett
+# stoppur slumpmÃ¤ssigt och titta pÃ¥ decimaldelen. Det kommer ge nÃ¥got vÃ¤rde mellan 0 och 1.
+# (Stoppuret kommer naturligtvis avrunda vÃ¤rdet, sÃ¥ man fÃ¥r tÃ¤nka sig ett magiskt stoppur med
+# oÃ¤ndligt antal decimaler.) Till skillnad frÃ¥n en diskret slumpvariabel, som kan beskrivas med
+# utfallen och dess sannolikheter, mÃ¥ste en kontinuerlig variabel fÃ¶rklaras med en matematisk
+# funktion, en sÃ¥ kallad *tÃ¤thetsfunktion*. Detta beror pÃ¥ att enskilda utfall alltid har sannolikhet
+# noll fÃ¶r en kontinuerlig fÃ¶rdelning: om man har oÃ¤ndligt antal decimaler Ã¤r det som exempel
+# sannolikhet noll att fÃ¥ exakt 0.345000... som decimaler pÃ¥ ett stoppur.
 #
-# Den absolut vanligaste kontinuerliga fördelningen är en *normalfördelning*.
+# Den absolut vanligaste kontinuerliga fÃ¶rdelningen Ã¤r en *normalfÃ¶rdelning*.
 #
-# ## Särskilda kontinuerliga fördelningar: normalfördelningen
+# ## SÃ¤rskilda kontinuerliga fÃ¶rdelningar: normalfÃ¶rdelningen
 #
-# En normalfördelning är en kontinuerlig fördelning some kan anta värden över hela tallinjen och
-# beror på två parametrar: mu som styr var fördelningens är centrerad, och sigma som styr hur
-# utspridd fördelningen är.
-# En normalfördelning har en karaktäristisk *klockform*. Vi illustreras två normalfördelningar med
-# hjälp av geomet `geom_function()` i en ggplot.
+# En normalfÃ¶rdelning Ã¤r en kontinuerlig fÃ¶rdelning some kan anta vÃ¤rden Ã¶ver hela tallinjen och
+# beror pÃ¥ tvÃ¥ parametrar: mu som styr var fÃ¶rdelningens Ã¤r centrerad, och sigma som styr hur
+# utspridd fÃ¶rdelningen Ã¤r.
+# En normalfÃ¶rdelning har en karaktÃ¤ristisk *klockform*. Vi illustreras tvÃ¥ normalfÃ¶rdelningar med
+# hjÃ¤lp av geomet `geom_function()` i en ggplot.
 #
 
 ggplot() +
@@ -473,30 +473,30 @@ ggplot() +
   xlim(0, 10)
 
 #
-# Den gröna och röda kurvan har samma medelvärde mu men skilda standardavvikelser sigma. Den blå
-# och gröna kurvan har skilda medelvärden mu men samma standardavvikelse sigma.
+# Den grÃ¶na och rÃ¶da kurvan har samma medelvÃ¤rde mu men skilda standardavvikelser sigma. Den blÃ¥
+# och grÃ¶na kurvan har skilda medelvÃ¤rden mu men samma standardavvikelse sigma.
 #
-# Uppgift 3.16. (Normalfördelningar)
-# Gör lämpliga ändringar i stycken ovan för att illustrera två normalfördelningar: en med
-# medelvärde 0 och standardavvikelse 1 och en med medelvärde 1 och standardavvikelse 2. Kan du
-# utifrån kurvorna säga vilken av de två fördelningarna som ger störst sannolikhet att få ett utfall
-# under minus två?
+# Uppgift 3.16. (NormalfÃ¶rdelningar)
+# GÃ¶r lÃ¤mpliga Ã¤ndringar i stycken ovan fÃ¶r att illustrera tvÃ¥ normalfÃ¶rdelningar: en med
+# medelvÃ¤rde 0 och standardavvikelse 1 och en med medelvÃ¤rde 1 och standardavvikelse 2. Kan du
+# utifrÃ¥n kurvorna sÃ¤ga vilken av de tvÃ¥ fÃ¶rdelningarna som ger stÃ¶rst sannolikhet att fÃ¥ ett utfall
+# under minus tvÃ¥?
 # :::
 #
-# Kurvorna illustrerar täthetsfunktionen. I en kontinuerlig fördelning har täthetsfunktionen ingen
-# tolkning i termer av sannolikheter. För att kunna förstå i normalfördelning behöver vi titta på
-# fördelningsfunktionen. Kom ihåg från det diskreta fallet att fördelningsfunktionen anger
-# sannolikheten för exakt lika eller under ett givet värde. Samma sak gäller för en kontinuerlig
-# variabel. Fördelningsfunktionen värde ges av `pnorm()`. Om vi vill beräkna sannolikheten att ligga
-# under 1 i en normalfördelning med medelvärde 2 och standardavvikelse 3 tar vi
+# Kurvorna illustrerar tÃ¤thetsfunktionen. I en kontinuerlig fÃ¶rdelning har tÃ¤thetsfunktionen ingen
+# tolkning i termer av sannolikheter. FÃ¶r att kunna fÃ¶rstÃ¥ i normalfÃ¶rdelning behÃ¶ver vi titta pÃ¥
+# fÃ¶rdelningsfunktionen. Kom ihÃ¥g frÃ¥n det diskreta fallet att fÃ¶rdelningsfunktionen anger
+# sannolikheten fÃ¶r exakt lika eller under ett givet vÃ¤rde. Samma sak gÃ¤ller fÃ¶r en kontinuerlig
+# variabel. FÃ¶rdelningsfunktionen vÃ¤rde ges av `pnorm()`. Om vi vill berÃ¤kna sannolikheten att ligga
+# under 1 i en normalfÃ¶rdelning med medelvÃ¤rde 2 och standardavvikelse 3 tar vi
 #
 
 pnorm(1, mean = 2, sd = 3)
 
 #
-# Vi kan ta fram en illustration med följande kod. Detaljer spelar mindre roll här, men gör gärna
-# några ändringar i `x_value`, `mu` och `sigma`för att se hur grafen ändras. Om paketet `patchwork`
-# inte är installerat, kör raden som här är utkommenterad med `#`.
+# Vi kan ta fram en illustration med fÃ¶ljande kod. Detaljer spelar mindre roll hÃ¤r, men gÃ¶r gÃ¤rna
+# nÃ¥gra Ã¤ndringar i `x_value`, `mu` och `sigma`fÃ¶r att se hur grafen Ã¤ndras. Om paketet `patchwork`
+# inte Ã¤r installerat, kÃ¶r raden som hÃ¤r Ã¤r utkommenterad med `#`.
 #
 
 x_value <- 1
@@ -513,25 +513,25 @@ dat_norm <- data.frame(x = seq(from = mu - 4 * sigma, to = mu + 4 * sigma, 0.1))
 g1 <- ggplot(dat_norm, aes(x, p)) +
   geom_line() +
   geom_ribbon(aes(ymin = 0, ymax = p), data = dat_norm %>% filter(x < x_value), fill = "salmon", color = "black") +
-  labs(title = "Täthetsfunktion")
+  labs(title = "TÃ¤thetsfunktion")
 
 g2 <- ggplot(dat_norm, aes(x, P)) +
   geom_line() +
   annotate("segment", x = x_value, y = 0, xend = x_value, yend = P_value) +
   annotate("segment", x = x_value, y = P_value, xend = -Inf, yend = P_value) +
-  labs(title = "Fördelningsfunktion")
+  labs(title = "FÃ¶rdelningsfunktion")
 
 # install.packages("patchwork")
 library(patchwork)
 g1 / g2
 
 #
-# Sannolikheten att ligga under ett värde på x ges av kurvan för fördelningsfunktionen vid det
-# x-värdet. Det motsvarar den fyllda ytan under täthetsfunktionen till vänster om x-värdet.
+# Sannolikheten att ligga under ett vÃ¤rde pÃ¥ x ges av kurvan fÃ¶r fÃ¶rdelningsfunktionen vid det
+# x-vÃ¤rdet. Det motsvarar den fyllda ytan under tÃ¤thetsfunktionen till vÃ¤nster om x-vÃ¤rdet.
 #
-# Uppgift 3.17. (Sannolikhet från normalfördelningen)
-# Fyll i kodstycket nedan för att beräkna sannolikheten att få ett värde under minus två i en
-# normalfördelning med medelvärde 0 och standardavvikelse 1, och i en normalfördelning med medelvärde
+# Uppgift 3.17. (Sannolikhet frÃ¥n normalfÃ¶rdelningen)
+# Fyll i kodstycket nedan fÃ¶r att berÃ¤kna sannolikheten att fÃ¥ ett vÃ¤rde under minus tvÃ¥ i en
+# normalfÃ¶rdelning med medelvÃ¤rde 0 och standardavvikelse 1, och i en normalfÃ¶rdelning med medelvÃ¤rde
 # 1 och standardavvikelse 2.
 #
 
@@ -542,15 +542,15 @@ pnorm(-2, mean = ___, sd = ___)
 # :::
 #
 # Om man vill ta fram en sannolikhet att ligga i ett visst intervall kan man ta skillnaden mellan
-# två värden från fördelningsfunktionen. Sannolikheten att ligga mellan 1 och minus 1 i en
-# normalfördelning med medelvärde 0 och standardavvikelse 1 ges till exempel av
+# tvÃ¥ vÃ¤rden frÃ¥n fÃ¶rdelningsfunktionen. Sannolikheten att ligga mellan 1 och minus 1 i en
+# normalfÃ¶rdelning med medelvÃ¤rde 0 och standardavvikelse 1 ges till exempel av
 #
 
 pnorm(1, mean = 0, sd = 1) - pnorm(-1, mean = 0, sd = 1)
 
 #
-# Den normalfördelningen (medelvärde 0 och standardavvikelse 1) kallas den *standardiserade*
-# normalfördelning. Vi kan illustrerade med följande.
+# Den normalfÃ¶rdelningen (medelvÃ¤rde 0 och standardavvikelse 1) kallas den *standardiserade*
+# normalfÃ¶rdelning. Vi kan illustrerade med fÃ¶ljande.
 #
 
 x_values <- c(-1,1)
@@ -563,80 +563,80 @@ dat_norm <- data.frame(x = seq(from = mu - 4 * sigma, to = mu + 4 * sigma, 0.1))
 ggplot(dat_norm, aes(x, p)) +
   geom_line() +
   geom_ribbon(aes(ymin = 0, ymax = p), data = dat_norm %>% filter(x < max(x_values) & x > min(x_values)), fill = "salmon", color = "black") +
-  labs(title = "Täthetsfunktion")
+  labs(title = "TÃ¤thetsfunktion")
 
 #
-# Uppgift 3.18. (Sannolikhet mellan två värden)
-# Fyll i kodstycket nedan för att beräkna sannolikheten att få ett värde mellan *minus två* och tre
-# i en normalfördelning med medelvärde 1 och standardavvikelse 2.
+# Uppgift 3.18. (Sannolikhet mellan tvÃ¥ vÃ¤rden)
+# Fyll i kodstycket nedan fÃ¶r att berÃ¤kna sannolikheten att fÃ¥ ett vÃ¤rde mellan *minus tvÃ¥* och tre
+# i en normalfÃ¶rdelning med medelvÃ¤rde 1 och standardavvikelse 2.
 #
 
 pnorm(___, mean = ___, sd = ___) - pnorm(___, mean = ___, sd = ___)
 
 # :::
 #
-# Fördelningsfunktionen ger sannolikheten att ligga under ett visst x-värde. Man kan enkelt beräkna
-# sannolikheten att ligga över värdet genom att ta ett minus fördelningsfunktionen. Sannolikheten att
-# ligga över 1.96 i en standardiserad normalfördelning ges till exempel av ungeför 2.5 procent.
+# FÃ¶rdelningsfunktionen ger sannolikheten att ligga under ett visst x-vÃ¤rde. Man kan enkelt berÃ¤kna
+# sannolikheten att ligga Ã¶ver vÃ¤rdet genom att ta ett minus fÃ¶rdelningsfunktionen. Sannolikheten att
+# ligga Ã¶ver 1.96 i en standardiserad normalfÃ¶rdelning ges till exempel av ungefÃ¶r 2.5 procent.
 #
 
 1 - pnorm(1.96)
 
 #
-# Uppgift 3.19. (Sannolikhet över x)
-# Fyll i kodstycket nedan för att beräkna sannolikheten att få ett värde över sju i en
-# normalfördelning med medelvärde 3 och standardavvikelse 5.
+# Uppgift 3.19. (Sannolikhet Ã¶ver x)
+# Fyll i kodstycket nedan fÃ¶r att berÃ¤kna sannolikheten att fÃ¥ ett vÃ¤rde Ã¶ver sju i en
+# normalfÃ¶rdelning med medelvÃ¤rde 3 och standardavvikelse 5.
 #
 
 1 - pnorm(___, mean = ___, sd = ___)
 
 # :::
 #
-# En normalfördelning kan transformeras till en annan normal genom att addera och multiplicera med
-# någon konstant. Mer specifik kan vilken normalfördelning som helst återföras till en standardiserad
-# normalfördelning genom att dra ifrån medelvärdet och dela med standardavvikelsen. Det här utnyttjas
-# när man beräknar sannolikheter för hand. Säg till exempel att vi har en normalfördelning med
-# medelvärde 8 och standardavvikelse 4, och vi vill ta fram sannolikheten att ligga under 7. Det kan
-# beräknas med
+# En normalfÃ¶rdelning kan transformeras till en annan normal genom att addera och multiplicera med
+# nÃ¥gon konstant. Mer specifik kan vilken normalfÃ¶rdelning som helst Ã¥terfÃ¶ras till en standardiserad
+# normalfÃ¶rdelning genom att dra ifrÃ¥n medelvÃ¤rdet och dela med standardavvikelsen. Det hÃ¤r utnyttjas
+# nÃ¤r man berÃ¤knar sannolikheter fÃ¶r hand. SÃ¤g till exempel att vi har en normalfÃ¶rdelning med
+# medelvÃ¤rde 8 och standardavvikelse 4, och vi vill ta fram sannolikheten att ligga under 7. Det kan
+# berÃ¤knas med
 #
 
 pnorm(7, mean = 8, sd = 4)
 
 #
-# Alternativt kan man standardiserade genom att att ta 7 minus 8, delat på 4, vilket ger (7 - 8) /
-# 4 = -0.25, och sedan göra sannolikhetsberäkningen i den standardiserade normalen.
+# Alternativt kan man standardiserade genom att att ta 7 minus 8, delat pÃ¥ 4, vilket ger (7 - 8) /
+# 4 = -0.25, och sedan gÃ¶ra sannolikhetsberÃ¤kningen i den standardiserade normalen.
 #
 
 pnorm(-0.25, mean = 0, sd = 1)
 
 #
 # Uppgift 3.20. (Standardisering)
-# En slumpvariabel Y följer en normalfördelning med medelvärde 2 och varians 9. Vad är
-# sannolikheten att få
+# En slumpvariabel Y fÃ¶ljer en normalfÃ¶rdelning med medelvÃ¤rde 2 och varians 9. Vad Ã¤r
+# sannolikheten att fÃ¥
 #
 # - P(Y > 2.75),
 # - P(Y < 2.75),
 # - P(2.30 < Y < 2.45)?
 #
-# Beräkna först sannolikheten för hand och sedan med `pnorm()`.
-# Notera att denna fråga finns bland instuderingsuppgifterna.
+# BerÃ¤kna fÃ¶rst sannolikheten fÃ¶r hand och sedan med `pnorm()`.
+# Notera att denna frÃ¥ga finns bland instuderingsuppgifterna.
 # :::
 #
-# ## Bonus. Summan av två slumpvariabler med slumptal
+# ## Bonus. Summan av tvÃ¥ slumpvariabler med slumptal
 #
-# Utöver funktioner för sannolikhetsfunktion (eller täthetsfunktion) och fördelningsfunktion (som
-# `dbinom()`, `dpois()`, `dnorm()`, respektive `pbinom()`, `ppois()`, `pnorm()`) har R funktioner för
-# att ta fram slumptal (`rbinom()`, `rpois()`, `rnorm()`). Slumptal kan vara användbara för att
-# undersöka egenskaper hos en slumpprocess.
+# UtÃ¶ver funktioner fÃ¶r sannolikhetsfunktion (eller tÃ¤thetsfunktion) och fÃ¶rdelningsfunktion (som
+# `dbinom()`, `dpois()`, `dnorm()`, respektive `pbinom()`, `ppois()`, `pnorm()`) har R funktioner fÃ¶r
+# att ta fram slumptal (`rbinom()`, `rpois()`, `rnorm()`). Slumptal kan vara anvÃ¤ndbara fÃ¶r att
+# undersÃ¶ka egenskaper hos en slumpprocess.
 #
-# Låt oss som ett första exempel undersöka egenskaper hos poissonfördelningen genom att titta på
-# följande fråga: om vi har två poissonfördelningar, med lambda 3 respektive 2, vilken fördelning har
-# summan av de två fördelningarna? Vi kan t.ex. tänka oss att antalet blåsippor i en försöksruta är
-# poissonfördelat med medelvärde 3 och antalet vitsippor är poissonfördelat med medelvärde 2, och att
-# vi vill veta fördelningen för antalet blåsippor plus antalet vitsippor.
+# LÃ¥t oss som ett fÃ¶rsta exempel undersÃ¶ka egenskaper hos poissonfÃ¶rdelningen genom att titta pÃ¥
+# fÃ¶ljande frÃ¥ga: om vi har tvÃ¥ poissonfÃ¶rdelningar, med lambda 3 respektive 2, vilken fÃ¶rdelning har
+# summan av de tvÃ¥ fÃ¶rdelningarna? Vi kan t.ex. tÃ¤nka oss att antalet blÃ¥sippor i en fÃ¶rsÃ¶ksruta Ã¤r
+# poissonfÃ¶rdelat med medelvÃ¤rde 3 och antalet vitsippor Ã¤r poissonfÃ¶rdelat med medelvÃ¤rde 2, och att
+# vi vill veta fÃ¶rdelningen fÃ¶r antalet blÃ¥sippor plus antalet vitsippor.
 #
-# Vi börjar med att dra slumptal för en poissonfördelning med lambda lika med 3 och jämför
-# slumptalen med en teoretisk fördelning.
+# Vi bÃ¶rjar med att dra slumptal fÃ¶r en poissonfÃ¶rdelning med lambda lika med 3 och jÃ¤mfÃ¶r
+# slumptalen med en teoretisk fÃ¶rdelning.
 #
 
 dat_pois <- data.frame(x = rpois(10000, lambda = 3)) %>% 
@@ -649,18 +649,18 @@ ggplot(dat_pois, aes(x, p)) +
   geom_line(aes(y = theoretical_p))
 
 #
-# Linjen ger den teoretiska poissonfördelningen och punkterna ger fördelningen för slumptalen.
-# Punkterna ligger nära linjen, vilket är helt efter förväntan. Notera dock att det kommer finnas
-# vissa naturliga avvikelser när man arbetar med slumptal.
+# Linjen ger den teoretiska poissonfÃ¶rdelningen och punkterna ger fÃ¶rdelningen fÃ¶r slumptalen.
+# Punkterna ligger nÃ¤ra linjen, vilket Ã¤r helt efter fÃ¶rvÃ¤ntan. Notera dock att det kommer finnas
+# vissa naturliga avvikelser nÃ¤r man arbetar med slumptal.
 #
-# Uppgift 3.21. (Poisson från slumptal)
-# Gör lämpliga ändringar i kodstycket ovan för att göra motsvarande beräkning för en
-# poissonfördelning med lambda lika med 2. Ligger slumptalen nära den teoretiska fördelningen?
+# Uppgift 3.21. (Poisson frÃ¥n slumptal)
+# GÃ¶r lÃ¤mpliga Ã¤ndringar i kodstycket ovan fÃ¶r att gÃ¶ra motsvarande berÃ¤kning fÃ¶r en
+# poissonfÃ¶rdelning med lambda lika med 2. Ligger slumptalen nÃ¤ra den teoretiska fÃ¶rdelningen?
 # :::
 #
-# Vi kan nu ta från två serier av slumptal, beräkna dess summa och jämföra med en teoretisk
-# fördelning. Som teoretisk fördelning tar vi en poissonfördelning med lambda 5, eftersom 5 är summan
-# av våra två lambdavärden.
+# Vi kan nu ta frÃ¥n tvÃ¥ serier av slumptal, berÃ¤kna dess summa och jÃ¤mfÃ¶ra med en teoretisk
+# fÃ¶rdelning. Som teoretisk fÃ¶rdelning tar vi en poissonfÃ¶rdelning med lambda 5, eftersom 5 Ã¤r summan
+# av vÃ¥ra tvÃ¥ lambdavÃ¤rden.
 #
 
 dat_pois <- data.frame(x1 = rpois(10000, lambda = 3),
@@ -675,13 +675,13 @@ ggplot(dat_pois, aes(x, p)) +
   geom_line(aes(y = theoretical_p))
 
 #
-# Summans värden ligger när den teoretiska fördelningen. Det stödjer tanken att summan av två
-# poissonfördelningar är poissonfördelad.
+# Summans vÃ¤rden ligger nÃ¤r den teoretiska fÃ¶rdelningen. Det stÃ¶djer tanken att summan av tvÃ¥
+# poissonfÃ¶rdelningar Ã¤r poissonfÃ¶rdelad.
 #
-# Vi såg tidigare hur utfallet av en tärning kan ses som en slumpvariabel (n stycken utfall där
-# samtliga är lika sannolika) och att funktionen `sample()` kan användas för att simulera
-# tärningskast. Vi kan utnyttja det för att undersöka fördelningen för summan av två tärningskast.
-# Exemplet nedan tittar på en sex-sidig tärning.
+# Vi sÃ¥g tidigare hur utfallet av en tÃ¤rning kan ses som en slumpvariabel (n stycken utfall dÃ¤r
+# samtliga Ã¤r lika sannolika) och att funktionen `sample()` kan anvÃ¤ndas fÃ¶r att simulera
+# tÃ¤rningskast. Vi kan utnyttja det fÃ¶r att undersÃ¶ka fÃ¶rdelningen fÃ¶r summan av tvÃ¥ tÃ¤rningskast.
+# Exemplet nedan tittar pÃ¥ en sex-sidig tÃ¤rning.
 #
 
 dat_dice_sum <- data.frame(x1 = sample(c(1,2,3,4,5,6), size = 10000, replace = T),
@@ -694,26 +694,26 @@ ggplot(dat_dice_sum, aes(x, p)) +
   geom_col()
 
 #
-# Summan av två tärningskast har en triangelformad fördelning där 7 är det vanligaste utfallet och
-# 2 och 12 är de ovanligaste.
+# Summan av tvÃ¥ tÃ¤rningskast har en triangelformad fÃ¶rdelning dÃ¤r 7 Ã¤r det vanligaste utfallet och
+# 2 och 12 Ã¤r de ovanligaste.
 #
-# Uppgift 3.22. (Summan av tärningskast med annan tärning)
-# Gör lämpliga ändringar i stycket ovan för att beräkna summan av två utfall för en åtta-sidig
-# tärning.
+# Uppgift 3.22. (Summan av tÃ¤rningskast med annan tÃ¤rning)
+# GÃ¶r lÃ¤mpliga Ã¤ndringar i stycket ovan fÃ¶r att berÃ¤kna summan av tvÃ¥ utfall fÃ¶r en Ã¥tta-sidig
+# tÃ¤rning.
 # :::
 #
-# Uppgift 3.23. (Summan av tre tärningskast)
-# Gör lämpliga tillägg i stycket ovan för att beräkna summan av tre utfall för en sex-sidig
-# tärning.
+# Uppgift 3.23. (Summan av tre tÃ¤rningskast)
+# GÃ¶r lÃ¤mpliga tillÃ¤gg i stycket ovan fÃ¶r att berÃ¤kna summan av tre utfall fÃ¶r en sex-sidig
+# tÃ¤rning.
 # :::
 #
-# ## Bonus. Cirkelns area från slumptal
+# ## Bonus. Cirkelns area frÃ¥n slumptal
 #
-# En intressant aspekt av slumptal är att de kan användas till att utforska icke-slumpmässiga
-# problem. Som exempel tar vi cirkelns area. I figuren nedan är en cirkel inskriven i en kvadrat.
-# Kvadraten har sidor med längden två, så dess totala yta är fyra (två i kvadrat). Om man vet hur
-# stor andel av ytan upptas av cirkeln kan man beräkna cirkelns area genom att ta den andelen gånger
-# fyra. Från rent matematiska resultat vet vi att arean ska vara lika med pi, alltså runt 3.14.
+# En intressant aspekt av slumptal Ã¤r att de kan anvÃ¤ndas till att utforska icke-slumpmÃ¤ssiga
+# problem. Som exempel tar vi cirkelns area. I figuren nedan Ã¤r en cirkel inskriven i en kvadrat.
+# Kvadraten har sidor med lÃ¤ngden tvÃ¥, sÃ¥ dess totala yta Ã¤r fyra (tvÃ¥ i kvadrat). Om man vet hur
+# stor andel av ytan upptas av cirkeln kan man berÃ¤kna cirkelns area genom att ta den andelen gÃ¥nger
+# fyra. FrÃ¥n rent matematiska resultat vet vi att arean ska vara lika med pi, alltsÃ¥ runt 3.14.
 #
 
 # install.packages("ggforce")
@@ -724,9 +724,9 @@ g <- ggplot() +
 g
 
 #
-# Funktionen `runif()` ger ett slumpmässigt värde mellan två gränsvärden (som sätts med argumenten
-# `min` och `max`). Slumpmässiga punkter inom kvadraten kan dras genom att dra en x- och en
-# y-koordinat. En fördelning där alla värden är lika sannolika kallas *uniform* (eller *likformig*).
+# Funktionen `runif()` ger ett slumpmÃ¤ssigt vÃ¤rde mellan tvÃ¥ grÃ¤nsvÃ¤rden (som sÃ¤tts med argumenten
+# `min` och `max`). SlumpmÃ¤ssiga punkter inom kvadraten kan dras genom att dra en x- och en
+# y-koordinat. En fÃ¶rdelning dÃ¤r alla vÃ¤rden Ã¤r lika sannolika kallas *uniform* (eller *likformig*).
 #
 
 dat_random <- data.frame(x = runif(100, min = -1, max = 1),
@@ -735,9 +735,9 @@ dat_random <- data.frame(x = runif(100, min = -1, max = 1),
 g + geom_point(aes(x, y), data = dat_random)
 
 #
-# Pytagoras sats kan användas för att beräkna avståndet mellan en slumpmässig punkt och origo
-# (nollpunkten). Punkter med ett avstånd under ett ligger inom cirkeln. Cirkelns area ska ges av
-# andelen punkter i kvadraten som också ligger i cirkeln, gånger fyra.
+# Pytagoras sats kan anvÃ¤ndas fÃ¶r att berÃ¤kna avstÃ¥ndet mellan en slumpmÃ¤ssig punkt och origo
+# (nollpunkten). Punkter med ett avstÃ¥nd under ett ligger inom cirkeln. Cirkelns area ska ges av
+# andelen punkter i kvadraten som ocksÃ¥ ligger i cirkeln, gÃ¥nger fyra.
 #
 
 dat_random <- data.frame(x = runif(100, min = -1, max = 1),
@@ -748,34 +748,34 @@ dat_random <- data.frame(x = runif(100, min = -1, max = 1),
 pi
 
 #
-# Den beräknade arean ligger inte så långt från konstanten pi.
+# Den berÃ¤knade arean ligger inte sÃ¥ lÃ¥ngt frÃ¥n konstanten pi.
 #
-# Uppgift 3.24. (Summan av tre tärningskast)
-# Beräkningens precision ökar med antalet slumptal. Vad i kodstycket ovan ska ändras för att
-# generera fler slumptal? Blir utfallet närmre det väntade värdet om antalet slumptal ökar?
+# Uppgift 3.24. (Summan av tre tÃ¤rningskast)
+# BerÃ¤kningens precision Ã¶kar med antalet slumptal. Vad i kodstycket ovan ska Ã¤ndras fÃ¶r att
+# generera fler slumptal? Blir utfallet nÃ¤rmre det vÃ¤ntade vÃ¤rdet om antalet slumptal Ã¶kar?
 # :::
 #
 # ## Bonus. Slump och ordning - Sierpinski-triangeln
 #
-# Slumpmässiga processer kan ge intressanta mönster. Ett exempel är följande procedur.
+# SlumpmÃ¤ssiga processer kan ge intressanta mÃ¶nster. Ett exempel Ã¤r fÃ¶ljande procedur.
 #
-# 1. Ta tre *rampunkter* i planet så att de bildar en triangel.
+# 1. Ta tre *rampunkter* i planet sÃ¥ att de bildar en triangel.
 # 2. Ta en *startpunkt* inom triangeln.
-# 3. Välj slumpmässigt en av de tre rampunkterna och beräkna punkten mellan startpunkten och den
+# 3. VÃ¤lj slumpmÃ¤ssigt en av de tre rampunkterna och berÃ¤kna punkten mellan startpunkten och den
 # valda rampunkten. Detta ger en ny punkt.
-# 4. Välj slumpmässigt en av de tre rampunkterna och beräkna punkten mellan den nya punkten från
-# föregående steg och rampunkten. Detta ger en ny punkt.
-# 5. Upprepa steg 4 ett godtyckligt antal gånger.
+# 4. VÃ¤lj slumpmÃ¤ssigt en av de tre rampunkterna och berÃ¤kna punkten mellan den nya punkten frÃ¥n
+# fÃ¶regÃ¥ende steg och rampunkten. Detta ger en ny punkt.
+# 5. Upprepa steg 4 ett godtyckligt antal gÃ¥nger.
 #
-# I R kan proceduren programmeras med en `for`-loop. Här ges ett exempel där 100 punkter genereras.
-# Koden är viss överkurs och innehåller funktioner vi inte behöver till den övriga kursen.
+# I R kan proceduren programmeras med en `for`-loop. HÃ¤r ges ett exempel dÃ¤r 100 punkter genereras.
+# Koden Ã¤r viss Ã¶verkurs och innehÃ¥ller funktioner vi inte behÃ¶ver till den Ã¶vriga kursen.
 #
 
 # Ta ut tre punkter
 x_original <- c(0,1,2)
 y_original <- c(0,2,0)
 
-# Välj en punkt inom triangeln
+# VÃ¤lj en punkt inom triangeln
 x_new <- 0.4
 y_new <- 0.2
 dat_tri <- data.frame(x = x_new, y = y_new)
@@ -795,8 +795,8 @@ ggplot(dat_tri, aes(x, y)) +
 
 #
 # Uppgift 3.25. (Sierpinski-triangeln)
-# Vad måste ändras i stycket ovan för att generera fler punkter? Tiotusen kan vara ett lämpligt
-# antal för en tydligare illustration. Vad händer om man ändrar värdena i `x_original` och
+# Vad mÃ¥ste Ã¤ndras i stycket ovan fÃ¶r att generera fler punkter? Tiotusen kan vara ett lÃ¤mpligt
+# antal fÃ¶r en tydligare illustration. Vad hÃ¤nder om man Ã¤ndrar vÃ¤rdena i `x_original` och
 # `y_original`?
 # :::
 #
@@ -834,19 +834,19 @@ plot_ly(dat_tri, x = ~x, y = ~y, z = ~z) %>%
   add_markers(size = 0.1)
 
 #
-# Vad måste ändras för att få fler punkter (`n`)?
+# Vad mÃ¥ste Ã¤ndras fÃ¶r att fÃ¥ fler punkter (`n`)?
 #
-# (Om grafen inte laddas i *Viewer* utan ger felet *WebGL is not supported*, testa att öppna den i
-# en webläsare genom att trycka på kanppen som ser ut som ett fönster med en pil i viewer-fönstret.)
+# (Om grafen inte laddas i *Viewer* utan ger felet *WebGL is not supported*, testa att Ã¶ppna den i
+# en weblÃ¤sare genom att trycka pÃ¥ kanppen som ser ut som ett fÃ¶nster med en pil i viewer-fÃ¶nstret.)
 # :::
 #
 # Uppgift 3.27. (Pyramidens bas)
-# Vad händer om man ändrar värdena i `x_original`?
+# Vad hÃ¤nder om man Ã¤ndrar vÃ¤rdena i `x_original`?
 # :::
 #
 # Uppgift 3.28. (Mandelbrot)
-# Sierpinski-triangeln är ett exempel på en fraktal - en mängd som ser likadan ut oavsett
-# inzoomning. Det mest kända exemplet på en fraktal är Mandelbrot-mängden. R-paketet *mandelbrot* kan
+# Sierpinski-triangeln Ã¤r ett exempel pÃ¥ en fraktal - en mÃ¤ngd som ser likadan ut oavsett
+# inzoomning. Det mest kÃ¤nda exemplet pÃ¥ en fraktal Ã¤r Mandelbrot-mÃ¤ngden. R-paketet *mandelbrot* kan
 # producera och visualisera.
 #
 
@@ -857,13 +857,13 @@ plot(mb)
 
 # :::
 #
-# Uppgift 3.29. (Ändrade färger)
-# Titta på hjälpsidan till `mandelbrot_palette` genom att köra `?mandelbrot_palette`. Använd
-# exemplet längst ned för att skapa en färglagd graf.
+# Uppgift 3.29. (Ã„ndrade fÃ¤rger)
+# Titta pÃ¥ hjÃ¤lpsidan till `mandelbrot_palette` genom att kÃ¶ra `?mandelbrot_palette`. AnvÃ¤nd
+# exemplet lÃ¤ngst ned fÃ¶r att skapa en fÃ¤rglagd graf.
 # :::
 #
 # Uppgift 3.30. (Barnsley Fern)
-# Barnsleys ormbunke är ett exempel på en fraktal som efterliknar en naturlig växt. Se
-# wikipediasidan https://en.wikipedia.org/wiki/Barnsley_fern för en beskrivning. Kör R-koden från
-# wikipediasidan för ett exempel i R. Vad måste ändras för att få fler punkter i grafen?
+# Barnsleys ormbunke Ã¤r ett exempel pÃ¥ en fraktal som efterliknar en naturlig vÃ¤xt. Se
+# wikipediasidan https://en.wikipedia.org/wiki/Barnsley_fern fÃ¶r en beskrivning. KÃ¶r R-koden frÃ¥n
+# wikipediasidan fÃ¶r ett exempel i R. Vad mÃ¥ste Ã¤ndras fÃ¶r att fÃ¥ fler punkter i grafen?
 # :::

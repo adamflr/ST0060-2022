@@ -83,8 +83,19 @@ ggplot(dat, aes(x, 0)) +
 
 #
 # I grafen ser vi att värdena ligger jämt spridda kring 50, så 50 är nog ganska rimligt som
-# medelvärde, men låt oss göra ett formellt test. Ett t-test bygger, som alla hypotestest, på en
-# serie steg:
+# medelvärde, men låt oss göra ett formellt test.
+# I R kan ett t-test genomföras med `t.test()`.
+#
+
+t.test(dat$x, mu = 50)   # Ett t-test på variabeln x i dataobjektet dat
+
+#
+# Utskriften ger ett p-värde från vilket vi kan dra en slutsats. I det här fallet är p-värdet högt
+# (över fem procent) så vi kan inte förkasta nollhypotesen (vilken är att populationsmedelvärdet är
+# lika med 50).
+#
+# Vi tittar nu på stegen bakom t-testet.
+# Ett t-test bygger, som alla hypotestest, på en serie steg:
 #
 # 1. sätt upp en *nollhypotes* och en *alternativhypotes*,
 # 2. beräkna ett *testvärde* från en testfunktion,
@@ -188,8 +199,8 @@ qt(0.975, 7)
 
 # :::
 #
-# R har förstås en specifik funktion för t-testet `t.test()`. Funktionens argument är data man
-# testar och ett nollhypotesvärde `mu`. Om man vill ha ett ensidigt test kan det sättas med
+# Som visades i början har R en specifik funktion för t-testet, `t.test()`. Funktionens argument är
+# datan man testar och ett nollhypotesvärde `mu`. Om man vill ha ett ensidigt test kan det sättas med
 # argumentet `alternative`. För vår data ges testet av
 #
 
@@ -307,7 +318,7 @@ qt(0.975, 7)
 t.test(dat$x, conf.level = 0.95)
 
 #
-# Är ett 99-procentigt konfidensintervall bredare eller smalare än ett 99-procentigt?
+# Är ett 99-procentigt konfidensintervall bredare eller smalare än ett 95-procentigt?
 # :::
 #
 # Uppgift 4.13. (Ensidiga konfidensintervall)
@@ -586,4 +597,40 @@ mean(dat_sim$ci_upper - dat_sim$ci_lower)
 #
 # Ungefär hur många observationer behövs för att konfidensintervallets bredd ska bli under 1, under
 # 0.9, under 0.8, och så vidare ned till 0.1?
+# :::
+#
+# ## Valfria hemuppgifter
+#
+# Uppgift 4.26. (Provstavar)
+# Mätningar av halten av något ämne i provstavar gav följande serie resultat.
+#
+
+x <- c(16, 10, 23, 30, 28, 37)
+
+#
+# Beräkna konfidensintervallet för populationsmedelvärdet.
+# :::
+#
+# Uppgift 4.27. (Provstavar, forts.)
+# Kan man ur konfidensintervallet i föregående uppgift se om 28 är ett *rimligt* värde på
+# medelvärdet?
+# :::
+#
+# Uppgift 4.28. (Konfidensintervall och populationen)
+# En viktig poäng med konfidensintervallet är att det är ett intervall för populationsmedelvärdet -
+# inte för populationen i sig. Det är alltså en feltolkning att säga att 95 procent av populationen
+# ligger i intervallet. Man konstruera stickprov där inga observationer ligger i ett beräknat
+# konfidensintervall. Konstruera en sådan datamängd.
+# :::
+#
+# Uppgift 4.29. (Konstant stickprov)
+# Om det inte finns någon spridning i ett stickprov är medelfelet noll och konfidensintervallet
+# blir en enskild punkt (det skattade medelvärdet). Hur reagerar funktionen `t.test()` om man anger
+# ett stickprov utan någon spridning - det vill säga där alla värden är samma värde?
+# :::
+#
+# Uppgift 4.30. (Känd standardavvikelse)
+# Det test som genomförs med `t.test()` är testet när standardavvikelsen skattas med `s` (fallet
+# med okänd populationsstandardavvikelse). I fallet med känd populationsstandardavvikelse kan man
+# istället göra ett z-test. Sök på internet efter ett R-paket som kan genomföra ett sådant z-test.
 # :::

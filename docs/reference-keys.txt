@@ -218,6 +218,11 @@ exr:unlabeled-div-217
 exr:unlabeled-div-218
 exr:unlabeled-div-219
 exr:unlabeled-div-220
+exr:unlabeled-div-221
+exr:unlabeled-div-222
+exr:unlabeled-div-223
+exr:unlabeled-div-224
+exr:unlabeled-div-225
 inledning
 installation-av-r
 installation-av-rstudio
@@ -273,6 +278,7 @@ konfidensintervall-för-proportioner
 chi-två-test-för-goodness-of-fit
 chi-två-test-när-någon-parameter-skattas-från-datan
 bonus.-interaktiva-kartor-med-leaflet
+valfria-hemuppgifter-4
 test-för-två-stickprov
 repetition-av-datorövning-5
 två-stickprov-och-normalfördelad-data

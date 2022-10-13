@@ -88,10 +88,11 @@ ggplotly(g)
 ```
 :::
 
-Gammal bollkunskap säger att var tredje match är en bortavinst. Vi kan testa det med ett z-test för proportioner. För att ta fram antalet bortasegrar och totalt antal matcher använder vi `count()` med ett logiskt villkor som beräkningsvariabel. De rader där `bortamal > hemmamal` är bortasegrar.
+Gammal bollkunskap säger att var tredje match är en bortavinst. Vi kan testa det med ett z-test för proportioner. För att ta fram antalet bortasegrar och totalt antal matcher använder vi `count()` på kolumnen `resultat`. Man kan också använda funktionen `table()` för ett liknande resultat.
 
 ```{r}
-dat_alls %>% count(Bortaseger = bortamal > hemmamal)
+dat_alls %>% count(resultat)
+table(dat_alls$resultat)
 ```
 
 Datan har 947 bortasegrar av totalt 947 + 1803 matcher. Vår skattade proportion `p` och totala antal `n` är alltså
@@ -107,6 +108,7 @@ n
 För att genomföra ett z-test sätter vi upp hypoteser om proportionen bortasegrar.
 
 Nollhypotes H0: p lika med 0.33
+
 Alternativhypotes H1: p ej lika med 0.33
 
 Testvärdet i ett z-test kan beräknas med testfunktionen.
@@ -139,13 +141,13 @@ Testets p-värde är alltså ungefär 11 procent. Om vi upprepar försöket (vil
 
 Om man löste uppgiften för hand skulle man istället för att beräkna p-värdet jämföra z-värdet med ett kritisk värde ur en tabell. Det kritiska värdet för fem-procentig signifikans är 1.96. Vi kan också ta fram det genom `qnorm(0.975)`.
 
-I R kommer man förstås inte beräkna ett z-test genom att gå igenom samtliga steg, då det finns en egen funktion för test av proportioner `prop.test()`. Funktionens argument ges av *antalet* positiva utfall och det totala antalet observationer. Nollhypotesens värde anges med ett argument `p`. Det finns också en möjlighet att förbättra testet med en så kallad kontinuitetskorrektion. Då det inte ingår i kursen måste vi sätta `correct = F` för att få samma utfall som handräkningen. Vi kan genomföra testet med
+I R finns en funktion för test av proportioner `prop.test()`. Funktionens argument ges av *antalet* positiva utfall och det totala antalet observationer. Nollhypotesens värde anges med ett argument `p`. Det finns också en möjlighet att förbättra testet med en så kallad kontinuitetskorrektion. Då det inte ingår i kursen måste vi sätta `correct = F` för att få samma utfall som handräkningen. Vi kan genomföra testet med
 
 ```{r}
 prop.test(x = 947, n = 2750, p = 0.33, correct = F)
 ```
 
-Den stegvisa beräkningen gav samma utfall som funktionen (`p-value = 0.01092`). Funktionen ger inte z-värdet utan ett chi-två-värde (2.5661). Här är det värdet z-värdet i kvadrat.
+Den stegvisa beräkningen gav samma utfall som funktionen (`p-value = 0.01092`). Funktionen ger inte z-värdet utan ett chi-två-värde (2.5661). Här är det värdet lika med z-värdet i kvadrat.
 
 ```{r}
 z_value^2
@@ -247,10 +249,11 @@ Ett proportionstest kan ses som ett test av en variabel med två möjliga klasse
 
 Låt oss göra ett exempel baserat på fotbollsdatan. Där hade vi utfallet 947, 518 och 1285 för bortaseger, oavgjort och hemmaseger. Klassisk bollkunskap gav oss sannolikheterna 33, 20 och 47 procent. Testets hypoteser ges av
 
-H0: sannolikheterna för de olika utfallet ges av 33, 20 respektive 47
-H1: minst något utfall har en annan sannolikhet än 33, 20 respektive 47
+H0: sannolikheterna för de olika utfallet ges av 33, 20 respektive 47 procent
 
-För att få de förväntade värdema E multipliceras nollhypotesens sannolikheter med det totala antalet matcher.
+H1: minst något utfall har en annan sannolikhet än 33, 20 respektive 47 procent
+
+För att få de förväntade värdena E multipliceras nollhypotesens sannolikheter med det totala antalet matcher.
 
 ```{r}
 O <- c(947, 518, 1285)
@@ -298,7 +301,7 @@ R har en inbyggd funktion för chi-två-test. Dess argument ges av observerade a
 chisq.test(O, p = c(0.33, 0.2, 0.47))
 ```
 
-Testet ger samma chi-två-värde och p-värde som beräknats stegvis.
+Testet ger samma chi-två-värde och p-värde som beräknats ovan.
 
 ::: {.exercise name="Chi-två med två klasser"}
 Situationen med flera klasser kan som sagt ses som en generalisering av fallet med två klasser. Det är alltså logiskt att chi-två-test kan användas även när man har två klasser. Följande exempel ger samma test som vi sett tidigare av andelen bortasegrar.
@@ -358,9 +361,12 @@ Spara testobjektet från chi-två-testet för fåglarna för att se vilka fågel
 
 ## Chi-två-test när någon parameter skattas från datan
 
+(Det här stycket är överkurs och kan läsas översiktligt eller hoppas över.)
+
 I de exempel vi sett hittills har nollhypotesen direkt givit de sannolikheter vi vill testa. Ett annat vanligt fall är att man testar om värdena följer en viss fördelning, men parametervärden i den fördelningen skattas från den insamlade datan. Ta som exempel frågan om antal mål per match följer en poissonfördelning. Hypoteserna ges av
 
 H0: antal mål följer en poissonfördelning,
+
 H1: antal mål följer ej en poissonfördelning.
 
 Här måste vi skatta medelvärdet från datan för att beräkna sannolikheter från fördelningen.
@@ -483,3 +489,34 @@ dat_leaf %>%
 Ändra i koden ovan för att ange artnamn som popup-text istället för rödlistestatus. Funktionen `paste()` kan också vara intressant för att ta med mer information i texten: `paste(dat_leaf$Rödlistade, dat_leaf$Antal)` skulle exempelvis ge både status och antal individer vid den specifika observationen.
 :::
 
+## Valfria hemuppgifter
+
+::: {.exercise name="Herrallsvenskan"}
+Följande importerar data för herrallsvenskan i fotboll.
+
+```{r, eval=F}
+dat <- read_csv("https://raw.githubusercontent.com/adamflr/ST0060-2022/main/Data/Allsvenskan%2C%20herrar%2C%201924-2020.csv")
+```
+
+Importera datan och se hur många matcher som ingår.
+:::
+
+::: {.exercise name="Antal hemmasegrar"}
+Beräkna antalet hemmasegrar i herrallsvenskan genom att räkna antalet matcher där `Hemmamål` överstiger `Bortamål`.
+:::
+
+::: {.exercise name="Test för antal hemmasegrar"}
+Testa om andelen hemmasegrar skiljer sig från nollhypotesen på 47 procent.
+:::
+
+::: {.exercise name="Konfidensintervall för antal hemmasegrar"}
+Använd `binom.asymp()` från paketet `binom` för att beräkna ett konfidensintervall för andelen hemmasegrar. Jämför med en handräkning (hand och miniräknare).
+:::
+
+::: {.exercise name="Hemmasegrar för Malmö FF"}
+Följande beräknar antalet hemmasegrar för Malmö FF. Testa om Malmös andel hemmasegrar är större än 47 procent.
+
+```{r, eval=F}
+dat %>% filter(Hemmalag == "Malmö FF") %>% count(Hemmamål > Bortamål)
+```
+:::

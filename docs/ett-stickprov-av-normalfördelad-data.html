@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2022-10-11" />
+<meta name="date" content="2022-10-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -205,6 +205,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4" data-path="ett-stickprov-av-icke-normalfördelad-data.html"><a href="ett-stickprov-av-icke-normalfördelad-data.html#chi-två-test-för-goodness-of-fit"><i class="fa fa-check"></i><b>5.4</b> Chi-två-test för goodness-of-fit</a></li>
 <li class="chapter" data-level="5.5" data-path="ett-stickprov-av-icke-normalfördelad-data.html"><a href="ett-stickprov-av-icke-normalfördelad-data.html#chi-två-test-när-någon-parameter-skattas-från-datan"><i class="fa fa-check"></i><b>5.5</b> Chi-två-test när någon parameter skattas från datan</a></li>
 <li class="chapter" data-level="5.6" data-path="ett-stickprov-av-icke-normalfördelad-data.html"><a href="ett-stickprov-av-icke-normalfördelad-data.html#bonus.-interaktiva-kartor-med-leaflet"><i class="fa fa-check"></i><b>5.6</b> Bonus. Interaktiva kartor med leaflet</a></li>
+<li class="chapter" data-level="5.7" data-path="ett-stickprov-av-icke-normalfördelad-data.html"><a href="ett-stickprov-av-icke-normalfördelad-data.html#valfria-hemuppgifter-4"><i class="fa fa-check"></i><b>5.7</b> Valfria hemuppgifter</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="test-för-två-stickprov.html"><a href="test-för-två-stickprov.html"><i class="fa fa-check"></i><b>6</b> Test för två stickprov</a>
 <ul>
@@ -452,7 +453,7 @@ Ett t-test bygger, som alla hypotestest, på en serie steg:</p>
 ## sample estimates:
 ## mean of x 
 ##        52</code></pre>
-<p>Är ett 99-procentigt konfidensintervall bredare eller smalare än ett 99-procentigt?</p>
+<p>Är ett 99-procentigt konfidensintervall bredare eller smalare än ett 95-procentigt?</p>
 </div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-103" class="exercise"><strong>Uppgift 4.13  (Ensidiga konfidensintervall) </strong></span>I en tidigare uppgift användes argumentet <code>alternative</code> för att göra ett ensidigt test med <code>t.test()</code>. Vad händer med konfidensintervallet om man anger ett ensidigt test?</p>
@@ -553,13 +554,13 @@ Ett t-test bygger, som alla hypotestest, på en serie steg:</p>
 ##  One Sample t-test
 ## 
 ## data:  dat_sim$x
-## t = 2.5542, df = 9, p-value = 0.03098
+## t = 0.91241, df = 9, p-value = 0.3853
 ## alternative hypothesis: true mean is not equal to 7
 ## 95 percent confidence interval:
-##  7.165438 9.728467
+##   5.236263 11.148278
 ## sample estimates:
 ## mean of x 
-##  8.446953</code></pre>
+##   8.19227</code></pre>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-111" class="exercise"><strong>Uppgift 4.21  (Upprepad simulering) </strong></span>Kör de två raderna i stycket ovan ett tiotal gånger. Du bör se att man ibland förkastar nollhypotesen trots att den ska stämma. Kan du få en känsla för hur stor andel av gångerna man felaktigt förkastar?</p>
 </div>
