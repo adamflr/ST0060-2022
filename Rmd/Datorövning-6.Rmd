@@ -95,8 +95,8 @@ ggplot(dat_long, aes(___, ___, group = ___)) +
 
 För att testa för skillnad före och efter behandling sätter vi upp hypoteser
 
-H0: mu före behandling är lika med mu efter behandling
-H1: mu före behandling är skild från mu efter behandling
+- H0: mu före behandling är lika med mu efter behandling
+- H1: mu före behandling är skild från mu efter behandling
 
 Testet kan antingen utföras som ett enkelt t-test på differensserien
 
@@ -168,8 +168,8 @@ ggplot(dat_berry, aes(Behandling, Vikt)) +
 
 Ett t-test för två oberoende stickprov har nollhypotesen att grupperna har samma populationsmedelvärde och alternativhypotesen att populationsmedelvärdena är skilda (för det tvåsidiga fallet):
 
-H0: mu_A är lika med mu_B
-H1: mu_A är ej lika med mu_B
+- H0: mu_A är lika med mu_B
+- H1: mu_A är ej lika med mu_B
 
 Testet kan utföras i R genom funktionen `t.test()`. Data kan antingen anges som en formel med dess data `Vikt ~ Behandling, data = dat_berry` (vilket man kan läsa som *vikt uppdelat efter behandling*) eller som två skilda vektorer. Det förra alternativet är oftast enklare om man har datan på lång form - med en kolumn som anger grupp (i exemplet *Behandling*) och en kolumn som anger utfallsvärdet (i exemplet *Vikt*).
 
@@ -255,8 +255,8 @@ Ett problem med att mäta skilda individer före och efter övervintring är att
 
 Om man vill jämföra två proportioner kan man använda z-testet för två stickprov. Säg till exempel att man har två sorter av någon planta och vill se hur stor proportion som är infekterad av bladmögel. I den ena gruppen (sort A) är 17 av 50 infektera och i den andra (sort B) är 26 av 60 infekterade. Testets hypoteser är i det tvåsidiga fallet
 
-H0: proportion A är lika med proportion B
-H1: proportion A är skild från proportion B
+- H0: proportion A är lika med proportion B
+- H1: proportion A är skild från proportion B
 
 I R kan testet genomföras med `prop.test`-funktionen. Funktionens första argument är antalen infekterade, som en vektor med två värden, och dess andra argument är totalerna. Likt testet med ett stickprov finns en möjlighet att göra en kontinuitetskorrektion med `correct`-argumentet. För att få samma resultat som räkning för hand anger vi att korrektion inte ska göras med `correct = F`.
 

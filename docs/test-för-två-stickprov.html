@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2022-10-13" />
+<meta name="date" content="2022-10-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -346,8 +346,10 @@ Som exempel ges följande data från en studie på äpple, där trädhöjd mätt
 <span id="cb395-3"><a href="test-för-två-stickprov.html#cb395-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
 </div>
 <p>För att testa för skillnad före och efter behandling sätter vi upp hypoteser</p>
-<p>H0: mu före behandling är lika med mu efter behandling
-H1: mu före behandling är skild från mu efter behandling</p>
+<ul>
+<li>H0: mu före behandling är lika med mu efter behandling</li>
+<li>H1: mu före behandling är skild från mu efter behandling</li>
+</ul>
 <p>Testet kan antingen utföras som ett enkelt t-test på differensserien</p>
 <div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="test-för-två-stickprov.html#cb396-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(dat_apple<span class="sc">$</span>Before <span class="sc">-</span> dat_apple<span class="sc">$</span>After)</span></code></pre></div>
 <pre><code>## 
@@ -421,8 +423,10 @@ Formulera hypoteser och genomför testet med <code>t.test()</code>. Lös gärna 
 <span id="cb404-2"><a href="test-för-två-stickprov.html#cb404-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="R-anvisningar_files/figure-html/unnamed-chunk-249-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Ett t-test för två oberoende stickprov har nollhypotesen att grupperna har samma populationsmedelvärde och alternativhypotesen att populationsmedelvärdena är skilda (för det tvåsidiga fallet):</p>
-<p>H0: mu_A är lika med mu_B
-H1: mu_A är ej lika med mu_B</p>
+<ul>
+<li>H0: mu_A är lika med mu_B</li>
+<li>H1: mu_A är ej lika med mu_B</li>
+</ul>
 <p>Testet kan utföras i R genom funktionen <code>t.test()</code>. Data kan antingen anges som en formel med dess data <code>Vikt ~ Behandling, data = dat_berry</code> (vilket man kan läsa som <em>vikt uppdelat efter behandling</em>) eller som två skilda vektorer. Det förra alternativet är oftast enklare om man har datan på lång form - med en kolumn som anger grupp (i exemplet <em>Behandling</em>) och en kolumn som anger utfallsvärdet (i exemplet <em>Vikt</em>).</p>
 <p>För formen med formel ger det</p>
 <div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="test-för-två-stickprov.html#cb405-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Formelskrivning</span></span>
@@ -505,8 +509,10 @@ Ett exempel på funktionen <code>pairwise.t.test()</code> ges nedan. Funktionen 
 <div id="z-test-och-konfidensintervall-för-två-proportioner" class="section level2 hasAnchor" number="6.3">
 <h2><span class="header-section-number">6.3</span> z-test och konfidensintervall för två proportioner<a href="test-för-två-stickprov.html#z-test-och-konfidensintervall-för-två-proportioner" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Om man vill jämföra två proportioner kan man använda z-testet för två stickprov. Säg till exempel att man har två sorter av någon planta och vill se hur stor proportion som är infekterad av bladmögel. I den ena gruppen (sort A) är 17 av 50 infektera och i den andra (sort B) är 26 av 60 infekterade. Testets hypoteser är i det tvåsidiga fallet</p>
-<p>H0: proportion A är lika med proportion B
-H1: proportion A är skild från proportion B</p>
+<ul>
+<li>H0: proportion A är lika med proportion B</li>
+<li>H1: proportion A är skild från proportion B</li>
+</ul>
 <p>I R kan testet genomföras med <code>prop.test</code>-funktionen. Funktionens första argument är antalen infekterade, som en vektor med två värden, och dess andra argument är totalerna. Likt testet med ett stickprov finns en möjlighet att göra en kontinuitetskorrektion med <code>correct</code>-argumentet. För att få samma resultat som räkning för hand anger vi att korrektion inte ska göras med <code>correct = F</code>.</p>
 <div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="test-för-två-stickprov.html#cb415-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.test</span>(<span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">26</span>), <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">60</span>), <span class="at">correct =</span> F)</span></code></pre></div>
 <pre><code>## 
