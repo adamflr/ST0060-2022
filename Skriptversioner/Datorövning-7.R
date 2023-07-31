@@ -1,39 +1,39 @@
 # # Variansanalys
 #
-# DatorÃ¶vning 7 handlar om variansanalys. Efter Ã¶vningen ska vi kunna
+# Datorövning 7 handlar om variansanalys. Efter övningen ska vi kunna
 #
-# - berÃ¤kna en anova-modell i R,
+# - beräkna en anova-modell i R,
 #
 # - ta fram och tolka en anova-tabell,
 #
-# - gÃ¶ra lÃ¤mpliga tester av modellantaganden,
+# - göra lämpliga tester av modellantaganden,
 #
-# - gÃ¶ra parvisa jÃ¤mfÃ¶relser mellan behandlingar.
+# - göra parvisa jämförelser mellan behandlingar.
 #
 #
-# ## Repetition av datorÃ¶vning 6
+# ## Repetition av datorövning 6
 #
-# NÃ¤r man startar en ny R-session bÃ¶r man ladda de paket man vet kommer behÃ¶vas med `library()`. Om
-# paket inte finns installerade mÃ¥ste man fÃ¶rst kÃ¶ra `install.packages()`.
+# När man startar en ny R-session bör man ladda de paket man vet kommer behövas med `library()`. Om
+# paket inte finns installerade måste man först köra `install.packages()`.
 #
 
 # install.packages("tidyverse")
 library(tidyverse)
 
 #
-# I datorÃ¶vning 6 tittade vi pÃ¥ tester fÃ¶r tvÃ¥ stickprov. FÃ¶r normalfÃ¶rdelad data kan man dÃ¥
-# anvÃ¤nda ett t-test fÃ¶r tvÃ¥ stickprov (fÃ¶r tvÃ¥ matchade stickprov eller fÃ¶r tvÃ¥ oberoende stickprov
-# beroende pÃ¥ situation) fÃ¶r data med utfall i tvÃ¥ eller flera kategorier kan man anvÃ¤nda ett z-test
-# fÃ¶r tvÃ¥ stickprov eller ett chi-tvÃ¥-test fÃ¶r en korstabell.
+# I datorövning 6 tittade vi på tester för två stickprov. För normalfördelad data kan man då
+# använda ett t-test för två stickprov (för två matchade stickprov eller för två oberoende stickprov
+# beroende på situation) för data med utfall i två eller flera kategorier kan man använda ett z-test
+# för två stickprov eller ett chi-två-test för en korstabell.
 #
-# Ett t-test fÃ¶r matchade stickprov anvnÃ¤ds nÃ¤r de tvÃ¥ grupper man jÃ¤mfÃ¶r Ã¤r matchade sÃ¥ att en
-# observation i den ena gruppen Ã¤r kopplad till en observation i den andra gruppen. Ett vanligt
-# exempel Ã¤r mÃ¤tningar Ã¶ver tid dÃ¤r man mÃ¤ter ett objekt fÃ¶re och efter en behandling; man har dÃ¥ tvÃ¥
-# grupper (fÃ¶re och efter) och varje observation i fÃ¶re-gruppen Ã¤r kopplad till en mÃ¤tning av samma
-# objekt i efter-gruppen). Ett t-test fÃ¶r oberoende stickprov anvÃ¤nds om man inte har matchade
-# stickprov, det vill sÃ¤ga dÃ¥ det inte finns nÃ¥gon koppling mellan behandlinggrupperna.
+# Ett t-test för matchade stickprov anvnäds när de två grupper man jämför är matchade så att en
+# observation i den ena gruppen är kopplad till en observation i den andra gruppen. Ett vanligt
+# exempel är mätningar över tid där man mäter ett objekt före och efter en behandling; man har då två
+# grupper (före och efter) och varje observation i före-gruppen är kopplad till en mätning av samma
+# objekt i efter-gruppen). Ett t-test för oberoende stickprov används om man inte har matchade
+# stickprov, det vill säga då det inte finns någon koppling mellan behandlinggrupperna.
 #
-# Ta som exempel fÃ¶ljande fiskefÃ¥ngster fÃ¶r sex bÃ¥tar frÃ¥n tvÃ¥ regioner och tvÃ¥ fiskearter.
+# Ta som exempel följande fiskefångster för sex båtar från två regioner och två fiskearter.
 #
 
 dat_fish <- data.frame(Vessel = c("A", "B", "C", "D", "E", "F"),
@@ -42,7 +42,7 @@ dat_fish <- data.frame(Vessel = c("A", "B", "C", "D", "E", "F"),
                        Species2 = c(122.8, 105.3, 99.8, 106.8, 114, 102.7))
 
 #
-# Vi vill hÃ¤r testa om det finns en skillnad mellan arter och om det finns skillnad mellan
+# Vi vill här testa om det finns en skillnad mellan arter och om det finns skillnad mellan
 # regioner.
 #
 
@@ -51,24 +51,24 @@ dat_long <- dat_fish %>%
 ggplot(dat_long, aes(Species, Catch, group = Vessel)) + 
   geom_point() + 
   geom_line() +
-  labs(title = "FÃ¥ngster av tvÃ¥ arter", subtitle = "Linje sammanbinder observationer frÃ¥n samma fartyg")
+  labs(title = "Fångster av två arter", subtitle = "Linje sammanbinder observationer från samma fartyg")
 
 #
 
 ggplot(dat_fish, aes(Species1, Region)) + 
   geom_point() +
-  labs(title = "FÃ¥ngster i tvÃ¥ regioner")
+  labs(title = "Fångster i två regioner")
 
 #
-# FÃ¶r arterna har vi matchad data - varje observation av den ena arten Ã¤r kopplad till en
-# observation frÃ¥n den andra arten eftersom den kommer frÃ¥n samma bÃ¥t - och vi kan testa om
-# medelfÃ¥ngsterna av de tvÃ¥ arterna Ã¤r lika med ett t-test. Hypoteserna ges av
+# För arterna har vi matchad data - varje observation av den ena arten är kopplad till en
+# observation från den andra arten eftersom den kommer från samma båt - och vi kan testa om
+# medelfångsterna av de två arterna är lika med ett t-test. Hypoteserna ges av
 #
-# - H0: populationsmedelvÃ¤rdet av fÃ¥ngster fÃ¶r art 1 Ã¤r lika med det fÃ¶r art 2,
-# - H1: populationsmedelvÃ¤rdena Ã¤r ej lika.
+# - H0: populationsmedelvärdet av fångster för art 1 är lika med det för art 2,
+# - H1: populationsmedelvärdena är ej lika.
 #
-# I R kan ett test fÃ¶r matchad data genomfÃ¶ras med `t.test()` och argumentet `paired`, eller genom
-# att berÃ¤kna differensen per bÃ¥t och gÃ¶ra ett t-test fÃ¶r ett stickprov.
+# I R kan ett test för matchad data genomföras med `t.test()` och argumentet `paired`, eller genom
+# att beräkna differensen per båt och göra ett t-test för ett stickprov.
 #
 
 t.test(dat_fish$Species1, dat_fish$Species2, paired = T)
@@ -77,74 +77,74 @@ t.test(dat_fish$Species1, dat_fish$Species2, paired = T)
 # t.test(dat_fish$Species1 - dat_fish$Species2)
 
 #
-# Det berÃ¤knade p-vÃ¤rdet stÃ¤lls mot en signifikansnivÃ¥, vanligen fem procent, och om p-vÃ¤rdet Ã¤r
-# under signifikansnivÃ¥n fÃ¶rkastar vi nollhypotesen. I det hÃ¤r exemplet tyder pÃ¥ vÃ¤rdet pÃ¥ att
-# nollhypotesen inte stÃ¤mmer - en art Ã¤r vanligare Ã¤n den andra.
+# Det beräknade p-värdet ställs mot en signifikansnivå, vanligen fem procent, och om p-värdet är
+# under signifikansnivån förkastar vi nollhypotesen. I det här exemplet tyder på värdet på att
+# nollhypotesen inte stämmer - en art är vanligare än den andra.
 #
-# FÃ¶r att jÃ¤mfÃ¶ra regioner kan vi gÃ¶ra ett t-test fÃ¶r tvÃ¥ oberoende stickprov. Hypoteser ges av
+# För att jämföra regioner kan vi göra ett t-test för två oberoende stickprov. Hypoteser ges av
 #
-# - H0: populationsmedelvÃ¤rdet av fÃ¥ngster Ã¤r lika mellan regioner,
-# - H1: populationsmedelvÃ¤rdet av fÃ¥ngster Ã¤r ej lika mellan regioner.
+# - H0: populationsmedelvärdet av fångster är lika mellan regioner,
+# - H1: populationsmedelvärdet av fångster är ej lika mellan regioner.
 #
-# Testet kan genomfÃ¶ras med `t.test()` och kan antingen gÃ¶ras med ett antagande om lika varianser
-# (vilket motsvarar det som gÃ¶rs fÃ¶r hand under kursen) eller utan det antagandet. Variabler kan
-# anges med en formel som `Species1 ~ Group`, vilket vi kan tÃ¤nka pÃ¥ som vÃ¤rden fÃ¶r art 1 uppdelat
+# Testet kan genomföras med `t.test()` och kan antingen göras med ett antagande om lika varianser
+# (vilket motsvarar det som görs för hand under kursen) eller utan det antagandet. Variabler kan
+# anges med en formel som `Species1 ~ Group`, vilket vi kan tänka på som värden för art 1 uppdelat
 # efter grupp.
 #
 
 t.test(Species1 ~ Region, data = dat_fish, var.equal = T)
 
 #
-# Ett hÃ¶gt p-vÃ¤rde tyder pÃ¥ att det inte finns nÃ¥gon skillnad i fÃ¥ngst mellan regioner.
+# Ett högt p-värde tyder på att det inte finns någon skillnad i fångst mellan regioner.
 #
-# FÃ¶r data dÃ¤r utfallen Ã¤r tvÃ¥ eller flera kategorier kan ett chi-tvÃ¥-test testa om det finns nÃ¥got
-# samband mellan tvÃ¥ variabler. FÃ¶ljande data anger vilka partier ett urval vÃ¤ljare frÃ¥n tre kommuner
-# planerar rÃ¶sta pÃ¥ i nÃ¤sta riksdagsval.
+# För data där utfallen är två eller flera kategorier kan ett chi-två-test testa om det finns något
+# samband mellan två variabler. Följande data anger vilka partier ett urval väljare från tre kommuner
+# planerar rösta på i nästa riksdagsval.
 #
 
-dat_parti <- data.frame(Kommun = c("MalmÃ¶", "Lund", "KÃ¤vlinge"),
+dat_parti <- data.frame(Kommun = c("Malmö", "Lund", "Kävlinge"),
                         S = c(54, 102, 40),
                         M = c(30, 98, 53),
                         MP = c(7, 50, 5))
 dat_parti
 
 #
-# FÃ¶r att testa om det finns nÃ¥got samband mellan kommun och parti sÃ¤tter vi upp hypoteserna
+# För att testa om det finns något samband mellan kommun och parti sätter vi upp hypoteserna
 #
 # - H0: det finns inget samband mellan parti och kommun (ingen skillnad mellan kommuner),
-# - H1: det finns nÃ¥got samband mellan parti och kommun.
+# - H1: det finns något samband mellan parti och kommun.
 #
-# Detta kan testas med ett chi-tvÃ¥-test med funktionen `chisq.test()`. Som argument ges den
-# numeriska delen av korstabellen - vi tar alltsÃ¥ bort den fÃ¶rsta kolumnen fÃ¶r kommun.
+# Detta kan testas med ett chi-två-test med funktionen `chisq.test()`. Som argument ges den
+# numeriska delen av korstabellen - vi tar alltså bort den första kolumnen för kommun.
 #
 
 chisq.test(dat_parti[, -1])
 
 #
-# Det lÃ¥ga p-vÃ¤rdet pÃ¥ 0.000037 ger att vi fÃ¶rkastar nollhypotesen och drar slutsatsen att det
+# Det låga p-värdet på 0.000037 ger att vi förkastar nollhypotesen och drar slutsatsen att det
 # finns ett samband mellan kommun och parti.
 #
-# ## AllmÃ¤nt
+# ## Allmänt
 #
-# Variansanalys (eller *anova-modellen*) Ã¤r en statistisk modell dÃ¤r medelvÃ¤rdet varierar beroende
-# pÃ¥ en behandling och ett normalfÃ¶rdelat slumpfel. FrÃ¥n en anova-modell kan man berÃ¤kna ett F-test,
-# som testar om det finns nÃ¥gon Ã¶vergripande gruppskillnad, och post-hoc-test, som jÃ¤mfÃ¶r specifika
+# Variansanalys (eller *anova-modellen*) är en statistisk modell där medelvärdet varierar beroende
+# på en behandling och ett normalfördelat slumpfel. Från en anova-modell kan man beräkna ett F-test,
+# som testar om det finns någon övergripande gruppskillnad, och post-hoc-test, som jämför specifika
 # grupper med varandra.
 #
-# Den specifika modellen beror pÃ¥ fÃ¶rsÃ¶ksupplÃ¤gget. HÃ¤r ges exempel pÃ¥ variansanalys med en faktor,
-# en faktor med block, och tvÃ¥ faktorer.
+# Den specifika modellen beror på försöksupplägget. Här ges exempel på variansanalys med en faktor,
+# en faktor med block, och två faktorer.
 #
 # ## Variansanalys. En faktor
 #
-# Vid variansanalys med en faktor har man observationer av en kontinuerlig utfallsvariabel frÃ¥n tvÃ¥
-# eller flera behandlingsgrupper. Som exempel anvÃ¤nds en datamÃ¤ngd pÃ¥ ett odlingsfÃ¶rsÃ¶k med tre
-# behandlingar (varav en kontroll). Exemplet finns tillgÃ¤ngligt i R som `PlantGrowth`.
+# Vid variansanalys med en faktor har man observationer av en kontinuerlig utfallsvariabel från två
+# eller flera behandlingsgrupper. Som exempel används en datamängd på ett odlingsförsök med tre
+# behandlingar (varav en kontroll). Exemplet finns tillgängligt i R som `PlantGrowth`.
 #
 
 PlantGrowth
 
 #
-# Datan har 30 observationer av vikt `weight` och varje observation tillhÃ¶r nÃ¥gon specifik
+# Datan har 30 observationer av vikt `weight` och varje observation tillhör någon specifik
 # behandling `group`. Datan kan illustreras med ett spridningsdiagram.
 #
 
@@ -152,20 +152,20 @@ ggplot(PlantGrowth, aes(group, weight)) +
   geom_point()
 
 #
-# Behandling 1 verkar vara nÃ¥got lÃ¤gre Ã¤n kontrollen medan behandling 2 verkar vara nÃ¥got hÃ¶gre.
+# Behandling 1 verkar vara något lägre än kontrollen medan behandling 2 verkar vara något högre.
 #
-# En anova-modell kan i R skattas med funktionen `lm()` (fÃ¶r *linjÃ¤r modell*). FrÃ¥n modellobjektet
+# En anova-modell kan i R skattas med funktionen `lm()` (för *linjär modell*). Från modellobjektet
 # kan man sedan plocka fram en anova-tabell (som bland annat anger utfallet av F-testet) och
-# genomfÃ¶ra parvisa jÃ¤mfÃ¶relser genom `emmeans`.
+# genomföra parvisa jämförelser genom `emmeans`.
 #
 
 mod <- lm(weight ~ group, data = PlantGrowth)
 
 #
-# Modellen anges som en formel `weight ~ group`, vilket kan utlÃ¤sas *vikt beroende pÃ¥
-# behandlingsgrupp*. DÃ¤refter anges data med argumentet `data`.
+# Modellen anges som en formel `weight ~ group`, vilket kan utläsas *vikt beroende på
+# behandlingsgrupp*. Därefter anges data med argumentet `data`.
 #
-# FÃ¶r anova-tabellen finns flera alternativ. HÃ¤r anvÃ¤nds funktionen `Anova()` frÃ¥n paketet `car`.
+# För anova-tabellen finns flera alternativ. Här används funktionen `Anova()` från paketet `car`.
 #
 
 library(car)
@@ -175,35 +175,35 @@ Anova(mod)
 # Anova-tabellen ger kvadratsummor (`Sum Sq`), frihetsgrader (`Df`) och utfallet av ett F-test.
 # Testets hypoteser ges av
 #
-# H0: alla behandlingsgrupper har samma medelvÃ¤rde
-# H1: alla behandlingsgrupper har inte samma medelvÃ¤rde
+# H0: alla behandlingsgrupper har samma medelvärde
+# H1: alla behandlingsgrupper har inte samma medelvärde
 #
-# Det lÃ¥ga p-vÃ¤rdet tyder pÃ¥ att nollhypotesen bÃ¶r fÃ¶rkastas, vilket alltsÃ¥ pekar pÃ¥ att det finns
-# nÃ¥gon eller nÃ¥gra skillnader i medelvÃ¤rde.
+# Det låga p-värdet tyder på att nollhypotesen bör förkastas, vilket alltså pekar på att det finns
+# någon eller några skillnader i medelvärde.
 #
-# Uppgift 7.1. (Anova fÃ¶r hand)
-# Anovatabell frÃ¥n `Anova()` ger kvadratsummor och frihetsgrader. AnvÃ¤nd den informationen fÃ¶r att,
-# fÃ¶r hand, berÃ¤kna medelkvadratsummor och F-vÃ¤rdet.
+# Uppgift 7.1. (Anova för hand)
+# Anovatabell från `Anova()` ger kvadratsummor och frihetsgrader. Använd den informationen för att,
+# för hand, beräkna medelkvadratsummor och F-värdet.
 # :::
 #
-# Uppgift 7.2. (TabellvÃ¤rde fÃ¶r F-fÃ¶rdelningen)
-# Anova-tabellen ger ett p-vÃ¤rde frÃ¥n vilket vi kan dra en direkt slutsats. Om man istÃ¤llet lÃ¶ser
-# uppgiften fÃ¶r hand stÃ¤ller man det berÃ¤knade F-vÃ¤rdet mot ett kritiskt vÃ¤rde frÃ¥n en tabell Ã¶ver
-# F-fÃ¶rdelningen. Se efter om man kan hitta ett lÃ¤mpligt tabellvÃ¤rde fÃ¶r det aktuella testet (med 2
-# och 27 frihetsgrader). Det Ã¤r mÃ¶jligt att det inte finns en rad fÃ¶r 27 i en vanlig
-# F-fÃ¶rdelningstabell, anvÃ¤nd isÃ¥fall vÃ¤rdet pÃ¥ nÃ¤rmast Ã¶vre rad (t.ex. 26 eller 25). I R kan
-# kvantiler fÃ¶r F-fÃ¶rdelningen tas fram med `qf()`, t.ex.
+# Uppgift 7.2. (Tabellvärde för F-fördelningen)
+# Anova-tabellen ger ett p-värde från vilket vi kan dra en direkt slutsats. Om man istället löser
+# uppgiften för hand ställer man det beräknade F-värdet mot ett kritiskt värde från en tabell över
+# F-fördelningen. Se efter om man kan hitta ett lämpligt tabellvärde för det aktuella testet (med 2
+# och 27 frihetsgrader). Det är möjligt att det inte finns en rad för 27 i en vanlig
+# F-fördelningstabell, använd isåfall värdet på närmast övre rad (t.ex. 26 eller 25). I R kan
+# kvantiler för F-fördelningen tas fram med `qf()`, t.ex.
 #
 
 qf(0.95, 2, 27)
 
 # :::
 #
-# En naturlig fÃ¶ljdfrÃ¥ga Ã¤r vilka behandlingsgrupper som skiljer sig Ã¥t. FÃ¶r att besvara det krÃ¤vs
-# *parvisa jÃ¤mfÃ¶relser* dÃ¤r behandlingarna jÃ¤mfÃ¶rs tvÃ¥ och tvÃ¥. Parvisa jÃ¤mfÃ¶relse kan gÃ¶ras med
-# paketet `emmeans` och funktionen med samma namn. Funktionen tar modellobjektet som fÃ¶rsta argument
-# och en formel fÃ¶r jÃ¤mfÃ¶relsetyp som andra argument (hÃ¤r `pairwise ~ group`, en parvis jÃ¤mfÃ¶relse
-# mellan nivÃ¥er i `group`).
+# En naturlig följdfråga är vilka behandlingsgrupper som skiljer sig åt. För att besvara det krävs
+# *parvisa jämförelser* där behandlingarna jämförs två och två. Parvisa jämförelse kan göras med
+# paketet `emmeans` och funktionen med samma namn. Funktionen tar modellobjektet som första argument
+# och en formel för jämförelsetyp som andra argument (här `pairwise ~ group`, en parvis jämförelse
+# mellan nivåer i `group`).
 #
 
 # install.packages("emmeans")
@@ -211,17 +211,17 @@ library(emmeans)
 emmeans(mod, pairwise ~ group)
 
 #
-# I den nedre tabellen med jÃ¤mfÃ¶relser ges alla parvisa jÃ¤mfÃ¶relser. Nollhypotesen Ã¤r att de tvÃ¥
-# grupper som jÃ¤mfÃ¶rs har samma medelvÃ¤rde - ett lÃ¥gt p-vÃ¤rde tyder alltsÃ¥ pÃ¥ att de tvÃ¥ grupperna Ã¤r
-# signifikant skilda. Notera ocksÃ¥ att p-vÃ¤rden justeras med tukey-metoden, Ã¤ven kÃ¤nt som Tukeys HSD.
+# I den nedre tabellen med jämförelser ges alla parvisa jämförelser. Nollhypotesen är att de två
+# grupper som jämförs har samma medelvärde - ett lågt p-värde tyder alltså på att de två grupperna är
+# signifikant skilda. Notera också att p-värden justeras med tukey-metoden, även känt som Tukeys HSD.
 #
-# Om man istÃ¤llet vill anvÃ¤nda Fishers LSD kan man styra justeringen med argumentet `adjust`.
+# Om man istället vill använda Fishers LSD kan man styra justeringen med argumentet `adjust`.
 #
 
 emmeans(mod, pairwise ~ group, adjust = "none")
 
 #
-# Parvisa jÃ¤mfÃ¶relser presenteras ofta med signifikansbokstÃ¤ver (en. *compact letter display,
+# Parvisa jämförelser presenteras ofta med signifikansbokstäver (en. *compact letter display,
 # cld*). Dessa kan plockas fram med `multcomp`-paketet och funktionen `cld()`.
 #
 
@@ -231,22 +231,22 @@ library(multcomp)
 cld(em, Letters = letters)
 
 #
-# Tolkning av grupperingen till hÃ¶ger Ã¤r att grupper som delar en bokstav inte Ã¤r signifikant
-# skilda. I det hÃ¤r fallet Ã¤r den lÃ¤gsta nivÃ¥n skild frÃ¥n de tvÃ¥ hÃ¶gsta. I Ã¶vrigt finns inga
-# signifikanta skillnader. JÃ¤mfÃ¶r gÃ¤rna med p-vÃ¤rdena frÃ¥n tabellen med parvisa jÃ¤mfÃ¶relser. Man bÃ¶r
-# se att parvisa jÃ¤mfÃ¶relser med ett p-vÃ¤rde under fem procent motsvaras av att de behandlingarna
-# inte delar nÃ¥gon bokstav i bokstavstabellen.
+# Tolkning av grupperingen till höger är att grupper som delar en bokstav inte är signifikant
+# skilda. I det här fallet är den lägsta nivån skild från de två högsta. I övrigt finns inga
+# signifikanta skillnader. Jämför gärna med p-värdena från tabellen med parvisa jämförelser. Man bör
+# se att parvisa jämförelser med ett p-värde under fem procent motsvaras av att de behandlingarna
+# inte delar någon bokstav i bokstavstabellen.
 #
-# Uppgift 7.3. (Anova med tvÃ¥ behandlingar)
-# FÃ¶ljande kod skapar en datamÃ¤ngd med tvÃ¥ behandlingar.
+# Uppgift 7.3. (Anova med två behandlingar)
+# Följande kod skapar en datamängd med två behandlingar.
 #
 
 dat_two <- PlantGrowth %>% filter(group %in% c("trt1", "trt2"))
 
 #
-# AnvÃ¤nd den datan fÃ¶r att gÃ¶ra ett t-test fÃ¶r tvÃ¥ oberoende stickprov med lika varians, ett t-test
-# fÃ¶r tvÃ¥ oberoende stickprov utan antagande om lika varians, och ett F-test (ofullstÃ¤ndig exempelkod
-# nedan). Vad kan sÃ¤gas om p-vÃ¤rdena frÃ¥n de tre testen?
+# Använd den datan för att göra ett t-test för två oberoende stickprov med lika varians, ett t-test
+# för två oberoende stickprov utan antagande om lika varians, och ett F-test (ofullständig exempelkod
+# nedan). Vad kan sägas om p-värdena från de tre testen?
 #
 
 t.test(___ ~ group, data = dat_two, var.equal = T)
@@ -258,10 +258,10 @@ Anova(mod)
 # :::
 #
 # Uppgift 7.4. (Mass-signifikans)
-# Anledning till att vi justerar p-vÃ¤rden Ã¤r att man vid varje test har en sannolikhet att
-# fÃ¶rkasta. Om man gÃ¶r ett stort antal tester Ã¤r man nÃ¤stan garanterad att fÃ¥ nÃ¥got (falskt)
-# signifikant resultat. Justering hÃ¶jer p-vÃ¤rdena fÃ¶r att minska den risken. FÃ¶ljande kod simulerar
-# data med 5 grupper och producerar de parvisa jÃ¤mfÃ¶relserna.
+# Anledning till att vi justerar p-värden är att man vid varje test har en sannolikhet att
+# förkasta. Om man gör ett stort antal tester är man nästan garanterad att få något (falskt)
+# signifikant resultat. Justering höjer p-värdena för att minska den risken. Följande kod simulerar
+# data med 5 grupper och producerar de parvisa jämförelserna.
 #
 
 n_groups <- 5
@@ -270,30 +270,30 @@ mod <- lm(y ~ group, dat_sim)
 emmeans(mod, pairwise ~ group, adjust = "none")
 
 #
-# KÃ¶r koden tio gÃ¥nger. Hur mÃ¥nga gÃ¥nger av de tio ger de parvisa jÃ¤mfÃ¶relserna *nÃ¥gon* signifikant
-# skillnad (det vill sÃ¤ga nÃ¥got p-vÃ¤rde under 0.05)?
+# Kör koden tio gånger. Hur många gånger av de tio ger de parvisa jämförelserna *någon* signifikant
+# skillnad (det vill säga något p-värde under 0.05)?
 #
 # En passande xkcd-serie: https://xkcd.com/882/
 # :::
 #
-# Uppgift 7.5. (Ã„ppelinfektionsimport)
-# En studie har givit ett mÃ¥tt pÃ¥ infektion hos Ã¤ppeltrÃ¤d. Fyra sorter jÃ¤mfÃ¶rs med tre replikat per
-# sort. Data finns i fliken *Ã„ppelangrepp* i excelfilen *Uppgiftsdata.xslx* pÃ¥ canvassidan. Fyll i
-# kodstycket nedan fÃ¶r att importera datan.
+# Uppgift 7.5. (Äppelinfektionsimport)
+# En studie har givit ett mått på infektion hos äppelträd. Fyra sorter jämförs med tre replikat per
+# sort. Data finns i fliken *Äppelangrepp* i excelfilen *Uppgiftsdata.xslx* på canvassidan. Fyll i
+# kodstycket nedan för att importera datan.
 #
 
 library(readxl)
-dat_apple <- read_excel("___", sheet = "Ã„ppelangrepp")
+dat_apple <- read_excel("___", sheet = "Äppelangrepp")
 dat_apple
 
 # dat_apple <-
 # read_csv("https://raw.githubusercontent.com/adamflr/ST0060-2022/main/Data/Uppgiftsdata/Uppgift_%C3%84ppelangrepp.csv")
-# Alternativ lÃ¶sning
+# Alternativ lösning
 
 # :::
 #
-# Uppgift 7.6. (Ã„ppelinfektionsgraf)
-# Fyll i kodstycket nedan fÃ¶r att skapa en graf av Ã¤ppeldatan.
+# Uppgift 7.6. (Äppelinfektionsgraf)
+# Fyll i kodstycket nedan för att skapa en graf av äppeldatan.
 #
 
 ggplot(___, aes(x = ___, y = ___)) +
@@ -301,9 +301,9 @@ ggplot(___, aes(x = ___, y = ___)) +
 
 # :::
 #
-# Uppgift 7.7. (Ã„ppelinfektionsmodell)
-# Fyll i kodstycket nedan fÃ¶r att skatta en anovamodell och ta fram anovatabellen. Vad Ã¤r F-testets
-# noll- och alternativhypotes? Vilken slutsats kan man dra frÃ¥n testet?
+# Uppgift 7.7. (Äppelinfektionsmodell)
+# Fyll i kodstycket nedan för att skatta en anovamodell och ta fram anovatabellen. Vad är F-testets
+# noll- och alternativhypotes? Vilken slutsats kan man dra från testet?
 #
 
 mod <- lm(___ ~ ___, data = dat_apple)
@@ -313,15 +313,15 @@ Anova(mod)
 #
 # ## Variansanalys. En faktor med block
 #
-# I en blockdesign delas fÃ¶rsÃ¶ksobjekten (de enheter man ger en behandling och sedan mÃ¤ter, t.ex.
-# en fÃ¶rsÃ¶ksruta eller en planta) in i grupper av lika objekt (ett *block*). Sedan ger man enheterna
-# inom blocket varsin behandling. BlockfÃ¶rsÃ¶k Ã¤r ofta balanserade, sÃ¥ att varje behandling fÃ¶rekommer
-# en gÃ¥ng i varje block.
+# I en blockdesign delas försöksobjekten (de enheter man ger en behandling och sedan mäter, t.ex.
+# en försöksruta eller en planta) in i grupper av lika objekt (ett *block*). Sedan ger man enheterna
+# inom blocket varsin behandling. Blockförsök är ofta balanserade, så att varje behandling förekommer
+# en gång i varje block.
 #
-# Som exempel pÃ¥ ett blockfÃ¶rsÃ¶k kan vi titta pÃ¥ datan `oats` frÃ¥n paketet `MASS`. Datan kommer
-# frÃ¥n ett agrikulturellt fÃ¶rsÃ¶k och blockdesignen sker genom att man delar in ett fÃ¤lt i flera delar
-# (blocken) och sÃ¤tter varje behandling i varje block. Datan har tvÃ¥ faktorer (kvÃ¤ve `N` och sort
-# `V`), men lÃ¥t oss i den hÃ¤r fÃ¶rsta delen titta pÃ¥ en specifik sort.
+# Som exempel på ett blockförsök kan vi titta på datan `oats` från paketet `MASS`. Datan kommer
+# från ett agrikulturellt försök och blockdesignen sker genom att man delar in ett fält i flera delar
+# (blocken) och sätter varje behandling i varje block. Datan har två faktorer (kväve `N` och sort
+# `V`), men låt oss i den här första delen titta på en specifik sort.
 #
 
 library(MASS)
@@ -329,7 +329,7 @@ oats_marvel <- oats %>% filter(V == "Marvellous")
 oats_marvel
 
 #
-# En vanlig illustration av ett blockfÃ¶rsÃ¶k Ã¤r ett punktdiagram kombinerat med ett linjediagram.
+# En vanlig illustration av ett blockförsök är ett punktdiagram kombinerat med ett linjediagram.
 #
 
 ggplot(oats_marvel, aes(N, Y, color = B, group = B)) +
@@ -337,13 +337,13 @@ ggplot(oats_marvel, aes(N, Y, color = B, group = B)) +
   geom_line()
 
 #
-# FÃ¤rg och linje sammanbinder observationer frÃ¥n samma block. Det finns tecken pÃ¥ en blockeffekt:
-# block I Ã¤r nÃ¤stan alltid hÃ¶gst och block V Ã¤r nÃ¤stan alltid lÃ¤gst. Det finns ocksÃ¥ en tydlig
-# behandlingseffekt i att hÃ¶gre kvÃ¤ve ger hÃ¶gre skÃ¶rd.
+# Färg och linje sammanbinder observationer från samma block. Det finns tecken på en blockeffekt:
+# block I är nästan alltid högst och block V är nästan alltid lägst. Det finns också en tydlig
+# behandlingseffekt i att högre kväve ger högre skörd.
 #
-# Blockeffekten kan enkelt fÃ¶ras in i modellen genom att lÃ¤gga till variabeln `B` i
-# `lm`-funktionen. Anova-tabellen och parvisa jÃ¤mfÃ¶relser kan gÃ¶ras pÃ¥ samma sÃ¤tt som tidigare.
-# Resultaten pÃ¥verkas av att modellen har en blockfaktor; man behÃ¶ver vanligen inte ange det
+# Blockeffekten kan enkelt föras in i modellen genom att lägga till variabeln `B` i
+# `lm`-funktionen. Anova-tabellen och parvisa jämförelser kan göras på samma sätt som tidigare.
+# Resultaten påverkas av att modellen har en blockfaktor; man behöver vanligen inte ange det
 # explicit.
 #
 
@@ -351,43 +351,43 @@ mod_bl <- lm(Y ~ N + B, data = oats_marvel)
 Anova(mod_bl)
 
 #
-# P-vÃ¤rdet frÃ¥n F-testet pÃ¥ variabeln N Ã¤r nu klart mindre Ã¤n tidigare. Detta beror pÃ¥ att en stor
-# del av variationen kan fÃ¶rklaras med blockeffekten, vilket Ã¤r tydligt i att blockeffekten ocksÃ¥ har
-# ett litet p-vÃ¤rde i F-testet.
+# P-värdet från F-testet på variabeln N är nu klart mindre än tidigare. Detta beror på att en stor
+# del av variationen kan förklaras med blockeffekten, vilket är tydligt i att blockeffekten också har
+# ett litet p-värde i F-testet.
 #
-# Det kan vara intressant att jÃ¤mfÃ¶ra med modellen utan block.
+# Det kan vara intressant att jämföra med modellen utan block.
 #
 
 mod_wo_block <- lm(Y ~ N, data = oats_marvel)
 Anova(mod_wo_block)
 
 #
-# Det som Ã¤r residualens kvadratsumma i modellen utan block Ã¤r i blockmodellen uppdelat i en
-# blockeffekt och en residualterm. Eftersom F-testet bygger pÃ¥ en jÃ¤mfÃ¶relse mellan
+# Det som är residualens kvadratsumma i modellen utan block är i blockmodellen uppdelat i en
+# blockeffekt och en residualterm. Eftersom F-testet bygger på en jämförelse mellan
 # behandlingseffekten och residualtermen leder blockdesignen till starkare signifikans i
-# blockmodellen. Ã… andra sidan kostar blockfaktorn frihetsgrader vilket ger oss ett svagare test.
-# Effekten av att ta med ett block beror alltsÃ¥ pÃ¥ om det finns en verklig skillnad mellan blocken
+# blockmodellen. Å andra sidan kostar blockfaktorn frihetsgrader vilket ger oss ett svagare test.
+# Effekten av att ta med ett block beror alltså på om det finns en verklig skillnad mellan blocken
 # eller ej.
 #
-# Vi kan gÃ¥ vidare med att titta pÃ¥ parvisa jÃ¤mfÃ¶relser mellan kvÃ¤venivÃ¥er. Funktionen `emmeans()`
+# Vi kan gå vidare med att titta på parvisa jämförelser mellan kvävenivåer. Funktionen `emmeans()`
 # och `cld()` fungerar som tidigare.
 #
 
 cld(emmeans(mod_bl, ~ N), Letters = letters)
 
 #
-# SignifikansbokstÃ¤ver anger att den lÃ¤gsta nivÃ¥n Ã¤r skild frÃ¥n Ã¶vriga och att den nÃ¤st lÃ¤gsta Ã¤r
-# skild frÃ¥n den hÃ¶gsta. Ã„ven hÃ¤r kan det vara intressant att jÃ¤mfÃ¶ra med modellen utan block.
+# Signifikansbokstäver anger att den lägsta nivån är skild från övriga och att den näst lägsta är
+# skild från den högsta. Även här kan det vara intressant att jämföra med modellen utan block.
 #
 
 cld(emmeans(mod_wo_block, ~ N), Letters = letters)
 
 #
-# Modellen utan block ger samma medelvÃ¤rden `emmean` men stÃ¶rre medelfel `SE` och fÃ¤rre
+# Modellen utan block ger samma medelvärden `emmean` men större medelfel `SE` och färre
 # signifikanta skillnader.
 #
-# Uppgift 7.8. (Block med tvÃ¥ behandlingar. Graf)
-# Det minsta mÃ¶jliga blocket Ã¤r det med tvÃ¥ behandlingar. Vi filtrerar havredatan fÃ¶r att den
+# Uppgift 7.8. (Block med två behandlingar. Graf)
+# Det minsta möjliga blocket är det med två behandlingar. Vi filtrerar havredatan för att den
 # situationen.
 #
 
@@ -395,8 +395,8 @@ dat_small_block <- oats %>% filter(V == "Marvellous", N %in% c("0.6cwt", "0.0cwt
 dat_small_block
 
 #
-# Fyll i stycket nedan fÃ¶r att skapa en graf med `N` pÃ¥ x-axeln, `Y` pÃ¥ y-axeln och en gruppering
-# som lÃ¤nkar observationer frÃ¥n samma block.
+# Fyll i stycket nedan för att skapa en graf med `N` på x-axeln, `Y` på y-axeln och en gruppering
+# som länkar observationer från samma block.
 #
 
 ggplot(dat_small_block, aes(x = ___, y = ___, group = ___)) +
@@ -405,11 +405,11 @@ ggplot(dat_small_block, aes(x = ___, y = ___, group = ___)) +
 
 # :::
 #
-# Uppgift 7.9. (Block med tvÃ¥ behandlingar. Test)
-# Eftersom det Ã¤r ett fÃ¶rsÃ¶k med en fÃ¶rklarande faktor och block kan man modellera det med den
-# tidigare blockmodellen. Men eftersom man bara har tvÃ¥ observationer per block kan man ocksÃ¥ se det
-# som matchade stickprov, vilket kan lÃ¶sas med ett t-test. Fyll i stycket nedan fÃ¶r att gÃ¶ra de tvÃ¥
-# testen - utfallsvariabeln Ã¤r skÃ¶rd `Y` och den fÃ¶rklarande faktorn Ã¤r kvÃ¤venivÃ¥n `N`. JÃ¤mfÃ¶r
+# Uppgift 7.9. (Block med två behandlingar. Test)
+# Eftersom det är ett försök med en förklarande faktor och block kan man modellera det med den
+# tidigare blockmodellen. Men eftersom man bara har två observationer per block kan man också se det
+# som matchade stickprov, vilket kan lösas med ett t-test. Fyll i stycket nedan för att göra de två
+# testen - utfallsvariabeln är skörd `Y` och den förklarande faktorn är kvävenivån `N`. Jämför
 # resultaten.
 #
 
@@ -421,8 +421,8 @@ t.test(___ ~ ___, data = dat_small_block, paired = ___)
 # :::
 #
 # Uppgift 7.10. (Majshybridimport)
-# I fliken *Majshybrider* i excelfilen *Uppgiftsdata.xlsx* finns data pÃ¥ fyra majssorter, vardera
-# sorterad pÃ¥ fem platser (som agerar som block). Importera datan med funktionen `read_excel()` genom
+# I fliken *Majshybrider* i excelfilen *Uppgiftsdata.xlsx* finns data på fyra majssorter, vardera
+# sorterad på fem platser (som agerar som block). Importera datan med funktionen `read_excel()` genom
 # att fylla i kodstycket nedan.
 #
 
@@ -432,13 +432,13 @@ dat_corn <- read_excel("", sheet = ___)
 # :::
 #
 # Uppgift 7.11. (Majshybridgraf)
-# Skapa en lÃ¤mplig graf av datan pÃ¥ majshybrider. Grafen ska illustrera bÃ¥de jÃ¤mfÃ¶relsen mellan
-# hybrider och jÃ¤mfÃ¶relsen mellan platser. Se exemplet ovan som guide.
+# Skapa en lämplig graf av datan på majshybrider. Grafen ska illustrera både jämförelsen mellan
+# hybrider och jämförelsen mellan platser. Se exemplet ovan som guide.
 # :::
 #
 # Uppgift 7.12. (Majshybridmodell)
-# Fyll i koden nedan fÃ¶r att skatta en anova-modell med block fÃ¶r datan pÃ¥ majshybrider. Ta fram
-# anovatabellen med `Anova()`. Vilka slutsatser kan man dra frÃ¥n anovatabellen?
+# Fyll i koden nedan för att skatta en anova-modell med block för datan på majshybrider. Ta fram
+# anovatabellen med `Anova()`. Vilka slutsatser kan man dra från anovatabellen?
 #
 
 mod <- lm(___ ~ ___ + Plats, data = dat_corn)
@@ -446,18 +446,18 @@ Anova(mod)
 
 # :::
 #
-# Uppgift 7.13. (MajshybridjÃ¤mfÃ¶relser)
-# GÃ¶r lÃ¤mplig Ã¤ndring i koden nedan fÃ¶r att jÃ¤mfÃ¶ra hybrider, istÃ¤llet fÃ¶r platser.
+# Uppgift 7.13. (Majshybridjämförelser)
+# Gör lämplig ändring i koden nedan för att jämföra hybrider, istället för platser.
 #
 
 emmeans(mod, pairwise ~ Plats)
 
 # :::
 #
-# ## Variansanalys. TvÃ¥ faktorer med block
+# ## Variansanalys. Två faktorer med block
 #
-# Exempeldata pÃ¥ havre tar med tvÃ¥ fÃ¶rklarande faktorer och ett block. Datan kan illustreras med
-# ett punktdiagram dÃ¤r `facet_wrap` delar grafen efter sort.
+# Exempeldata på havre tar med två förklarande faktorer och ett block. Datan kan illustreras med
+# ett punktdiagram där `facet_wrap` delar grafen efter sort.
 #
 
 ggplot(oats, aes(N, Y, color = B)) +
@@ -465,34 +465,34 @@ ggplot(oats, aes(N, Y, color = B)) +
   facet_wrap(~ V)
 
 #
-# Grafen visar samma kvÃ¤vesamband som tidigare. Det finns inga tydliga skillnader mellan sorter,
-# mÃ¶jligen har sorten Victory givit nÃ¥got lÃ¤gre skÃ¶rd Ã¤n Ã¶vriga. Det finns fortfarande en tydlig
-# blockeffekt, till exempel har block I hÃ¶ga vÃ¤rden och block V lÃ¥ga vÃ¤rden.
+# Grafen visar samma kvävesamband som tidigare. Det finns inga tydliga skillnader mellan sorter,
+# möjligen har sorten Victory givit något lägre skörd än övriga. Det finns fortfarande en tydlig
+# blockeffekt, till exempel har block I höga värden och block V låga värden.
 #
-# Modellen skattas genom att lÃ¤gga till variabeln fÃ¶r sort (V fÃ¶r variety) i `lm`-formeln. En
-# modell med tvÃ¥ faktorer kan antingen vara med eller utan en *interaktion*. Interaktionstermen
-# fÃ¥ngar pÃ¥verkan mellan faktorerna. Ett exempel hade varit om nÃ¥gon sort svarat starkare pÃ¥ Ã¶kad
-# kvÃ¤ve Ã¤n nÃ¥gon annan. Standardmodellen Ã¤r att ta med interaktionen, vilket vi anger genom att sÃ¤tta
-# `N * V` istÃ¤llet fÃ¶r `N + V`. Blocket tas fortfarande med som en adderad faktor
+# Modellen skattas genom att lägga till variabeln för sort (V för variety) i `lm`-formeln. En
+# modell med två faktorer kan antingen vara med eller utan en *interaktion*. Interaktionstermen
+# fångar påverkan mellan faktorerna. Ett exempel hade varit om någon sort svarat starkare på ökad
+# kväve än någon annan. Standardmodellen är att ta med interaktionen, vilket vi anger genom att sätta
+# `N * V` istället för `N + V`. Blocket tas fortfarande med som en adderad faktor
 #
 
 mod_two_fact <- lm(Y ~ N * V + B, data = oats)
 
 #
-# Anovatabellen kan plockas fram pÃ¥ samma sÃ¤tt som tidigare.
+# Anovatabellen kan plockas fram på samma sätt som tidigare.
 #
 
 Anova(mod_two_fact)
 
 #
-# Raden `N:V` gÃ¤ller interaktionseffekten mellan kvÃ¤ve och sort. I det hÃ¤r fallet Ã¤r det ingen
-# signifikant interaktion - vilket tyder pÃ¥ att sorterna svarar pÃ¥ kvÃ¤vebehandling pÃ¥ liknande sÃ¤tt.
-# Samtliga huvudeffekter (raderna fÃ¶r N, V och B) Ã¤r signifikanta. Kvadratsummorna och p-vÃ¤rdena
-# tyder pÃ¥ att kvÃ¤ve fÃ¶rklarar mer av variationen Ã¤n sort, vilket ocksÃ¥ Ã¤r i linje med grafen ovan.
+# Raden `N:V` gäller interaktionseffekten mellan kväve och sort. I det här fallet är det ingen
+# signifikant interaktion - vilket tyder på att sorterna svarar på kvävebehandling på liknande sätt.
+# Samtliga huvudeffekter (raderna för N, V och B) är signifikanta. Kvadratsummorna och p-värdena
+# tyder på att kväve förklarar mer av variationen än sort, vilket också är i linje med grafen ovan.
 #
-# Vid flerfaktoriella fÃ¶rsÃ¶k kan man presentera parvisa jÃ¤mfÃ¶relser pÃ¥ flera olika sÃ¤tt. Man kan
-# ange huvudeffekter fÃ¶r en faktor utan att ange den andra faktorn, man kan ange medelvÃ¤rden fÃ¶r
-# samtliga kombinationer av tvÃ¥ faktorer, och man kan ange medelvÃ¤rden uppdelat efter nivÃ¥er i en
+# Vid flerfaktoriella försök kan man presentera parvisa jämförelser på flera olika sätt. Man kan
+# ange huvudeffekter för en faktor utan att ange den andra faktorn, man kan ange medelvärden för
+# samtliga kombinationer av två faktorer, och man kan ange medelvärden uppdelat efter nivåer i en
 # annan faktor.
 #
 
@@ -501,21 +501,21 @@ emmeans(mod_two_fact, ~ N + V)
 emmeans(mod_two_fact, ~ N | V)
 
 #
-# Ã„ven hÃ¤r kan man gÃ¶ra jÃ¤mfÃ¶relser mellan nivÃ¥er genom att sÃ¤tta `pairwise ~ N + V` eller berÃ¤kna
-# signifikansbokstÃ¤ver med `cld`. FÃ¶ljande kod jÃ¤mfÃ¶r kvÃ¤venivÃ¥er *inom* sort.
+# Även här kan man göra jämförelser mellan nivåer genom att sätta `pairwise ~ N + V` eller beräkna
+# signifikansbokstäver med `cld`. Följande kod jämför kvävenivåer *inom* sort.
 #
 
 cld(emmeans(mod_two_fact, ~ N | V), Letters = letters)
 
 #
-# Uppgift 7.14. (Sort uppdelat efter kvÃ¤venivÃ¥)
-# GÃ¶r lÃ¤mplig Ã¤ndring i koden ovan fÃ¶r att jÃ¤mfÃ¶ra sorter *inom* kvÃ¤venivÃ¥. Finns det nÃ¥gra
+# Uppgift 7.14. (Sort uppdelat efter kvävenivå)
+# Gör lämplig ändring i koden ovan för att jämföra sorter *inom* kvävenivå. Finns det några
 # signifikanta skillnader?
 # :::
 #
 # Uppgift 7.15. (Interaktion med ett block)
-# I modellen ovan Ã¤r block en *additiv* faktor - den ingÃ¥r inte i nÃ¥gon interaktionseffekt. Vad
-# hÃ¤nder med testerna om man skattar modellen dÃ¤r samtliga interaktioner tas med? VarfÃ¶r?
+# I modellen ovan är block en *additiv* faktor - den ingår inte i någon interaktionseffekt. Vad
+# händer med testerna om man skattar modellen där samtliga interaktioner tas med? Varför?
 #
 
 mod_two_fact <- lm(Y ~ N * V * B, data = oats)
@@ -524,11 +524,11 @@ mod_two_fact <- lm(Y ~ N * V * B, data = oats)
 #
 # ## Modellantaganden och residualer
 #
-# Samtliga anovamodeller har samma grundlÃ¤ggande antaganden: feltermerna (den kvarvarande
-# slumpmÃ¤ssigheten) Ã¤r normalfÃ¶rdelade, sinsemellan oberoende, och variansen Ã¤r samma fÃ¶r samtliga
-# behandlingsgrupper. Antagandena testas oftast genom att titta pÃ¥ modellens *residualer* -
-# skillnaden mellan det faktiska vÃ¤rdet och det skattade vÃ¤rdet. FÃ¶r en skattad modell kan man ta upp
-# residualerna med `residuals()` och de skattade vÃ¤rdena med `fitted()`. Vi kan lÃ¤gga till residualer
+# Samtliga anovamodeller har samma grundläggande antaganden: feltermerna (den kvarvarande
+# slumpmässigheten) är normalfördelade, sinsemellan oberoende, och variansen är samma för samtliga
+# behandlingsgrupper. Antagandena testas oftast genom att titta på modellens *residualer* -
+# skillnaden mellan det faktiska värdet och det skattade värdet. För en skattad modell kan man ta upp
+# residualerna med `residuals()` och de skattade värdena med `fitted()`. Vi kan lägga till residualer
 # och skattningar till datan med ett `mutate()`-steg.
 #
 
@@ -537,7 +537,7 @@ oats <- oats %>%
          Skattade = fitted(mod_two_fact))
 
 #
-# NormalfÃ¶rdelning kan undersÃ¶kas grafiskt med ett histogram eller en QQ-graf.
+# Normalfördelning kan undersökas grafiskt med ett histogram eller en QQ-graf.
 #
 
 g_hist <- ggplot(oats, aes(Residualer)) + geom_histogram(bins = 20)
@@ -547,11 +547,11 @@ library(patchwork)
 g_hist + g_qq
 
 #
-# Punkterna avviker nÃ¥got frÃ¥n normalfÃ¶rdelningen i svansarna, men det Ã¤r fÃ¶rstÃ¥s alltid en
-# bedÃ¶mningsfrÃ¥ga.
+# Punkterna avviker något från normalfördelningen i svansarna, men det är förstås alltid en
+# bedömningsfråga.
 #
-# Lika varians undersÃ¶ks ofta med ett spridningsdiagram med de skattade vÃ¤rdena pÃ¥ x-axeln och
-# residualerna pÃ¥ y-axeln.
+# Lika varians undersöks ofta med ett spridningsdiagram med de skattade värdena på x-axeln och
+# residualerna på y-axeln.
 #
 
 ggplot(oats, aes(x = Skattade, y = Residualer)) +
@@ -559,12 +559,12 @@ ggplot(oats, aes(x = Skattade, y = Residualer)) +
   geom_hline(yintercept = 0, alpha = 0.3)
 
 #
-# Om datan Ã¤r i linje med antaganden ska diagrammet se ut som slumpmÃ¤ssigt placerade punkter med
-# ungefÃ¤r lika stor spridning kring noll-linjen fÃ¶r samtliga nivÃ¥er pÃ¥ x-axeln. FÃ¶r det hÃ¤r exemplet
+# Om datan är i linje med antaganden ska diagrammet se ut som slumpmässigt placerade punkter med
+# ungefär lika stor spridning kring noll-linjen för samtliga nivåer på x-axeln. För det här exemplet
 # ser det okej ut.
 #
 # Uppgift 7.16. (Bakterieimport)
-# Fliken *Bakterier* i filen *Uppgiftsdata.xlsx* innehÃ¥ller data om tillvÃ¤xt hos grÃ¤s efter
+# Fliken *Bakterier* i filen *Uppgiftsdata.xlsx* innehåller data om tillväxt hos gräs efter
 # inokulering av bakterier. Ladda ner filen och importera datan genom att fylla i koden nedan.
 #
 
@@ -573,8 +573,8 @@ dat_bact <- read_excel("___", sheet = "Bakterier")
 # :::
 #
 # Uppgift 7.17. (Bakterieimport)
-# Illustrera datan med en lÃ¤mplig graf, till exempel ett spridningsdiagram med `Inoculation` pÃ¥
-# x-axeln, `Dry weight` pÃ¥ y-axeln, smÃ¥fÃ¶nster efter `Cultivar` och fÃ¤rg efter `Block`.
+# Illustrera datan med en lämplig graf, till exempel ett spridningsdiagram med `Inoculation` på
+# x-axeln, `Dry weight` på y-axeln, småfönster efter `Cultivar` och färg efter `Block`.
 #
 
 ggplot(dat_bact, aes(x = ___, y = `___`, color = Block)) +
@@ -582,9 +582,9 @@ ggplot(dat_bact, aes(x = ___, y = `___`, color = Block)) +
   facet_wrap(~ ___)
 
 #
-# Hur blev fÃ¤rgerna fÃ¶r blocket? Om de inte blev distinkta fÃ¤rger kan variabeln `Block` ha blivit
-# inlÃ¤st som numerisk. Transformera variabeln med `as.character()` och gÃ¶r om grafen. Ã„ndras
-# fÃ¤rgerna?
+# Hur blev färgerna för blocket? Om de inte blev distinkta färger kan variabeln `Block` ha blivit
+# inläst som numerisk. Transformera variabeln med `as.character()` och gör om grafen. Ändras
+# färgerna?
 #
 
 dat_bact <- dat_bact %>% 
@@ -593,8 +593,8 @@ dat_bact <- dat_bact %>%
 # :::
 #
 # Uppgift 7.18. (Bakteriemodell)
-# Bakteriedatan har tvÃ¥ faktorer och en blockfaktor. Skatta en anova-modell med interaktion och
-# block genom att fylla i stycket nedan. Ta fram anovatabell och dra en slutsats frÃ¥n F-testen.
+# Bakteriedatan har två faktorer och en blockfaktor. Skatta en anova-modell med interaktion och
+# block genom att fylla i stycket nedan. Ta fram anovatabell och dra en slutsats från F-testen.
 # Ligger slutsatsen i linje med grafen?
 #
 
@@ -603,9 +603,9 @@ Anova(mod)
 
 # :::
 #
-# Uppgift 7.19. (BakteriejÃ¤mfÃ¶relser)
-# AnvÃ¤nd `emmeans()` fÃ¶r parvisa jÃ¤mfÃ¶relser mellan inokuleringsmetoder. Vilka par Ã¤r signifikant
-# Ã¥tskilda?
+# Uppgift 7.19. (Bakteriejämförelser)
+# Använd `emmeans()` för parvisa jämförelser mellan inokuleringsmetoder. Vilka par är signifikant
+# åtskilda?
 #
 
 emmeans(mod, pairwise ~ ___)
@@ -613,7 +613,7 @@ emmeans(mod, pairwise ~ ___)
 # :::
 #
 # Uppgift 7.20. (Bakterieresidualer)
-# Vi anvÃ¤nder den skattade modellen fÃ¶r att ta fram skattade vÃ¤rden och residualer.
+# Vi använder den skattade modellen för att ta fram skattade värden och residualer.
 #
 
 dat_bact <- dat_bact %>% 
@@ -621,17 +621,17 @@ dat_bact <- dat_bact %>%
          Skattade = fitted(mod))
 
 #
-# AnvÃ¤nd exemplet pÃ¥ residualtester ovan fÃ¶r att undersÃ¶ka antagandet om normalfÃ¶rdelade
+# Använd exemplet på residualtester ovan för att undersöka antagandet om normalfördelade
 # residualer.
 # :::
 #
-# ## Bonus. Statistik fÃ¶r ekologi
+# ## Bonus. Statistik för ekologi
 #
-# HÃ¤r tittar vi pÃ¥ nÃ¥gra statistiska metoder som Ã¤r vanliga inom ekologin, men gÃ¥r bortom
-# materialet pÃ¥ en statistisk grundkurs. Vi bÃ¶rjar med datastruktur och visualisering fÃ¶r
-# populationsdata, fÃ¶r att sedan titta pÃ¥ diversitetsmÃ¥tt, principalkomponentanalys (PCA) och
-# hierarkisk klustering. Det vanligaste paketet fÃ¶r ekologi Ã¤r `vegan`, sÃ¥ vi kan bÃ¶rja med att
-# installera och ladda det. Vi kommer ocksÃ¥ anvÃ¤nda `factoextra` fÃ¶r en graf.
+# Här tittar vi på några statistiska metoder som är vanliga inom ekologin, men går bortom
+# materialet på en statistisk grundkurs. Vi börjar med datastruktur och visualisering för
+# populationsdata, för att sedan titta på diversitetsmått, principalkomponentanalys (PCA) och
+# hierarkisk klustering. Det vanligaste paketet för ekologi är `vegan`, så vi kan börja med att
+# installera och ladda det. Vi kommer också använda `factoextra` för en graf.
 #
 
 # install.packages("vegan")
@@ -641,11 +641,11 @@ library(vegan)
 library(factoextra)
 
 #
-# Data fÃ¶r ekologiska populationer fÃ¶r flera platser eller tillfÃ¤llen ordnas oftast i en tabell med
-# plats som rad och arter som kolumner. VÃ¤rdena i tabellen anger antingen antalet observerade
-# individer eller ett binÃ¤rt utfall (1 fÃ¶r fÃ¶rekomst, 0 fÃ¶r ingen fÃ¶rekomst). Exempeldatan `dune`,
-# som kan laddas med funktionen `data()`, ger ett exempel. FÃ¶r att illustrera en typisk
-# jÃ¤mfÃ¶relsestudie skapar vi en kolumn fÃ¶r platstyp och lÃ¤gger till ett plats-id.
+# Data för ekologiska populationer för flera platser eller tillfällen ordnas oftast i en tabell med
+# plats som rad och arter som kolumner. Värdena i tabellen anger antingen antalet observerade
+# individer eller ett binärt utfall (1 för förekomst, 0 för ingen förekomst). Exempeldatan `dune`,
+# som kan laddas med funktionen `data()`, ger ett exempel. För att illustrera en typisk
+# jämförelsestudie skapar vi en kolumn för platstyp och lägger till ett plats-id.
 #
 
 data(dune)
@@ -654,9 +654,9 @@ dune <- dune %>%
          Type = rep(c("A", "B"), each = 10))
 
 #
-# Vi kan illustrera data genom att pivotera till lÃ¥ngt format och gÃ¶ra en graf med `ggplot()`. En
-# heatmap eller ett spridningsdiagram med storlek fÃ¶r antal observationer kan vara lÃ¤mpliga grafer.
-# Tolkning krÃ¤ver fÃ¶rstÃ¥s kod artkÃ¤nnedom och beror pÃ¥ den vetenskapliga frÃ¥gan.
+# Vi kan illustrera data genom att pivotera till långt format och göra en graf med `ggplot()`. En
+# heatmap eller ett spridningsdiagram med storlek för antal observationer kan vara lämpliga grafer.
+# Tolkning kräver förstås kod artkännedom och beror på den vetenskapliga frågan.
 #
 
 dune_long <- dune %>%
@@ -671,11 +671,11 @@ ggplot(dune_long %>% filter(Abundance > 0), aes(Site, Species, size = Abundance,
   geom_point()
 
 #
-# Ytterligare alternativ kan vara upprepade lÃ¥dagram eller staplar med smÃ¥fÃ¶nster per art.
+# Ytterligare alternativ kan vara upprepade lådagram eller staplar med småfönster per art.
 #
 # Uppgift 7.21. (Populationsgrafer)
-# Vad mÃ¥ste lÃ¤ggas till i stycket nedan fÃ¶r gÃ¶ra ett lÃ¥dagram (med art pÃ¥ y-axeln och abundans pÃ¥
-# x-axeln) och ett stapeldiagram (med platstyp pÃ¥ x-axeln och abundans pÃ¥ y-axeln)?
+# Vad måste läggas till i stycket nedan för göra ett lådagram (med art på y-axeln och abundans på
+# x-axeln) och ett stapeldiagram (med platstyp på x-axeln och abundans på y-axeln)?
 #
 
 dune_long
@@ -688,10 +688,10 @@ ggplot(dune_long, aes(x = ___, y = ___, fill = Type)) +
 
 # :::
 #
-# Ekologiska populationer kan analyseras genom *heirarkisk klustring* - metoder dÃ¤r platser (rader)
-# eller arter (kolumner) sorteras efter hur lika de Ã¤r. FÃ¶rst berÃ¤knas ett avstÃ¥nd mellan samtliga
-# enheter (platser eller arter) och dÃ¤refter sker klustringen genom att slÃ¥ ihop enheter som ligger
-# *nÃ¤ra* varandra. Resultatet illustreras med ett trÃ¤ddiagram.
+# Ekologiska populationer kan analyseras genom *heirarkisk klustring* - metoder där platser (rader)
+# eller arter (kolumner) sorteras efter hur lika de är. Först beräknas ett avstånd mellan samtliga
+# enheter (platser eller arter) och därefter sker klustringen genom att slå ihop enheter som ligger
+# *nära* varandra. Resultatet illustreras med ett träddiagram.
 #
 
 dune_data <- dune %>% select(-Site, -Type)
@@ -701,15 +701,15 @@ plot(hc, hang = -1, labels = dune$Type,
      axes = F, xlab = "", ylab = "", ann = F)
 
 #
-# Uppgift 7.22. (AvstÃ¥ndsmÃ¥tt)
-# Ta upp hjÃ¤lpsidan till distansfunktionen med `?dist`. Under `method` finns flera mÃ¶jliga
-# avstÃ¥ndsmÃ¥tt. Vad mÃ¥ste Ã¤ndras i kodstycket ovan fÃ¶r att ange ett Manhattan-avstÃ¥nd? Har avstÃ¥ndet
-# nÃ¥gon betydande effekt pÃ¥ trÃ¤ddiagrammet?
+# Uppgift 7.22. (Avståndsmått)
+# Ta upp hjälpsidan till distansfunktionen med `?dist`. Under `method` finns flera möjliga
+# avståndsmått. Vad måste ändras i kodstycket ovan för att ange ett Manhattan-avstånd? Har avståndet
+# någon betydande effekt på träddiagrammet?
 # :::
 #
-# FÃ¶r att gÃ¶ra en klustring av arter kan man *transponera* data sÃ¥ att rader och kolumner byter
-# plats med varandra. HÃ¤r kommer artnamn automatisk med eftersom raderna i datan har namn. Det Ã¤r
-# inte alltid fallet, sÃ¥ det kan vara nÃ¶dvÃ¤ndigt att sÃ¤tta etiketter med argumentet `labels` i
+# För att göra en klustring av arter kan man *transponera* data så att rader och kolumner byter
+# plats med varandra. Här kommer artnamn automatisk med eftersom raderna i datan har namn. Det är
+# inte alltid fallet, så det kan vara nödvändigt att sätta etiketter med argumentet `labels` i
 # `plot()`.
 #
 
@@ -720,18 +720,18 @@ plot(hc, hang = -1,
      axes = F, xlab = "", ylab = "", ann = F)
 
 #
-# TrÃ¤ddiagrammet tolkas sÃ¥ att enheter vars koppling ligger lÃ¥gt Ã¤r mer lika varandra - arterna
-# fÃ¶rekommer ofta pÃ¥ samma plats.
+# Träddiagrammet tolkas så att enheter vars koppling ligger lågt är mer lika varandra - arterna
+# förekommer ofta på samma plats.
 #
-# En annan vanlig metod fÃ¶r *multivariat* data, vilket populationsdata Ã¤r ett exempel pÃ¥, Ã¤r
-# *principalkomponentsanalys* (PCA, Principal Component Analysis). En PCA Ã¤r ett fÃ¶rsÃ¶k att
+# En annan vanlig metod för *multivariat* data, vilket populationsdata är ett exempel på, är
+# *principalkomponentsanalys* (PCA, Principal Component Analysis). En PCA är ett försök att
 # sammanfatta den ursprungliga datans 30 variabler (en per art) med ett mindre antal variabler. De
-# nya variablerna - *komponenterna* - skapas genom att vÃ¤ga och addera de ursprungliga variablerna pÃ¥
-# ett sÃ¤tt som fÃ¶rklarar sÃ¥ mycket som mÃ¶jligt av variationen med minsta mÃ¶jliga antal variabler.
-# Resultatet illustreras vanligen med en *biplot* - ett spridningsdiagram som placerar ut bÃ¥de
+# nya variablerna - *komponenterna* - skapas genom att väga och addera de ursprungliga variablerna på
+# ett sätt som förklarar så mycket som möjligt av variationen med minsta möjliga antal variabler.
+# Resultatet illustreras vanligen med en *biplot* - ett spridningsdiagram som placerar ut både
 # platser och arter.
 #
-# I R kan en PCA gÃ¶ras med `prcomp()` och en biplot kan gÃ¶ras med `fviz_pca_biplot()` frÃ¥n
+# I R kan en PCA göras med `prcomp()` och en biplot kan göras med `fviz_pca_biplot()` från
 # `factoextra`.
 #
 
@@ -741,33 +741,33 @@ fviz_pca_biplot(pca, geom.ind = "point", habillage = dune$Type, labelsize = 3)
 
 #
 # Platserna illustreras med punkter och arterna med pilar. Pilar i samma riktning motsvarar arter
-# som Ã¤r lika (de finns pÃ¥ samma platser), nÃ¤rliggande punkter motsvarar lika platser (de har samma
-# arter), och punkter i samma riktning som en pil har hÃ¶ga vÃ¤rden fÃ¶r den arten.
+# som är lika (de finns på samma platser), närliggande punkter motsvarar lika platser (de har samma
+# arter), och punkter i samma riktning som en pil har höga värden för den arten.
 #
 # Uppgift 7.23. (Skalning i en PCA)
-# En PCA kan gÃ¶ras med och utan att skala variablerna. Om variablerna skalas fÃ¥r en variabel som
+# En PCA kan göras med och utan att skala variablerna. Om variablerna skalas får en variabel som
 # varierar mycket samma vikt som en variabel som varierar lite. Det kan vara bra om man har variabler
-# som Ã¤r mÃ¤tta pÃ¥ olika sÃ¤tt, till exempel om en variabel Ã¤r i meter och en Ã¤r i centimeter. GÃ¶r
-# lÃ¤mplig Ã¤ndring i kodstycket ovan fÃ¶r att skala variablerna i `prcomp()`. Har det nÃ¥gon effekt pÃ¥
+# som är mätta på olika sätt, till exempel om en variabel är i meter och en är i centimeter. Gör
+# lämplig ändring i kodstycket ovan för att skala variablerna i `prcomp()`. Har det någon effekt på
 # grafen?
 # :::
 #
-# Den sista ansatsen vi ska titta pÃ¥ Ã¤r att sammanfatta en population i ett enskilt tal - ett
-# diversitetsindex. Genom att berÃ¤kna ett index kan man reducera datan till en observation pÃ¥ plats.
-# Man kan dÃ¤rifrÃ¥n tillÃ¤mpa de metoder vi sett i Ã¶vriga delar av kursen (t-test och variansanalys).
-# Det finns en stor mÃ¤ngd olika index. Det vanligaste Ã¤n Shannon-Weaver indexet (eller entropi),
-# vilket berÃ¤knas genom att ta andelen per art, multiplicera med logaritmen av andelen, summera Ã¶ver
+# Den sista ansatsen vi ska titta på är att sammanfatta en population i ett enskilt tal - ett
+# diversitetsindex. Genom att beräkna ett index kan man reducera datan till en observation på plats.
+# Man kan därifrån tillämpa de metoder vi sett i övriga delar av kursen (t-test och variansanalys).
+# Det finns en stor mängd olika index. Det vanligaste än Shannon-Weaver indexet (eller entropi),
+# vilket beräknas genom att ta andelen per art, multiplicera med logaritmen av andelen, summera över
 # arter, och multiplicera med minus ett. Om man har tre arter med andelarna 0.3, 0.5 och 0.2 ges
-# Shannon-Weaver alltsÃ¥ av
+# Shannon-Weaver alltså av
 #
 
 -(0.3 * log(0.3) + 0.5 * log(0.5) + 0.2 * log(0.2))
 
 #
-# Indexet Ã¶kar om det finns mÃ¥nga arter och om andelen per art Ã¤r samma. En population med *en*
-# dominant art kommer alltsÃ¥ ha ett lÃ¥gt index.
+# Indexet ökar om det finns många arter och om andelen per art är samma. En population med *en*
+# dominant art kommer alltså ha ett lågt index.
 #
-# FÃ¶r en tabell med data kan index berÃ¤knas med `diversity()`.
+# För en tabell med data kan index beräknas med `diversity()`.
 #
 
 diver <- diversity(dune_data, index = "shannon")
@@ -784,14 +784,14 @@ Anova(mod)
 emmeans(mod, ~ Type)
 
 #
-# HÃ¤r finns en signifikant skillnad med platstyper.
+# Här finns en signifikant skillnad med platstyper.
 #
 # Uppgift 7.24. (Diversitetsindex)
-# Ta upp hjÃ¤lpsidan till funktionen `diversity()`. Hur anger man att funktionen ska ge Simpsons
+# Ta upp hjälpsidan till funktionen `diversity()`. Hur anger man att funktionen ska ge Simpsons
 # index?
 # :::
 #
-# Uppgift 7.25. (Test pÃ¥ nytt index)
-# GÃ¶r om analysen pÃ¥ diversitet (anovamodellen och F-testet) med Simpsons index istÃ¤llet fÃ¶r
-# Shannon-Weaver. PÃ¥verkar valet av diversitetsindex utfallet av testet?
+# Uppgift 7.25. (Test på nytt index)
+# Gör om analysen på diversitet (anovamodellen och F-testet) med Simpsons index istället för
+# Shannon-Weaver. Påverkar valet av diversitetsindex utfallet av testet?
 # :::

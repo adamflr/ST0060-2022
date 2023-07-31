@@ -1,36 +1,36 @@
-# # Ett stickprov av icke-normalfördelad data
+# # Ett stickprov av icke-normalfÃ¶rdelad data
 #
-# Datorövning 5 handlar om hypotestest och konfidensintervall för ett stickprov av
-# icke-normalfördelad data. Efter övningen ska vi kunna
+# DatorÃ¶vning 5 handlar om hypotestest och konfidensintervall fÃ¶r ett stickprov av
+# icke-normalfÃ¶rdelad data. Efter Ã¶vningen ska vi kunna
 #
-# - genomföra och tolka ett z-test för proportioner,
+# - genomfÃ¶ra och tolka ett z-test fÃ¶r proportioner,
 #
-# - genomföra och tolka ett chi-två-test för nominal data
+# - genomfÃ¶ra och tolka ett chi-tvÃ¥-test fÃ¶r nominal data
 #
-# - beräkna och tolka ett konfidensintervall för proportioner,
+# - berÃ¤kna och tolka ett konfidensintervall fÃ¶r proportioner,
 #
-# - använda simulerad data för att förstå testens egenskaper.
+# - anvÃ¤nda simulerad data fÃ¶r att fÃ¶rstÃ¥ testens egenskaper.
 #
-# Om det finns tid för en bonussektion kommer vi också titta på interaktiva kartor med `leaflet`.
+# Om det finns tid fÃ¶r en bonussektion kommer vi ocksÃ¥ titta pÃ¥ interaktiva kartor med `leaflet`.
 #
-# ## Repetition av datorövning 4
+# ## Repetition av datorÃ¶vning 4
 #
-# När man startar en ny R-session bör man ladda de paket man vet kommer behövas med `library()`. Om
-# paket inte finns installerade måste man först köra `install.packages()`.
+# NÃ¤r man startar en ny R-session bÃ¶r man ladda de paket man vet kommer behÃ¶vas med `library()`. Om
+# paket inte finns installerade mÃ¥ste man fÃ¶rst kÃ¶ra `install.packages()`.
 #
 
 # install.packages("tidyverse")
 library(tidyverse)
 
 #
-# I datorövning 4 tittade vi på analys av ett stickprov av normalfördelad data. Det underliggande
-# upplägget är att vi vill säga något om en population genom att titta på ett stickprov. Ett *t-test*
-# kan användas för att testa en given *nollhypotes*. Ett konfidensintervall ringar in populationens
-# medelvärde med en viss konfidensgrad - oftast 95 procent. Ett normalfördelningsantagande kan
-# undersökas med histogram eller QQ-grafer.
+# I datorÃ¶vning 4 tittade vi pÃ¥ analys av ett stickprov av normalfÃ¶rdelad data. Det underliggande
+# upplÃ¤gget Ã¤r att vi vill sÃ¤ga nÃ¥got om en population genom att titta pÃ¥ ett stickprov. Ett *t-test*
+# kan anvÃ¤ndas fÃ¶r att testa en given *nollhypotes*. Ett konfidensintervall ringar in populationens
+# medelvÃ¤rde med en viss konfidensgrad - oftast 95 procent. Ett normalfÃ¶rdelningsantagande kan
+# undersÃ¶kas med histogram eller QQ-grafer.
 #
-# Ta som exempel följande data på jord-pH och låt oss anta att det är relevant att testa om
-# populationens medelvärde är 7.
+# Ta som exempel fÃ¶ljande data pÃ¥ jord-pH och lÃ¥t oss anta att det Ã¤r relevant att testa om
+# populationens medelvÃ¤rde Ã¤r 7.
 #
 
 dat_pH <- data.frame(pH = c(6.3, 6.55, 6.75, 6.4, 7.25, 6.65, 6.8, 7.3, 7.15, 6.7))
@@ -48,18 +48,18 @@ ggplot(dat_pH, aes(pH, 0)) +
 # - H0: mu lika med 7
 # - H1: mu ej lika med 7
 #
-# Testet kan genomföras med funktionen `t.test()`.
+# Testet kan genomfÃ¶ras med funktionen `t.test()`.
 #
 
 t.test(dat_pH$pH, mu = 7)
 
 #
-# Ett p-värde över 0.05 ger att vi inte förkastar nollhypotesen - den observerade skillnaden mot 7
-# är inte statistiskt signifikant. Konfidensintervallet ger att populationens medelvärde ligger
+# Ett p-vÃ¤rde Ã¶ver 0.05 ger att vi inte fÃ¶rkastar nollhypotesen - den observerade skillnaden mot 7
+# Ã¤r inte statistiskt signifikant. Konfidensintervallet ger att populationens medelvÃ¤rde ligger
 # mellan 6.54 och 7.03 med 95 procents konfidens.
 #
-# En QQ-graf kan visa om det finns några avvikelser från normalantagandet. Med små datamängder är
-# det oftast svårt att se några tydliga tecken på icke-normalitet.
+# En QQ-graf kan visa om det finns nÃ¥gra avvikelser frÃ¥n normalantagandet. Med smÃ¥ datamÃ¤ngder Ã¤r
+# det oftast svÃ¥rt att se nÃ¥gra tydliga tecken pÃ¥ icke-normalitet.
 #
 
 ggplot(dat_pH, aes(sample = pH)) +
@@ -67,20 +67,20 @@ ggplot(dat_pH, aes(sample = pH)) +
   geom_qq_line()
 
 #
-# ## Proportioner från binär data
+# ## Proportioner frÃ¥n binÃ¤r data
 #
-# Binär data är data där en observation har ett av två utfall, vilka kan kodas som noll och ett.
-# Man talar ibland om utfallet ett som ett *positivt* utfall. Binär data kan sammanfattas med en
-# proportion - antalet positiva utfall delat på det totala antalet upprepningar. En proportion kan
-# testas med ett z-test för proportioner (eller *relativ frekvens*). Testet följer stegen för
-# hypotestest (Hypoteser - Testvärde - Testfördelning - P-värde (eller jämförelse med kritiskt värde)
-# - Slutsats). Testvärdet beräknas som differensen mellan den skattade proportionen minus
-# nollhypotesen värde delat på medelfelet, där medelfelet ges av roten ur nollhypotesens värde gånger
-# 1 minus nollhypotesens värde delat på antalet observationer. Testfördelningen är en standardiserad
-# normalfördelning.
+# BinÃ¤r data Ã¤r data dÃ¤r en observation har ett av tvÃ¥ utfall, vilka kan kodas som noll och ett.
+# Man talar ibland om utfallet ett som ett *positivt* utfall. BinÃ¤r data kan sammanfattas med en
+# proportion - antalet positiva utfall delat pÃ¥ det totala antalet upprepningar. En proportion kan
+# testas med ett z-test fÃ¶r proportioner (eller *relativ frekvens*). Testet fÃ¶ljer stegen fÃ¶r
+# hypotestest (Hypoteser - TestvÃ¤rde - TestfÃ¶rdelning - P-vÃ¤rde (eller jÃ¤mfÃ¶relse med kritiskt vÃ¤rde)
+# - Slutsats). TestvÃ¤rdet berÃ¤knas som differensen mellan den skattade proportionen minus
+# nollhypotesen vÃ¤rde delat pÃ¥ medelfelet, dÃ¤r medelfelet ges av roten ur nollhypotesens vÃ¤rde gÃ¥nger
+# 1 minus nollhypotesens vÃ¤rde delat pÃ¥ antalet observationer. TestfÃ¶rdelningen Ã¤r en standardiserad
+# normalfÃ¶rdelning.
 #
-# Låt oss importera lite exempeldata och beräkna ett exempel. Följande rad importerar matchresultat
-# i fotbollsallsvenskan för damer 2000-2020.
+# LÃ¥t oss importera lite exempeldata och berÃ¤kna ett exempel. FÃ¶ljande rad importerar matchresultat
+# i fotbollsallsvenskan fÃ¶r damer 2000-2020.
 #
 
 library(tidyverse)
@@ -90,8 +90,8 @@ ggplot(dat_alls, aes(hemmamal, bortamal)) +
   geom_jitter(size = 0.1)
 
 #
-# Uppgift 5.1. (En interaktiv målgraf)
-# Kör stycket nedan för en interaktiv målgraf. Vilken match gav det högsta antalet insläppta mål på
+# Uppgift 5.1. (En interaktiv mÃ¥lgraf)
+# KÃ¶r stycket nedan fÃ¶r en interaktiv mÃ¥lgraf. Vilken match gav det hÃ¶gsta antalet inslÃ¤ppta mÃ¥l pÃ¥
 # hemmaplan?
 
 # install.packages(plotly)
@@ -103,9 +103,9 @@ ggplotly(g)
 
 # :::
 #
-# Gammal bollkunskap säger att var tredje match är en bortavinst. Vi kan testa det med ett z-test
-# för proportioner. För att ta fram antalet bortasegrar och totalt antal matcher använder vi
-# `count()` på kolumnen `resultat`. Man kan också använda funktionen `table()` för ett liknande
+# Gammal bollkunskap sÃ¤ger att var tredje match Ã¤r en bortavinst. Vi kan testa det med ett z-test
+# fÃ¶r proportioner. FÃ¶r att ta fram antalet bortasegrar och totalt antal matcher anvÃ¤nder vi
+# `count()` pÃ¥ kolumnen `resultat`. Man kan ocksÃ¥ anvÃ¤nda funktionen `table()` fÃ¶r ett liknande
 # resultat.
 #
 
@@ -113,8 +113,8 @@ dat_alls %>% count(resultat)
 table(dat_alls$resultat)
 
 #
-# Datan har 947 bortasegrar av totalt 947 + 1803 matcher. Vår skattade proportion `p` och totala
-# antal `n` är alltså
+# Datan har 947 bortasegrar av totalt 947 + 1803 matcher. VÃ¥r skattade proportion `p` och totala
+# antal `n` Ã¤r alltsÃ¥
 #
 
 n <- 947 + 1803
@@ -124,13 +124,13 @@ p_est
 n
 
 #
-# För att genomföra ett z-test sätter vi upp hypoteser om proportionen bortasegrar.
+# FÃ¶r att genomfÃ¶ra ett z-test sÃ¤tter vi upp hypoteser om proportionen bortasegrar.
 #
 # Nollhypotes H0: p lika med 0.33
 #
 # Alternativhypotes H1: p ej lika med 0.33
 #
-# Testvärdet i ett z-test kan beräknas med testfunktionen.
+# TestvÃ¤rdet i ett z-test kan berÃ¤knas med testfunktionen.
 #
 
 p0 <- 0.33
@@ -138,8 +138,8 @@ z_value <- (p_est - p0) / sqrt(p0 * (1 - p0) / n)
 z_value
 
 #
-# Därefter kan p-värdet räknas ut som arean under en standardiserad normalfördelning bortom
-# z-värdet. Eftersom vi har en tvåsidig mothypotes adderas de två svansarna.
+# DÃ¤refter kan p-vÃ¤rdet rÃ¤knas ut som arean under en standardiserad normalfÃ¶rdelning bortom
+# z-vÃ¤rdet. Eftersom vi har en tvÃ¥sidig mothypotes adderas de tvÃ¥ svansarna.
 #
 
 dat_norm <- data.frame(x = seq(-4, 4, 0.1)) %>% 
@@ -151,57 +151,57 @@ ggplot(dat_norm) +
   geom_ribbon(aes(x = x, ymin = 0, ymax = p), data = dat_norm %>% filter(x < -abs(z_value)), fill = "salmon")
 
 #
-# Areans yta kan tas fram med normalfördelningens fördelningsfunktion `pnorm()`.
+# Areans yta kan tas fram med normalfÃ¶rdelningens fÃ¶rdelningsfunktion `pnorm()`.
 #
 
 2 * pnorm(-z_value)
 
 #
-# Testets p-värde är alltså ungefär 11 procent. Om vi upprepar försöket (vilket i det här fallet
-# skulle innebära att spela om 21 säsonger av allsvenskan) skulle vi i 11 procent av upprepningarna
-# få en lika stor eller större avvikelse från 0.33. Vår observation är alltså inte ett orimligt
-# utfall om den faktiska sannolikheten för bortaseger är 0.33 och vi kan inte förkasta nollhypotesen
-# på femprocentsnivån.
+# Testets p-vÃ¤rde Ã¤r alltsÃ¥ ungefÃ¤r 11 procent. Om vi upprepar fÃ¶rsÃ¶ket (vilket i det hÃ¤r fallet
+# skulle innebÃ¤ra att spela om 21 sÃ¤songer av allsvenskan) skulle vi i 11 procent av upprepningarna
+# fÃ¥ en lika stor eller stÃ¶rre avvikelse frÃ¥n 0.33. VÃ¥r observation Ã¤r alltsÃ¥ inte ett orimligt
+# utfall om den faktiska sannolikheten fÃ¶r bortaseger Ã¤r 0.33 och vi kan inte fÃ¶rkasta nollhypotesen
+# pÃ¥ femprocentsnivÃ¥n.
 #
-# Om man löste uppgiften för hand skulle man istället för att beräkna p-värdet jämföra z-värdet med
-# ett kritisk värde ur en tabell. Det kritiska värdet för fem-procentig signifikans är 1.96. Vi kan
-# också ta fram det genom `qnorm(0.975)`.
+# Om man lÃ¶ste uppgiften fÃ¶r hand skulle man istÃ¤llet fÃ¶r att berÃ¤kna p-vÃ¤rdet jÃ¤mfÃ¶ra z-vÃ¤rdet med
+# ett kritisk vÃ¤rde ur en tabell. Det kritiska vÃ¤rdet fÃ¶r fem-procentig signifikans Ã¤r 1.96. Vi kan
+# ocksÃ¥ ta fram det genom `qnorm(0.975)`.
 #
-# I R finns en funktion för test av proportioner `prop.test()`. Funktionens argument ges av
-# *antalet* positiva utfall och det totala antalet observationer. Nollhypotesens värde anges med ett
-# argument `p`. Det finns också en möjlighet att förbättra testet med en så kallad
-# kontinuitetskorrektion. Då det inte ingår i kursen måste vi sätta `correct = F` för att få samma
-# utfall som handräkningen. Vi kan genomföra testet med
+# I R finns en funktion fÃ¶r test av proportioner `prop.test()`. Funktionens argument ges av
+# *antalet* positiva utfall och det totala antalet observationer. Nollhypotesens vÃ¤rde anges med ett
+# argument `p`. Det finns ocksÃ¥ en mÃ¶jlighet att fÃ¶rbÃ¤ttra testet med en sÃ¥ kallad
+# kontinuitetskorrektion. DÃ¥ det inte ingÃ¥r i kursen mÃ¥ste vi sÃ¤tta `correct = F` fÃ¶r att fÃ¥ samma
+# utfall som handrÃ¤kningen. Vi kan genomfÃ¶ra testet med
 #
 
 prop.test(x = 947, n = 2750, p = 0.33, correct = F)
 
 #
-# Den stegvisa beräkningen gav samma utfall som funktionen (`p-value = 0.01092`). Funktionen ger
-# inte z-värdet utan ett chi-två-värde (2.5661). Här är det värdet lika med z-värdet i kvadrat.
+# Den stegvisa berÃ¤kningen gav samma utfall som funktionen (`p-value = 0.01092`). Funktionen ger
+# inte z-vÃ¤rdet utan ett chi-tvÃ¥-vÃ¤rde (2.5661). HÃ¤r Ã¤r det vÃ¤rdet lika med z-vÃ¤rdet i kvadrat.
 #
 
 z_value^2
 
 #
 # Uppgift 5.2. (Ensidigt test)
-# Titta på hjälpsidan med `?prop.test`. Hur genomför man ett ensidigt test? Gör lämpligt tillägg
-# för att testa om andelen bortasegrar är större än 0.33.
+# Titta pÃ¥ hjÃ¤lpsidan med `?prop.test`. Hur genomfÃ¶r man ett ensidigt test? GÃ¶r lÃ¤mpligt tillÃ¤gg
+# fÃ¶r att testa om andelen bortasegrar Ã¤r stÃ¶rre Ã¤n 0.33.
 # :::
 #
-# Uppgift 5.3. (Test för proportionen oavgjorda)
-# Samma gamla bollkunskap säger att 20 procent av matcher blir oavgjorda. I datan är 518 av 2750
-# matcher oavgjorda. Ställ upp hypoteser och fyll i koden nedan för att testa om bollkunskapen
-# stämmer.
+# Uppgift 5.3. (Test fÃ¶r proportionen oavgjorda)
+# Samma gamla bollkunskap sÃ¤ger att 20 procent av matcher blir oavgjorda. I datan Ã¤r 518 av 2750
+# matcher oavgjorda. StÃ¤ll upp hypoteser och fyll i koden nedan fÃ¶r att testa om bollkunskapen
+# stÃ¤mmer.
 #
 
 prop.test(x = ___, n = ___, p = ___, correct = F)
 
 # :::
 #
-# Uppgift 5.4. (Test för proportionen hemmasegrar)
-# Slutligen är då resten av matcherna, 1285 av 2750, hemmasegrar. Bollkunskap säger: *47 procent av
-# alla matcher är hemmasegrar*. Genomför ett z-test för att testa det påstående.
+# Uppgift 5.4. (Test fÃ¶r proportionen hemmasegrar)
+# Slutligen Ã¤r dÃ¥ resten av matcherna, 1285 av 2750, hemmasegrar. Bollkunskap sÃ¤ger: *47 procent av
+# alla matcher Ã¤r hemmasegrar*. GenomfÃ¶r ett z-test fÃ¶r att testa det pÃ¥stÃ¥ende.
 #
 
 prop.test(x = ___, n = ___, p = ___, correct = F)
@@ -209,71 +209,71 @@ prop.test(x = ___, n = ___, p = ___, correct = F)
 # :::
 #
 # Uppgift 5.5. (Population och stickprov)
-# Ett hypotestest bygger på en underliggande tanke med en population (med någon för oss okänd
+# Ett hypotestest bygger pÃ¥ en underliggande tanke med en population (med nÃ¥gon fÃ¶r oss okÃ¤nd
 # proportion positiva utfall) och ett stickprov (i vilket vi kan observera andelen positiva utfall).
-# Testet säger oss om någon hypotes om populationens proportion är rimlig i ljus av den proportion vi
-# observerar. P-värdet ger oss sannolikheten för utfallet under antagandet att hypotesen stämmer. Ett
-# lågt p-värde (en låg sannolikhet för datautfallet givet nollhypotesen) tyder på att nollhypotesen
-# inte är rimlig.
+# Testet sÃ¤ger oss om nÃ¥gon hypotes om populationens proportion Ã¤r rimlig i ljus av den proportion vi
+# observerar. P-vÃ¤rdet ger oss sannolikheten fÃ¶r utfallet under antagandet att hypotesen stÃ¤mmer. Ett
+# lÃ¥gt p-vÃ¤rde (en lÃ¥g sannolikhet fÃ¶r datautfallet givet nollhypotesen) tyder pÃ¥ att nollhypotesen
+# inte Ã¤r rimlig.
 #
-# Det är inte alltid uppenbart vad som egentligen är populationen. I fallet med fotbollsdatan, vad
-# kan ses som populationen? Hur långt skulle man kunna generalisera de slutsatser man kan dra från
+# Det Ã¤r inte alltid uppenbart vad som egentligen Ã¤r populationen. I fallet med fotbollsdatan, vad
+# kan ses som populationen? Hur lÃ¥ngt skulle man kunna generalisera de slutsatser man kan dra frÃ¥n
 # datan?
 # :::
 #
 # Uppgift 5.6. (Guldfiskgenetik)
-# (Fråga från Olsson, *Biometri*) En teori inom genetik förutsäger att tre fjärdedelar i en grupp
-# guldfiskar ska ha genomskinliga fjäll. Observationer ger att nittio av hundra har genomskinliga
-# fjäll. Genomför ett test med `prop.test()` för att se om den faktiska proportionen skiljer sig från
-# 0.75. Lös gärna först uppgiften för hand eller med miniräknare.
+# (FrÃ¥ga frÃ¥n Olsson, *Biometri*) En teori inom genetik fÃ¶rutsÃ¤ger att tre fjÃ¤rdedelar i en grupp
+# guldfiskar ska ha genomskinliga fjÃ¤ll. Observationer ger att nittio av hundra har genomskinliga
+# fjÃ¤ll. GenomfÃ¶r ett test med `prop.test()` fÃ¶r att se om den faktiska proportionen skiljer sig frÃ¥n
+# 0.75. LÃ¶s gÃ¤rna fÃ¶rst uppgiften fÃ¶r hand eller med minirÃ¤knare.
 # :::
 #
 # Uppgift 5.7. (Mer guldfiskgenetik)
-# (Fråga från Olsson, *Biometri*) En konkurrerande teori inom genetik förutsäger att femton
-# sextondelar (proportionen 0.9375) ska ha genomskinliga fjäll. Observationer ger att nittio av
-# hundra har genomskinliga fjäll. Genomför ett test med `prop.test()` för att se om proportionen
-# skiljer sig från 0.9375. Lös gärna först uppgiften för hand eller med miniräknare.
+# (FrÃ¥ga frÃ¥n Olsson, *Biometri*) En konkurrerande teori inom genetik fÃ¶rutsÃ¤ger att femton
+# sextondelar (proportionen 0.9375) ska ha genomskinliga fjÃ¤ll. Observationer ger att nittio av
+# hundra har genomskinliga fjÃ¤ll. GenomfÃ¶r ett test med `prop.test()` fÃ¶r att se om proportionen
+# skiljer sig frÃ¥n 0.9375. LÃ¶s gÃ¤rna fÃ¶rst uppgiften fÃ¶r hand eller med minirÃ¤knare.
 # :::
 #
-# Hypotestestet för proportioner som används här, *z-testet*, bygger på en normalapproximation av
-# en binomialfördelning. Approximation blir bättre när antalet observationer är stort och
-# nollhypotesens värde p0 ligger nära 0.5. En vanlig tumregel för när approximationen är giltig är
-# att n gånger p0 gånger (1 - p0) ska vara större än 10. För fotbollsdatan över oavgjorda matcher ger
-# det 2750 * 0.2 * 0.8 vilket är klart större än 10.
+# Hypotestestet fÃ¶r proportioner som anvÃ¤nds hÃ¤r, *z-testet*, bygger pÃ¥ en normalapproximation av
+# en binomialfÃ¶rdelning. Approximation blir bÃ¤ttre nÃ¤r antalet observationer Ã¤r stort och
+# nollhypotesens vÃ¤rde p0 ligger nÃ¤ra 0.5. En vanlig tumregel fÃ¶r nÃ¤r approximationen Ã¤r giltig Ã¤r
+# att n gÃ¥nger p0 gÃ¥nger (1 - p0) ska vara stÃ¶rre Ã¤n 10. FÃ¶r fotbollsdatan Ã¶ver oavgjorda matcher ger
+# det 2750 * 0.2 * 0.8 vilket Ã¤r klart stÃ¶rre Ã¤n 10.
 #
 # Uppgift 5.8. (Giltig approximation)
-# I det andra guldfiskexemplet är antalet observationer 100 och nollhypotesens värde 0.9375. Är
+# I det andra guldfiskexemplet Ã¤r antalet observationer 100 och nollhypotesens vÃ¤rde 0.9375. Ã„r
 # normalapproximationen *giltig* i det fallet?
 # :::
 #
-# Uppgift 5.9. (Fågelproportioner)
-# I ett naturreservat tror man fördelningen av tre fåglar (tärnmås, fiskmås och fisktärna) är 50,
-# 30 respektive 20 procent. En studie ger antalen 115, 54 respektive 31. Genomför tre z-test för att
-# testa den antagna andelarna. För tärnmås får man till exempel `prop.test(115, 200, p = 0.5, correct
+# Uppgift 5.9. (FÃ¥gelproportioner)
+# I ett naturreservat tror man fÃ¶rdelningen av tre fÃ¥glar (tÃ¤rnmÃ¥s, fiskmÃ¥s och fisktÃ¤rna) Ã¤r 50,
+# 30 respektive 20 procent. En studie ger antalen 115, 54 respektive 31. GenomfÃ¶r tre z-test fÃ¶r att
+# testa den antagna andelarna. FÃ¶r tÃ¤rnmÃ¥s fÃ¥r man till exempel `prop.test(115, 200, p = 0.5, correct
 # = F)`.
 # :::
 #
-# Uppgift 5.10. (Förbestämd signifikans)
-# En intressant egenskap hos proportionstest är att man redan i förväg kan beräkna vilka utfall som
-# ger signifikanta resulat. Säg att man har möjlighet att göra 100 replikat. Ändra i stycket nedan
-# för att hitta det högsta värde på x som ger ett *icke*-signifikant utfall.
+# Uppgift 5.10. (FÃ¶rbestÃ¤md signifikans)
+# En intressant egenskap hos proportionstest Ã¤r att man redan i fÃ¶rvÃ¤g kan berÃ¤kna vilka utfall som
+# ger signifikanta resulat. SÃ¤g att man har mÃ¶jlighet att gÃ¶ra 100 replikat. Ã„ndra i stycket nedan
+# fÃ¶r att hitta det hÃ¶gsta vÃ¤rde pÃ¥ x som ger ett *icke*-signifikant utfall.
 #
 
 prop.test(x, n = 100, p = 0.5, correct = F)
 
 #
-# Det är möjligt att göra liknande beräkningar för ett t-test för normalfördelad data, men då måste
-# man göra antaganden om standardavvikelsens storlek.
+# Det Ã¤r mÃ¶jligt att gÃ¶ra liknande berÃ¤kningar fÃ¶r ett t-test fÃ¶r normalfÃ¶rdelad data, men dÃ¥ mÃ¥ste
+# man gÃ¶ra antaganden om standardavvikelsens storlek.
 # :::
 #
-# ## Konfidensintervall för proportioner
+# ## Konfidensintervall fÃ¶r proportioner
 #
-# Konstruktionen av ett konfidensintervall för en proportion är ganska lik konstruktionen för ett
-# medelvärde. För en skattad proportion p och antal observationer n kan man beräkna p plus/minus ett
-# z-värde från tabell gånger medelfelet, där medelfelet ges av roten ur p * (1 - p) / n. För exemplet
-# med bortasegrar i allsvenskan är p = 0.344 och n = 2750. Tabellvärdet hämtas från en tabell över
-# kvantiler. För ett 95-procentigt konfidensintervall tar vi kvantilen 0.975 (2.5 procent i
-# respektive svans) vilket ger värdet 1.96. Konfidensintervallet ges av
+# Konstruktionen av ett konfidensintervall fÃ¶r en proportion Ã¤r ganska lik konstruktionen fÃ¶r ett
+# medelvÃ¤rde. FÃ¶r en skattad proportion p och antal observationer n kan man berÃ¤kna p plus/minus ett
+# z-vÃ¤rde frÃ¥n tabell gÃ¥nger medelfelet, dÃ¤r medelfelet ges av roten ur p * (1 - p) / n. FÃ¶r exemplet
+# med bortasegrar i allsvenskan Ã¤r p = 0.344 och n = 2750. TabellvÃ¤rdet hÃ¤mtas frÃ¥n en tabell Ã¶ver
+# kvantiler. FÃ¶r ett 95-procentigt konfidensintervall tar vi kvantilen 0.975 (2.5 procent i
+# respektive svans) vilket ger vÃ¤rdet 1.96. Konfidensintervallet ges av
 #
 
 n <- 947 + 1803
@@ -283,10 +283,10 @@ p - 1.96 * sqrt(p * (1 - p) / n)
 p + 1.96 * sqrt(p * (1 - p) / n)
 
 #
-# Notera att 0.33, det värde som var nollhypotesen i det tidigare testet, *ingår* i intervallet. Om
-# man tittar på utskriften från `prop.test()` kan man se ett konfidensintervall. Det intervallet är
-# dock inte beräknat på samma sätt den formel som förekommer på föreläsningarna. För att få matchande
-# utskrift kan vi använda paketet `binom` och funktionen `binom.asymp()`.
+# Notera att 0.33, det vÃ¤rde som var nollhypotesen i det tidigare testet, *ingÃ¥r* i intervallet. Om
+# man tittar pÃ¥ utskriften frÃ¥n `prop.test()` kan man se ett konfidensintervall. Det intervallet Ã¤r
+# dock inte berÃ¤knat pÃ¥ samma sÃ¤tt den formel som fÃ¶rekommer pÃ¥ fÃ¶relÃ¤sningarna. FÃ¶r att fÃ¥ matchande
+# utskrift kan vi anvÃ¤nda paketet `binom` och funktionen `binom.asymp()`.
 #
 
 #install.packages("binom")
@@ -295,7 +295,7 @@ binom.asymp(x = 947, n = 2750)
 
 #
 # Uppgift 5.11. (99-procentigt konfidensintervall)
-# Gör lämplig ändring i koden nedan för att beräkna ett 99-procentigt konfidensintervall för
+# GÃ¶r lÃ¤mplig Ã¤ndring i koden nedan fÃ¶r att berÃ¤kna ett 99-procentigt konfidensintervall fÃ¶r
 # andelen bortasegrar.
 #
 
@@ -304,33 +304,33 @@ binom.asymp(x = 947, n = 2750, conf.level = 0.95)
 # :::
 #
 # Uppgift 5.12. (Perfekta utfall)
-# Vad händer om man försöker räkna ut ett konfidensintervall för ett perfekt utfall - t.ex. om man
-# får 100 av 100 positiva utfall?
+# Vad hÃ¤nder om man fÃ¶rsÃ¶ker rÃ¤kna ut ett konfidensintervall fÃ¶r ett perfekt utfall - t.ex. om man
+# fÃ¥r 100 av 100 positiva utfall?
 # :::
 #
-# Uppgift 5.13. (Konfidensintervall för guldfiskar)
-# Använd funktionen `binom.asymp()` för att ta fram konfidensintervallet för andelen guldfiskar
-# från den tidigare uppgiften. Hur förhåller sig resultatet till nollhypotesernas värden (0.75
-# respektive 0.9375)? Gör motsvarande beräkning med miniräknare.
+# Uppgift 5.13. (Konfidensintervall fÃ¶r guldfiskar)
+# AnvÃ¤nd funktionen `binom.asymp()` fÃ¶r att ta fram konfidensintervallet fÃ¶r andelen guldfiskar
+# frÃ¥n den tidigare uppgiften. Hur fÃ¶rhÃ¥ller sig resultatet till nollhypotesernas vÃ¤rden (0.75
+# respektive 0.9375)? GÃ¶r motsvarande berÃ¤kning med minirÃ¤knare.
 # :::
 #
-# ## Chi-två-test för goodness-of-fit
+# ## Chi-tvÃ¥-test fÃ¶r goodness-of-fit
 #
-# Ett proportionstest kan ses som ett test av en variabel med två möjliga klasser som utfall. Ett
-# *goodness-of-fit*-test utvecklar det till valfritt antal klasser. Testet utförs som ett
-# chi-två-test genom att beräkna ett observerat antal O och ett förväntat antal E för varje klass.
-# Testvärdet ges av att man beräknar (O - E)^2 / E för varje klass och sedan summerar. Testfunktionen
-# är en chi-två-fördelning där antalet frihetsgrader beror på antalet klasser.
+# Ett proportionstest kan ses som ett test av en variabel med tvÃ¥ mÃ¶jliga klasser som utfall. Ett
+# *goodness-of-fit*-test utvecklar det till valfritt antal klasser. Testet utfÃ¶rs som ett
+# chi-tvÃ¥-test genom att berÃ¤kna ett observerat antal O och ett fÃ¶rvÃ¤ntat antal E fÃ¶r varje klass.
+# TestvÃ¤rdet ges av att man berÃ¤knar (O - E)^2 / E fÃ¶r varje klass och sedan summerar. Testfunktionen
+# Ã¤r en chi-tvÃ¥-fÃ¶rdelning dÃ¤r antalet frihetsgrader beror pÃ¥ antalet klasser.
 #
-# Låt oss göra ett exempel baserat på fotbollsdatan. Där hade vi utfallet 947, 518 och 1285 för
+# LÃ¥t oss gÃ¶ra ett exempel baserat pÃ¥ fotbollsdatan. DÃ¤r hade vi utfallet 947, 518 och 1285 fÃ¶r
 # bortaseger, oavgjort och hemmaseger. Klassisk bollkunskap gav oss sannolikheterna 33, 20 och 47
 # procent. Testets hypoteser ges av
 #
-# H0: sannolikheterna för de olika utfallet ges av 33, 20 respektive 47 procent
+# H0: sannolikheterna fÃ¶r de olika utfallet ges av 33, 20 respektive 47 procent
 #
-# H1: minst något utfall har en annan sannolikhet än 33, 20 respektive 47 procent
+# H1: minst nÃ¥got utfall har en annan sannolikhet Ã¤n 33, 20 respektive 47 procent
 #
-# För att få de förväntade värdena E multipliceras nollhypotesens sannolikheter med det totala
+# FÃ¶r att fÃ¥ de fÃ¶rvÃ¤ntade vÃ¤rdena E multipliceras nollhypotesens sannolikheter med det totala
 # antalet matcher.
 #
 
@@ -339,20 +339,20 @@ E <- c(0.33,0.20,0.47) * 2750
 
 #
 # Uppgift 5.14. (Granska E)
-# Skriv ut objektet `E` och jämför med de observerade värdena. Notera att de förväntade värdena
-# inte måste vara heltal, trots att de observerade värdena förstås alltid kommer vara det.
+# Skriv ut objektet `E` och jÃ¤mfÃ¶r med de observerade vÃ¤rdena. Notera att de fÃ¶rvÃ¤ntade vÃ¤rdena
+# inte mÃ¥ste vara heltal, trots att de observerade vÃ¤rdena fÃ¶rstÃ¥s alltid kommer vara det.
 # :::
 #
-# Testvärdet beräknas genom formeln för varje term följt av summan.
+# TestvÃ¤rdet berÃ¤knas genom formeln fÃ¶r varje term fÃ¶ljt av summan.
 #
 
 chisq_value <- sum((O - E)^2 / E)
 
 #
-# P-värdet beräknas från en chi-två-fördelning. Antalet frihetsgrader ges av antalet klasser minus
-# antalet skattade parametrar minus ett. I det här fallet har inga parametrar skattats från datan så
-# antalet frihetsgrader blir två. Ett chi-två-test beräknas med kvadrater så vi är enbart
-# intresserade av högra svansen.
+# P-vÃ¤rdet berÃ¤knas frÃ¥n en chi-tvÃ¥-fÃ¶rdelning. Antalet frihetsgrader ges av antalet klasser minus
+# antalet skattade parametrar minus ett. I det hÃ¤r fallet har inga parametrar skattats frÃ¥n datan sÃ¥
+# antalet frihetsgrader blir tvÃ¥. Ett chi-tvÃ¥-test berÃ¤knas med kvadrater sÃ¥ vi Ã¤r enbart
+# intresserade av hÃ¶gra svansen.
 #
 
 dat_chisq <- data.frame(x = seq(0, 10, 0.1)) %>% 
@@ -363,60 +363,60 @@ ggplot() +
   geom_ribbon(aes(x, ymin = 0, ymax = p), data = dat_chisq %>% filter(x > chisq_value), fill = "salmon")
 
 #
-# Man kan också beräkna ytan i svansen med `pchisq()`. Ett minus det resultatet ger den övre delen.
+# Man kan ocksÃ¥ berÃ¤kna ytan i svansen med `pchisq()`. Ett minus det resultatet ger den Ã¶vre delen.
 #
 
 1 - pchisq(chisq_value, df = 2)
 
 #
-# P-värdet är alltså 0.16, över den klassiska signifikansnivån på 5 procent, vilket ger att vi inte
-# kan förkasta nollhypotesen. Om man gör ett chi-två-test för hand jämför man det observerade
-# chi-två-värdet med ett tabellvärde över kvantiler. Tabellvärdet kan också hämtas med funktionen
-# `qchisq()`, i det här fallet
+# P-vÃ¤rdet Ã¤r alltsÃ¥ 0.16, Ã¶ver den klassiska signifikansnivÃ¥n pÃ¥ 5 procent, vilket ger att vi inte
+# kan fÃ¶rkasta nollhypotesen. Om man gÃ¶r ett chi-tvÃ¥-test fÃ¶r hand jÃ¤mfÃ¶r man det observerade
+# chi-tvÃ¥-vÃ¤rdet med ett tabellvÃ¤rde Ã¶ver kvantiler. TabellvÃ¤rdet kan ocksÃ¥ hÃ¤mtas med funktionen
+# `qchisq()`, i det hÃ¤r fallet
 #
 
 qchisq(0.95, df = 2)
 
 #
-# Notera att man tar 0.95 eftersom man alltid tittar på den yttre svansen i ett chi-två-test.
+# Notera att man tar 0.95 eftersom man alltid tittar pÃ¥ den yttre svansen i ett chi-tvÃ¥-test.
 #
-# R har en inbyggd funktion för chi-två-test. Dess argument ges av observerade antal och
+# R har en inbyggd funktion fÃ¶r chi-tvÃ¥-test. Dess argument ges av observerade antal och
 # sannolikheter.
 #
 
 chisq.test(O, p = c(0.33, 0.2, 0.47))
 
 #
-# Testet ger samma chi-två-värde och p-värde som beräknats ovan.
+# Testet ger samma chi-tvÃ¥-vÃ¤rde och p-vÃ¤rde som berÃ¤knats ovan.
 #
-# Uppgift 5.15. (Chi-två med två klasser)
-# Situationen med flera klasser kan som sagt ses som en generalisering av fallet med två klasser.
-# Det är alltså logiskt att chi-två-test kan användas även när man har två klasser. Följande exempel
+# Uppgift 5.15. (Chi-tvÃ¥ med tvÃ¥ klasser)
+# Situationen med flera klasser kan som sagt ses som en generalisering av fallet med tvÃ¥ klasser.
+# Det Ã¤r alltsÃ¥ logiskt att chi-tvÃ¥-test kan anvÃ¤ndas Ã¤ven nÃ¤r man har tvÃ¥ klasser. FÃ¶ljande exempel
 # ger samma test som vi sett tidigare av andelen bortasegrar.
 #
 
 chisq.test(x = c(947, 1803), p = c(0.33, 0.67), correct = F)
 
 #
-# Likt `prop.test()` sätter vi `correct` till `FALSE` för att inte göra en korrektion. Notera att
-# `x` här anges som positiva och negativa utfall istället för positiva utfall och totalt antal
+# Likt `prop.test()` sÃ¤tter vi `correct` till `FALSE` fÃ¶r att inte gÃ¶ra en korrektion. Notera att
+# `x` hÃ¤r anges som positiva och negativa utfall istÃ¤llet fÃ¶r positiva utfall och totalt antal
 # utfall, vilket var fallet i `prop.test()`.
 #
-# Använd stycket ovan som mall för att göra uppgiften om guldfiskar som ett chi-två-test. Testa
-# nollhypotesen att andelen positiva utfall är 0.75.
+# AnvÃ¤nd stycket ovan som mall fÃ¶r att gÃ¶ra uppgiften om guldfiskar som ett chi-tvÃ¥-test. Testa
+# nollhypotesen att andelen positiva utfall Ã¤r 0.75.
 # :::
 #
-# Chi-två-testet bygger på en underliggande normal-liknande approximation. En vanlig tumregel är
-# att alla förväntade värden ska vara större än 5. R ger en varning om så inte är fallet.
+# Chi-tvÃ¥-testet bygger pÃ¥ en underliggande normal-liknande approximation. En vanlig tumregel Ã¤r
+# att alla fÃ¶rvÃ¤ntade vÃ¤rden ska vara stÃ¶rre Ã¤n 5. R ger en varning om sÃ¥ inte Ã¤r fallet.
 #
 
 chisq.test(c(6,4), p = c(0.51, 0.49))
 
 #
-# Uppgift 5.16. (Chi-två med lika sannolikheter)
-# En vanlig tillämpning av goodness-of-fit-testet är för att testa om alla klasser är lika
-# sannolika. En jämn fördelning är grundinställning i `chisq.test()` så i det fallet behöver man bara
-# ange de observerade värdena. En datainsamling om M&M-godis gav följande antal.
+# Uppgift 5.16. (Chi-tvÃ¥ med lika sannolikheter)
+# En vanlig tillÃ¤mpning av goodness-of-fit-testet Ã¤r fÃ¶r att testa om alla klasser Ã¤r lika
+# sannolika. En jÃ¤mn fÃ¶rdelning Ã¤r grundinstÃ¤llning i `chisq.test()` sÃ¥ i det fallet behÃ¶ver man bara
+# ange de observerade vÃ¤rdena. En datainsamling om M&M-godis gav fÃ¶ljande antal.
 #
 
 dat_mnm <- data.frame(Color = c("blue", "brown", "green", "orange", "red", "yellow"),
@@ -427,14 +427,14 @@ ggplot(dat_mnm, aes(Color, Count, fill = Color)) +
   scale_fill_manual(values = dat_mnm$Color)
 
 #
-# Använd de observerade värdena i kolumnen `Count` för att testa om alla godisfärger är lika
+# AnvÃ¤nd de observerade vÃ¤rdena i kolumnen `Count` fÃ¶r att testa om alla godisfÃ¤rger Ã¤r lika
 # vanliga.
 # :::
 #
-# Om man har flera klasser kan det vara värdefullt att se vilken klass som bidrar mest till
-# chi-två-värdet. Det kan ge en bild av vilka klasser som är mest speciella. Ett enkelt sätt att göra
-# det på är att spara utfallet av `chisq.test()` som ett objekt och därifrån hämta `observed` och
-# `expected`. Som fortsättning på fotbollsexemplet:
+# Om man har flera klasser kan det vara vÃ¤rdefullt att se vilken klass som bidrar mest till
+# chi-tvÃ¥-vÃ¤rdet. Det kan ge en bild av vilka klasser som Ã¤r mest speciella. Ett enkelt sÃ¤tt att gÃ¶ra
+# det pÃ¥ Ã¤r att spara utfallet av `chisq.test()` som ett objekt och dÃ¤rifrÃ¥n hÃ¤mta `observed` och
+# `expected`. Som fortsÃ¤ttning pÃ¥ fotbollsexemplet:
 #
 
 test <- chisq.test(c(947, 518, 1285), p = c(0.33, 0.2, 0.47))
@@ -443,104 +443,104 @@ test$observed
 (test$observed - test$expected)^2 / test$expected
 
 #
-# Antalet hemmavinster (det tredje värdet) ligger när den teoretiska sannolikheten medan de övriga
-# två utfallen ligger längre från.
+# Antalet hemmavinster (det tredje vÃ¤rdet) ligger nÃ¤r den teoretiska sannolikheten medan de Ã¶vriga
+# tvÃ¥ utfallen ligger lÃ¤ngre frÃ¥n.
 #
-# Uppgift 5.17. (Udda färger)
-# Spara testobjektet från testet på M&M-färger för att se vilka färger som avviker mest från det
-# väntade utfallet.
+# Uppgift 5.17. (Udda fÃ¤rger)
+# Spara testobjektet frÃ¥n testet pÃ¥ M&M-fÃ¤rger fÃ¶r att se vilka fÃ¤rger som avviker mest frÃ¥n det
+# vÃ¤ntade utfallet.
 # :::
 #
-# Uppgift 5.18. (Fågelproportioner som chi-två)
-# I naturreservatet från en tidigare uppgift tror man fördelningen av tre fåglar (tärnmås, fiskmås
-# och fisktärna) är 50, 30 respektive 20 procent. En studie ger antalen 115, 54 respektive 31.
-# Genomför ett chi-två-test för att testa de antagna andelarna. Är resultatet i linje med de separata
-# testen från den tidigare uppgiften?
+# Uppgift 5.18. (FÃ¥gelproportioner som chi-tvÃ¥)
+# I naturreservatet frÃ¥n en tidigare uppgift tror man fÃ¶rdelningen av tre fÃ¥glar (tÃ¤rnmÃ¥s, fiskmÃ¥s
+# och fisktÃ¤rna) Ã¤r 50, 30 respektive 20 procent. En studie ger antalen 115, 54 respektive 31.
+# GenomfÃ¶r ett chi-tvÃ¥-test fÃ¶r att testa de antagna andelarna. Ã„r resultatet i linje med de separata
+# testen frÃ¥n den tidigare uppgiften?
 # :::
 #
-# Uppgift 5.19. (Udda fåglar)
-# Spara testobjektet från chi-två-testet för fåglarna för att se vilka fågelarter som avviker mest
-# från det väntade utfallet.
+# Uppgift 5.19. (Udda fÃ¥glar)
+# Spara testobjektet frÃ¥n chi-tvÃ¥-testet fÃ¶r fÃ¥glarna fÃ¶r att se vilka fÃ¥gelarter som avviker mest
+# frÃ¥n det vÃ¤ntade utfallet.
 # :::
 #
-# ## Chi-två-test när någon parameter skattas från datan
+# ## Chi-tvÃ¥-test nÃ¤r nÃ¥gon parameter skattas frÃ¥n datan
 #
-# (Det här stycket är överkurs och kan läsas översiktligt eller hoppas över.)
+# (Det hÃ¤r stycket Ã¤r Ã¶verkurs och kan lÃ¤sas Ã¶versiktligt eller hoppas Ã¶ver.)
 #
 # I de exempel vi sett hittills har nollhypotesen direkt givit de sannolikheter vi vill testa. Ett
-# annat vanligt fall är att man testar om värdena följer en viss fördelning, men parametervärden i
-# den fördelningen skattas från den insamlade datan. Ta som exempel frågan om antal mål per match
-# följer en poissonfördelning. Hypoteserna ges av
+# annat vanligt fall Ã¤r att man testar om vÃ¤rdena fÃ¶ljer en viss fÃ¶rdelning, men parametervÃ¤rden i
+# den fÃ¶rdelningen skattas frÃ¥n den insamlade datan. Ta som exempel frÃ¥gan om antal mÃ¥l per match
+# fÃ¶ljer en poissonfÃ¶rdelning. Hypoteserna ges av
 #
-# H0: antal mål följer en poissonfördelning,
+# H0: antal mÃ¥l fÃ¶ljer en poissonfÃ¶rdelning,
 #
-# H1: antal mål följer ej en poissonfördelning.
+# H1: antal mÃ¥l fÃ¶ljer ej en poissonfÃ¶rdelning.
 #
-# Här måste vi skatta medelvärdet från datan för att beräkna sannolikheter från fördelningen.
+# HÃ¤r mÃ¥ste vi skatta medelvÃ¤rdet frÃ¥n datan fÃ¶r att berÃ¤kna sannolikheter frÃ¥n fÃ¶rdelningen.
 #
 
 mean_goals <- mean(dat_alls$hemmamal + dat_alls$bortamal)
 mean_goals
 
 dat_goals <- dat_alls %>% 
-  count(Mål = bortamal + hemmamal, name = "O") %>% 
-  mutate(p = dpois(Mål, lambda = mean_goals),
+  count(MÃ¥l = bortamal + hemmamal, name = "O") %>% 
+  mutate(p = dpois(MÃ¥l, lambda = mean_goals),
          E = p * 2750)
 dat_goals
 
 #
-# En graf kan illustrera faktiska antal (som punkter) och den skattade poissonfördelningen (som
+# En graf kan illustrera faktiska antal (som punkter) och den skattade poissonfÃ¶rdelningen (som
 # linje).
 #
-# Uppgift 5.20. (Målgraf)
-# Fyll i de saknade delarna i koden nedan för en graf med faktiska antal `O` som punkter och
-# förväntade antal `E` som en linje.
+# Uppgift 5.20. (MÃ¥lgraf)
+# Fyll i de saknade delarna i koden nedan fÃ¶r en graf med faktiska antal `O` som punkter och
+# fÃ¶rvÃ¤ntade antal `E` som en linje.
 #
 
 ggplot(dat_goals) +
-  geom_point(aes(x = Mål, y = ___)) +
-  geom_line(aes(x = Mål, y = ___))
+  geom_point(aes(x = MÃ¥l, y = ___)) +
+  geom_line(aes(x = MÃ¥l, y = ___))
 
 # :::
 #
-# De faktiska observationerna är inte så långt från poissonfördelningen.
+# De faktiska observationerna Ã¤r inte sÃ¥ lÃ¥ngt frÃ¥n poissonfÃ¶rdelningen.
 #
-# Ett problem med de förväntade antalen är att några av dem är under 5 - den gräns vi satte för en
-# acceptabel chi-två-approximation. Det vanligaste sättet att hantera det är att slå ihop klasser.
-# Här slås klasser över 9 ihop till en grupp. Det är inte så väsentligt hur det görs här, även om
+# Ett problem med de fÃ¶rvÃ¤ntade antalen Ã¤r att nÃ¥gra av dem Ã¤r under 5 - den grÃ¤ns vi satte fÃ¶r en
+# acceptabel chi-tvÃ¥-approximation. Det vanligaste sÃ¤ttet att hantera det Ã¤r att slÃ¥ ihop klasser.
+# HÃ¤r slÃ¥s klasser Ã¶ver 9 ihop till en grupp. Det Ã¤r inte sÃ¥ vÃ¤sentligt hur det gÃ¶rs hÃ¤r, Ã¤ven om
 # `ifelse()` kan vara ett nyttigt trick.
 #
 
 dat_goals_merged <- dat_goals %>% 
-  mutate(Mål = ifelse(Mål > 9, 10, Mål)) %>% 
-  group_by(Mål) %>% 
+  mutate(MÃ¥l = ifelse(MÃ¥l > 9, 10, MÃ¥l)) %>% 
+  group_by(MÃ¥l) %>% 
   summarise(O = sum(O),
             p = sum(p),
             E = sum(E))
 dat_goals_merged
 
 #
-# En sista svårighet är antalet frihetsgrader. I ett goodness-of-fit-test ges antalet frihetsgrader
-# av antalet klasser minus antalet skattade parametrar minus 1. I det här fallet har vi nu 11 klasser
-# och vi har skattat en parameter. Vi ska alltså ha 9 frihetsgrader i testet. Funktionen
-# `chisq.test()` beräknar tyvärr antalet frihetsgrader internt som antalet klasser minus 1, så vi får
-# beräkna chi-två-värde och p-värde på egen hand.
+# En sista svÃ¥righet Ã¤r antalet frihetsgrader. I ett goodness-of-fit-test ges antalet frihetsgrader
+# av antalet klasser minus antalet skattade parametrar minus 1. I det hÃ¤r fallet har vi nu 11 klasser
+# och vi har skattat en parameter. Vi ska alltsÃ¥ ha 9 frihetsgrader i testet. Funktionen
+# `chisq.test()` berÃ¤knar tyvÃ¤rr antalet frihetsgrader internt som antalet klasser minus 1, sÃ¥ vi fÃ¥r
+# berÃ¤kna chi-tvÃ¥-vÃ¤rde och p-vÃ¤rde pÃ¥ egen hand.
 #
 
 chisq_value <- sum((dat_goals_merged$O - dat_goals_merged$E)^2 / dat_goals_merged$E)
 1 - pchisq(chisq_value, df = 9)
 
 #
-# Chi-två-värdet blir extremt stort och p-värdet väldigt lågt. Nollhypotesen att antalet mål följer
-# en poissonfördelning förkastas.
+# Chi-tvÃ¥-vÃ¤rdet blir extremt stort och p-vÃ¤rdet vÃ¤ldigt lÃ¥gt. Nollhypotesen att antalet mÃ¥l fÃ¶ljer
+# en poissonfÃ¶rdelning fÃ¶rkastas.
 #
 # ## Bonus. Interaktiva kartor med leaflet
 #
-# Paketet `leaflet` (https://rstudio.github.io/leaflet/) kopplar R till leaflet - ett verktyg för
-# interaktiva kartor som ofta använd för kartor online.
+# Paketet `leaflet` (https://rstudio.github.io/leaflet/) kopplar R till leaflet - ett verktyg fÃ¶r
+# interaktiva kartor som ofta anvÃ¤nd fÃ¶r kartor online.
 #
 # Uppgift 5.21. (Installera leaflet)
-# Installera och ladda `leaflet genom att fylla i och köra raden nedan.
+# Installera och ladda `leaflet genom att fylla i och kÃ¶ra raden nedan.
 #
 
 install.packages("leaflet")
@@ -548,7 +548,7 @@ library(leaflet)
 
 # :::
 #
-# Som en första kontroll kan vi köra den exempelkod som ges på hemsidan länkad till ovan.
+# Som en fÃ¶rsta kontroll kan vi kÃ¶ra den exempelkod som ges pÃ¥ hemsidan lÃ¤nkad till ovan.
 #
 
 m <- leaflet() %>%
@@ -557,11 +557,11 @@ m <- leaflet() %>%
 m
 
 #
-# På canvassidan finns en excelfil med data tillgänglig på Artportalen - *Artportalen, SLU
-# feromoninventering, 2011-2013.xlsx*. Datan kommer från från ett inventeringsprojekt vid SLU.
+# PÃ¥ canvassidan finns en excelfil med data tillgÃ¤nglig pÃ¥ Artportalen - *Artportalen, SLU
+# feromoninventering, 2011-2013.xlsx*. Datan kommer frÃ¥n frÃ¥n ett inventeringsprojekt vid SLU.
 #
 # Uppgift 5.22. (Importera datan)
-# Ladda ner excelfilen och läs in datan med `read_excel()` från paketet `readxl`.
+# Ladda ner excelfilen och lÃ¤s in datan med `read_excel()` frÃ¥n paketet `readxl`.
 #
 
 library(readxl)
@@ -569,7 +569,7 @@ read_excel("___")
 
 # :::
 #
-# Kartans utseende kan ändras genom att ange en källa och karttyp. Tillgängliga alternativ kan
+# Kartans utseende kan Ã¤ndras genom att ange en kÃ¤lla och karttyp. TillgÃ¤ngliga alternativ kan
 # skrivas ut med `providers`.
 #
 
@@ -580,11 +580,11 @@ dat_leaf %>%
 
 #
 # Uppgift 5.23. (Baskarta)
-# Skriv ut tillgängliga baskartor med `providers`. Välj ett alternativ slumpmässigt och ändra koden
-# ovan för att se hur det ser ut.
+# Skriv ut tillgÃ¤ngliga baskartor med `providers`. VÃ¤lj ett alternativ slumpmÃ¤ssigt och Ã¤ndra koden
+# ovan fÃ¶r att se hur det ser ut.
 # :::
 #
-# För att lägga till datapunkter kan man använda `addCircleMarkers()`.
+# FÃ¶r att lÃ¤gga till datapunkter kan man anvÃ¤nda `addCircleMarkers()`.
 #
 
 dat_leaf %>% 
@@ -594,57 +594,57 @@ dat_leaf %>%
 
 #
 # Uppgift 5.24. (Cirkelstorlek)
-# Ändra storleken på cirklarna från `addCircleMarkers()` genom argumentet `radius`
+# Ã„ndra storleken pÃ¥ cirklarna frÃ¥n `addCircleMarkers()` genom argumentet `radius`
 # :::
 #
-# Slutligen kan vi lägga till en etikett för år med argumentet `popup`. Texten kommer upp när man
-# klickar på en punkt.
+# Slutligen kan vi lÃ¤gga till en etikett fÃ¶r Ã¥r med argumentet `popup`. Texten kommer upp nÃ¤r man
+# klickar pÃ¥ en punkt.
 #
 
 dat_leaf %>% 
   leaflet() %>% 
   addTiles() %>% 
-  addCircleMarkers(lng = dat_leaf$lng, lat = dat_leaf$lat, radius = 10, popup = dat_leaf$Rödlistade)
+  addCircleMarkers(lng = dat_leaf$lng, lat = dat_leaf$lat, radius = 10, popup = dat_leaf$RÃ¶dlistade)
 
 #
 # Uppgift 5.25. (Artnamn)
-# Ändra i koden ovan för att ange artnamn som popup-text istället för rödlistestatus. Funktionen
-# `paste()` kan också vara intressant för att ta med mer information i texten:
-# `paste(dat_leaf$Rödlistade, dat_leaf$Antal)` skulle exempelvis ge både status och antal individer
+# Ã„ndra i koden ovan fÃ¶r att ange artnamn som popup-text istÃ¤llet fÃ¶r rÃ¶dlistestatus. Funktionen
+# `paste()` kan ocksÃ¥ vara intressant fÃ¶r att ta med mer information i texten:
+# `paste(dat_leaf$RÃ¶dlistade, dat_leaf$Antal)` skulle exempelvis ge bÃ¥de status och antal individer
 # vid den specifika observationen.
 # :::
 #
 # ## Valfria hemuppgifter
 #
 # Uppgift 5.26. (Herrallsvenskan)
-# Följande importerar data för herrallsvenskan i fotboll.
+# FÃ¶ljande importerar data fÃ¶r herrallsvenskan i fotboll.
 #
 
 dat <- read_csv("https://raw.githubusercontent.com/adamflr/ST0060-2022/main/Data/Allsvenskan%2C%20herrar%2C%201924-2020.csv")
 
 #
-# Importera datan och se hur många matcher som ingår.
+# Importera datan och se hur mÃ¥nga matcher som ingÃ¥r.
 # :::
 #
 # Uppgift 5.27. (Antal hemmasegrar)
-# Beräkna antalet hemmasegrar i herrallsvenskan genom att räkna antalet matcher där `Hemmamål`
-# överstiger `Bortamål`.
+# BerÃ¤kna antalet hemmasegrar i herrallsvenskan genom att rÃ¤kna antalet matcher dÃ¤r `HemmamÃ¥l`
+# Ã¶verstiger `BortamÃ¥l`.
 # :::
 #
-# Uppgift 5.28. (Test för antal hemmasegrar)
-# Testa om andelen hemmasegrar skiljer sig från nollhypotesen på 47 procent.
+# Uppgift 5.28. (Test fÃ¶r antal hemmasegrar)
+# Testa om andelen hemmasegrar skiljer sig frÃ¥n nollhypotesen pÃ¥ 47 procent.
 # :::
 #
-# Uppgift 5.29. (Konfidensintervall för antal hemmasegrar)
-# Använd `binom.asymp()` från paketet `binom` för att beräkna ett konfidensintervall för andelen
-# hemmasegrar. Jämför med en handräkning (hand och miniräknare).
+# Uppgift 5.29. (Konfidensintervall fÃ¶r antal hemmasegrar)
+# AnvÃ¤nd `binom.asymp()` frÃ¥n paketet `binom` fÃ¶r att berÃ¤kna ett konfidensintervall fÃ¶r andelen
+# hemmasegrar. JÃ¤mfÃ¶r med en handrÃ¤kning (hand och minirÃ¤knare).
 # :::
 #
-# Uppgift 5.30. (Hemmasegrar för Malmö FF)
-# Följande beräknar antalet hemmasegrar för Malmö FF. Testa om Malmös andel hemmasegrar är större
-# än 47 procent.
+# Uppgift 5.30. (Hemmasegrar fÃ¶r MalmÃ¶ FF)
+# FÃ¶ljande berÃ¤knar antalet hemmasegrar fÃ¶r MalmÃ¶ FF. Testa om MalmÃ¶s andel hemmasegrar Ã¤r stÃ¶rre
+# Ã¤n 47 procent.
 #
 
-dat %>% filter(Hemmalag == "Malmö FF") %>% count(Hemmamål > Bortamål)
+dat %>% filter(Hemmalag == "MalmÃ¶ FF") %>% count(HemmamÃ¥l > BortamÃ¥l)
 
 # :::
