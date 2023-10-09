@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2023-07-31" />
+<meta name="date" content="2023-10-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -495,26 +495,26 @@ H1: alla behandlingsgrupper har inte samma medelvärde</p>
 <span id="cb486-4"><a href="variansanalys.html#cb486-4" tabindex="-1"></a><span class="fu">emmeans</span>(mod, pairwise <span class="sc">~</span> group, <span class="at">adjust =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <pre><code>## $emmeans
 ##  group  emmean    SE df lower.CL upper.CL
-##  a     -0.1146 0.257 45   -0.632    0.403
-##  b      0.0798 0.257 45   -0.438    0.597
-##  c      0.1890 0.257 45   -0.328    0.706
-##  d     -0.3042 0.257 45   -0.822    0.213
-##  e     -0.2713 0.257 45   -0.789    0.246
+##  a      0.3075 0.345 45   -0.388    1.003
+##  b     -0.0415 0.345 45   -0.737    0.654
+##  c     -0.3131 0.345 45   -1.008    0.382
+##  d      0.5222 0.345 45   -0.173    1.217
+##  e      0.2765 0.345 45   -0.418    0.972
 ## 
 ## Confidence level used: 0.95 
 ## 
 ## $contrasts
 ##  contrast estimate    SE df t.ratio p.value
-##  a - b     -0.1944 0.363 45  -0.535  0.5952
-##  a - c     -0.3036 0.363 45  -0.836  0.4078
-##  a - d      0.1896 0.363 45   0.522  0.6043
-##  a - e      0.1567 0.363 45   0.431  0.6683
-##  b - c     -0.1092 0.363 45  -0.301  0.7651
-##  b - d      0.3840 0.363 45   1.057  0.2962
-##  b - e      0.3511 0.363 45   0.966  0.3390
-##  c - d      0.4932 0.363 45   1.358  0.1814
-##  c - e      0.4603 0.363 45   1.267  0.2117
-##  d - e     -0.0329 0.363 45  -0.091  0.9282</code></pre>
+##  a - b       0.349 0.488 45   0.715  0.4782
+##  a - c       0.621 0.488 45   1.272  0.2100
+##  a - d      -0.215 0.488 45  -0.440  0.6621
+##  a - e       0.031 0.488 45   0.063  0.9497
+##  b - c       0.272 0.488 45   0.557  0.5806
+##  b - d      -0.564 0.488 45  -1.155  0.2542
+##  b - e      -0.318 0.488 45  -0.652  0.5179
+##  c - d      -0.835 0.488 45  -1.712  0.0938
+##  c - e      -0.590 0.488 45  -1.208  0.2332
+##  d - e       0.246 0.488 45   0.503  0.6172</code></pre>
 <p>Kör koden tio gånger. Hur många gånger av de tio ger de parvisa jämförelserna <em>någon</em> signifikant skillnad (det vill säga något p-värde under 0.05)?</p>
 <p>En passande xkcd-serie: <a href="https://xkcd.com/882/" class="uri">https://xkcd.com/882/</a></p>
 </div>
